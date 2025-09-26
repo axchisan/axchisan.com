@@ -1,0 +1,215 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String?
+  role      Role     @default(VISITOR)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  comments Comment[]
+  likes    Like[]
+  messages ContactMessage[]
+
+  @@map("users")
+}
+
+model Profile {
+  id          String @id @default(cuid())
+  name        String
+  title       String
+  bio         String @db.Text
+  email       String
+  phone       String?
+  whatsapp    String?
+  instagram   String?
+  github      String?
+  linkedin    String?
+  avatar      String?
+  resumeUrl   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("profiles")
+}
+
+model Skill {
+  id          String @id @default(cuid())
+  name        String
+  category    String
+  level       Int    @default(5) // 1-10 scale
+  icon        String?
+  color       String?
+  order       Int    @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("skills")
+}
+
+model Service {
+  id          String @id @default(cuid())
+  title       String
+  description String @db.Text
+  icon        String?
+  features    String[] // Array of features
+  price       String?
+  order       Int    @default(0)
+  isActive    Boolean @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("services")
+}
+
+model Project {
+  id          String @id @default(cuid())
+  title       String
+  description String @db.Text
+  shortDesc   String?
+  content     String? @db.Text
+  images      String[] // Array of image URLs
+  videos      String[] // Array of video URLs
+  technologies String[] // Array of tech stack
+  githubUrl   String?
+  liveUrl     String?
+  downloadUrl String?
+  category    String?
+  status      ProjectStatus @default(COMPLETED)
+  featured    Boolean @default(false)
+  order       Int    @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  comments Comment[]
+  likes    Like[]
+
+  @@map("projects")
+}
+
+model BlogPost {
+  id          String @id @default(cuid())
+  title       String
+  slug        String @unique
+  excerpt     String?
+  content     String @db.Text
+  coverImage  String?
+  tags        String[] // Array of tags
+  published   Boolean @default(false)
+  featured    Boolean @default(false)
+  views       Int    @default(0)
+  readTime    Int?   // in minutes
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  publishedAt DateTime?
+
+  // Relations
+  comments Comment[]
+  likes    Like[]
+
+  @@map("blog_posts")
+}
+
+model Comment {
+  id        String @id @default(cuid())
+  content   String @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  
+  // Polymorphic relations
+  project   Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String?
+  
+  blogPost   BlogPost? @relation(fields: [blogPostId], references: [id], onDelete: Cascade)
+  blogPostId String?
+
+  @@map("comments")
+}
+
+model Like {
+  id        String @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  // Relations
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  
+  // Polymorphic relations
+  project   Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String?
+  
+  blogPost   BlogPost? @relation(fields: [blogPostId], references: [id], onDelete: Cascade)
+  blogPostId String?
+
+  @@unique([userId, projectId])
+  @@unique([userId, blogPostId])
+  @@map("likes")
+}
+
+model ContactMessage {
+  id        String @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String @db.Text
+  read      Boolean @default(false)
+  replied   Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user      User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId    String?
+
+  @@map("contact_messages")
+}
+
+model SiteSettings {
+  id          String @id @default(cuid())
+  key         String @unique
+  value       String @db.Text
+  type        SettingType @default(TEXT)
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("site_settings")
+}
+
+// Enums
+enum Role {
+  ADMIN
+  VISITOR
+}
+
+enum ProjectStatus {
+  IN_PROGRESS
+  COMPLETED
+  ARCHIVED
+}
+
+enum SettingType {
+  TEXT
+  NUMBER
+  BOOLEAN
+  JSON
+  IMAGE
+}
