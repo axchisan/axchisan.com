@@ -1,16 +1,16 @@
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
-import { SignInForm } from "@/components/auth/signin-form"
+import { SignUpForm } from "@/components/auth/signup-form"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { BackgroundEffects } from "@/components/background-effects"
 
 export const metadata = {
-  title: "Iniciar Sesión - Axchi",
-  description: "Inicia sesión en tu cuenta para acceder a funciones adicionales.",
+  title: "Crear Cuenta - Axchi",
+  description: "Crea tu cuenta para acceder al panel de administración.",
 }
 
-export default async function SignInPage() {
+export default async function SignUpPage() {
   const supabase = await createClient()
   const {
     data: { user },
@@ -27,7 +27,7 @@ export default async function SignInPage() {
 
       <main className="relative z-10 pt-16">
         <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
-          <SignInForm />
+          <SignUpForm />
         </div>
       </main>
 

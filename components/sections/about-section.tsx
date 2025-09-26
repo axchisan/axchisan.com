@@ -78,6 +78,7 @@ export function AboutSection() {
 
                 <div className="flex flex-wrap gap-2">
                   <Badge variant="secondary">Estudiante SENA</Badge>
+                  <Badge variant="secondary">Desarrollador Full Stack</Badge>
                   <Badge variant="secondary">Innovador</Badge>
                   <Badge variant="secondary">Creativo</Badge>
                 </div>
@@ -134,12 +135,12 @@ export function AboutSection() {
           viewport={{ once: true }}
           className="mt-20"
         >
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
               { label: "Años de Experiencia", value: "3+" },
               { label: "Proyectos Completados", value: "25+" },
-              { label: "tecnologias en aprendizaje", value: "3"}
-              
+              { label: "Tecnologías Dominadas", value: "10+" },
+              { label: "Clientes Satisfechos", value: "15+" },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}

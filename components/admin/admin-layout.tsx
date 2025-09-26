@@ -4,6 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import { useSession, signOut } from "next-auth/react"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -42,7 +43,30 @@ interface AdminLayoutProps {
 export function AdminLayout({ children }: AdminLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const pathname = usePathname()
-  const { data: session } = useSession()
+  const router = useRouter()
+  const { data: session, status } = useSession()
+
+  const handleSignOut = async () => {
+    await signOut({ callbackUrl: "/auth/signin" })
+  }
+
+  // Show loading state while checking authentication
+  if (status === "loading") {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Cargando...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Redirect if not authenticated
+  if (status === "unauthenticated") {
+    router.push("/auth/signin")
+    return null
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -103,7 +127,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                 <User className="h-4 w-4 text-primary" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium truncate">{session?.user?.name}</p>
+                <p className="text-sm font-medium truncate">{session?.user?.name || session?.user?.email}</p>
                 <p className="text-xs text-muted-foreground truncate">{session?.user?.email}</p>
               </div>
             </div>
@@ -114,7 +138,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                   Ver sitio
                 </Link>
               </Button>
-              <Button variant="outline" size="sm" onClick={() => signOut()}>
+              <Button variant="outline" size="sm" onClick={handleSignOut}>
                 <LogOut className="h-4 w-4" />
               </Button>
             </div>

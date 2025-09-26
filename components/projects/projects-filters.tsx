@@ -6,17 +6,38 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Search, Filter } from "lucide-react"
+import { useProjects } from "@/hooks/use-projects"
 
-const categories = ["Todos", "Web", "Móvil", "Automatización", "Juegos", "API"]
-const technologies = ["React", "Next.js", "Flutter", "Python", "PHP", "TypeScript", "Node.js"]
+interface ProjectsFiltersProps {
+  onCategoryChange: (category: string) => void
+  onTechChange: (techs: string[]) => void
+  onSearchChange: (query: string) => void
+}
 
-export function ProjectsFilters() {
+export function ProjectsFilters({ onCategoryChange, onTechChange, onSearchChange }: ProjectsFiltersProps) {
+  const { projects } = useProjects()
   const [selectedCategory, setSelectedCategory] = useState("Todos")
   const [selectedTechs, setSelectedTechs] = useState<string[]>([])
   const [searchQuery, setSearchQuery] = useState("")
 
+  // Extract unique categories and technologies from projects
+  const categories = ["Todos", ...Array.from(new Set(projects.map((p) => p.category).filter(Boolean)))]
+  const technologies = Array.from(new Set(projects.flatMap((p) => p.technologies)))
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category)
+    onCategoryChange(category)
+  }
+
   const toggleTech = (tech: string) => {
-    setSelectedTechs((prev) => (prev.includes(tech) ? prev.filter((t) => t !== tech) : [...prev, tech]))
+    const newTechs = selectedTechs.includes(tech) ? selectedTechs.filter((t) => t !== tech) : [...selectedTechs, tech]
+    setSelectedTechs(newTechs)
+    onTechChange(newTechs)
+  }
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query)
+    onSearchChange(query)
   }
 
   return (
@@ -32,7 +53,7 @@ export function ProjectsFilters() {
         <Input
           placeholder="Buscar proyectos..."
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={(e) => handleSearchChange(e.target.value)}
           className="pl-10 bg-card/50 border-primary/20"
         />
       </div>
@@ -49,7 +70,7 @@ export function ProjectsFilters() {
               key={category}
               variant={selectedCategory === category ? "default" : "outline"}
               size="sm"
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => handleCategoryChange(category)}
               className={
                 selectedCategory === category ? "transition-neon hover:neon-glow" : "bg-transparent hover:bg-primary/10"
               }
@@ -61,25 +82,27 @@ export function ProjectsFilters() {
       </div>
 
       {/* Technologies */}
-      <div>
-        <h3 className="text-sm font-medium text-muted-foreground mb-3">Tecnologías</h3>
-        <div className="flex flex-wrap gap-2">
-          {technologies.map((tech) => (
-            <Badge
-              key={tech}
-              variant={selectedTechs.includes(tech) ? "default" : "outline"}
-              className={`cursor-pointer transition-all ${
-                selectedTechs.includes(tech)
-                  ? "bg-primary text-primary-foreground"
-                  : "hover:bg-primary/10 hover:border-primary/30"
-              }`}
-              onClick={() => toggleTech(tech)}
-            >
-              {tech}
-            </Badge>
-          ))}
+      {technologies.length > 0 && (
+        <div>
+          <h3 className="text-sm font-medium text-muted-foreground mb-3">Tecnologías</h3>
+          <div className="flex flex-wrap gap-2">
+            {technologies.map((tech) => (
+              <Badge
+                key={tech}
+                variant={selectedTechs.includes(tech) ? "default" : "outline"}
+                className={`cursor-pointer transition-all ${
+                  selectedTechs.includes(tech)
+                    ? "bg-primary text-primary-foreground"
+                    : "hover:bg-primary/10 hover:border-primary/30"
+                }`}
+                onClick={() => toggleTech(tech)}
+              >
+                {tech}
+              </Badge>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </motion.div>
   )
 }

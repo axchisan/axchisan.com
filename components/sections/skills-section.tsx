@@ -4,36 +4,34 @@ import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
-
-const skillCategories = [
-  {
-    name: "Frontend",
-    skills: [
-      { name: "JavaScript", level: 65, color: "#F7DF1E" },
-      { name: "React", level: 60, color: "#61DAFB" },
-      { name: "Next.js", level: 80, color: "#000000" },
-      { name: "TypeScript", level: 50, color: "#3178C6" },
-    ],
-  },
-  {
-    name: "Backend",
-    skills: [
-      { name: "PHP", level: 75, color: "#777BB4" },
-      { name: "Python", level: 80, color: "#3776AB" },
-      { name: "PostgreSQL", level: 70, color: "#336791" },
-    ],
-  },
-  {
-    name: "Mobile & Tools",
-    skills: [
-      { name: "Flutter", level: 70, color: "#02569B" },
-      { name: "Git", level: 90, color: "#F05032" },
-      { name: "n8n", level: 60, color: "#EA4B71" },
-    ],
-  },
-]
+import { useSkills } from "@/hooks/use-skills"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export function SkillsSection() {
+  const { skills, loading, error } = useSkills()
+
+  // Group skills by category
+  const skillsByCategory = skills.reduce(
+    (acc, skill) => {
+      if (!acc[skill.category]) {
+        acc[skill.category] = []
+      }
+      acc[skill.category].push(skill)
+      return acc
+    },
+    {} as Record<string, typeof skills>,
+  )
+
+  if (error) {
+    return (
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-muted-foreground">Error al cargar las habilidades</p>
+        </div>
+      </section>
+    )
+  }
+
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
       <div className="max-w-6xl mx-auto">
@@ -52,53 +50,79 @@ export function SkillsSection() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {skillCategories.map((category, categoryIndex) => (
-            <motion.div
-              key={category.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Card className="border-primary/20 bg-card/50 backdrop-blur-sm h-full">
+        {loading ? (
+          <div className="grid md:grid-cols-3 gap-8">
+            {[1, 2, 3].map((i) => (
+              <Card key={i} className="border-primary/20 bg-card/50 backdrop-blur-sm h-full">
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-6 text-center">{category.name}</h3>
-
+                  <Skeleton className="h-6 w-24 mx-auto mb-6" />
                   <div className="space-y-6">
-                    {category.skills.map((skill, skillIndex) => (
-                      <motion.div
-                        key={skill.name}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{
-                          duration: 0.6,
-                          delay: categoryIndex * 0.1 + skillIndex * 0.1,
-                        }}
-                        viewport={{ once: true }}
-                        className="space-y-2"
-                      >
+                    {[1, 2, 3].map((j) => (
+                      <div key={j} className="space-y-2">
                         <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-2">
-                            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: skill.color }} />
-                            <span className="font-medium">{skill.name}</span>
-                          </div>
-                          <Badge variant="secondary" className="text-xs">
-                            {skill.level}%
-                          </Badge>
+                          <Skeleton className="h-4 w-20" />
+                          <Skeleton className="h-4 w-12" />
                         </div>
-
-                        <Progress value={skill.level} className="h-2" />
-                      </motion.div>
+                        <Skeleton className="h-2 w-full" />
+                      </div>
                     ))}
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-3 gap-8">
+            {Object.entries(skillsByCategory).map(([category, categorySkills], categoryIndex) => (
+              <motion.div
+                key={category}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Card className="border-primary/20 bg-card/50 backdrop-blur-sm h-full">
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold mb-6 text-center capitalize">{category}</h3>
 
-        {/* Additional skills as badges */}
+                    <div className="space-y-6">
+                      {categorySkills.map((skill, skillIndex) => (
+                        <motion.div
+                          key={skill.id}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{
+                            duration: 0.6,
+                            delay: categoryIndex * 0.1 + skillIndex * 0.1,
+                          }}
+                          viewport={{ once: true }}
+                          className="space-y-2"
+                        >
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-2">
+                              <div
+                                className="w-3 h-3 rounded-full"
+                                style={{ backgroundColor: skill.color || "#3b82f6" }}
+                              />
+                              <span className="font-medium">{skill.name}</span>
+                            </div>
+                            <Badge variant="secondary" className="text-xs">
+                              {skill.level * 10}%
+                            </Badge>
+                          </div>
+
+                          <Progress value={skill.level * 10} className="h-2" />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        )}
+
+        {/* Additional skills as badges - fallback for now */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -112,13 +136,13 @@ export function SkillsSection() {
               "Docker",
               "Linux",
               "Figma",
-              "Coolify",
+              "Photoshop",
               "Firebase",
               "Vercel",
-              "Notion",
-              "N8N",
-              "Servidores",
-              "Flask",
+              "Netlify",
+              "WordPress",
+              "Laravel",
+              "Vue.js",
             ].map((tech, index) => (
               <motion.div
                 key={tech}

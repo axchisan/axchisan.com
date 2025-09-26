@@ -4,11 +4,21 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowDown, MessageCircle, Github, Instagram } from "lucide-react"
 import Link from "next/link"
+import { useProfile } from "@/hooks/use-profile"
 
 export function HeroSection() {
+  const { profile, loading } = useProfile()
+
   const scrollToAbout = () => {
     document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })
   }
+
+  // Show loading state or fallback data
+  const displayName = profile?.name || "Duvan Yair Arciniegas"
+  const displayTitle = profile?.title || "Innovación y Creatividad en Desarrollo de Software"
+  const displayBio =
+    profile?.bio ||
+    "Creo soluciones tecnológicas que transforman ideas en realidad digital. Especializado en desarrollo web, móvil y automatización de procesos."
 
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16">
@@ -21,7 +31,7 @@ export function HeroSection() {
           className="mb-6"
         >
           <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium">
-            ¡Hola! Soy Duvan Yair Arciniegas
+            ¡Hola! Soy {displayName}
           </span>
         </motion.div>
 
@@ -33,11 +43,11 @@ export function HeroSection() {
           className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 text-balance"
         >
           <span className="bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
-            Innovación y Creatividad
+            {displayTitle.split(" ").slice(0, 2).join(" ")}
           </span>
           <br />
           <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent neon-text">
-            en Desarrollo de Software
+            {displayTitle.split(" ").slice(2).join(" ")}
           </span>
         </motion.h1>
 
@@ -48,8 +58,7 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto text-pretty"
         >
-          Creo soluciones tecnológicas que transforman ideas en realidad digital. Especializado en desarrollo web, móvil
-          y automatización de procesos.
+          {displayBio}
         </motion.p>
 
         {/* CTA Buttons */}
@@ -78,24 +87,30 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="flex justify-center space-x-6 mb-12"
         >
-          <Button variant="ghost" size="sm" className="transition-neon hover:neon-glow" asChild>
-            <a href="https://github.com/axchisan" target="_blank" rel="noopener noreferrer">
-              <Github className="h-5 w-5" />
-              <span className="sr-only">GitHub</span>
-            </a>
-          </Button>
-          <Button variant="ghost" size="sm" className="transition-neon hover:neon-glow" asChild>
-            <a href="https://instagram.com/axchisan" target="_blank" rel="noopener noreferrer">
-              <Instagram className="h-5 w-5" />
-              <span className="sr-only">Instagram</span>
-            </a>
-          </Button>
-          <Button variant="ghost" size="sm" className="transition-neon hover:neon-glow" asChild>
-            <a href="https://wa.me/3183038190" target="_blank" rel="noopener noreferrer">
-              <MessageCircle className="h-5 w-5" />
-              <span className="sr-only">WhatsApp</span>
-            </a>
-          </Button>
+          {profile?.github && (
+            <Button variant="ghost" size="sm" className="transition-neon hover:neon-glow" asChild>
+              <a href={profile.github} target="_blank" rel="noopener noreferrer">
+                <Github className="h-5 w-5" />
+                <span className="sr-only">GitHub</span>
+              </a>
+            </Button>
+          )}
+          {profile?.instagram && (
+            <Button variant="ghost" size="sm" className="transition-neon hover:neon-glow" asChild>
+              <a href={profile.instagram} target="_blank" rel="noopener noreferrer">
+                <Instagram className="h-5 w-5" />
+                <span className="sr-only">Instagram</span>
+              </a>
+            </Button>
+          )}
+          {profile?.whatsapp && (
+            <Button variant="ghost" size="sm" className="transition-neon hover:neon-glow" asChild>
+              <a href={`https://wa.me/${profile.whatsapp}`} target="_blank" rel="noopener noreferrer">
+                <MessageCircle className="h-5 w-5" />
+                <span className="sr-only">WhatsApp</span>
+              </a>
+            </Button>
+          )}
         </motion.div>
 
         {/* Scroll indicator */}

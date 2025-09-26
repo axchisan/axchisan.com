@@ -5,11 +5,12 @@ import { useDropzone } from "react-dropzone"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
-import { Upload, X, File, ImageIcon, Video } from "lucide-react"
+import { Upload, X, File, ImageIcon, Video, CheckCircle, AlertCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useToast } from "@/hooks/use-toast"
 
 interface FileUploadProps {
-  onUpload: (files: File[]) => void
+  onUpload: (files: UploadedFileResult[]) => void
   accept?: Record<string, string[]>
   maxFiles?: number
   maxSize?: number
@@ -21,6 +22,15 @@ interface UploadedFile {
   progress: number
   url?: string
   error?: string
+  status: "uploading" | "success" | "error"
+}
+
+interface UploadedFileResult {
+  filename: string
+  originalName: string
+  size: number
+  type: string
+  url: string
 }
 
 export function FileUpload({
@@ -36,6 +46,7 @@ export function FileUpload({
 }: FileUploadProps) {
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([])
   const [isUploading, setIsUploading] = useState(false)
+  const { toast } = useToast()
 
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
@@ -44,27 +55,80 @@ export function FileUpload({
       const newFiles = acceptedFiles.map((file) => ({
         file,
         progress: 0,
+        status: "uploading" as const,
       }))
 
       setUploadedFiles((prev) => [...prev, ...newFiles])
 
-      // Simulate upload progress
-      for (const fileObj of newFiles) {
-        for (let progress = 0; progress <= 100; progress += 10) {
-          await new Promise((resolve) => setTimeout(resolve, 100))
-          setUploadedFiles((prev) => prev.map((f) => (f.file === fileObj.file ? { ...f, progress } : f)))
+      try {
+        // Create FormData
+        const formData = new FormData()
+        acceptedFiles.forEach((file) => {
+          formData.append("files", file)
+        })
+
+        // Upload files
+        const response = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
+        })
+
+        if (!response.ok) {
+          throw new Error("Upload failed")
         }
 
-        // Simulate successful upload
-        setUploadedFiles((prev) =>
-          prev.map((f) => (f.file === fileObj.file ? { ...f, url: URL.createObjectURL(f.file) } : f)),
-        )
-      }
+        const result = await response.json()
 
-      setIsUploading(false)
-      onUpload(acceptedFiles)
+        // Update file status to success
+        setUploadedFiles((prev) =>
+          prev.map((f) => {
+            const uploadedFile = result.files.find((rf: UploadedFileResult) => rf.originalName === f.file.name)
+            if (uploadedFile && acceptedFiles.includes(f.file)) {
+              return {
+                ...f,
+                progress: 100,
+                status: "success" as const,
+                url: uploadedFile.url,
+              }
+            }
+            return f
+          }),
+        )
+
+        // Call onUpload callback
+        onUpload(result.files)
+
+        toast({
+          title: "Archivos subidos",
+          description: `${acceptedFiles.length} archivo(s) subido(s) exitosamente.`,
+        })
+      } catch (error) {
+        console.error("Upload error:", error)
+
+        // Update file status to error
+        setUploadedFiles((prev) =>
+          prev.map((f) => {
+            if (acceptedFiles.includes(f.file)) {
+              return {
+                ...f,
+                status: "error" as const,
+                error: "Error al subir archivo",
+              }
+            }
+            return f
+          }),
+        )
+
+        toast({
+          title: "Error",
+          description: "Error al subir los archivos. Intenta de nuevo.",
+          variant: "destructive",
+        })
+      } finally {
+        setIsUploading(false)
+      }
     },
-    [onUpload],
+    [onUpload, toast],
   )
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -84,6 +148,17 @@ export function FileUpload({
     return File
   }
 
+  const getStatusIcon = (status: UploadedFile["status"]) => {
+    switch (status) {
+      case "success":
+        return <CheckCircle className="h-4 w-4 text-green-500" />
+      case "error":
+        return <AlertCircle className="h-4 w-4 text-red-500" />
+      default:
+        return null
+    }
+  }
+
   return (
     <div className={cn("space-y-4", className)}>
       <Card
@@ -91,6 +166,7 @@ export function FileUpload({
         className={cn(
           "border-2 border-dashed border-border/50 hover:border-primary/50 transition-colors cursor-pointer",
           isDragActive && "border-primary bg-primary/5",
+          isUploading && "pointer-events-none opacity-50",
         )}
       >
         <CardContent className="p-8 text-center">
@@ -119,9 +195,13 @@ export function FileUpload({
                   <div className="flex items-center space-x-4">
                     <Icon className="h-8 w-8 text-primary flex-shrink-0" />
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium truncate">{fileObj.file.name}</p>
+                      <div className="flex items-center space-x-2">
+                        <p className="text-sm font-medium truncate">{fileObj.file.name}</p>
+                        {getStatusIcon(fileObj.status)}
+                      </div>
                       <p className="text-xs text-muted-foreground">{(fileObj.file.size / 1024 / 1024).toFixed(2)} MB</p>
-                      {fileObj.progress < 100 && <Progress value={fileObj.progress} className="mt-2" />}
+                      {fileObj.status === "uploading" && <Progress value={fileObj.progress} className="mt-2" />}
+                      {fileObj.error && <p className="text-xs text-red-500 mt-1">{fileObj.error}</p>}
                     </div>
                     <Button
                       variant="ghost"
