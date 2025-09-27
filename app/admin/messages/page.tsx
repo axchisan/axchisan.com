@@ -1,49 +1,26 @@
-import { createClient } from "@/lib/supabase/server"
+import { prisma } from "@/lib/prisma"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Mail, Clock, User, MessageSquare } from "lucide-react"
 
 export default async function MessagesPage() {
-  const supabase = await createClient()
+  const messages = await prisma.contactMessage.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  })
 
-  const { data: messages, error } = await supabase
-    .from("messages")
-    .select("*")
-    .order("created_at", { ascending: false })
-
-  if (error) {
-    console.error("Error fetching messages:", error)
+  const getStatusColor = (read: boolean, replied: boolean) => {
+    if (replied) return "bg-green-500/10 text-green-500 border-green-500/20"
+    if (read) return "bg-blue-500/10 text-blue-500 border-blue-500/20"
+    return "bg-red-500/10 text-red-500 border-red-500/20"
   }
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "unread":
-        return "bg-red-500/10 text-red-500 border-red-500/20"
-      case "read":
-        return "bg-blue-500/10 text-blue-500 border-blue-500/20"
-      case "replied":
-        return "bg-green-500/10 text-green-500 border-green-500/20"
-      case "archived":
-        return "bg-gray-500/10 text-gray-500 border-gray-500/20"
-      default:
-        return "bg-gray-500/10 text-gray-500 border-gray-500/20"
-    }
-  }
-
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case "unread":
-        return "No leído"
-      case "read":
-        return "Leído"
-      case "replied":
-        return "Respondido"
-      case "archived":
-        return "Archivado"
-      default:
-        return status
-    }
+  const getStatusText = (read: boolean, replied: boolean) => {
+    if (replied) return "Respondido"
+    if (read) return "Leído"
+    return "No leído"
   }
 
   return (
@@ -73,7 +50,7 @@ export default async function MessagesPage() {
                       </span>
                       <span className="flex items-center gap-1">
                         <Clock className="h-3 w-3" />
-                        {new Date(message.created_at).toLocaleDateString("es-ES", {
+                        {new Date(message.createdAt).toLocaleDateString("es-ES", {
                           year: "numeric",
                           month: "long",
                           day: "numeric",
@@ -83,7 +60,9 @@ export default async function MessagesPage() {
                       </span>
                     </div>
                   </div>
-                  <Badge className={getStatusColor(message.status)}>{getStatusText(message.status)}</Badge>
+                  <Badge className={getStatusColor(message.read, message.replied)}>
+                    {getStatusText(message.read, message.replied)}
+                  </Badge>
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">

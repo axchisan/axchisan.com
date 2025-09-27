@@ -1,6 +1,7 @@
 import type React from "react"
 import { redirect } from "next/navigation"
-import { createClient } from "@/lib/supabase/server"
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "@/lib/auth"
 import { AdminLayout } from "@/components/admin/admin-layout"
 
 export default async function AdminLayoutPage({
@@ -8,12 +9,9 @@ export default async function AdminLayoutPage({
 }: {
   children: React.ReactNode
 }) {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  const session = await getServerSession(authOptions)
 
-  if (!user) {
+  if (!session || session.user.role !== "ADMIN") {
     redirect("/auth/signin")
   }
 

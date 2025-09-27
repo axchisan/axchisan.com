@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useSession, signOut } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
@@ -46,6 +46,14 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   const router = useRouter()
   const { data: session, status } = useSession()
 
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/auth/signin")
+    } else if (status === "authenticated" && session?.user?.role !== "ADMIN") {
+      router.push("/")
+    }
+  }, [status, session, router])
+
   const handleSignOut = async () => {
     await signOut({ callbackUrl: "/auth/signin" })
   }
@@ -62,10 +70,16 @@ export function AdminLayout({ children }: AdminLayoutProps) {
     )
   }
 
-  // Redirect if not authenticated
-  if (status === "unauthenticated") {
-    router.push("/auth/signin")
-    return null
+  // Show loading while redirecting unauthenticated users
+  if (status === "unauthenticated" || (status === "authenticated" && session?.user?.role !== "ADMIN")) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Redirigiendo...</p>
+        </div>
+      </div>
+    )
   }
 
   return (

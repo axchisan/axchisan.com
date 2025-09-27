@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation"
-import { createClient } from "@/lib/supabase/server"
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "@/lib/auth"
 import { SignInForm } from "@/components/auth/signin-form"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -11,12 +12,9 @@ export const metadata = {
 }
 
 export default async function SignInPage() {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  const session = await getServerSession(authOptions)
 
-  if (user) {
+  if (session) {
     redirect("/admin")
   }
 

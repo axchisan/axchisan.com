@@ -1,28 +1,21 @@
-import { createClient } from "@/lib/supabase/server"
+import { prisma } from "@/lib/prisma"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Users, FolderOpen, BookOpen, Mail, Eye, TrendingUp } from "lucide-react"
 
 export default async function AnalyticsPage() {
-  const supabase = await createClient()
-
-  // Get analytics data
-  const [
-    { count: projectsCount },
-    { count: blogPostsCount },
-    { count: messagesCount },
-    { data: recentMessages },
-    { data: publishedPosts },
-  ] = await Promise.all([
-    supabase.from("projects").select("*", { count: "exact", head: true }),
-    supabase.from("blog_posts").select("*", { count: "exact", head: true }),
-    supabase.from("messages").select("*", { count: "exact", head: true }),
-    supabase.from("messages").select("*").order("created_at", { ascending: false }).limit(5),
-    supabase
-      .from("blog_posts")
-      .select("*")
-      .eq("status", "published")
-      .order("created_at", { ascending: false })
-      .limit(5),
+  const [projectsCount, blogPostsCount, messagesCount, recentMessages, publishedPosts] = await Promise.all([
+    prisma.project.count(),
+    prisma.blogPost.count(),
+    prisma.contactMessage.count(),
+    prisma.contactMessage.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 5,
+    }),
+    prisma.blogPost.findMany({
+      where: { published: true },
+      orderBy: { createdAt: "desc" },
+      take: 5,
+    }),
   ])
 
   const stats = [
@@ -106,7 +99,7 @@ export default async function AnalyticsPage() {
                     <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{message.message}</p>
                   </div>
                   <div className="text-xs text-muted-foreground">
-                    {new Date(message.created_at).toLocaleDateString("es-ES")}
+                    {new Date(message.createdAt).toLocaleDateString("es-ES")}
                   </div>
                 </div>
               ))
@@ -134,7 +127,7 @@ export default async function AnalyticsPage() {
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium truncate">{post.title}</p>
                     <p className="text-xs text-muted-foreground">
-                      {post.views || 0} vistas • {new Date(post.created_at).toLocaleDateString("es-ES")}
+                      {post.views || 0} vistas • {new Date(post.createdAt).toLocaleDateString("es-ES")}
                     </p>
                   </div>
                 </div>

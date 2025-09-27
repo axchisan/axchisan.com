@@ -23,7 +23,7 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,6 +34,8 @@ export function Header() {
   }, [])
 
   const closeMenu = () => setIsOpen(false)
+
+  const showAuthContent = status !== "loading"
 
   return (
     <header
@@ -87,28 +89,32 @@ export function Header() {
           <div className="flex items-center space-x-4">
             <ThemeToggle />
 
-            {session ? (
-              <div className="hidden md:flex items-center space-x-2">
-                {session.user.role === "ADMIN" && (
-                  <Button variant="outline" size="sm" asChild>
-                    <Link href="/admin">
-                      <Settings className="h-4 w-4 mr-2" />
-                      Admin
+            {showAuthContent && (
+              <>
+                {session ? (
+                  <div className="hidden md:flex items-center space-x-2">
+                    {session.user.role === "ADMIN" && (
+                      <Button variant="outline" size="sm" asChild>
+                        <Link href="/admin">
+                          <Settings className="h-4 w-4 mr-2" />
+                          Admin
+                        </Link>
+                      </Button>
+                    )}
+                    <Button variant="outline" size="sm" onClick={() => signOut()}>
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Salir
+                    </Button>
+                  </div>
+                ) : (
+                  <Button variant="outline" size="sm" asChild className="hidden md:flex bg-transparent">
+                    <Link href="/auth/signin">
+                      <LogIn className="h-4 w-4 mr-2" />
+                      Iniciar Sesión
                     </Link>
                   </Button>
                 )}
-                <Button variant="outline" size="sm" onClick={() => signOut()}>
-                  <LogOut className="h-4 w-4 mr-2" />
-                  Salir
-                </Button>
-              </div>
-            ) : (
-              <Button variant="outline" size="sm" asChild className="hidden md:flex bg-transparent">
-                <Link href="/auth/signin">
-                  <LogIn className="h-4 w-4 mr-2" />
-                  Iniciar Sesión
-                </Link>
-              </Button>
+              </>
             )}
 
             {/* Mobile menu button */}
@@ -150,41 +156,43 @@ export function Header() {
                   )
                 })}
 
-                <div className="border-t border-border/50 pt-3 mt-3">
-                  {session ? (
-                    <>
-                      {session.user.role === "ADMIN" && (
-                        <Link
-                          href="/admin"
-                          onClick={closeMenu}
-                          className="flex items-center px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-foreground hover:bg-accent"
+                {showAuthContent && (
+                  <div className="border-t border-border/50 pt-3 mt-3">
+                    {session ? (
+                      <>
+                        {session.user.role === "ADMIN" && (
+                          <Link
+                            href="/admin"
+                            onClick={closeMenu}
+                            className="flex items-center px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-foreground hover:bg-accent"
+                          >
+                            <Settings className="h-5 w-5 mr-3" />
+                            Admin Panel
+                          </Link>
+                        )}
+                        <button
+                          onClick={() => {
+                            signOut()
+                            closeMenu()
+                          }}
+                          className="flex items-center w-full px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-foreground hover:bg-accent"
                         >
-                          <Settings className="h-5 w-5 mr-3" />
-                          Admin Panel
-                        </Link>
-                      )}
-                      <button
-                        onClick={() => {
-                          signOut()
-                          closeMenu()
-                        }}
-                        className="flex items-center w-full px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-foreground hover:bg-accent"
+                          <LogOut className="h-5 w-5 mr-3" />
+                          Cerrar Sesión
+                        </button>
+                      </>
+                    ) : (
+                      <Link
+                        href="/auth/signin"
+                        onClick={closeMenu}
+                        className="flex items-center px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-foreground hover:bg-accent"
                       >
-                        <LogOut className="h-5 w-5 mr-3" />
-                        Cerrar Sesión
-                      </button>
-                    </>
-                  ) : (
-                    <Link
-                      href="/auth/signin"
-                      onClick={closeMenu}
-                      className="flex items-center px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-foreground hover:bg-accent"
-                    >
-                      <LogIn className="h-5 w-5 mr-3" />
-                      Iniciar Sesión
-                    </Link>
-                  )}
-                </div>
+                        <LogIn className="h-5 w-5 mr-3" />
+                        Iniciar Sesión
+                      </Link>
+                    )}
+                  </div>
+                )}
               </div>
             </motion.div>
           )}
