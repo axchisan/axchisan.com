@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { AdminLayout } from "@/components/admin/admin-layout"
 import { Button } from "@/components/ui/button"
@@ -16,93 +16,142 @@ import { Switch } from "@/components/ui/switch"
 import { X, Plus, ArrowLeft } from "lucide-react"
 import { toast } from "sonner"
 
-export default function NewProjectPage() {
+interface Project {
+  id: string
+  title: string
+  description: string
+  shortDesc?: string
+  content?: string
+  images: string[]
+  videos: string[]
+  technologies: string[]
+  githubUrl?: string
+  liveUrl?: string
+  downloadUrl?: string
+  category?: string
+  status: string
+  featured: boolean
+  order: number
+}
+
+export default function EditProjectPage({ params }: { params: { id: string } }) {
   const router = useRouter()
-  const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
-  const [shortDesc, setShortDesc] = useState("")
-  const [content, setContent] = useState("")
-  const [status, setStatus] = useState("IN_PROGRESS")
-  const [category, setCategory] = useState("")
-  const [liveUrl, setLiveUrl] = useState("")
-  const [githubUrl, setGithubUrl] = useState("")
-  const [downloadUrl, setDownloadUrl] = useState("")
-  const [technologies, setTechnologies] = useState<string[]>([])
-  const [images, setImages] = useState<string[]>([])
-  const [featured, setFeatured] = useState(false)
-  const [order, setOrder] = useState(0)
+  const [project, setProject] = useState<Project | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
   const [newTech, setNewTech] = useState("")
   const [newImage, setNewImage] = useState("")
-  const [saving, setSaving] = useState(false)
+
+  useEffect(() => {
+    fetchProject()
+  }, [params.id])
+
+  const fetchProject = async () => {
+    try {
+      const response = await fetch(`/api/projects/${params.id}`)
+      if (response.ok) {
+        const data = await response.json()
+        setProject(data)
+      } else {
+        toast.error("Error al cargar el proyecto")
+        router.push("/admin/projects")
+      }
+    } catch (error) {
+      console.error("Error fetching project:", error)
+      toast.error("Error al cargar el proyecto")
+      router.push("/admin/projects")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!project) return
+
+    setSaving(true)
+    try {
+      const response = await fetch(`/api/projects/${params.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(project),
+      })
+
+      if (response.ok) {
+        toast.success("Proyecto actualizado exitosamente")
+        router.push("/admin/projects")
+      } else {
+        toast.error("Error al actualizar el proyecto")
+      }
+    } catch (error) {
+      console.error("Error updating project:", error)
+      toast.error("Error al actualizar el proyecto")
+    } finally {
+      setSaving(false)
+    }
+  }
 
   const handleAddTechnology = () => {
-    if (newTech.trim() && !technologies.includes(newTech.trim())) {
-      setTechnologies([...technologies, newTech.trim()])
+    if (newTech.trim() && project && !project.technologies.includes(newTech.trim())) {
+      setProject({
+        ...project,
+        technologies: [...project.technologies, newTech.trim()],
+      })
       setNewTech("")
     }
   }
 
   const handleRemoveTechnology = (tech: string) => {
-    setTechnologies(technologies.filter((t) => t !== tech))
+    if (project) {
+      setProject({
+        ...project,
+        technologies: project.technologies.filter((t) => t !== tech),
+      })
+    }
   }
 
   const handleAddImage = () => {
-    if (newImage.trim() && !images.includes(newImage.trim())) {
-      setImages([...images, newImage.trim()])
+    if (newImage.trim() && project && !project.images.includes(newImage.trim())) {
+      setProject({
+        ...project,
+        images: [...project.images, newImage.trim()],
+      })
       setNewImage("")
     }
   }
 
   const handleRemoveImage = (image: string) => {
-    setImages(images.filter((img) => img !== image))
+    if (project) {
+      setProject({
+        ...project,
+        images: project.images.filter((img) => img !== image),
+      })
+    }
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  if (loading) {
+    return (
+      <AdminLayout>
+        <div className="flex items-center justify-center min-h-[400px]">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+            <p>Cargando proyecto...</p>
+          </div>
+        </div>
+      </AdminLayout>
+    )
+  }
 
-    if (!title || !description) {
-      toast.error("Título y descripción son requeridos")
-      return
-    }
-
-    setSaving(true)
-    try {
-      const projectData = {
-        title,
-        description,
-        shortDesc,
-        content,
-        status,
-        category,
-        liveUrl,
-        githubUrl,
-        downloadUrl,
-        technologies,
-        images,
-        featured,
-        order,
-      }
-
-      const response = await fetch("/api/projects", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(projectData),
-      })
-
-      if (response.ok) {
-        toast.success("Proyecto creado exitosamente")
-        router.push("/admin/projects")
-      } else {
-        toast.error("Error al crear el proyecto")
-      }
-    } catch (error) {
-      console.error("Error creating project:", error)
-      toast.error("Error al crear el proyecto")
-    } finally {
-      setSaving(false)
-    }
+  if (!project) {
+    return (
+      <AdminLayout>
+        <div className="text-center py-12">
+          <p className="text-muted-foreground">Proyecto no encontrado</p>
+        </div>
+      </AdminLayout>
+    )
   }
 
   return (
@@ -114,8 +163,8 @@ export default function NewProjectPage() {
             Volver
           </Button>
           <div>
-            <h1 className="text-3xl font-bold neon-text">Nuevo Proyecto</h1>
-            <p className="text-muted-foreground">Agrega un nuevo proyecto a tu portafolio</p>
+            <h1 className="text-3xl font-bold neon-text">Editar Proyecto</h1>
+            <p className="text-muted-foreground">Modifica los detalles de tu proyecto</p>
           </div>
         </div>
 
@@ -132,9 +181,8 @@ export default function NewProjectPage() {
                   <Label htmlFor="title">Título del Proyecto</Label>
                   <Input
                     id="title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    placeholder="Nombre del proyecto"
+                    value={project.title}
+                    onChange={(e) => setProject({ ...project, title: e.target.value })}
                     required
                   />
                 </div>
@@ -143,9 +191,8 @@ export default function NewProjectPage() {
                   <Label htmlFor="shortDesc">Descripción Corta</Label>
                   <Textarea
                     id="shortDesc"
-                    value={shortDesc}
-                    onChange={(e) => setShortDesc(e.target.value)}
-                    placeholder="Descripción breve del proyecto"
+                    value={project.shortDesc || ""}
+                    onChange={(e) => setProject({ ...project, shortDesc: e.target.value })}
                     rows={3}
                   />
                 </div>
@@ -154,9 +201,8 @@ export default function NewProjectPage() {
                   <Label htmlFor="description">Descripción Completa</Label>
                   <Textarea
                     id="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    placeholder="Descripción detallada del proyecto"
+                    value={project.description}
+                    onChange={(e) => setProject({ ...project, description: e.target.value })}
                     rows={4}
                     required
                   />
@@ -166,8 +212,8 @@ export default function NewProjectPage() {
                   <Label htmlFor="content">Contenido Detallado</Label>
                   <Textarea
                     id="content"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
+                    value={project.content || ""}
+                    onChange={(e) => setProject({ ...project, content: e.target.value })}
                     rows={6}
                     placeholder="Descripción técnica, desafíos, soluciones implementadas..."
                   />
@@ -184,9 +230,9 @@ export default function NewProjectPage() {
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="status">Estado</Label>
-                  <Select value={status} onValueChange={setStatus} required>
+                  <Select value={project.status} onValueChange={(value) => setProject({ ...project, status: value })}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Selecciona el estado" />
+                      <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="IN_PROGRESS">En Progreso</SelectItem>
@@ -200,8 +246,8 @@ export default function NewProjectPage() {
                   <Label htmlFor="category">Categoría</Label>
                   <Input
                     id="category"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
+                    value={project.category || ""}
+                    onChange={(e) => setProject({ ...project, category: e.target.value })}
                     placeholder="Web, Mobile, Desktop, etc."
                   />
                 </div>
@@ -211,14 +257,17 @@ export default function NewProjectPage() {
                   <Input
                     id="order"
                     type="number"
-                    value={order}
-                    onChange={(e) => setOrder(Number.parseInt(e.target.value) || 0)}
-                    placeholder="0"
+                    value={project.order}
+                    onChange={(e) => setProject({ ...project, order: Number.parseInt(e.target.value) || 0 })}
                   />
                 </div>
 
                 <div className="flex items-center space-x-2">
-                  <Switch id="featured" checked={featured} onCheckedChange={setFeatured} />
+                  <Switch
+                    id="featured"
+                    checked={project.featured}
+                    onCheckedChange={(checked) => setProject({ ...project, featured: checked })}
+                  />
                   <Label htmlFor="featured">Proyecto destacado</Label>
                 </div>
               </CardContent>
@@ -237,8 +286,8 @@ export default function NewProjectPage() {
                 <Input
                   id="liveUrl"
                   type="url"
-                  value={liveUrl}
-                  onChange={(e) => setLiveUrl(e.target.value)}
+                  value={project.liveUrl || ""}
+                  onChange={(e) => setProject({ ...project, liveUrl: e.target.value })}
                   placeholder="https://ejemplo.com"
                 />
               </div>
@@ -248,8 +297,8 @@ export default function NewProjectPage() {
                 <Input
                   id="githubUrl"
                   type="url"
-                  value={githubUrl}
-                  onChange={(e) => setGithubUrl(e.target.value)}
+                  value={project.githubUrl || ""}
+                  onChange={(e) => setProject({ ...project, githubUrl: e.target.value })}
                   placeholder="https://github.com/usuario/repo"
                 />
               </div>
@@ -259,8 +308,8 @@ export default function NewProjectPage() {
                 <Input
                   id="downloadUrl"
                   type="url"
-                  value={downloadUrl}
-                  onChange={(e) => setDownloadUrl(e.target.value)}
+                  value={project.downloadUrl || ""}
+                  onChange={(e) => setProject({ ...project, downloadUrl: e.target.value })}
                   placeholder="https://releases.com/download"
                 />
               </div>
@@ -285,9 +334,9 @@ export default function NewProjectPage() {
                   <Plus className="h-4 w-4" />
                 </Button>
               </div>
-              {technologies.length > 0 && (
+              {project.technologies.length > 0 && (
                 <div className="flex flex-wrap gap-2">
-                  {technologies.map((tech) => (
+                  {project.technologies.map((tech) => (
                     <Badge key={tech} variant="secondary" className="flex items-center gap-1">
                       {tech}
                       <button
@@ -322,13 +371,13 @@ export default function NewProjectPage() {
                   <Plus className="h-4 w-4" />
                 </Button>
               </div>
-              {images.length > 0 && (
+              {project.images.length > 0 && (
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {images.map((image, index) => (
+                  {project.images.map((image, index) => (
                     <div key={index} className="relative group">
                       <img
                         src={image || "/placeholder.svg"}
-                        alt={`Preview ${index + 1}`}
+                        alt={`${project.title} - ${index + 1}`}
                         className="w-full h-32 object-cover rounded-lg border"
                       />
                       <button
@@ -348,7 +397,7 @@ export default function NewProjectPage() {
           {/* Actions */}
           <div className="flex gap-4 pt-4">
             <Button type="submit" disabled={saving} className="neon-glow">
-              {saving ? "Creando..." : "Crear Proyecto"}
+              {saving ? "Guardando..." : "Guardar Cambios"}
             </Button>
             <Button type="button" variant="outline" onClick={() => router.back()}>
               Cancelar
