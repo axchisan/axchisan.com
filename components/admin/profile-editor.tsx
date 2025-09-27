@@ -10,8 +10,23 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Slider } from "@/components/ui/slider"
-import { Plus, Trash2, Edit, Save, X } from "lucide-react"
+import { Plus, Trash2, Edit, Save, X, Loader2 } from "lucide-react"
 import { toast } from "sonner"
+
+interface Profile {
+  id?: string
+  name: string
+  title: string
+  bio: string
+  email: string
+  phone?: string
+  whatsapp?: string
+  instagram?: string
+  github?: string
+  linkedin?: string
+  avatar?: string
+  resumeUrl?: string
+}
 
 interface Skill {
   id: string
@@ -24,16 +39,18 @@ interface Skill {
 }
 
 export function ProfileEditor() {
-  const [profile, setProfile] = useState({
-    name: "Duvan Yair Arciniegas - Axchi",
-    title: "Desarrollador de Software",
-    bio: "Soy un apasionado desarrollador de software, actualmente estudiante en el SENA. Me encanta la programación y creo soluciones tecnológicas innovadoras para diferentes negocios. En mis tiempos libres disfruto creando juegos y soy un gran apasionado por la música. Trabajo bajo el apodo Axchi, mi marca personal que representa innovación y creatividad en el desarrollo de software.",
-    email: "contact@axchi.dev",
-    phone: "3183038190",
-    whatsapp: "3183038190",
-    instagram: "@axchisan",
-    github: "@axchisan",
+  const [profile, setProfile] = useState<Profile>({
+    name: "",
+    title: "",
+    bio: "",
+    email: "",
+    phone: "",
+    whatsapp: "",
+    instagram: "",
+    github: "",
     linkedin: "",
+    avatar: "",
+    resumeUrl: "",
   })
 
   const [skills, setSkills] = useState<Skill[]>([])
@@ -48,44 +65,71 @@ export function ProfileEditor() {
   })
 
   const [isSaving, setIsSaving] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
-  const handleProfileChange = (field: string, value: string) => {
-    setProfile((prev) => ({ ...prev, [field]: value }))
-  }
+  useEffect(() => {
+    fetchProfile()
+    fetchSkills()
+  }, [])
 
-  const addSkill = () => {
-    if (
-      newSkill.name.trim() &&
-      newSkill.category.trim() &&
-      !skills.some((skill) => skill.name === newSkill.name.trim())
-    ) {
-      setSkills((prev) => [...prev, { ...newSkill, id: Date.now().toString() }])
-      setNewSkill({
-        name: "",
-        category: "",
-        level: 5,
-        icon: "",
-        color: "#3b82f6",
-        order: 0,
-      })
+  const fetchProfile = async () => {
+    try {
+      const response = await fetch("/api/profile")
+      if (response.ok) {
+        const data = await response.json()
+        setProfile({
+          id: data.id,
+          name: data.name || "",
+          title: data.title || "",
+          bio: data.bio || "",
+          email: data.email || "",
+          phone: data.phone || "",
+          whatsapp: data.whatsapp || "",
+          instagram: data.instagram || "",
+          github: data.github || "",
+          linkedin: data.linkedin || "",
+          avatar: data.avatar || "",
+          resumeUrl: data.resumeUrl || "",
+        })
+      }
+    } catch (error) {
+      console.error("Error fetching profile:", error)
+      toast.error("Error al cargar el perfil")
+    } finally {
+      setIsLoading(false)
     }
   }
 
-  const removeSkill = (skillToRemove: string) => {
-    setSkills((prev) => prev.filter((skill) => skill.id !== skillToRemove))
+  const handleProfileChange = (field: keyof Profile, value: string) => {
+    setProfile((prev) => ({ ...prev, [field]: value }))
   }
 
   const handleSave = async () => {
     setIsSaving(true)
-    // Here you would make an API call to save the profile
-    console.log("Saving profile:", { profile, skills })
-    // Show success message
-    setIsSaving(false)
-  }
+    try {
+      const response = await fetch("/api/profile", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(profile),
+      })
 
-  useEffect(() => {
-    fetchSkills()
-  }, [])
+      if (response.ok) {
+        const updatedProfile = await response.json()
+        setProfile(updatedProfile)
+        toast.success("Perfil guardado exitosamente")
+      } else {
+        const error = await response.json()
+        toast.error(error.message || "Error al guardar el perfil")
+      }
+    } catch (error) {
+      console.error("Error saving profile:", error)
+      toast.error("Error al guardar el perfil")
+    } finally {
+      setIsSaving(false)
+    }
+  }
 
   const fetchSkills = async () => {
     try {
@@ -182,12 +226,31 @@ export function ProfileEditor() {
     }
   }
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <Loader2 className="h-8 w-8 animate-spin" />
+        <span className="ml-2">Cargando perfil...</span>
+      </div>
+    )
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">Editor de Perfil</h1>
         <Button onClick={handleSave} disabled={isSaving}>
-          {isSaving ? "Guardando..." : "Guardar Cambios"}
+          {isSaving ? (
+            <>
+              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              Guardando...
+            </>
+          ) : (
+            <>
+              <Save className="h-4 w-4 mr-2" />
+              Guardar Cambios
+            </>
+          )}
         </Button>
       </div>
 
@@ -252,7 +315,7 @@ export function ProfileEditor() {
                 <Label htmlFor="phone">Teléfono</Label>
                 <Input
                   id="phone"
-                  value={profile.phone}
+                  value={profile.phone || ""}
                   onChange={(e) => handleProfileChange("phone", e.target.value)}
                 />
               </div>
@@ -261,7 +324,7 @@ export function ProfileEditor() {
                 <Label htmlFor="whatsapp">WhatsApp</Label>
                 <Input
                   id="whatsapp"
-                  value={profile.whatsapp}
+                  value={profile.whatsapp || ""}
                   onChange={(e) => handleProfileChange("whatsapp", e.target.value)}
                 />
               </div>
@@ -270,7 +333,7 @@ export function ProfileEditor() {
                 <Label htmlFor="instagram">Instagram</Label>
                 <Input
                   id="instagram"
-                  value={profile.instagram}
+                  value={profile.instagram || ""}
                   onChange={(e) => handleProfileChange("instagram", e.target.value)}
                 />
               </div>
@@ -279,7 +342,7 @@ export function ProfileEditor() {
                 <Label htmlFor="github">GitHub</Label>
                 <Input
                   id="github"
-                  value={profile.github}
+                  value={profile.github || ""}
                   onChange={(e) => handleProfileChange("github", e.target.value)}
                 />
               </div>
@@ -288,7 +351,7 @@ export function ProfileEditor() {
                 <Label htmlFor="linkedin">LinkedIn</Label>
                 <Input
                   id="linkedin"
-                  value={profile.linkedin}
+                  value={profile.linkedin || ""}
                   onChange={(e) => handleProfileChange("linkedin", e.target.value)}
                 />
               </div>
@@ -403,7 +466,32 @@ export function ProfileEditor() {
         </TabsContent>
 
         <TabsContent value="media" className="space-y-6">
-          {/* Media Tab Content */}
+          <Card className="border-primary/20">
+            <CardHeader>
+              <CardTitle>Archivos y Media</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="avatar">URL del Avatar</Label>
+                <Input
+                  id="avatar"
+                  value={profile.avatar || ""}
+                  onChange={(e) => handleProfileChange("avatar", e.target.value)}
+                  placeholder="https://ejemplo.com/avatar.jpg"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="resumeUrl">URL del CV/Resume</Label>
+                <Input
+                  id="resumeUrl"
+                  value={profile.resumeUrl || ""}
+                  onChange={(e) => handleProfileChange("resumeUrl", e.target.value)}
+                  placeholder="https://ejemplo.com/cv.pdf"
+                />
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
     </div>
