@@ -15,6 +15,24 @@ import { Badge } from "@/components/ui/badge"
 import { Switch } from "@/components/ui/switch"
 import { X, Plus, ArrowLeft } from "lucide-react"
 import { toast } from "sonner"
+import { AdvancedFileManager } from "@/components/admin/advanced-file-manager"
+
+interface ProjectFile {
+  id?: string
+  filename: string
+  originalName: string
+  displayName?: string
+  description?: string
+  url: string
+  size: number
+  type: string
+  category: string
+  platform?: string
+  version?: string
+  isDownloadable: boolean
+  downloadCount?: number
+  order: number
+}
 
 export default function NewProjectPage() {
   const router = useRouter()
@@ -29,6 +47,7 @@ export default function NewProjectPage() {
   const [downloadUrl, setDownloadUrl] = useState("")
   const [technologies, setTechnologies] = useState<string[]>([])
   const [images, setImages] = useState<string[]>([])
+  const [projectFiles, setProjectFiles] = useState<ProjectFile[]>([])
   const [featured, setFeatured] = useState(false)
   const [order, setOrder] = useState(0)
   const [newTech, setNewTech] = useState("")
@@ -79,6 +98,7 @@ export default function NewProjectPage() {
         downloadUrl,
         technologies,
         images,
+        files: projectFiles,
         featured,
         order,
       }
@@ -107,7 +127,7 @@ export default function NewProjectPage() {
 
   return (
     <AdminLayout>
-      <div className="max-w-4xl mx-auto space-y-6">
+      <div className="max-w-6xl mx-auto space-y-6">
         <div className="flex items-center space-x-4">
           <Button variant="outline" size="sm" onClick={() => router.back()}>
             <ArrowLeft className="h-4 w-4 mr-2" />
@@ -342,6 +362,19 @@ export default function NewProjectPage() {
                   ))}
                 </div>
               )}
+            </CardContent>
+          </Card>
+
+          {/* Archivos del Proyecto */}
+          <Card className="bg-card/50 backdrop-blur-sm border-primary/20">
+            <CardHeader>
+              <CardTitle>Archivos del Proyecto</CardTitle>
+              <CardDescription>
+                Sube archivos descargables como APK, EXE, ZIP, etc. Organiza por plataforma y controla la descarga.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <AdvancedFileManager initialFiles={projectFiles} onFilesChange={setProjectFiles} maxFiles={20} />
             </CardContent>
           </Card>
 

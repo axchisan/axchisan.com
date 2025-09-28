@@ -6,7 +6,14 @@ import Image from "next/image"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Heart, MessageCircle, ExternalLink, Github, Download, Eye } from "lucide-react"
+import { Heart, MessageCircle, ExternalLink, Github, Download, Eye, Monitor, Smartphone, Globe } from "lucide-react"
+
+interface ProjectFile {
+  id: string
+  category: string
+  platform?: string
+  isDownloadable: boolean
+}
 
 interface Project {
   id: string
@@ -14,6 +21,7 @@ interface Project {
   description: string
   shortDesc: string
   images: string[]
+  files?: ProjectFile[]
   technologies: string[]
   category: string
   status: "IN_PROGRESS" | "COMPLETED" | "ARCHIVED"
@@ -50,6 +58,26 @@ export function ProjectCard({ project }: ProjectCardProps) {
     ARCHIVED: "Archivado",
   }
 
+  const availablePlatforms = project.files ? [...new Set(project.files.map((f) => f.platform).filter(Boolean))] : []
+
+  const downloadableFiles = project.files ? project.files.filter((f) => f.isDownloadable) : []
+
+  const getPlatformIcon = (platform: string) => {
+    switch (platform) {
+      case "Android":
+      case "iOS":
+        return Smartphone
+      case "Windows":
+      case "macOS":
+      case "Linux":
+        return Monitor
+      case "Web":
+        return Globe
+      default:
+        return Monitor
+    }
+  }
+
   return (
     <Card className="border-primary/20 bg-card/50 backdrop-blur-sm hover:border-primary/40 transition-all duration-300 group overflow-hidden">
       {/* Project Image */}
@@ -71,6 +99,24 @@ export function ProjectCard({ project }: ProjectCardProps) {
         {project.featured && (
           <div className="absolute top-3 right-3">
             <Badge className="bg-primary/90 text-primary-foreground">Destacado</Badge>
+          </div>
+        )}
+
+        {availablePlatforms.length > 0 && (
+          <div className="absolute bottom-3 left-3 flex gap-1">
+            {availablePlatforms.slice(0, 3).map((platform) => {
+              const Icon = getPlatformIcon(platform)
+              return (
+                <div key={platform} className="bg-black/60 backdrop-blur-sm rounded-full p-1.5">
+                  <Icon className="h-3 w-3 text-white" />
+                </div>
+              )
+            })}
+            {availablePlatforms.length > 3 && (
+              <div className="bg-black/60 backdrop-blur-sm rounded-full px-2 py-1">
+                <span className="text-xs text-white">+{availablePlatforms.length - 3}</span>
+              </div>
+            )}
           </div>
         )}
 
@@ -112,6 +158,18 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
       <CardContent className="pt-0">
         <p className="text-sm text-muted-foreground line-clamp-2">{project.description}</p>
+
+        {downloadableFiles.length > 0 && (
+          <div className="mt-3 p-2 bg-primary/5 rounded-lg">
+            <div className="flex items-center gap-2 text-sm text-primary">
+              <Download className="h-3 w-3" />
+              <span>
+                {downloadableFiles.length} archivo{downloadableFiles.length !== 1 ? "s" : ""} disponible
+                {downloadableFiles.length !== 1 ? "s" : ""}
+              </span>
+            </div>
+          </div>
+        )}
       </CardContent>
 
       <CardFooter className="pt-0">

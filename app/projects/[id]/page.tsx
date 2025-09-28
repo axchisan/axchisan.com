@@ -8,8 +8,26 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { CommentSection } from "@/components/comments/comment-section"
+import { ProjectFilesDisplay } from "@/components/projects/project-files-display"
 import { ArrowLeft, ExternalLink, Github, Download, Calendar, Tag } from "lucide-react"
 import { toast } from "sonner"
+
+interface ProjectFile {
+  id: string
+  filename: string
+  originalName: string
+  displayName?: string
+  description?: string
+  url: string
+  size: number
+  type: string
+  category: string
+  platform?: string
+  version?: string
+  isDownloadable: boolean
+  downloadCount: number
+  order: number
+}
 
 interface Project {
   id: string
@@ -19,6 +37,7 @@ interface Project {
   content?: string
   images: string[]
   videos: string[]
+  files: ProjectFile[]
   technologies: string[]
   githubUrl?: string
   liveUrl?: string
@@ -208,6 +227,10 @@ export default function ProjectDetailPage() {
               </CardContent>
             </Card>
 
+            {project.files && project.files.length > 0 && (
+              <ProjectFilesDisplay files={project.files} projectTitle={project.title} />
+            )}
+
             {/* Comments */}
             <CommentSection projectId={project.id} />
           </div>
@@ -241,6 +264,18 @@ export default function ProjectDetailPage() {
                     <span className="text-muted-foreground">Me gusta</span>
                     <span>{project.likes.length}</span>
                   </div>
+                  {project.files && project.files.length > 0 && (
+                    <>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Archivos</span>
+                        <span>{project.files.length}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Descargas totales</span>
+                        <span>{project.files.reduce((total, file) => total + file.downloadCount, 0)}</span>
+                      </div>
+                    </>
+                  )}
                 </div>
               </CardContent>
             </Card>
