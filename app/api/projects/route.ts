@@ -7,6 +7,18 @@ export async function GET() {
   try {
     const projects = await prisma.project.findMany({
       where: { status: "COMPLETED" },
+      include: {
+        files: {
+          orderBy: { order: "asc" },
+        },
+        _count: {
+          select: {
+            likes: true,
+            comments: true,
+            favorites: true,
+          },
+        },
+      },
       orderBy: [{ featured: "desc" }, { order: "asc" }, { createdAt: "desc" }],
     })
 
@@ -45,7 +57,36 @@ export async function POST(request: NextRequest) {
       },
     })
 
-    return NextResponse.json(project)
+    if (data.files && data.files.length > 0) {
+      await prisma.projectFile.createMany({
+        data: data.files.map((file: any, index: number) => ({
+          filename: file.filename,
+          originalName: file.originalName,
+          displayName: file.displayName || file.originalName,
+          description: file.description,
+          url: file.url,
+          size: file.size,
+          type: file.type,
+          category: file.category || "OTHER",
+          platform: file.platform,
+          version: file.version,
+          isDownloadable: file.isDownloadable ?? true,
+          order: file.order || index,
+          projectId: project.id,
+        })),
+      })
+    }
+
+    const projectWithFiles = await prisma.project.findUnique({
+      where: { id: project.id },
+      include: {
+        files: {
+          orderBy: { order: "asc" },
+        },
+      },
+    })
+
+    return NextResponse.json(projectWithFiles)
   } catch (error) {
     console.error("Project creation error:", error)
     return NextResponse.json({ error: "Failed to create project" }, { status: 500 })

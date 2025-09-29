@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { CommentSection } from "@/components/comments/comment-section"
 import { ProjectFilesDisplay } from "@/components/projects/project-files-display"
-import { ArrowLeft, ExternalLink, Github, Download, Calendar, Tag } from "lucide-react"
+import { ArrowLeft, ExternalLink, Github, Download, Calendar, Tag, Eye, Heart, Star } from "lucide-react"
 import { toast } from "sonner"
 
 interface ProjectFile {
@@ -46,9 +46,17 @@ interface Project {
   status: string
   featured: boolean
   order: number
+  views: number
   createdAt: string
   comments: any[]
   likes: any[]
+  favorites: any[]
+  _count: {
+    likes: number
+    comments: number
+    favorites: number
+    projectViews: number
+  }
 }
 
 export default function ProjectDetailPage() {
@@ -142,9 +150,30 @@ export default function ProjectDetailPage() {
             </Badge>
           </div>
 
-          <h1 className="text-4xl font-bold">{project.title}</h1>
+          <h1 className="text-4xl font-bold text-balance">{project.title}</h1>
 
-          {project.shortDesc && <p className="text-xl text-muted-foreground">{project.shortDesc}</p>}
+          {project.shortDesc && <p className="text-xl text-muted-foreground text-pretty">{project.shortDesc}</p>}
+
+          <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+            <div className="flex items-center gap-1">
+              <Eye className="h-4 w-4" />
+              <span>{project.views || project._count?.projectViews || 0} visualizaciones</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Heart className="h-4 w-4" />
+              <span>{project._count?.likes || project.likes?.length || 0} me gusta</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Star className="h-4 w-4" />
+              <span>{project._count?.favorites || project.favorites?.length || 0} favoritos</span>
+            </div>
+            {project.files && project.files.length > 0 && (
+              <div className="flex items-center gap-1">
+                <Download className="h-4 w-4" />
+                <span>{project.files.reduce((total, file) => total + file.downloadCount, 0)} descargas</span>
+              </div>
+            )}
+          </div>
 
           {/* Action buttons */}
           <div className="flex flex-wrap gap-2">
@@ -222,7 +251,7 @@ export default function ProjectDetailPage() {
               <CardContent className="p-6">
                 <h2 className="text-2xl font-semibold mb-4">Descripción</h2>
                 <div className="prose prose-neutral dark:prose-invert max-w-none">
-                  <p className="whitespace-pre-wrap">{project.content || project.description}</p>
+                  <p className="whitespace-pre-wrap text-pretty">{project.content || project.description}</p>
                 </div>
               </CardContent>
             </Card>
@@ -251,30 +280,92 @@ export default function ProjectDetailPage() {
               </CardContent>
             </Card>
 
-            {/* Project Stats */}
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-4">Estadísticas</h3>
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Comentarios</span>
-                    <span>{project.comments.length}</span>
+                <h3 className="font-semibold mb-4">Estadísticas del Proyecto</h3>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                      <Eye className="h-4 w-4 text-muted-foreground" />
+                      <span className="text-muted-foreground">Visualizaciones</span>
+                    </div>
+                    <span className="font-medium">{project.views || project._count?.projectViews || 0}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Me gusta</span>
-                    <span>{project.likes.length}</span>
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                      <Heart className="h-4 w-4 text-muted-foreground" />
+                      <span className="text-muted-foreground">Me gusta</span>
+                    </div>
+                    <span className="font-medium">{project._count?.likes || project.likes?.length || 0}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                      <Star className="h-4 w-4 text-muted-foreground" />
+                      <span className="text-muted-foreground">Favoritos</span>
+                    </div>
+                    <span className="font-medium">{project._count?.favorites || project.favorites?.length || 0}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                      <Tag className="h-4 w-4 text-muted-foreground" />
+                      <span className="text-muted-foreground">Comentarios</span>
+                    </div>
+                    <span className="font-medium">{project._count?.comments || project.comments?.length || 0}</span>
                   </div>
                   {project.files && project.files.length > 0 && (
                     <>
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">Archivos</span>
-                        <span>{project.files.length}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">Descargas totales</span>
-                        <span>{project.files.reduce((total, file) => total + file.downloadCount, 0)}</span>
+                      <div className="border-t pt-3 mt-3">
+                        <div className="flex justify-between items-center">
+                          <span className="text-muted-foreground">Archivos disponibles</span>
+                          <span className="font-medium">{project.files.length}</span>
+                        </div>
+                        <div className="flex justify-between items-center mt-2">
+                          <div className="flex items-center gap-2">
+                            <Download className="h-4 w-4 text-muted-foreground" />
+                            <span className="text-muted-foreground">Descargas totales</span>
+                          </div>
+                          <span className="font-medium">
+                            {project.files.reduce((total, file) => total + file.downloadCount, 0)}
+                          </span>
+                        </div>
                       </div>
                     </>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-4">Información del Proyecto</h3>
+                <div className="space-y-3 text-sm">
+                  <div>
+                    <span className="text-muted-foreground">Estado:</span>
+                    <Badge variant="outline" className="ml-2">
+                      {project.status === "COMPLETED"
+                        ? "Completado"
+                        : project.status === "IN_PROGRESS"
+                          ? "En progreso"
+                          : project.status === "DRAFT"
+                            ? "Borrador"
+                            : project.status}
+                    </Badge>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Fecha de creación:</span>
+                    <span className="ml-2">
+                      {new Date(project.createdAt).toLocaleDateString("es-ES", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </span>
+                  </div>
+                  {project.category && (
+                    <div>
+                      <span className="text-muted-foreground">Categoría:</span>
+                      <span className="ml-2">{project.category}</span>
+                    </div>
                   )}
                 </div>
               </CardContent>

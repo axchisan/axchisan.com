@@ -23,6 +23,7 @@ model User {
   comments Comment[]
   likes    Like[]
   messages ContactMessage[]
+  favorites Favorite[]
 
   @@map("users")
 }
@@ -92,12 +93,15 @@ model Project {
   status      ProjectStatus @default(COMPLETED)
   featured    Boolean @default(false)
   order       Int    @default(0)
+  views       Int    @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   // Relations
   comments Comment[]
   likes    Like[]
+  favorites Favorite[]
+  projectViews ProjectView[]
 
   @@map("projects")
 }
@@ -109,6 +113,7 @@ model BlogPost {
   excerpt     String?
   content     String @db.Text
   coverImage  String?
+  files       BlogFile[]
   tags        String[] // Array of tags
   published   Boolean @default(false)
   featured    Boolean @default(false)
@@ -121,6 +126,8 @@ model BlogPost {
   // Relations
   comments Comment[]
   likes    Like[]
+  favorites Favorite[]
+  blogViews BlogView[]
 
   @@map("blog_posts")
 }
@@ -173,6 +180,9 @@ model ContactMessage {
   message   String @db.Text
   read      Boolean @default(false)
   replied   Boolean @default(false)
+  status    MessageStatus @default(PENDING)
+  response  String? @db.Text
+  respondedAt DateTime?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -226,6 +236,13 @@ enum FileCategory {
   OTHER
 }
 
+enum MessageStatus {
+  PENDING
+  IN_PROGRESS
+  RESOLVED
+  REJECTED
+}
+
 model ProjectFile {
   id          String @id @default(cuid())
   filename    String // Nombre del archivo en el servidor
@@ -249,4 +266,84 @@ model ProjectFile {
   projectId   String
 
   @@map("project_files")
+}
+
+model BlogFile {
+  id          String @id @default(cuid())
+  filename    String // Nombre del archivo en el servidor
+  originalName String // Nombre original del archivo
+  displayName String? // Nombre personalizado para mostrar
+  description String? // Descripción del archivo
+  url         String // URL pública del archivo
+  size        Int // Tamaño en bytes
+  type        String // MIME type
+  category    FileCategory @default(OTHER) // Categoría del archivo
+  isDownloadable Boolean @default(true) // Si el archivo es descargable
+  downloadCount Int @default(0) // Contador de descargas
+  order       Int @default(0) // Orden de visualización
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  blogPost    BlogPost @relation(fields: [blogPostId], references: [id], onDelete: Cascade)
+  blogPostId  String
+
+  @@map("blog_files")
+}
+
+model SiteAnalytics {
+  id        String @id @default(cuid())
+  path      String // Ruta visitada
+  userAgent String? // User agent del visitante
+  ip        String? // IP del visitante (hasheada por privacidad)
+  referer   String? // Página de referencia
+  country   String? // País del visitante
+  device    String? // Tipo de dispositivo
+  createdAt DateTime @default(now())
+
+  @@map("site_analytics")
+}
+
+model ProjectView {
+  id        String @id @default(cuid())
+  projectId String
+  userAgent String?
+  ip        String? // IP hasheada
+  createdAt DateTime @default(now())
+
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("project_views")
+}
+
+model BlogView {
+  id         String @id @default(cuid())
+  blogPostId String
+  userAgent  String?
+  ip         String? // IP hasheada
+  createdAt  DateTime @default(now())
+
+  blogPost   BlogPost @relation(fields: [blogPostId], references: [id], onDelete: Cascade)
+
+  @@map("blog_views")
+}
+
+model Favorite {
+  id        String @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  // Relations
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  
+  // Polymorphic relations
+  project   Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String?
+  
+  blogPost   BlogPost? @relation(fields: [blogPostId], references: [id], onDelete: Cascade)
+  blogPostId String?
+
+  @@unique([userId, projectId])
+  @@unique([userId, blogPostId])
+  @@map("favorites")
 }

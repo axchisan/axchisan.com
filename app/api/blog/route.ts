@@ -1,4 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 
 export async function GET(request: NextRequest) {
@@ -30,10 +32,14 @@ export async function GET(request: NextRequest) {
       where,
       orderBy: [{ featured: "desc" }, { publishedAt: "desc" }, { createdAt: "desc" }],
       include: {
+        files: {
+          orderBy: { order: "asc" },
+        },
         _count: {
           select: {
             comments: true,
             likes: true,
+            favorites: true,
           },
         },
       },
@@ -59,8 +65,24 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    const session = await getServerSession(authOptions)
+    if (!session || session.user.role !== "ADMIN") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
+
     const body = await request.json()
-    const { title, slug, excerpt, content, coverImage, tags, published = false, featured = false, readTime } = body
+    const {
+      title,
+      slug,
+      excerpt,
+      content,
+      coverImage,
+      tags,
+      published = false,
+      featured = false,
+      readTime,
+      files,
+    } = body
 
     // Check if slug already exists
     const existingPost = await prisma.blogPost.findUnique({
@@ -86,7 +108,34 @@ export async function POST(request: NextRequest) {
       },
     })
 
-    return NextResponse.json(post, { status: 201 })
+    if (files && files.length > 0) {
+      await prisma.blogFile.createMany({
+        data: files.map((file: any, index: number) => ({
+          filename: file.filename,
+          originalName: file.originalName,
+          displayName: file.displayName || file.originalName,
+          description: file.description,
+          url: file.url,
+          size: file.size,
+          type: file.type,
+          category: file.category || "OTHER",
+          isDownloadable: file.isDownloadable ?? true,
+          order: file.order || index,
+          blogPostId: post.id,
+        })),
+      })
+    }
+
+    const postWithFiles = await prisma.blogPost.findUnique({
+      where: { id: post.id },
+      include: {
+        files: {
+          orderBy: { order: "asc" },
+        },
+      },
+    })
+
+    return NextResponse.json(postWithFiles, { status: 201 })
   } catch (error) {
     console.error("Error creating blog post:", error)
     return NextResponse.json({ error: "Error creating blog post" }, { status: 500 })

@@ -8,13 +8,13 @@ async function setupDatabase() {
     console.log("🚀 Setting up database...")
 
     // Create admin user
-    const hashedPassword = await bcrypt.hash("admin123", 12)
+    const hashedPassword = await bcrypt.hash("***REMOVED***", 12)
 
     const admin = await prisma.user.upsert({
-      where: { email: "admin@axchi.dev" },
+      where: { email: "axchisan923@gmail.com" },
       update: {},
       create: {
-        email: "admin@axchi.dev",
+        email: "axchisan923@gmail.com",
         name: "Duvan Yair Arciniegas",
         password: hashedPassword,
         role: "ADMIN",
@@ -32,7 +32,7 @@ async function setupDatabase() {
         name: "Duvan Yair Arciniegas - Axchi",
         title: "Desarrollador de Software",
         bio: "Soy un apasionado desarrollador de software, actualmente estudiante en el SENA. Me encanta la programación y creo soluciones tecnológicas innovadoras para diferentes negocios. En mis tiempos libres disfruto creando juegos y soy un gran apasionado por la música. Trabajo bajo el apodo Axchi, mi marca personal que representa innovación y creatividad en el desarrollo de software.",
-        email: "contact@axchi.dev",
+        email: "axchisan923@gmail.com",
         phone: "3183038190",
         whatsapp: "3183038190",
         instagram: "@axchisan",
