@@ -41,14 +41,9 @@ export function AboutHero() {
                 <span className="text-muted-foreground">Estudiante SENA</span>
               </div>
             </div>
-
-            <Button className="transition-neon hover:neon-glow">
-              <Download className="mr-2 h-4 w-4" />
-              Descargar CV
-            </Button>
           </motion.div>
 
-          {/* Profile image placeholder */}
+          {/* Profile image */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -56,8 +51,12 @@ export function AboutHero() {
           >
             <Card className="border-primary/20 bg-card/50 backdrop-blur-sm">
               <CardContent className="p-8">
-                <div className="aspect-square bg-gradient-to-br from-primary/20 to-primary/5 rounded-lg flex items-center justify-center mb-6">
-                  <div className="text-6xl font-bold text-primary/50">A</div>
+                <div className="aspect-square bg-gradient-to-br from-primary/20 to-primary/5 rounded-lg overflow-hidden mb-6">
+                  <img 
+                    src="/axchi.jpg" 
+                    alt="Duvan Yair Arciniegas (Axchi)" 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div className="text-center">
                   <h3 className="text-xl font-semibold mb-2">Axchi</h3>

@@ -6,40 +6,40 @@ import { Badge } from "@/components/ui/badge"
 
 const timelineEvents = [
   {
-    year: "2018",
-    title: "Primeros Pasos",
-    description: "Comencé mi viaje en el desarrollo de software aprendiendo los fundamentos de la programación.",
-    technologies: ["HTML", "CSS", "JavaScript"],
-  },
-  {
-    year: "2019",
-    title: "Desarrollo Web",
-    description: "Me especialicé en desarrollo web frontend y backend, creando mis primeras aplicaciones completas.",
-    technologies: ["React", "Node.js", "MongoDB"],
-  },
-  {
     year: "2020",
-    title: "Automatización",
-    description: "Descubrí mi pasión por la automatización y comencé a crear bots y scripts para optimizar procesos.",
-    technologies: ["Python", "Selenium", "APIs"],
+    title: "Primeros Pasos",
+    description: "Comencé mi viaje mediante juegos de aprendizaje y tutoriales interactivos.",
+    technologies: ["Scratch", "Mimo", "Code.org"],
   },
   {
     year: "2021",
-    title: "Desarrollo Móvil",
-    description: "Expandí mis habilidades al desarrollo móvil, creando aplicaciones nativas y híbridas.",
-    technologies: ["React Native", "Flutter", "Firebase"],
+    title: "Conceptos Básicos",
+    description: "Continué aprendiendo los fundamentos básicos de la programación.",
+    technologies: ["HTML", "CSS", "JavaScript"],
   },
   {
     year: "2022",
-    title: "Soluciones Empresariales",
-    description: "Comencé a trabajar en proyectos empresariales más complejos y sistemas de gran escala.",
-    technologies: ["Next.js", "TypeScript", "Docker"],
+    title: "Aprendizaje Sobre Electrónica",
+    description: "Me interesé por la electrónica y comencé a aprender sobre microcontroladores y circuitos.",
+    technologies: ["Arduino", "Raspberry Pi", "Circuitos"],
   },
   {
-    year: "2023-2024",
-    title: "Innovación Continua",
-    description: "Actualmente enfocado en tecnologías emergentes y soluciones innovadoras para el futuro.",
-    technologies: ["AI/ML", "Blockchain", "Cloud Computing"],
+    year: "2023",
+    title: "Desarrollo de mis Primeros Proyectos",
+    description: "Desarrollé mis primeros proyectos simples, aplicando lo que había aprendido. Para mi proyecto final de curso cree un sistema de monitoreo ambiental con sensores de temperatura y humedad.",
+    technologies: ["Arduino", "Sensores", "C++"],
+  },
+  {
+    year: "2024",
+    title: "Aprendizaje en el SENA",
+    description: "Aprendí sobre desarrollo web, bases de datos y programación orientada a objetos gracias al SENA.",
+    technologies: ["Java", "MySQL", "HTML/CSS", "phpMyAdmin"],
+  },
+  {
+    year: "2025",
+    title: "Construcción de Proyectos Más Complejos",
+    description: "Comencé a trabajar en proyectos más complejos y sistemas de gran escala. También aprendí sobre metodologías ágiles, automatización y control de versiones, también adquirí mi propio servidor y dominio. Actualmente estoy trabajando en proyectos para clientes reales y colaborando con otros desarrolladores.",
+    technologies: ["Next.js", "TypeScript", "Docker", "Git", "Flutter", "n8n", "php", "Hostinger", "Coolify", "Vercel" ],
   },
 ]
 

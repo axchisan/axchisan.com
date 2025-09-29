@@ -39,7 +39,7 @@ export function ServicesCTA() {
             size="lg"
             variant="secondary"
             className="transition-neon hover:neon-glow"
-            onClick={() => window.open("https://calendly.com/axchi", "_blank")}
+            onClick={() => window.open("https://calendly.com/axchisan923/30min", "_blank")}
           >
             <Calendar className="h-5 w-5 mr-2" />
             Agendar Reunión

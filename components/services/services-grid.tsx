@@ -13,7 +13,6 @@ const services = [
       "Aplicaciones web modernas y responsivas utilizando las últimas tecnologías como React, Next.js y TypeScript.",
     icon: Globe,
     technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-    price: "Desde $500",
   },
   {
     id: 2,
@@ -21,7 +20,6 @@ const services = [
     description: "Aplicaciones móviles nativas y multiplataforma con Flutter para iOS y Android.",
     icon: Smartphone,
     technologies: ["Flutter", "Dart", "Firebase", "SQLite"],
-    price: "Desde $800",
   },
   {
     id: 3,
@@ -29,7 +27,6 @@ const services = [
     description: "APIs robustas y escalables con Node.js, Python y bases de datos modernas.",
     icon: Database,
     technologies: ["Node.js", "Python", "PostgreSQL", "MongoDB"],
-    price: "Desde $400",
   },
   {
     id: 4,
@@ -37,7 +34,6 @@ const services = [
     description: "Automatización de procesos empresariales con n8n y scripts personalizados.",
     icon: Zap,
     technologies: ["n8n", "Python", "APIs", "Webhooks"],
-    price: "Desde $300",
   },
   {
     id: 5,
@@ -45,7 +41,6 @@ const services = [
     description: "Soluciones completas desde el frontend hasta el backend y la base de datos.",
     icon: Code,
     technologies: ["React", "Node.js", "PostgreSQL", "Docker"],
-    price: "Desde $1000",
   },
   {
     id: 6,
@@ -53,7 +48,6 @@ const services = [
     description: "Diseño de interfaces de usuario atractivas y experiencias de usuario optimizadas.",
     icon: Palette,
     technologies: ["Figma", "Adobe XD", "Tailwind CSS", "Framer Motion"],
-    price: "Desde $250",
   },
 ]
 
@@ -87,7 +81,6 @@ export function ServicesGrid() {
               </div>
 
               <div className="flex items-center justify-between pt-4">
-                <span className="text-lg font-semibold text-primary">{service.price}</span>
                 <Button size="sm" className="transition-neon hover:neon-glow">
                   Solicitar
                 </Button>

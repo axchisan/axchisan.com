@@ -47,8 +47,8 @@ export function BlogHero() {
             <div className="text-sm text-muted-foreground">Artículos</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-primary mb-1">1.2k</div>
-            <div className="text-sm text-muted-foreground">Lectores</div>
+            <div className="text-2xl font-bold text-primary mb-1">30+</div>
+            <div className="text-sm text-muted-foreground">Publicaciones</div>
           </div>
           <div className="text-center">
             <div className="text-2xl font-bold text-primary mb-1">15</div>

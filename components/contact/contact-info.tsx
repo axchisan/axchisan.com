@@ -10,7 +10,7 @@ const contactMethods = [
     name: "WhatsApp",
     description: "Respuesta inmediata",
     value: "+57 318 303 8190",
-    href: "https://wa.me/3183038190?text=Hola%20Axchi,%20me%20interesa%20hablar%20sobre%20un%20proyecto",
+    href: "https://wa.me/3183038190?text=Hola%20Duvan,%20me%20interesa%20hablar%20sobre%20un%20proyecto",
     icon: MessageCircle,
     color: "text-green-400",
     primary: true,
@@ -18,8 +18,8 @@ const contactMethods = [
   {
     name: "Email",
     description: "Respuesta en 24h",
-    value: "contact@axchi.dev",
-    href: "mailto:contact@axchi.dev",
+    value: "axchisan923@gmail.com",
+    href: "mailto:axchisan923@gmail.com",
     icon: Mail,
     color: "text-blue-400",
     primary: true,
@@ -62,7 +62,7 @@ const additionalInfo = [
   {
     icon: Clock,
     label: "Horario",
-    value: "Lun - Vie, 8AM - 6PM COT",
+    value: "Lun - Vie, 7AM - 5PM COT",
     color: "text-yellow-400",
   },
   {

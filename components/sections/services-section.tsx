@@ -17,9 +17,9 @@ const services = [
   },
   {
     title: "Apps Multiplataforma",
-    description: "Aplicaciones móviles para iOS y Android con Flutter y React Native.",
+    description: "Aplicaciones multiplataforma con Flutter.",
     icon: Smartphone,
-    features: ["iOS y Android", "UI/UX Moderno", "Rendimiento Óptimo", "Integración API"],
+    features: ["iOS, Android, Web, Windows, Linux, Mac", "UI/UX Moderno", "Rendimiento Óptimo", "Integración API"],
     color: "text-green-400",
     gradient: "from-green-500/20 to-emerald-500/20",
   },

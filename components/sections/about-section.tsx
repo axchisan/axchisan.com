@@ -71,16 +71,16 @@ export function AboutSection() {
                 </p>
 
                 <p className="text-muted-foreground leading-relaxed mb-6">
-                  En mis tiempos libres disfruto creando juegos y soy un gran apasionado por la música. Trabajo bajo el
+                  En mis tiempos libres disfruto creando proyectos y soy un gran apasionado por el aprendizaje. Trabajo bajo el
                   apodo <span className="text-primary font-semibold">Axchi</span>, mi marca personal que representa
                   innovación y creatividad en el desarrollo de software.
                 </p>
 
                 <div className="flex flex-wrap gap-2">
                   <Badge variant="secondary">Estudiante SENA</Badge>
-                  <Badge variant="secondary">Desarrollador Full Stack</Badge>
                   <Badge variant="secondary">Innovador</Badge>
                   <Badge variant="secondary">Creativo</Badge>
+                  <Badge variant="secondary">Autodidacta</Badge>
                 </div>
               </CardContent>
             </Card>
@@ -135,12 +135,11 @@ export function AboutSection() {
           viewport={{ once: true }}
           className="mt-20"
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
             {[
               { label: "Años de Experiencia", value: "3+" },
               { label: "Proyectos Completados", value: "25+" },
-              { label: "Tecnologías Dominadas", value: "10+" },
-              { label: "Clientes Satisfechos", value: "15+" },
+              { label: "Tecnologías Aprendidas", value: "10+" },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}

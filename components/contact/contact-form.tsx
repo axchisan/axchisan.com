@@ -25,13 +25,13 @@ const projectTypes = [
 ]
 
 const budgetRanges = [
-  "Menos de $500 USD",
-  "$500 - $1,000 USD",
-  "$1,000 - $2,500 USD",
-  "$2,500 - $5,000 USD",
-  "$5,000 - $10,000 USD",
-  "Más de $10,000 USD",
+  "Menos de $1,000,000 COP",
+  "$1,000,000 - $2,000,000 COP",
+  "$2,000,000 - $3,000,000 COP",
+  "$3,000,000 - $5,000,000 COP",
+  "Más de $5,000,000 COP",
 ]
+
 
 export function ContactForm() {
   const [formData, setFormData] = useState({

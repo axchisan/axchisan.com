@@ -68,7 +68,7 @@ export function Footer() {
             <div className="space-y-2">
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4 text-primary" />
-                <span>contact@axchi.dev</span>
+                <span>axchisan923@gmail.com</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Phone className="h-4 w-4 text-primary" />
@@ -146,7 +146,7 @@ export function Footer() {
               <Link href="/terms" className="hover:text-primary transition-colors">
                 Términos
               </Link>
-              <span className="text-xs">Powered by Next.js & Vercel</span>
+              <span className="text-xs">axchi</span>
             </div>
           </div>
         </div>

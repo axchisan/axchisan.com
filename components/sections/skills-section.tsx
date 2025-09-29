@@ -136,13 +136,13 @@ export function SkillsSection() {
               "Docker",
               "Linux",
               "Figma",
-              "Photoshop",
+              "Coolify",
               "Firebase",
               "Vercel",
-              "Netlify",
+              "Railway",
               "WordPress",
-              "Laravel",
-              "Vue.js",
+              "Google Cloud",
+              "OpenAI",
             ].map((tech, index) => (
               <motion.div
                 key={tech}

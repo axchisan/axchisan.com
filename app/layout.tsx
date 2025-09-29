@@ -23,24 +23,24 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Axchi - Desarrollador de Software",
   description:
-    "Portafolio personal de Duvan Yair Arciniegas (Axchi) - Desarrollador de Software especializado en soluciones web, móviles y automatización.",
+    "Portafolio personal de Duvan Yair Arciniegas (Axchi) - Desarrollador de Software especializado en soluciones web, multiplataforma y automatización.",
   keywords: ["desarrollador", "software", "web", "móvil", "automatización", "axchi", "programador"],
-  authors: [{ name: "Duvan Yair Arciniegas", url: "https://axchi.dev" }],
+  authors: [{ name: "Duvan Yair Arciniegas", url: "https://axchisan.com" }],
   creator: "Axchi",
   openGraph: {
     type: "website",
     locale: "es_ES",
-    url: "https://axchi.dev",
+    url: "https://axchisan.com",
     title: "Axchi - Desarrollador de Software",
     description:
-      "Portafolio personal de Duvan Yair Arciniegas (Axchi) - Desarrollador de Software especializado en soluciones web, móviles y automatización.",
+      "Portafolio personal de Duvan Yair Arciniegas (Axchi) - Desarrollador de Software especializado en soluciones web, multiplataforma y automatización.",
     siteName: "Axchi Portfolio",
   },
   twitter: {
     card: "summary_large_image",
     title: "Axchi - Desarrollador de Software",
     description:
-      "Portafolio personal de Duvan Yair Arciniegas (Axchi) - Desarrollador de Software especializado en soluciones web, móviles y automatización.",
+      "Portafolio personal de Duvan Yair Arciniegas (Axchi) - Desarrollador de Software especializado en soluciones web, multiplataforma y automatización.",
     creator: "@axchisan",
   },
   robots: {
@@ -54,7 +54,19 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-    generator: 'v0.app'
+  generator: 'v0.app',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any', type: 'image/x-icon' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    shortcut: '/apple-touch-icon.png', 
+  },
+  manifest: '/site.webmanifest',
 }
 
 export default function RootLayout({

@@ -24,9 +24,9 @@ const contactMethods = [
   },
   {
     name: "Email",
-    description: "contact@axchi.dev",
+    description: "axchisan923@gmail.com",
     icon: Mail,
-    href: "mailto:contact@axchi.dev",
+    href: "mailto:axchisan923@gmail.com",
     color: "text-purple-400",
     action: "Escribir",
   },
