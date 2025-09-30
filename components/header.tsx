@@ -7,7 +7,21 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useSession, signOut } from "next-auth/react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { Menu, X, Home, User, Briefcase, FolderOpen, BookOpen, Mail, Settings, LogOut, LogIn } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import {
+  Menu,
+  X,
+  Home,
+  User,
+  Briefcase,
+  FolderOpen,
+  BookOpen,
+  Mail,
+  Settings,
+  LogOut,
+  LogIn,
+  MessageSquare,
+} from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const navigation = [
@@ -22,6 +36,7 @@ const navigation = [
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [unreadCount, setUnreadCount] = useState(0)
   const pathname = usePathname()
   const { data: session, status } = useSession()
 
@@ -32,6 +47,27 @@ export function Header() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  useEffect(() => {
+    if (session && session.user.role !== "ADMIN") {
+      fetchUnreadCount()
+      // Poll every 30 seconds for new messages
+      const interval = setInterval(fetchUnreadCount, 30000)
+      return () => clearInterval(interval)
+    }
+  }, [session])
+
+  const fetchUnreadCount = async () => {
+    try {
+      const response = await fetch("/api/user/messages/unread-count")
+      if (response.ok) {
+        const data = await response.json()
+        setUnreadCount(data.count || 0)
+      }
+    } catch (error) {
+      console.error("Error fetching unread count:", error)
+    }
+  }
 
   const closeMenu = () => setIsOpen(false)
 
@@ -93,6 +129,19 @@ export function Header() {
               <>
                 {session ? (
                   <div className="hidden md:flex items-center space-x-2">
+                    {session.user.role !== "ADMIN" && (
+                      <Button variant="outline" size="sm" asChild className="relative bg-transparent">
+                        <Link href="/messages">
+                          <MessageSquare className="h-4 w-4 mr-2" />
+                          Mensajes
+                          {unreadCount > 0 && (
+                            <Badge className="ml-2 h-5 w-5 p-0 flex items-center justify-center bg-primary text-primary-foreground">
+                              {unreadCount}
+                            </Badge>
+                          )}
+                        </Link>
+                      </Button>
+                    )}
                     {session.user.role === "ADMIN" && (
                       <Button variant="outline" size="sm" asChild>
                         <Link href="/admin">
@@ -160,6 +209,23 @@ export function Header() {
                   <div className="border-t border-border/50 pt-3 mt-3">
                     {session ? (
                       <>
+                        {session.user.role !== "ADMIN" && (
+                          <Link
+                            href="/messages"
+                            onClick={closeMenu}
+                            className="flex items-center justify-between px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-foreground hover:bg-accent"
+                          >
+                            <div className="flex items-center">
+                              <MessageSquare className="h-5 w-5 mr-3" />
+                              Mis Mensajes
+                            </div>
+                            {unreadCount > 0 && (
+                              <Badge className="h-5 w-5 p-0 flex items-center justify-center bg-primary text-primary-foreground">
+                                {unreadCount}
+                              </Badge>
+                            )}
+                          </Link>
+                        )}
                         {session.user.role === "ADMIN" && (
                           <Link
                             href="/admin"

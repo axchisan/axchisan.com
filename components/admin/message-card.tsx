@@ -5,7 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import { Mail, Clock, User, MessageSquare, Trash2 } from "lucide-react"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Mail, Clock, User, MessageSquare, Trash2, CheckCircle, AlertCircle, Loader2 } from "lucide-react"
 import { toast } from "sonner"
 import {
   Dialog,
@@ -38,19 +39,53 @@ interface MessageCardProps {
 
 export function MessageCard({ message, onUpdate }: MessageCardProps) {
   const [isReplying, setIsReplying] = useState(false)
-  const [replyText, setReplyText] = useState("")
+  const [replyText, setReplyText] = useState(message.response || "")
   const [isLoading, setIsLoading] = useState(false)
+  const [localStatus, setLocalStatus] = useState(message.status)
 
-  const getStatusColor = (read: boolean, replied: boolean) => {
-    if (replied) return "bg-green-500/10 text-green-500 border-green-500/20"
-    if (read) return "bg-blue-500/10 text-blue-500 border-blue-500/20"
-    return "bg-red-500/10 text-red-500 border-red-500/20"
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "PENDING":
+        return "bg-yellow-500/10 text-yellow-500 border-yellow-500/20"
+      case "IN_PROGRESS":
+        return "bg-blue-500/10 text-blue-500 border-blue-500/20"
+      case "RESOLVED":
+        return "bg-green-500/10 text-green-500 border-green-500/20"
+      case "REJECTED":
+        return "bg-red-500/10 text-red-500 border-red-500/20"
+      default:
+        return "bg-gray-500/10 text-gray-500 border-gray-500/20"
+    }
   }
 
-  const getStatusText = (read: boolean, replied: boolean) => {
-    if (replied) return "Respondido"
-    if (read) return "Leído"
-    return "No leído"
+  const getStatusText = (status: string) => {
+    switch (status) {
+      case "PENDING":
+        return "Pendiente"
+      case "IN_PROGRESS":
+        return "En Progreso"
+      case "RESOLVED":
+        return "Resuelto"
+      case "REJECTED":
+        return "Rechazado"
+      default:
+        return status
+    }
+  }
+
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case "PENDING":
+        return <Clock className="h-3 w-3" />
+      case "IN_PROGRESS":
+        return <Loader2 className="h-3 w-3 animate-spin" />
+      case "RESOLVED":
+        return <CheckCircle className="h-3 w-3" />
+      case "REJECTED":
+        return <AlertCircle className="h-3 w-3" />
+      default:
+        return <MessageSquare className="h-3 w-3" />
+    }
   }
 
   const handleAction = async (action: string, additionalData?: any) => {
@@ -74,6 +109,11 @@ export function MessageCard({ message, onUpdate }: MessageCardProps) {
     } finally {
       setIsLoading(false)
     }
+  }
+
+  const handleStatusChange = async (newStatus: string) => {
+    setLocalStatus(newStatus)
+    await handleAction("update_status", { status: newStatus })
   }
 
   const handleDelete = async () => {
@@ -107,29 +147,28 @@ export function MessageCard({ message, onUpdate }: MessageCardProps) {
 
     await handleAction("mark_replied", { response: replyText })
     setIsReplying(false)
-    setReplyText("")
   }
 
   return (
     <>
-      <Card className="hover:shadow-md transition-shadow">
+      <Card className="hover:shadow-md transition-shadow border-primary/20">
         <CardHeader className="pb-3">
-          <div className="flex items-start justify-between">
-            <div className="space-y-1">
+          <div className="flex items-start justify-between gap-4">
+            <div className="space-y-1 flex-1 min-w-0">
               <CardTitle className="text-lg flex items-center gap-2">
-                <User className="h-4 w-4" />
-                {message.name}
+                <User className="h-4 w-4 flex-shrink-0" />
+                <span className="truncate">{message.name}</span>
               </CardTitle>
-              <div className="flex items-center gap-4 text-sm text-muted-foreground">
+              <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1">
                   <Mail className="h-3 w-3" />
-                  {message.email}
+                  <span className="truncate">{message.email}</span>
                 </span>
                 <span className="flex items-center gap-1">
                   <Clock className="h-3 w-3" />
                   {new Date(message.createdAt).toLocaleDateString("es-ES", {
                     year: "numeric",
-                    month: "long",
+                    month: "short",
                     day: "numeric",
                     hour: "2-digit",
                     minute: "2-digit",
@@ -137,9 +176,19 @@ export function MessageCard({ message, onUpdate }: MessageCardProps) {
                 </span>
               </div>
             </div>
-            <Badge className={getStatusColor(message.read, message.replied)}>
-              {getStatusText(message.read, message.replied)}
-            </Badge>
+            <div className="flex flex-col gap-2 items-end flex-shrink-0">
+              <Badge className={getStatusColor(localStatus)}>
+                <span className="flex items-center gap-1">
+                  {getStatusIcon(localStatus)}
+                  {getStatusText(localStatus)}
+                </span>
+              </Badge>
+              {!message.read && (
+                <Badge variant="outline" className="bg-red-500/10 text-red-500 border-red-500/20">
+                  Nuevo
+                </Badge>
+              )}
+            </div>
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -157,8 +206,11 @@ export function MessageCard({ message, onUpdate }: MessageCardProps) {
             <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.message}</p>
           </div>
           {message.response && (
-            <div className="bg-muted/50 p-3 rounded-lg">
-              <h4 className="font-medium text-sm text-muted-foreground mb-2">Respuesta:</h4>
+            <div className="bg-primary/5 border border-primary/20 p-4 rounded-lg">
+              <div className="flex items-center gap-2 mb-2">
+                <CheckCircle className="h-4 w-4 text-green-500" />
+                <h4 className="font-medium text-sm">Tu respuesta:</h4>
+              </div>
               <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.response}</p>
               {message.respondedAt && (
                 <p className="text-xs text-muted-foreground mt-2">
@@ -167,7 +219,24 @@ export function MessageCard({ message, onUpdate }: MessageCardProps) {
               )}
             </div>
           )}
-          <div className="flex gap-2 pt-2">
+
+          {/* Status selector */}
+          <div className="flex items-center gap-2">
+            <Label className="text-sm text-muted-foreground">Estado:</Label>
+            <Select value={localStatus} onValueChange={handleStatusChange} disabled={isLoading}>
+              <SelectTrigger className="w-[180px] h-8">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="PENDING">Pendiente</SelectItem>
+                <SelectItem value="IN_PROGRESS">En Progreso</SelectItem>
+                <SelectItem value="RESOLVED">Resuelto</SelectItem>
+                <SelectItem value="REJECTED">Rechazado</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="flex flex-wrap gap-2 pt-2">
             {!message.read && (
               <Button size="sm" variant="outline" onClick={() => handleAction("mark_read")} disabled={isLoading}>
                 Marcar como leído
@@ -195,11 +264,11 @@ export function MessageCard({ message, onUpdate }: MessageCardProps) {
       </Card>
 
       <Dialog open={isReplying} onOpenChange={setIsReplying}>
-        <DialogContent>
+        <DialogContent className="max-w-2xl">
           <DialogHeader>
             <DialogTitle>Responder a {message.name}</DialogTitle>
             <DialogDescription>
-              Escribe tu respuesta al mensaje. Esta respuesta se guardará en el sistema.
+              Escribe tu respuesta al mensaje. El usuario podrá ver esta respuesta en su panel de mensajes.
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 py-4">
@@ -210,7 +279,8 @@ export function MessageCard({ message, onUpdate }: MessageCardProps) {
                 value={replyText}
                 onChange={(e) => setReplyText(e.target.value)}
                 placeholder="Escribe tu respuesta aquí..."
-                rows={6}
+                rows={8}
+                className="resize-none"
               />
             </div>
           </div>

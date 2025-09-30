@@ -10,7 +10,20 @@ import { PageTransition } from "@/components/page-transition"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Mail, Clock, MessageSquare, LogIn, CheckCircle, AlertCircle, Loader2 } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import {
+  Mail,
+  Clock,
+  MessageSquare,
+  LogIn,
+  CheckCircle,
+  AlertCircle,
+  Loader2,
+  Search,
+  Filter,
+  XCircle,
+} from "lucide-react"
 import { toast } from "sonner"
 
 interface Message {
@@ -27,11 +40,16 @@ interface Message {
   createdAt: Date
 }
 
+type FilterStatus = "all" | "pending" | "in_progress" | "resolved" | "rejected" | "replied" | "unreplied"
+
 export default function UserMessagesPage() {
   const { data: session, status } = useSession()
   const router = useRouter()
   const [messages, setMessages] = useState<Message[]>([])
+  const [filteredMessages, setFilteredMessages] = useState<Message[]>([])
   const [loading, setLoading] = useState(true)
+  const [searchTerm, setSearchTerm] = useState("")
+  const [filterStatus, setFilterStatus] = useState<FilterStatus>("all")
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -41,12 +59,51 @@ export default function UserMessagesPage() {
     }
   }, [status, router])
 
+  useEffect(() => {
+    let filtered = messages
+
+    // Apply search filter
+    if (searchTerm) {
+      filtered = filtered.filter(
+        (msg) =>
+          msg.subject?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          msg.message.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          msg.response?.toLowerCase().includes(searchTerm.toLowerCase()),
+      )
+    }
+
+    // Apply status filter
+    if (filterStatus !== "all") {
+      filtered = filtered.filter((msg) => {
+        switch (filterStatus) {
+          case "replied":
+            return msg.replied
+          case "unreplied":
+            return !msg.replied
+          case "pending":
+            return msg.status === "PENDING"
+          case "in_progress":
+            return msg.status === "IN_PROGRESS"
+          case "resolved":
+            return msg.status === "RESOLVED"
+          case "rejected":
+            return msg.status === "REJECTED"
+          default:
+            return true
+        }
+      })
+    }
+
+    setFilteredMessages(filtered)
+  }, [searchTerm, filterStatus, messages])
+
   const fetchMessages = async () => {
     try {
       const response = await fetch("/api/user/messages")
       if (response.ok) {
         const data = await response.json()
         setMessages(data)
+        setFilteredMessages(data)
       } else {
         toast.error("Error al cargar tus mensajes")
       }
@@ -103,6 +160,16 @@ export default function UserMessagesPage() {
     }
   }
 
+  const getStatusCounts = () => {
+    return {
+      total: messages.length,
+      replied: messages.filter((m) => m.replied).length,
+      pending: messages.filter((m) => m.status === "PENDING").length,
+      inProgress: messages.filter((m) => m.status === "IN_PROGRESS").length,
+      resolved: messages.filter((m) => m.status === "RESOLVED").length,
+    }
+  }
+
   if (status === "loading" || loading) {
     return (
       <div className="relative min-h-screen">
@@ -154,6 +221,8 @@ export default function UserMessagesPage() {
     )
   }
 
+  const counts = getStatusCounts()
+
   return (
     <div className="relative min-h-screen">
       <BackgroundEffects />
@@ -161,24 +230,133 @@ export default function UserMessagesPage() {
       <PageTransition>
         <main className="relative z-10 pt-16">
           <div className="container mx-auto px-4 py-12">
-            <div className="max-w-4xl mx-auto space-y-8">
+            <div className="max-w-5xl mx-auto space-y-8">
               <div>
                 <h1 className="text-4xl font-bold mb-2">Mis Mensajes</h1>
                 <p className="text-muted-foreground">
-                  Aquí puedes ver el estado de todos los mensajes que has enviado.
+                  Aquí puedes ver el estado de todos los mensajes que has enviado y las respuestas recibidas.
                 </p>
               </div>
 
+              {/* Stats Cards */}
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <Card className="border-primary/20 bg-card/50 backdrop-blur-sm">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm text-muted-foreground">Total</p>
+                        <p className="text-2xl font-bold">{counts.total}</p>
+                      </div>
+                      <Mail className="h-8 w-8 text-muted-foreground" />
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card className="border-green-500/20 bg-card/50 backdrop-blur-sm">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm text-muted-foreground">Respondidos</p>
+                        <p className="text-2xl font-bold text-green-500">{counts.replied}</p>
+                      </div>
+                      <CheckCircle className="h-8 w-8 text-green-500" />
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card className="border-yellow-500/20 bg-card/50 backdrop-blur-sm">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm text-muted-foreground">Pendientes</p>
+                        <p className="text-2xl font-bold text-yellow-500">{counts.pending}</p>
+                      </div>
+                      <Clock className="h-8 w-8 text-yellow-500" />
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card className="border-blue-500/20 bg-card/50 backdrop-blur-sm">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm text-muted-foreground">En progreso</p>
+                        <p className="text-2xl font-bold text-blue-500">{counts.inProgress}</p>
+                      </div>
+                      <Filter className="h-8 w-8 text-blue-500" />
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card className="border-green-500/20 bg-card/50 backdrop-blur-sm">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm text-muted-foreground">Resueltos</p>
+                        <p className="text-2xl font-bold text-green-500">{counts.resolved}</p>
+                      </div>
+                      <CheckCircle className="h-8 w-8 text-green-500" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Filters */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    placeholder="Buscar en tus mensajes..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-10"
+                  />
+                </div>
+                <Select value={filterStatus} onValueChange={(value: FilterStatus) => setFilterStatus(value)}>
+                  <SelectTrigger className="w-full sm:w-[200px]">
+                    <SelectValue placeholder="Filtrar por estado" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Todos</SelectItem>
+                    <SelectItem value="replied">Respondidos</SelectItem>
+                    <SelectItem value="unreplied">Sin responder</SelectItem>
+                    <SelectItem value="pending">Pendientes</SelectItem>
+                    <SelectItem value="in_progress">En progreso</SelectItem>
+                    <SelectItem value="resolved">Resueltos</SelectItem>
+                    <SelectItem value="rejected">Rechazados</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Results count */}
+              {(searchTerm || filterStatus !== "all") && (
+                <div className="flex items-center justify-between">
+                  <p className="text-sm text-muted-foreground">
+                    Mostrando {filteredMessages.length} de {messages.length} mensajes
+                  </p>
+                  {(searchTerm || filterStatus !== "all") && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => {
+                        setSearchTerm("")
+                        setFilterStatus("all")
+                      }}
+                    >
+                      <XCircle className="h-4 w-4 mr-2" />
+                      Limpiar filtros
+                    </Button>
+                  )}
+                </div>
+              )}
+
+              {/* Messages List */}
               <div className="grid gap-4">
-                {messages && messages.length > 0 ? (
-                  messages.map((message) => (
+                {filteredMessages && filteredMessages.length > 0 ? (
+                  filteredMessages.map((message) => (
                     <Card key={message.id} className="border-primary/20 bg-card/50 backdrop-blur-sm">
                       <CardHeader className="pb-3">
-                        <div className="flex items-start justify-between">
-                          <div className="space-y-1 flex-1">
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="space-y-1 flex-1 min-w-0">
                             <CardTitle className="text-lg flex items-center gap-2">
-                              <MessageSquare className="h-4 w-4" />
-                              {message.subject || "Mensaje de contacto"}
+                              <MessageSquare className="h-4 w-4 flex-shrink-0" />
+                              <span className="truncate">{message.subject || "Mensaje de contacto"}</span>
                             </CardTitle>
                             <div className="flex items-center gap-4 text-sm text-muted-foreground">
                               <span className="flex items-center gap-1">
@@ -193,18 +371,26 @@ export default function UserMessagesPage() {
                               </span>
                             </div>
                           </div>
-                          <Badge className={getStatusColor(message.status)}>
-                            <span className="flex items-center gap-1">
-                              {getStatusIcon(message.status)}
-                              {getStatusText(message.status)}
-                            </span>
-                          </Badge>
+                          <div className="flex flex-col gap-2 items-end flex-shrink-0">
+                            <Badge className={getStatusColor(message.status)}>
+                              <span className="flex items-center gap-1">
+                                {getStatusIcon(message.status)}
+                                {getStatusText(message.status)}
+                              </span>
+                            </Badge>
+                            {message.replied && (
+                              <Badge className="bg-green-500/10 text-green-500 border-green-500/20">
+                                <CheckCircle className="h-3 w-3 mr-1" />
+                                Respondido
+                              </Badge>
+                            )}
+                          </div>
                         </div>
                       </CardHeader>
                       <CardContent className="space-y-4">
                         <div>
                           <h4 className="font-medium text-sm text-muted-foreground mb-2">Tu mensaje:</h4>
-                          <p className="text-sm leading-relaxed whitespace-pre-wrap line-clamp-3">{message.message}</p>
+                          <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.message}</p>
                         </div>
 
                         {message.replied && message.response && (
@@ -228,14 +414,14 @@ export default function UserMessagesPage() {
                         )}
 
                         {!message.replied && message.read && (
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground bg-blue-500/5 border border-blue-500/20 p-3 rounded-lg">
                             <Mail className="h-4 w-4" />
                             <span>Tu mensaje ha sido leído. Recibirás una respuesta pronto.</span>
                           </div>
                         )}
 
                         {!message.read && (
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground bg-yellow-500/5 border border-yellow-500/20 p-3 rounded-lg">
                             <Clock className="h-4 w-4" />
                             <span>Tu mensaje está pendiente de revisión.</span>
                           </div>
@@ -247,20 +433,26 @@ export default function UserMessagesPage() {
                   <Card className="border-primary/20 bg-card/50 backdrop-blur-sm">
                     <CardContent className="flex flex-col items-center justify-center py-12">
                       <Mail className="h-12 w-12 text-muted-foreground mb-4" />
-                      <h3 className="text-lg font-medium mb-2">No tienes mensajes</h3>
+                      <h3 className="text-lg font-medium mb-2">
+                        {searchTerm || filterStatus !== "all" ? "No se encontraron mensajes" : "No tienes mensajes"}
+                      </h3>
                       <p className="text-muted-foreground text-center mb-6">
-                        Aún no has enviado ningún mensaje de contacto.
+                        {searchTerm || filterStatus !== "all"
+                          ? "Intenta ajustar los filtros de búsqueda"
+                          : "Aún no has enviado ningún mensaje de contacto."}
                       </p>
-                      <Button onClick={() => router.push("/contact")}>
-                        <MessageSquare className="h-4 w-4 mr-2" />
-                        Enviar un mensaje
-                      </Button>
+                      {!searchTerm && filterStatus === "all" && (
+                        <Button onClick={() => router.push("/contact")}>
+                          <MessageSquare className="h-4 w-4 mr-2" />
+                          Enviar un mensaje
+                        </Button>
+                      )}
                     </CardContent>
                   </Card>
                 )}
               </div>
 
-              {messages && messages.length > 0 && (
+              {filteredMessages && filteredMessages.length > 0 && (
                 <div className="text-center">
                   <Button onClick={() => router.push("/contact")} variant="outline">
                     <MessageSquare className="h-4 w-4 mr-2" />
