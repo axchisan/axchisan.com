@@ -71,8 +71,11 @@
     "react-dom": "^18",
     "react-dropzone": "latest",
     "react-hook-form": "latest",
+    "react-markdown": "10.1.0",
     "react-resizable-panels": "latest",
     "recharts": "latest",
+    "rehype-raw": "7.0.0",
+    "remark-gfm": "4.0.1",
     "sonner": "latest",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
@@ -80,6 +83,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^22",
     "@types/react": "^18",
     "@types/react-dom": "^18",

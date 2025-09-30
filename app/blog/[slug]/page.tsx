@@ -8,6 +8,9 @@ import { ArrowLeft, Calendar, Clock, User, Tag } from "lucide-react"
 import Link from "next/link"
 import { formatDistanceToNow } from "date-fns"
 import { es } from "date-fns/locale"
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
+import rehypeRaw from "rehype-raw"
 
 interface BlogPost {
   id: string
@@ -86,7 +89,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
         {/* Article Header */}
         <article className="max-w-4xl mx-auto">
-          <Card className="bg-card/50 backdrop-blur-sm border-primary/20 mb-8">
+          <Card className="bg-card/50 backdrop-blur-sm border-primary/20 border mb-8">
             <CardContent className="p-8">
               {/* Cover Image */}
               {post.coverImage && (
@@ -143,12 +146,16 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           </Card>
 
           {/* Article Content */}
-          <Card className="bg-card/50 backdrop-blur-sm border-primary/20 mb-8">
+          <Card className="bg-card/50 backdrop-blur-sm border-primary/20 border mb-8">
             <CardContent className="p-8">
-              <div
-                className="prose prose-lg max-w-none dark:prose-invert prose-headings:neon-text prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-code:text-primary prose-pre:bg-muted prose-pre:border prose-pre:border-border"
-                dangerouslySetInnerHTML={{ __html: formatContent(post.content) }}
-              />
+              <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:neon-text prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-code:text-primary prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-img:rounded-lg prose-blockquote:border-l-primary space-y-4">
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  rehypePlugins={[rehypeRaw]}
+                >
+                  {post.content}
+                </ReactMarkdown>
+              </div>
             </CardContent>
           </Card>
 
@@ -158,27 +165,4 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       </div>
     </div>
   )
-}
-
-function formatContent(content: string): string {
-  // Simple markdown-like formatting
-  let formatted = content
-    // Headers
-    .replace(/^### (.*$)/gim, "<h3>$1</h3>")
-    .replace(/^## (.*$)/gim, "<h2>$1</h2>")
-    .replace(/^# (.*$)/gim, "<h1>$1</h1>")
-    // Bold and italic
-    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-    .replace(/\*(.*?)\*/g, "<em>$1</em>")
-    // Code blocks
-    .replace(/```([\s\S]*?)```/g, "<pre><code>$1</code></pre>")
-    .replace(/`(.*?)`/g, "<code>$1</code>")
-    // Line breaks
-    .replace(/\n\n/g, "</p><p>")
-    .replace(/\n/g, "<br>")
-
-  // Wrap in paragraphs
-  formatted = "<p>" + formatted + "</p>"
-
-  return formatted
 }

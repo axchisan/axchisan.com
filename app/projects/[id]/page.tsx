@@ -12,6 +12,9 @@ import { ProjectFilesDisplay } from "@/components/projects/project-files-display
 import { ArrowLeft, ExternalLink, Github, Download, Calendar, Tag, Eye, Heart, Star } from "lucide-react"
 import { toast } from "sonner"
 import { LikeButton } from "@/components/ui/like-button"
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
+import rehypeRaw from "rehype-raw"
 
 interface ProjectFile {
   id: string
@@ -248,12 +251,17 @@ export default function ProjectDetailPage() {
               </Card>
             )}
 
-            {/* Description */}
+            {/* Description - Mejorado con espaciado extra */}
             <Card>
               <CardContent className="p-6">
                 <h2 className="text-2xl font-semibold mb-4">Descripción</h2>
-                <div className="prose prose-neutral dark:prose-invert max-w-none">
-                  <p className="whitespace-pre-wrap text-pretty">{project.content || project.description}</p>
+                <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-semibold prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-code:text-primary prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-img:rounded-lg prose-blockquote:border-l-primary space-y-4">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    rehypePlugins={[rehypeRaw]}
+                  >
+                    {project.content || project.description}
+                  </ReactMarkdown>
                 </div>
               </CardContent>
             </Card>
