@@ -16,6 +16,7 @@ import { Switch } from "@/components/ui/switch"
 import { X, Plus, ArrowLeft } from "lucide-react"
 import { toast } from "sonner"
 import { AdvancedFileManager } from "@/components/admin/advanced-file-manager"
+import { CoverImageUpload } from "@/components/admin/cover-image-upload"
 
 interface ProjectFile {
   id?: string
@@ -40,6 +41,7 @@ interface Project {
   description: string
   shortDesc?: string
   content?: string
+  coverImage?: string
   images: string[]
   videos: string[]
   files?: ProjectFile[]
@@ -300,6 +302,11 @@ export default function EditProjectPage({ params }: { params: { id: string } }) 
             </Card>
           </div>
 
+          <CoverImageUpload
+            initialImage={project.coverImage}
+            onImageChange={(url) => setProject({ ...project, coverImage: url })}
+          />
+
           {/* URLs */}
           <Card className="bg-card/50 backdrop-blur-sm border-primary/20">
             <CardHeader>
@@ -382,8 +389,8 @@ export default function EditProjectPage({ params }: { params: { id: string } }) 
           {/* Images */}
           <Card className="bg-card/50 backdrop-blur-sm border-primary/20">
             <CardHeader>
-              <CardTitle>Imágenes</CardTitle>
-              <CardDescription>Capturas de pantalla y media del proyecto</CardDescription>
+              <CardTitle>Imágenes Adicionales</CardTitle>
+              <CardDescription>Capturas de pantalla y media adicional del proyecto (opcional)</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex gap-2">

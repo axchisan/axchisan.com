@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useCallback, useEffect } from "react"
 import { useDropzone } from "react-dropzone"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -220,6 +222,23 @@ export function AdvancedFileManager({
     })
   }
 
+  const handleEditClick = (file: ProjectFile, e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setEditingFile(file)
+  }
+
+  const handleSaveEdit = () => {
+    if (editingFile && editingFile.id) {
+      updateFile(editingFile.id, editingFile)
+      setEditingFile(null)
+    }
+  }
+
+  const handleCancelEdit = () => {
+    setEditingFile(null)
+  }
+
   const getFileIcon = (category: string) => {
     const categoryInfo = CATEGORIES.find((c) => c.value === category)
     return categoryInfo?.icon || File
@@ -419,7 +438,8 @@ export function AdvancedFileManager({
                             <Button
                               size="sm"
                               variant="ghost"
-                              onClick={() => setEditingFile(file)}
+                              onClick={(e) => handleEditClick(file, e)}
+                              type="button"
                               className="h-8 w-8 p-0"
                             >
                               <Edit className="h-3 w-3" />
@@ -445,7 +465,7 @@ export function AdvancedFileManager({
       )}
 
       {/* Edit File Dialog */}
-      <Dialog open={!!editingFile} onOpenChange={() => setEditingFile(null)}>
+      <Dialog open={!!editingFile} onOpenChange={(open) => !open && handleCancelEdit()}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
             <DialogTitle>Editar Archivo</DialogTitle>
@@ -510,15 +530,10 @@ export function AdvancedFileManager({
               </div>
 
               <div className="flex gap-2 pt-4">
-                <Button
-                  onClick={() => {
-                    updateFile(editingFile.id!, editingFile)
-                    setEditingFile(null)
-                  }}
-                >
+                <Button type="button" onClick={handleSaveEdit}>
                   Guardar cambios
                 </Button>
-                <Button variant="outline" onClick={() => setEditingFile(null)}>
+                <Button type="button" variant="outline" onClick={handleCancelEdit}>
                   Cancelar
                 </Button>
               </div>

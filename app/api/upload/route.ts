@@ -110,6 +110,7 @@ export async function POST(request: NextRequest) {
     const isDownloadable = data.get("isDownloadable") === "true"
     const displayName = data.get("displayName") as string | null
     const description = data.get("description") as string | null
+    const isCoverImage = data.get("isCoverImage") === "true"
 
     if (!files || files.length === 0) {
       return NextResponse.json({ error: "No files uploaded" }, { status: 400 })
@@ -142,11 +143,10 @@ export async function POST(request: NextRequest) {
       const filePath = join(fullUploadDir, filename)
       await writeFile(filePath, buffer)
 
-      // Return public URL
       const publicUrl = `/${uploadDir}/${filename}`
 
       let savedFile
-      if (projectId) {
+      if (projectId && !isCoverImage) {
         savedFile = await prisma.projectFile.create({
           data: {
             filename,
@@ -163,7 +163,7 @@ export async function POST(request: NextRequest) {
             projectId,
           },
         })
-      } else if (blogPostId) {
+      } else if (blogPostId && !isCoverImage) {
         savedFile = await prisma.blogFile.create({
           data: {
             filename,

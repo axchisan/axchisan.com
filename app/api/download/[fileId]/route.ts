@@ -49,7 +49,7 @@ export async function GET(request: NextRequest, { params }: { params: { fileId: 
       })
     }
 
-    // Get file path
+    // We need to prepend 'public' to get the actual file system path
     const filePath = join(process.cwd(), "public", file.url)
 
     try {
@@ -64,6 +64,7 @@ export async function GET(request: NextRequest, { params }: { params: { fileId: 
       })
     } catch (fileError) {
       console.error("File read error:", fileError)
+      console.error("Attempted path:", filePath)
       return NextResponse.json({ error: "File not found on disk" }, { status: 404 })
     }
   } catch (error) {

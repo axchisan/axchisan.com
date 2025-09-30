@@ -82,7 +82,8 @@ model Project {
   description String @db.Text
   shortDesc   String?
   content     String? @db.Text
-  images      String[] // Array of image URLs
+  coverImage  String? // Single cover image URL
+  images      String[] // Array of additional image URLs
   videos      String[] // Array of video URLs
   files       ProjectFile[] // Relación con archivos del proyecto
   technologies String[] // Array of tech stack

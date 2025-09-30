@@ -85,6 +85,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
         description: data.description,
         shortDesc: data.shortDesc,
         content: data.content,
+        coverImage: data.coverImage,
         images: data.images || [],
         videos: data.videos || [],
         technologies: data.technologies || [],
