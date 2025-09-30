@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { AdminLayout } from "@/components/admin/admin-layout"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -8,43 +8,24 @@ import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Plus, Search, Edit, Trash2, Eye } from "lucide-react"
 import Link from "next/link"
+import { toast } from "sonner"
 
-// Mock data - will be replaced with real database data
-const mockPosts = [
-  {
-    id: 1,
-    title: "Cómo optimizar aplicaciones React para mejor rendimiento",
-    excerpt: "Técnicas avanzadas para mejorar el rendimiento de tus aplicaciones React",
-    status: "published",
-    category: "React",
-    readTime: "8 min",
-    views: 1250,
-    createdAt: "2024-01-15",
-    updatedAt: "2024-01-16",
-  },
-  {
-    id: 2,
-    title: "Introducción a Next.js 14 y sus nuevas características",
-    excerpt: "Explora las últimas funcionalidades de Next.js 14 y cómo implementarlas",
-    status: "draft",
-    category: "Next.js",
-    readTime: "12 min",
-    views: 0,
-    createdAt: "2024-02-10",
-    updatedAt: "2024-02-10",
-  },
-  {
-    id: 3,
-    title: "Automatización de procesos con Python y Selenium",
-    excerpt: "Guía completa para automatizar tareas web usando Python",
-    status: "published",
-    category: "Python",
-    readTime: "15 min",
-    views: 890,
-    createdAt: "2024-03-05",
-    updatedAt: "2024-03-06",
-  },
-]
+interface BlogPost {
+  id: string
+  title: string
+  slug: string
+  excerpt?: string
+  content: string
+  coverImage?: string | null
+  tags: string[]
+  published: boolean
+  featured: boolean
+  views: number
+  readTime?: number | null
+  createdAt: string
+  updatedAt: string
+  publishedAt?: string | null
+}
 
 const statusColors = {
   published: "bg-green-500/20 text-green-400 border-green-500/30",
@@ -60,14 +41,71 @@ const statusLabels = {
 
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState("")
-  const [posts] = useState(mockPosts)
+  const [posts, setPosts] = useState<BlogPost[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchPosts()
+  }, [])
+
+  const fetchPosts = async () => {
+    try {
+      const response = await fetch("/api/blog")
+      if (response.ok) {
+        const data = await response.json()
+        setPosts(data)
+      } else {
+        toast.error("Error al cargar los artículos")
+      }
+    } catch (error) {
+      console.error("Error fetching blog posts:", error)
+      toast.error("Error al cargar los artículos")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleDeletePost = async (postId: string) => {
+    if (!confirm("¿Estás seguro de que quieres eliminar este artículo?")) {
+      return
+    }
+
+    try {
+      const response = await fetch(`/api/blog/${postId}`, {
+        method: "DELETE",
+      })
+
+      if (response.ok) {
+        setPosts(posts.filter((post) => post.id !== postId))
+        toast.success("Artículo eliminado exitosamente")
+      } else {
+        toast.error("Error al eliminar el artículo")
+      }
+    } catch (error) {
+      console.error("Error deleting blog post:", error)
+      toast.error("Error al eliminar el artículo")
+    }
+  }
 
   const filteredPosts = posts.filter(
     (post) =>
       post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.category.toLowerCase().includes(searchTerm.toLowerCase()),
+      (post.excerpt && post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      post.tags.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase())),
   )
+
+  if (loading) {
+    return (
+      <AdminLayout>
+        <div className="flex items-center justify-center min-h-[400px]">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+            <p>Cargando artículos...</p>
+          </div>
+        </div>
+      </AdminLayout>
+    )
+  }
 
   return (
     <AdminLayout>
@@ -105,35 +143,59 @@ export default function BlogPage() {
             >
               <CardHeader>
                 <div className="flex items-start justify-between">
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <Badge className={statusColors[post.status as keyof typeof statusColors]}>
-                        {statusLabels[post.status as keyof typeof statusLabels]}
+                  <div className="space-y-2 flex-1">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <Badge className={statusColors[post.published ? "published" : "draft"]}>
+                        {statusLabels[post.published ? "published" : "draft"]}
                       </Badge>
-                      <Badge variant="outline">{post.category}</Badge>
+                      {post.featured && <Badge className="bg-primary text-primary-foreground">Destacado</Badge>}
+                      {post.tags.slice(0, 3).map((tag) => (
+                        <Badge key={tag} variant="outline">
+                          {tag}
+                        </Badge>
+                      ))}
+                      {post.tags.length > 3 && <Badge variant="outline">+{post.tags.length - 3}</Badge>}
                     </div>
                     <CardTitle className="text-xl">{post.title}</CardTitle>
-                    <CardDescription>{post.excerpt}</CardDescription>
+                    <CardDescription>{post.excerpt || post.content.substring(0, 150) + "..."}</CardDescription>
                   </div>
+                  {post.coverImage && (
+                    <div className="ml-4 w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+                      <img
+                        src={post.coverImage || "/placeholder.svg"}
+                        alt={post.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
                 </div>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4 text-sm text-muted-foreground">
-                    <span>{post.readTime} lectura</span>
+                    {post.readTime && <span>{post.readTime} min lectura</span>}
                     <span>{post.views} vistas</span>
                     <span>Actualizado: {new Date(post.updatedAt).toLocaleDateString()}</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    {post.status === "published" && (
-                      <Button size="sm" variant="ghost">
-                        <Eye className="h-4 w-4" />
+                    {post.published && (
+                      <Button size="sm" variant="ghost" asChild>
+                        <Link href={`/blog/${post.slug}`}>
+                          <Eye className="h-4 w-4" />
+                        </Link>
                       </Button>
                     )}
-                    <Button size="sm" variant="ghost">
-                      <Edit className="h-4 w-4" />
+                    <Button size="sm" variant="ghost" asChild>
+                      <Link href={`/admin/blog/${post.slug}`}>
+                        <Edit className="h-4 w-4" />
+                      </Link>
                     </Button>
-                    <Button size="sm" variant="ghost" className="text-destructive hover:text-destructive">
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="text-destructive hover:text-destructive"
+                      onClick={() => handleDeletePost(post.id)}
+                    >
                       <Trash2 className="h-4 w-4" />
                     </Button>
                   </div>
@@ -143,9 +205,19 @@ export default function BlogPage() {
           ))}
         </div>
 
-        {filteredPosts.length === 0 && (
+        {filteredPosts.length === 0 && !loading && (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">No se encontraron artículos</p>
+            <p className="text-muted-foreground">
+              {searchTerm ? "No se encontraron artículos" : "No hay artículos creados aún"}
+            </p>
+            {!searchTerm && (
+              <Link href="/admin/blog/new">
+                <Button className="mt-4">
+                  <Plus className="mr-2 h-4 w-4" />
+                  Crear tu primer artículo
+                </Button>
+              </Link>
+            )}
           </div>
         )}
       </div>

@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { AdminLayout } from "@/components/admin/admin-layout"
 import { Button } from "@/components/ui/button"
@@ -10,91 +10,152 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
+import { Switch } from "@/components/ui/switch"
 import { CoverImageUpload } from "@/components/admin/cover-image-upload"
-import { X, Plus, Eye } from "lucide-react"
+import { X, Plus, Eye, ArrowLeft } from "lucide-react"
 import { toast } from "sonner"
 
-export default function NewBlogPostPage() {
+interface BlogPost {
+  id: string
+  title: string
+  slug: string
+  excerpt?: string
+  content: string
+  coverImage?: string | null
+  tags: string[]
+  published: boolean
+  featured: boolean
+  views: number
+  readTime?: number | null
+  createdAt: string
+  updatedAt: string
+  publishedAt?: string | null
+}
+
+export default function EditBlogPostPage({ params }: { params: { slug: string } }) {
   const router = useRouter()
-  const [title, setTitle] = useState("")
-  const [excerpt, setExcerpt] = useState("")
-  const [content, setContent] = useState("")
-  const [category, setCategory] = useState("")
-  const [status, setStatus] = useState("draft")
-  const [tags, setTags] = useState<string[]>([])
-  const [newTag, setNewTag] = useState("")
-  const [featuredImage, setFeaturedImage] = useState("")
-  const [readTime, setReadTime] = useState("")
+  const [post, setPost] = useState<BlogPost | null>(null)
+  const [loading, setLoading] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [newTag, setNewTag] = useState("")
+
+  useEffect(() => {
+    fetchPost()
+  }, [params.slug])
+
+  const fetchPost = async () => {
+    try {
+      const response = await fetch(`/api/blog/${params.slug}`)
+      if (response.ok) {
+        const data = await response.json()
+        setPost(data)
+      } else {
+        toast.error("Error al cargar el artículo")
+        router.push("/admin/blog")
+      }
+    } catch (error) {
+      console.error("Error fetching blog post:", error)
+      toast.error("Error al cargar el artículo")
+      router.push("/admin/blog")
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const handleAddTag = () => {
-    if (newTag.trim() && !tags.includes(newTag.trim())) {
-      setTags([...tags, newTag.trim()])
+    if (newTag.trim() && post && !post.tags.includes(newTag.trim())) {
+      setPost({
+        ...post,
+        tags: [...post.tags, newTag.trim()],
+      })
       setNewTag("")
     }
   }
 
   const handleRemoveTag = (tag: string) => {
-    setTags(tags.filter((t) => t !== tag))
+    if (post) {
+      setPost({
+        ...post,
+        tags: post.tags.filter((t) => t !== tag),
+      })
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!post) return
+
     setIsSubmitting(true)
 
     try {
-      const postData = {
-        title,
-        slug: title
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, "-")
-          .replace(/(^-|-$)/g, ""),
-        excerpt,
-        content,
-        coverImage: featuredImage,
-        tags,
-        published: status === "published",
-        featured: false,
-        readTime: Number.parseInt(readTime) || 5,
-      }
-
-      const response = await fetch("/api/blog", {
-        method: "POST",
+      const response = await fetch(`/api/blog/${params.slug}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(postData),
+        body: JSON.stringify(post),
       })
 
       if (response.ok) {
-        toast.success("Artículo creado exitosamente")
+        toast.success("Artículo actualizado exitosamente")
         router.push("/admin/blog")
       } else {
         const error = await response.json()
-        toast.error(error.message || "Error al crear el artículo")
+        toast.error(error.message || "Error al actualizar el artículo")
       }
     } catch (error) {
-      console.error("Error creating blog post:", error)
-      toast.error("Error al crear el artículo")
+      console.error("Error updating blog post:", error)
+      toast.error("Error al actualizar el artículo")
     } finally {
       setIsSubmitting(false)
     }
   }
 
   const handlePreview = () => {
-    console.log("[v0] Preview blog post")
-    // Here you would open a preview modal or new tab
+    if (post?.published) {
+      window.open(`/blog/${post.slug}`, "_blank")
+    } else {
+      toast.info("El artículo debe estar publicado para ver la vista previa")
+    }
+  }
+
+  if (loading) {
+    return (
+      <AdminLayout>
+        <div className="flex items-center justify-center min-h-[400px]">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+            <p>Cargando artículo...</p>
+          </div>
+        </div>
+      </AdminLayout>
+    )
+  }
+
+  if (!post) {
+    return (
+      <AdminLayout>
+        <div className="text-center py-12">
+          <p className="text-muted-foreground">Artículo no encontrado</p>
+        </div>
+      </AdminLayout>
+    )
   }
 
   return (
     <AdminLayout>
       <div className="max-w-4xl mx-auto space-y-6">
-        <div className="flex justify-between items-center">
-          <div>
-            <h1 className="text-3xl font-bold neon-text">Nuevo Artículo</h1>
-            <p className="text-muted-foreground">Crea un nuevo artículo para tu blog</p>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <Button variant="outline" size="sm" onClick={() => router.back()}>
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Volver
+            </Button>
+            <div>
+              <h1 className="text-3xl font-bold neon-text">Editar Artículo</h1>
+              <p className="text-muted-foreground">Modifica los detalles de tu artículo</p>
+            </div>
           </div>
           <Button onClick={handlePreview} variant="outline">
             <Eye className="mr-2 h-4 w-4" />
@@ -114,9 +175,20 @@ export default function NewBlogPostPage() {
                     <Label htmlFor="title">Título</Label>
                     <Input
                       id="title"
-                      value={title}
-                      onChange={(e) => setTitle(e.target.value)}
+                      value={post.title}
+                      onChange={(e) => setPost({ ...post, title: e.target.value })}
                       placeholder="Título del artículo"
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="slug">Slug (URL)</Label>
+                    <Input
+                      id="slug"
+                      value={post.slug}
+                      onChange={(e) => setPost({ ...post, slug: e.target.value })}
+                      placeholder="slug-del-articulo"
                       required
                     />
                   </div>
@@ -125,11 +197,10 @@ export default function NewBlogPostPage() {
                     <Label htmlFor="excerpt">Extracto</Label>
                     <Textarea
                       id="excerpt"
-                      value={excerpt}
-                      onChange={(e) => setExcerpt(e.target.value)}
+                      value={post.excerpt || ""}
+                      onChange={(e) => setPost({ ...post, excerpt: e.target.value })}
                       placeholder="Breve descripción del artículo"
                       rows={3}
-                      required
                     />
                   </div>
 
@@ -137,8 +208,8 @@ export default function NewBlogPostPage() {
                     <Label htmlFor="content">Contenido</Label>
                     <Textarea
                       id="content"
-                      value={content}
-                      onChange={(e) => setContent(e.target.value)}
+                      value={post.content}
+                      onChange={(e) => setPost({ ...post, content: e.target.value })}
                       placeholder="Escribe el contenido completo del artículo aquí..."
                       rows={20}
                       className="font-mono text-sm"
@@ -157,36 +228,22 @@ export default function NewBlogPostPage() {
                   <CardDescription>Ajustes de publicación</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="status">Estado</Label>
-                    <Select value={status} onValueChange={setStatus}>
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="draft">Borrador</SelectItem>
-                        <SelectItem value="published">Publicado</SelectItem>
-                        <SelectItem value="archived">Archivado</SelectItem>
-                      </SelectContent>
-                    </Select>
+                  <div className="flex items-center space-x-2">
+                    <Switch
+                      id="published"
+                      checked={post.published}
+                      onCheckedChange={(checked) => setPost({ ...post, published: checked })}
+                    />
+                    <Label htmlFor="published">Publicado</Label>
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="category">Categoría</Label>
-                    <Select value={category} onValueChange={setCategory}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Selecciona categoría" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="React">React</SelectItem>
-                        <SelectItem value="Next.js">Next.js</SelectItem>
-                        <SelectItem value="Python">Python</SelectItem>
-                        <SelectItem value="JavaScript">JavaScript</SelectItem>
-                        <SelectItem value="TypeScript">TypeScript</SelectItem>
-                        <SelectItem value="Automatización">Automatización</SelectItem>
-                        <SelectItem value="Tutorial">Tutorial</SelectItem>
-                      </SelectContent>
-                    </Select>
+                  <div className="flex items-center space-x-2">
+                    <Switch
+                      id="featured"
+                      checked={post.featured}
+                      onCheckedChange={(checked) => setPost({ ...post, featured: checked })}
+                    />
+                    <Label htmlFor="featured">Destacado</Label>
                   </div>
 
                   <div className="space-y-2">
@@ -194,16 +251,29 @@ export default function NewBlogPostPage() {
                     <Input
                       id="readTime"
                       type="number"
-                      value={readTime}
-                      onChange={(e) => setReadTime(e.target.value)}
+                      value={post.readTime || ""}
+                      onChange={(e) => setPost({ ...post, readTime: Number.parseInt(e.target.value) || null })}
                       placeholder="5"
                       min="1"
                     />
                   </div>
+
+                  <div className="space-y-2">
+                    <Label>Estadísticas</Label>
+                    <div className="text-sm text-muted-foreground space-y-1">
+                      <p>Vistas: {post.views}</p>
+                      <p>Creado: {new Date(post.createdAt).toLocaleDateString()}</p>
+                      <p>Actualizado: {new Date(post.updatedAt).toLocaleDateString()}</p>
+                      {post.publishedAt && <p>Publicado: {new Date(post.publishedAt).toLocaleDateString()}</p>}
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
 
-              <CoverImageUpload initialImage={featuredImage} onImageChange={setFeaturedImage} />
+              <CoverImageUpload
+                initialImage={post.coverImage || ""}
+                onImageChange={(url) => setPost({ ...post, coverImage: url })}
+              />
 
               <Card className="bg-card/50 backdrop-blur-sm border-primary/20">
                 <CardHeader>
@@ -221,9 +291,9 @@ export default function NewBlogPostPage() {
                       <Plus className="h-4 w-4" />
                     </Button>
                   </div>
-                  {tags.length > 0 && (
+                  {post.tags.length > 0 && (
                     <div className="flex flex-wrap gap-2">
-                      {tags.map((tag) => (
+                      {post.tags.map((tag) => (
                         <Badge key={tag} variant="secondary" className="flex items-center gap-1">
                           {tag}
                           <button
@@ -244,7 +314,7 @@ export default function NewBlogPostPage() {
 
           <div className="flex gap-4 pt-4">
             <Button type="submit" className="neon-glow" disabled={isSubmitting}>
-              {isSubmitting ? "Guardando..." : status === "published" ? "Publicar Artículo" : "Guardar Borrador"}
+              {isSubmitting ? "Guardando..." : "Guardar Cambios"}
             </Button>
             <Button type="button" variant="outline" onClick={() => router.back()}>
               Cancelar

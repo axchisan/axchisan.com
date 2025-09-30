@@ -5,6 +5,16 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "1gb",
+    },
+  },
+}
+
+export const maxDuration = 60
+
 const SUPPORTED_TYPES = {
   // Imágenes
   "image/jpeg": { category: "IMAGE", extensions: [".jpg", ".jpeg"], folder: "images" },
@@ -114,6 +124,13 @@ export async function POST(request: NextRequest) {
 
     if (!files || files.length === 0) {
       return NextResponse.json({ error: "No files uploaded" }, { status: 400 })
+    }
+
+    const MAX_FILE_SIZE = 1024 * 1024 * 1024 // 1GB in bytes
+    for (const file of files) {
+      if (file.size > MAX_FILE_SIZE) {
+        return NextResponse.json({ error: `File ${file.name} exceeds maximum size of 1GB` }, { status: 400 })
+      }
     }
 
     const uploadedFiles = []

@@ -19,6 +19,7 @@ interface Project {
   title: string
   description: string
   shortDesc: string
+  coverImage?: string | null
   images: string[]
   files?: ProjectFile[]
   technologies: string[]
@@ -69,12 +70,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
     }
   }
 
+  const displayImage = project.coverImage || project.images[0] || "/placeholder.svg"
+
   return (
     <Card className="border-primary/20 bg-card/50 backdrop-blur-sm hover:border-primary/40 transition-all duration-300 group overflow-hidden">
       {/* Project Image */}
       <div className="relative aspect-video overflow-hidden">
         <Image
-          src={project.images[0] || "/placeholder.svg"}
+          src={displayImage || "/placeholder.svg"}
           alt={project.title}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -155,8 +158,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             <div className="flex items-center gap-2 text-sm text-primary">
               <Download className="h-3 w-3" />
               <span>
-                {downloadableFiles.length} archivo{downloadableFiles.length !== 1 ? "s" : ""} disponible
-                {downloadableFiles.length !== 1 ? "s" : ""}
+                {downloadableFiles.length} archivo{downloadableFiles.length !== 1 ? "s" : ""}
               </span>
             </div>
           </div>

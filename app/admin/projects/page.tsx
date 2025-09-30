@@ -15,6 +15,7 @@ interface Project {
   title: string
   description: string
   shortDesc?: string
+  coverImage?: string | null
   images: string[]
   technologies: string[]
   githubUrl?: string
@@ -143,7 +144,9 @@ export default function ProjectsPage() {
               <CardHeader className="pb-3">
                 <div className="aspect-video relative overflow-hidden rounded-lg mb-3">
                   <img
-                    src={project.images[0] || "/placeholder.svg?height=200&width=300&query=project"}
+                    src={
+                      project.coverImage || project.images[0] || "/placeholder.svg?height=200&width=300&query=project"
+                    }
                     alt={project.title}
                     className="object-cover w-full h-full"
                   />
