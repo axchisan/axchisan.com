@@ -143,7 +143,7 @@ export async function POST(request: NextRequest) {
       const filePath = join(fullUploadDir, filename)
       await writeFile(filePath, buffer)
 
-      const publicUrl = `/${uploadDir}/${filename}`
+      const publicUrl = `/api/files/${fileInfo.folder}/${filename}`
 
       let savedFile
       if (projectId && !isCoverImage) {

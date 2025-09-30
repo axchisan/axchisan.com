@@ -51,6 +51,11 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 RUN mkdir -p /app/public/uploads/images
 RUN mkdir -p /app/public/uploads/videos
 RUN mkdir -p /app/public/uploads/documents
+RUN mkdir -p /app/public/uploads/archives
+RUN mkdir -p /app/public/uploads/executables
+RUN mkdir -p /app/public/uploads/mobile-apps
+RUN mkdir -p /app/public/uploads/source-code
+RUN mkdir -p /app/public/uploads/other
 RUN chown -R nextjs:nodejs /app/public/uploads
 
 COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma

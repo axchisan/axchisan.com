@@ -16,6 +16,7 @@ import { Switch } from "@/components/ui/switch"
 import { X, Plus, ArrowLeft } from "lucide-react"
 import { toast } from "sonner"
 import { AdvancedFileManager } from "@/components/admin/advanced-file-manager"
+import { CoverImageUpload } from "@/components/admin/cover-image-upload"
 
 interface ProjectFile {
   id?: string
@@ -40,6 +41,7 @@ export default function NewProjectPage() {
   const [description, setDescription] = useState("")
   const [shortDesc, setShortDesc] = useState("")
   const [content, setContent] = useState("")
+  const [coverImage, setCoverImage] = useState("")
   const [status, setStatus] = useState("IN_PROGRESS")
   const [category, setCategory] = useState("")
   const [liveUrl, setLiveUrl] = useState("")
@@ -91,6 +93,7 @@ export default function NewProjectPage() {
         description,
         shortDesc,
         content,
+        coverImage,
         status,
         category,
         liveUrl,
@@ -245,6 +248,8 @@ export default function NewProjectPage() {
             </Card>
           </div>
 
+          <CoverImageUpload onImageChange={setCoverImage} />
+
           {/* URLs */}
           <Card className="bg-card/50 backdrop-blur-sm border-primary/20">
             <CardHeader>
@@ -327,8 +332,8 @@ export default function NewProjectPage() {
           {/* Images */}
           <Card className="bg-card/50 backdrop-blur-sm border-primary/20">
             <CardHeader>
-              <CardTitle>Imágenes</CardTitle>
-              <CardDescription>Capturas de pantalla y media del proyecto</CardDescription>
+              <CardTitle>Imágenes Adicionales</CardTitle>
+              <CardDescription>Capturas de pantalla y media adicional del proyecto (opcional)</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex gap-2">
