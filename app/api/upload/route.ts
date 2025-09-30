@@ -5,15 +5,10 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: "1gb",
-    },
-  },
-}
 
 export const maxDuration = 60
+
+export const dynamic = 'force-dynamic'
 
 const SUPPORTED_TYPES = {
   // Imágenes
