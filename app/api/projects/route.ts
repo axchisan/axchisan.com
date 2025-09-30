@@ -38,52 +38,59 @@ export async function POST(request: NextRequest) {
 
     const data = await request.json()
 
-    const project = await prisma.project.create({
-      data: {
-        title: data.title,
-        description: data.description,
-        shortDesc: data.shortDesc,
-        content: data.content,
-        images: data.images || [],
-        videos: data.videos || [],
-        technologies: data.technologies || [],
-        githubUrl: data.githubUrl,
-        liveUrl: data.liveUrl,
-        downloadUrl: data.downloadUrl,
-        category: data.category,
-        status: data.status || "COMPLETED",
-        featured: data.featured || false,
-        order: data.order || 0,
-      },
-    })
-
-    if (data.files && data.files.length > 0) {
-      await prisma.projectFile.createMany({
-        data: data.files.map((file: any, index: number) => ({
-          filename: file.filename,
-          originalName: file.originalName,
-          displayName: file.displayName || file.originalName,
-          description: file.description,
-          url: file.url,
-          size: file.size,
-          type: file.type,
-          category: file.category || "OTHER",
-          platform: file.platform,
-          version: file.version,
-          isDownloadable: file.isDownloadable ?? true,
-          order: file.order || index,
-          projectId: project.id,
-        })),
-      })
-    }
-
-    const projectWithFiles = await prisma.project.findUnique({
-      where: { id: project.id },
-      include: {
-        files: {
-          orderBy: { order: "asc" },
+    const projectWithFiles = await prisma.$transaction(async (tx) => {
+      const project = await tx.project.create({
+        data: {
+          title: data.title,
+          description: data.description,
+          shortDesc: data.shortDesc,
+          content: data.content,
+          images: data.images || [],
+          videos: data.videos || [],
+          technologies: data.technologies || [],
+          githubUrl: data.githubUrl,
+          liveUrl: data.liveUrl,
+          downloadUrl: data.downloadUrl,
+          category: data.category,
+          status: data.status || "COMPLETED",
+          featured: data.featured || false,
+          order: data.order || 0,
         },
-      },
+      })
+
+      if (data.files && data.files.length > 0) {
+        const createdFiles = await Promise.all(
+          data.files.map((file: any, index: number) =>
+            tx.projectFile.create({
+              data: {
+                filename: file.filename,
+                originalName: file.originalName,
+                displayName: file.displayName || file.originalName,
+                description: file.description,
+                url: file.url,
+                size: file.size,
+                type: file.type,
+                category: file.category || "OTHER",
+                platform: file.platform,
+                version: file.version,
+                isDownloadable: file.isDownloadable ?? true,
+                order: file.order || index,
+                projectId: project.id,
+              },
+            }),
+          ),
+        )
+
+        return {
+          ...project,
+          files: createdFiles,
+        }
+      }
+
+      return {
+        ...project,
+        files: [],
+      }
     })
 
     return NextResponse.json(projectWithFiles)

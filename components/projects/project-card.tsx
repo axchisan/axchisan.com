@@ -1,12 +1,11 @@
 "use client"
-
-import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Heart, MessageCircle, ExternalLink, Github, Download, Eye, Monitor, Smartphone, Globe } from "lucide-react"
+import { LikeButton } from "@/components/ui/like-button"
+import { MessageCircle, ExternalLink, Github, Download, Eye, Monitor, Smartphone, Globe } from "lucide-react"
 
 interface ProjectFile {
   id: string
@@ -38,14 +37,6 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
-  const [isLiked, setIsLiked] = useState(false)
-  const [likes, setLikes] = useState(project.likes)
-
-  const handleLike = () => {
-    setIsLiked(!isLiked)
-    setLikes(isLiked ? likes - 1 : likes + 1)
-  }
-
   const statusColors = {
     IN_PROGRESS: "bg-yellow-500/10 text-yellow-500 border-yellow-500/20",
     COMPLETED: "bg-green-500/10 text-green-500 border-green-500/20",
@@ -176,15 +167,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <div className="flex items-center justify-between w-full">
           {/* Engagement */}
           <div className="flex items-center space-x-4">
-            <button
-              onClick={handleLike}
-              className={`flex items-center space-x-1 text-sm transition-colors ${
-                isLiked ? "text-red-500" : "text-muted-foreground hover:text-red-500"
-              }`}
-            >
-              <Heart className={`h-4 w-4 ${isLiked ? "fill-current" : ""}`} />
-              <span>{likes}</span>
-            </button>
+            <LikeButton
+              projectId={project.id}
+              initialCount={project.likes}
+              showCount={true}
+              className="h-auto p-0 hover:bg-transparent"
+            />
 
             <Link
               href={`/projects/${project.id}#comments`}

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect } from "react"
 import { useDropzone } from "react-dropzone"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -94,6 +94,12 @@ export function AdvancedFileManager({
   const [editingFile, setEditingFile] = useState<ProjectFile | null>(null)
   const { toast } = useToast()
 
+  useEffect(() => {
+    if (initialFiles && initialFiles.length > 0) {
+      setFiles(initialFiles)
+    }
+  }, [initialFiles])
+
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
       if (acceptedFiles.length === 0) return
@@ -111,7 +117,6 @@ export function AdvancedFileManager({
           formData.append("projectId", projectId)
         }
 
-        // Simulate progress
         const progressInterval = setInterval(() => {
           setUploadProgress((prev) => {
             if (prev >= 90) {
@@ -146,7 +151,7 @@ export function AdvancedFileManager({
           category: file.category || "OTHER",
           platform: file.platform,
           version: file.version,
-          isDownloadable: file.isDownloadable ?? true,
+          isDownloadable: file.isDownloadable !== undefined ? file.isDownloadable : true,
           downloadCount: 0,
           order: files.length + index,
         }))
@@ -199,12 +204,20 @@ export function AdvancedFileManager({
     const updatedFiles = files.filter((f) => f.id !== fileId)
     setFiles(updatedFiles)
     onFilesChange?.(updatedFiles)
+    toast({
+      title: "Archivo eliminado",
+      description: "El archivo ha sido eliminado de la lista.",
+    })
   }
 
   const updateFile = (fileId: string, updates: Partial<ProjectFile>) => {
     const updatedFiles = files.map((f) => (f.id === fileId ? { ...f, ...updates } : f))
     setFiles(updatedFiles)
     onFilesChange?.(updatedFiles)
+    toast({
+      title: "Archivo actualizado",
+      description: "Los cambios han sido guardados.",
+    })
   }
 
   const getFileIcon = (category: string) => {

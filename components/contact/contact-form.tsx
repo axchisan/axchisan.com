@@ -3,6 +3,8 @@
 import type React from "react"
 
 import { useState } from "react"
+import { useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -11,7 +13,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Send, CheckCircle } from "lucide-react"
+import { Send, CheckCircle, LogIn } from "lucide-react"
 
 const projectTypes = [
   "Página Web",
@@ -32,8 +34,9 @@ const budgetRanges = [
   "Más de $5,000,000 COP",
 ]
 
-
 export function ContactForm() {
+  const { data: session, status } = useSession()
+  const router = useRouter()
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -65,6 +68,12 @@ export function ContactForm() {
         body: JSON.stringify(formData),
       })
 
+      if (response.status === 401) {
+        setError("Debes iniciar sesión para enviar un mensaje.")
+        setIsSubmitting(false)
+        return
+      }
+
       if (!response.ok) {
         throw new Error("Error al enviar el mensaje")
       }
@@ -84,6 +93,45 @@ export function ContactForm() {
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  if (status === "loading") {
+    return (
+      <Card className="border-primary/20 bg-card/50 backdrop-blur-sm">
+        <CardContent className="p-8 text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Cargando...</p>
+        </CardContent>
+      </Card>
+    )
+  }
+
+  if (!session) {
+    return (
+      <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
+        <Card className="border-primary/20 bg-card/50 backdrop-blur-sm">
+          <CardContent className="p-8 text-center">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 border border-primary/20 mb-6">
+              <LogIn className="h-8 w-8 text-primary" />
+            </div>
+            <h3 className="text-2xl font-bold mb-4">Inicia Sesión para Contactar</h3>
+            <p className="text-muted-foreground mb-6">
+              Para enviar un mensaje, necesitas tener una cuenta. Esto nos ayuda a mantener un mejor seguimiento de tu
+              consulta y brindarte una respuesta más personalizada.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button onClick={() => router.push("/auth/signin")} className="transition-neon hover:neon-glow">
+                <LogIn className="h-4 w-4 mr-2" />
+                Iniciar Sesión
+              </Button>
+              <Button onClick={() => router.push("/auth/signup")} variant="outline" className="bg-transparent">
+                Crear Cuenta
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
+    )
   }
 
   if (isSubmitted) {

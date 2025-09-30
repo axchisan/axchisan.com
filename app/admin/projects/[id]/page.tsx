@@ -15,6 +15,24 @@ import { Badge } from "@/components/ui/badge"
 import { Switch } from "@/components/ui/switch"
 import { X, Plus, ArrowLeft } from "lucide-react"
 import { toast } from "sonner"
+import { AdvancedFileManager } from "@/components/admin/advanced-file-manager"
+
+interface ProjectFile {
+  id?: string
+  filename: string
+  originalName: string
+  displayName?: string
+  description?: string
+  url: string
+  size: number
+  type: string
+  category: string
+  platform?: string
+  version?: string
+  isDownloadable: boolean
+  downloadCount?: number
+  order: number
+}
 
 interface Project {
   id: string
@@ -24,6 +42,7 @@ interface Project {
   content?: string
   images: string[]
   videos: string[]
+  files?: ProjectFile[]
   technologies: string[]
   githubUrl?: string
   liveUrl?: string
@@ -41,6 +60,7 @@ export default function EditProjectPage({ params }: { params: { id: string } }) 
   const [saving, setSaving] = useState(false)
   const [newTech, setNewTech] = useState("")
   const [newImage, setNewImage] = useState("")
+  const [projectFiles, setProjectFiles] = useState<ProjectFile[]>([])
 
   useEffect(() => {
     fetchProject()
@@ -52,6 +72,9 @@ export default function EditProjectPage({ params }: { params: { id: string } }) 
       if (response.ok) {
         const data = await response.json()
         setProject(data)
+        if (data.files && Array.isArray(data.files)) {
+          setProjectFiles(data.files)
+        }
       } else {
         toast.error("Error al cargar el proyecto")
         router.push("/admin/projects")
@@ -76,7 +99,10 @@ export default function EditProjectPage({ params }: { params: { id: string } }) 
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(project),
+        body: JSON.stringify({
+          ...project,
+          files: projectFiles,
+        }),
       })
 
       if (response.ok) {
@@ -156,7 +182,7 @@ export default function EditProjectPage({ params }: { params: { id: string } }) 
 
   return (
     <AdminLayout>
-      <div className="max-w-4xl mx-auto space-y-6">
+      <div className="max-w-6xl mx-auto space-y-6">
         <div className="flex items-center space-x-4">
           <Button variant="outline" size="sm" onClick={() => router.back()}>
             <ArrowLeft className="h-4 w-4 mr-2" />
@@ -391,6 +417,24 @@ export default function EditProjectPage({ params }: { params: { id: string } }) 
                   ))}
                 </div>
               )}
+            </CardContent>
+          </Card>
+
+          {/* Files */}
+          <Card className="bg-card/50 backdrop-blur-sm border-primary/20">
+            <CardHeader>
+              <CardTitle>Archivos del Proyecto</CardTitle>
+              <CardDescription>
+                Gestiona archivos descargables como APK, EXE, ZIP, etc. Organiza por plataforma y controla la descarga.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <AdvancedFileManager
+                projectId={params.id}
+                initialFiles={projectFiles}
+                onFilesChange={setProjectFiles}
+                maxFiles={20}
+              />
             </CardContent>
           </Card>
 

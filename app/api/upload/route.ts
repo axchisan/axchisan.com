@@ -1,3 +1,70 @@
+const SUPPORTED_TYPES = {
+  // Imágenes
+  "image/jpeg": { category: "IMAGE", extensions: [".jpg", ".jpeg"], folder: "images" },
+  "image/png": { category: "IMAGE", extensions: [".png"], folder: "images" },
+  "image/gif": { category: "IMAGE", extensions: [".gif"], folder: "images" },
+  "image/webp": { category: "IMAGE", extensions: [".webp"], folder: "images" },
+  "image/svg+xml": { category: "IMAGE", extensions: [".svg"], folder: "images" },
+
+  // Videos
+  "video/mp4": { category: "VIDEO", extensions: [".mp4"], folder: "videos" },
+  "video/webm": { category: "VIDEO", extensions: [".webm"], folder: "videos" },
+  "video/ogg": { category: "VIDEO", extensions: [".ogg"], folder: "videos" },
+  "video/avi": { category: "VIDEO", extensions: [".avi"], folder: "videos" },
+  "video/mov": { category: "VIDEO", extensions: [".mov"], folder: "videos" },
+
+  // Documentos
+  "application/pdf": { category: "DOCUMENT", extensions: [".pdf"], folder: "documents" },
+  "text/plain": { category: "DOCUMENT", extensions: [".txt"], folder: "documents" },
+  "application/msword": { category: "DOCUMENT", extensions: [".doc"], folder: "documents" },
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document": {
+    category: "DOCUMENT",
+    extensions: [".docx"],
+    folder: "documents",
+  },
+
+  // Ejecutables
+  "application/x-msdownload": { category: "EXECUTABLE", extensions: [".exe"], folder: "executables" },
+  "application/x-msi": { category: "EXECUTABLE", extensions: [".msi"], folder: "executables" },
+  "application/x-apple-diskimage": { category: "EXECUTABLE", extensions: [".dmg"], folder: "executables" },
+  "application/x-debian-package": { category: "EXECUTABLE", extensions: [".deb"], folder: "executables" },
+  "application/x-rpm": { category: "EXECUTABLE", extensions: [".rpm"], folder: "executables" },
+
+  // Apps móviles
+  "application/vnd.android.package-archive": { category: "MOBILE_APP", extensions: [".apk"], folder: "mobile-apps" },
+  "application/octet-stream": { category: "MOBILE_APP", extensions: [".ipa"], folder: "mobile-apps" }, // iOS apps
+
+  // Archivos comprimidos
+  "application/zip": { category: "ARCHIVE", extensions: [".zip"], folder: "archives" },
+  "application/x-rar-compressed": { category: "ARCHIVE", extensions: [".rar"], folder: "archives" },
+  "application/x-7z-compressed": { category: "ARCHIVE", extensions: [".7z"], folder: "archives" },
+  "application/x-tar": { category: "ARCHIVE", extensions: [".tar"], folder: "archives" },
+  "application/gzip": { category: "ARCHIVE", extensions: [".gz"], folder: "archives" },
+}
+
+function getCategoryByExtension(filename: string): { category: string; folder: string } {
+  const extension = filename.toLowerCase().split(".").pop()
+
+  const extensionMap: Record<string, { category: string; folder: string }> = {
+    // Ejecutables adicionales
+    exe: { category: "EXECUTABLE", folder: "executables" },
+    msi: { category: "EXECUTABLE", folder: "executables" },
+    dmg: { category: "EXECUTABLE", folder: "executables" },
+    deb: { category: "EXECUTABLE", folder: "executables" },
+    rpm: { category: "EXECUTABLE", folder: "executables" },
+    appimage: { category: "EXECUTABLE", folder: "executables" },
+
+    // Apps móviles
+    apk: { category: "MOBILE_APP", folder: "mobile-apps" },
+    ipa: { category: "MOBILE_APP", folder: "mobile-apps" },
+    aab: { category: "MOBILE_APP", folder: "mobile-apps" }, // Android App Bundle
+
+    // Archivos comprimidos
+    zip: { category: "ARCHIVE", folder: \"archivesma de carga de archivos para que guarde correctamente la información en la base de datos:
+\
+<CodeProject id="axchiwebsite" taskNameActive="Updating upload API" taskNameComplete="Updated upload API">
+
+```ts file="app/api/upload/route.ts"
 import { type NextRequest, NextResponse } from "next/server"
 import { writeFile, mkdir } from "fs/promises"
 import { join } from "path"

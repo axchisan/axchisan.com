@@ -11,6 +11,7 @@ import { CommentSection } from "@/components/comments/comment-section"
 import { ProjectFilesDisplay } from "@/components/projects/project-files-display"
 import { ArrowLeft, ExternalLink, Github, Download, Calendar, Tag, Eye, Heart, Star } from "lucide-react"
 import { toast } from "sonner"
+import { LikeButton } from "@/components/ui/like-button"
 
 interface ProjectFile {
   id: string
@@ -159,10 +160,11 @@ export default function ProjectDetailPage() {
               <Eye className="h-4 w-4" />
               <span>{project.views || project._count?.projectViews || 0} visualizaciones</span>
             </div>
-            <div className="flex items-center gap-1">
-              <Heart className="h-4 w-4" />
-              <span>{project._count?.likes || project.likes?.length || 0} me gusta</span>
-            </div>
+            <LikeButton
+              projectId={project.id}
+              initialCount={project._count?.likes || project.likes?.length || 0}
+              showCount={true}
+            />
             <div className="flex items-center gap-1">
               <Star className="h-4 w-4" />
               <span>{project._count?.favorites || project.favorites?.length || 0} favoritos</span>
