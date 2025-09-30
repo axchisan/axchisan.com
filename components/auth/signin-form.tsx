@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import { signIn } from "next-auth/react"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -20,6 +20,7 @@ export function SignInForm() {
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
+  const searchParams = useSearchParams()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -36,7 +37,22 @@ export function SignInForm() {
       if (result?.error) {
         setError("Credenciales inválidas. Por favor, verifica tu email y contraseña.")
       } else {
-        router.push("/admin")
+        const callbackUrl = searchParams.get("callbackUrl")
+
+        // Fetch the session to get user role
+        const response = await fetch("/api/auth/session")
+        const session = await response.json()
+
+        if (callbackUrl) {
+          // If there's a callback URL, use it
+          router.push(callbackUrl)
+        } else if (session?.user?.role === "ADMIN") {
+          // Admin users go to admin panel
+          router.push("/admin")
+        } else {
+          // Regular users go to home page
+          router.push("/")
+        }
         router.refresh()
       }
     } catch (error) {

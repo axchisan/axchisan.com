@@ -11,11 +11,22 @@ export const metadata = {
   description: "Inicia sesión en tu cuenta para acceder a funciones adicionales.",
 }
 
-export default async function SignInPage() {
+export default async function SignInPage(props: {
+  searchParams: Promise<{ callbackUrl?: string }>
+}) {
   const session = await getServerSession(authOptions)
+  const searchParams = await props.searchParams
 
   if (session) {
-    redirect("/admin")
+    const callbackUrl = searchParams?.callbackUrl
+
+    if (callbackUrl) {
+      redirect(callbackUrl)
+    } else if (session.user.role === "ADMIN") {
+      redirect("/admin")
+    } else {
+      redirect("/")
+    }
   }
 
   return (

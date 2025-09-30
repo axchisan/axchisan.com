@@ -8,7 +8,31 @@ import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { CheckCircle, MessageSquare } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Alert, AlertDescription } from "@/components/ui/alert"
+import { Send, CheckCircle, LogIn } from "lucide-react"
+
+const projectTypes = [
+  "Página Web",
+  "Aplicación Móvil",
+  "E-commerce",
+  "Sistema de Gestión",
+  "Automatización",
+  "API/Backend",
+  "Consultoría",
+  "Otro",
+]
+
+const budgetRanges = [
+  "Menos de $1,000,000 COP",
+  "$1,000,000 - $2,000,000 COP",
+  "$2,000,000 - $3,000,000 COP",
+  "$3,000,000 - $5,000,000 COP",
+  "Más de $5,000,000 COP",
+]
 
 export function ContactForm() {
   const { data: session, status } = useSession()
@@ -71,6 +95,45 @@ export function ContactForm() {
     }
   }
 
+  if (status === "loading") {
+    return (
+      <Card className="border-primary/20 bg-card/50 backdrop-blur-sm">
+        <CardContent className="p-8 text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Cargando...</p>
+        </CardContent>
+      </Card>
+    )
+  }
+
+  if (!session) {
+    return (
+      <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
+        <Card className="border-primary/20 bg-card/50 backdrop-blur-sm">
+          <CardContent className="p-8 text-center">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 border border-primary/20 mb-6">
+              <LogIn className="h-8 w-8 text-primary" />
+            </div>
+            <h3 className="text-2xl font-bold mb-4">Inicia Sesión para Contactar</h3>
+            <p className="text-muted-foreground mb-6">
+              Para enviar un mensaje, necesitas tener una cuenta. Esto nos ayuda a mantener un mejor seguimiento de tu
+              consulta y brindarte una respuesta más personalizada.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button onClick={() => router.push("/auth/signin")} className="transition-neon hover:neon-glow">
+                <LogIn className="h-4 w-4 mr-2" />
+                Iniciar Sesión
+              </Button>
+              <Button onClick={() => router.push("/auth/signup")} variant="outline" className="bg-transparent">
+                Crear Cuenta
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
+    )
+  }
+
   if (isSubmitted) {
     return (
       <motion.div
@@ -85,16 +148,11 @@ export function ContactForm() {
             </div>
             <h3 className="text-2xl font-bold mb-4">¡Mensaje Enviado!</h3>
             <p className="text-muted-foreground mb-6">
-              Gracias por contactarme. He recibido tu mensaje y te responderé dentro de las próximas 24 horas. Puedes
-              hacer seguimiento de tu mensaje en tu panel de mensajes.
+              Gracias por contactarme. He recibido tu mensaje y te responderé dentro de las próximas 24 horas.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button onClick={() => router.push("/messages")} variant="outline" className="bg-transparent">
-                <MessageSquare className="h-4 w-4 mr-2" />
-                Ver mis mensajes
-              </Button>
-              <Button onClick={() => setIsSubmitted(false)}>Enviar otro mensaje</Button>
-            </div>
+            <Button onClick={() => setIsSubmitted(false)} variant="outline" className="bg-transparent">
+              Enviar otro mensaje
+            </Button>
           </CardContent>
         </Card>
       </motion.div>
@@ -108,7 +166,123 @@ export function ContactForm() {
           <CardTitle>Cuéntame sobre tu proyecto</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6"></form>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {error && (
+              <Alert variant="destructive">
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="name">Nombre *</Label>
+                <Input
+                  id="name"
+                  value={formData.name}
+                  onChange={(e) => handleChange("name", e.target.value)}
+                  required
+                  disabled={isSubmitting}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="email">Email *</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => handleChange("email", e.target.value)}
+                  required
+                  disabled={isSubmitting}
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="company">Empresa (opcional)</Label>
+              <Input
+                id="company"
+                value={formData.company}
+                onChange={(e) => handleChange("company", e.target.value)}
+                disabled={isSubmitting}
+              />
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="projectType">Tipo de Proyecto</Label>
+                <Select
+                  value={formData.projectType}
+                  onValueChange={(value) => handleChange("projectType", value)}
+                  disabled={isSubmitting}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecciona un tipo" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {projectTypes.map((type) => (
+                      <SelectItem key={type} value={type}>
+                        {type}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="budget">Presupuesto Estimado</Label>
+                <Select
+                  value={formData.budget}
+                  onValueChange={(value) => handleChange("budget", value)}
+                  disabled={isSubmitting}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecciona un rango" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {budgetRanges.map((range) => (
+                      <SelectItem key={range} value={range}>
+                        {range}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="timeline">Timeline del Proyecto</Label>
+              <Input
+                id="timeline"
+                placeholder="ej. 2-3 meses, Lo antes posible, Flexible"
+                value={formData.timeline}
+                onChange={(e) => handleChange("timeline", e.target.value)}
+                disabled={isSubmitting}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="message">Descripción del Proyecto *</Label>
+              <Textarea
+                id="message"
+                rows={5}
+                placeholder="Describe tu proyecto, objetivos, funcionalidades requeridas, etc."
+                value={formData.message}
+                onChange={(e) => handleChange("message", e.target.value)}
+                required
+                disabled={isSubmitting}
+              />
+            </div>
+
+            <Button type="submit" className="w-full transition-neon hover:neon-glow" disabled={isSubmitting}>
+              {isSubmitting ? (
+                "Enviando..."
+              ) : (
+                <>
+                  <Send className="h-4 w-4 mr-2" />
+                  Enviar Mensaje
+                </>
+              )}
+            </Button>
+          </form>
         </CardContent>
       </Card>
     </motion.div>
