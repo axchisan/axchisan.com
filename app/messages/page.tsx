@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { BackgroundEffects } from "@/components/background-effects"
+import { AuroraBackground } from "@/components/aurora-background"
 import { PageTransition } from "@/components/page-transition"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -173,7 +173,7 @@ export default function UserMessagesPage() {
   if (status === "loading" || loading) {
     return (
       <div className="relative min-h-screen">
-        <BackgroundEffects />
+        <AuroraBackground />
         <Header />
         <PageTransition>
           <main className="relative z-10 pt-16">
@@ -195,7 +195,7 @@ export default function UserMessagesPage() {
   if (!session) {
     return (
       <div className="relative min-h-screen">
-        <BackgroundEffects />
+        <AuroraBackground />
         <Header />
         <PageTransition>
           <main className="relative z-10 pt-16">
@@ -225,7 +225,7 @@ export default function UserMessagesPage() {
 
   return (
     <div className="relative min-h-screen">
-      <BackgroundEffects />
+      <AuroraBackground />
       <Header />
       <PageTransition>
         <main className="relative z-10 pt-16">

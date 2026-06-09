@@ -14,6 +14,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Send, CheckCircle, LogIn } from "lucide-react"
+import { GradientText } from "@/components/ui/gradient-text"
 
 const projectTypes = [
   "Página Web",
@@ -97,7 +98,7 @@ export function ContactForm() {
 
   if (status === "loading") {
     return (
-      <Card className="border-primary/20 bg-card/50 backdrop-blur-sm">
+      <Card className="glass border-border/60 bg-card/60 backdrop-blur-sm transition-colors duration-300 hover:border-primary/40">
         <CardContent className="p-8 text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
           <p className="text-muted-foreground">Cargando...</p>
@@ -109,9 +110,9 @@ export function ContactForm() {
   if (!session) {
     return (
       <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-        <Card className="border-primary/20 bg-card/50 backdrop-blur-sm">
+        <Card className="glass border-border/60 bg-card/60 backdrop-blur-sm transition-colors duration-300 hover:border-primary/40">
           <CardContent className="p-8 text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 border border-primary/20 mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 glow mb-6">
               <LogIn className="h-8 w-8 text-primary" />
             </div>
             <h3 className="text-2xl font-bold mb-4">Inicia Sesión para Contactar</h3>
@@ -120,7 +121,7 @@ export function ContactForm() {
               consulta y brindarte una respuesta más personalizada.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button onClick={() => router.push("/auth/signin")} className="transition-neon hover:neon-glow">
+              <Button onClick={() => router.push("/auth/signin")} className="glow">
                 <LogIn className="h-4 w-4 mr-2" />
                 Iniciar Sesión
               </Button>
@@ -141,9 +142,9 @@ export function ContactForm() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <Card className="border-primary/20 bg-card/50 backdrop-blur-sm">
+        <Card className="glass border-border/60 bg-card/60 backdrop-blur-sm transition-colors duration-300 hover:border-primary/40">
           <CardContent className="p-8 text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500/10 border border-green-500/20 mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-green-500/10 border border-green-500/20 mb-6">
               <CheckCircle className="h-8 w-8 text-green-500" />
             </div>
             <h3 className="text-2xl font-bold mb-4">¡Mensaje Enviado!</h3>
@@ -161,9 +162,11 @@ export function ContactForm() {
 
   return (
     <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-      <Card className="border-primary/20 bg-card/50 backdrop-blur-sm">
+      <Card className="glass border-border/60 bg-card/60 backdrop-blur-sm transition-colors duration-300 hover:border-primary/40">
         <CardHeader>
-          <CardTitle>Cuéntame sobre tu proyecto</CardTitle>
+          <CardTitle className="text-2xl">
+            <GradientText>Cuéntame sobre tu proyecto</GradientText>
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -178,6 +181,7 @@ export function ContactForm() {
                 <Label htmlFor="name">Nombre *</Label>
                 <Input
                   id="name"
+                  className="focus-visible:border-primary/50 focus-visible:ring-primary/40"
                   value={formData.name}
                   onChange={(e) => handleChange("name", e.target.value)}
                   required
@@ -189,6 +193,7 @@ export function ContactForm() {
                 <Input
                   id="email"
                   type="email"
+                  className="focus-visible:border-primary/50 focus-visible:ring-primary/40"
                   value={formData.email}
                   onChange={(e) => handleChange("email", e.target.value)}
                   required
@@ -201,6 +206,7 @@ export function ContactForm() {
               <Label htmlFor="company">Empresa (opcional)</Label>
               <Input
                 id="company"
+                className="focus-visible:border-primary/50 focus-visible:ring-primary/40"
                 value={formData.company}
                 onChange={(e) => handleChange("company", e.target.value)}
                 disabled={isSubmitting}
@@ -215,7 +221,7 @@ export function ContactForm() {
                   onValueChange={(value) => handleChange("projectType", value)}
                   disabled={isSubmitting}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="focus:border-primary/50 focus:ring-primary/40">
                     <SelectValue placeholder="Selecciona un tipo" />
                   </SelectTrigger>
                   <SelectContent>
@@ -234,7 +240,7 @@ export function ContactForm() {
                   onValueChange={(value) => handleChange("budget", value)}
                   disabled={isSubmitting}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="focus:border-primary/50 focus:ring-primary/40">
                     <SelectValue placeholder="Selecciona un rango" />
                   </SelectTrigger>
                   <SelectContent>
@@ -253,6 +259,7 @@ export function ContactForm() {
               <Input
                 id="timeline"
                 placeholder="ej. 2-3 meses, Lo antes posible, Flexible"
+                className="focus-visible:border-primary/50 focus-visible:ring-primary/40"
                 value={formData.timeline}
                 onChange={(e) => handleChange("timeline", e.target.value)}
                 disabled={isSubmitting}
@@ -265,6 +272,7 @@ export function ContactForm() {
                 id="message"
                 rows={5}
                 placeholder="Describe tu proyecto, objetivos, funcionalidades requeridas, etc."
+                className="focus-visible:border-primary/50 focus-visible:ring-primary/40"
                 value={formData.message}
                 onChange={(e) => handleChange("message", e.target.value)}
                 required
@@ -272,7 +280,7 @@ export function ContactForm() {
               />
             </div>
 
-            <Button type="submit" className="w-full transition-neon hover:neon-glow" disabled={isSubmitting}>
+            <Button type="submit" className="w-full glow" disabled={isSubmitting}>
               {isSubmitting ? (
                 "Enviando..."
               ) : (

@@ -1,9 +1,13 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { MessageCircle, Phone, Mail, Instagram, Github, MapPin, Clock, Globe } from "lucide-react"
+import { SectionReveal } from "@/components/motion/section-reveal"
+import { GradientText } from "@/components/ui/gradient-text"
+
+const cardClass =
+  "border-border/60 bg-card/60 backdrop-blur-sm transition-colors duration-300 hover:border-primary/40"
 
 const contactMethods = [
   {
@@ -75,16 +79,13 @@ const additionalInfo = [
 
 export function ContactInfo() {
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6, delay: 0.2 }}
-      className="space-y-6"
-    >
+    <SectionReveal stagger staggerDelay={0.12} className="space-y-6">
       {/* Primary Contact Methods */}
-      <Card className="border-primary/20 bg-card/50 backdrop-blur-sm">
+      <Card className={cardClass}>
         <CardContent className="p-6">
-          <h3 className="text-xl font-semibold mb-6">Contacto Directo</h3>
+          <h3 className="text-xl font-semibold mb-6">
+            <GradientText>Contacto Directo</GradientText>
+          </h3>
           <div className="space-y-4">
             {contactMethods
               .filter((method) => method.primary)
@@ -93,10 +94,10 @@ export function ContactInfo() {
                 return (
                   <div
                     key={method.name}
-                    className="flex items-center justify-between p-4 rounded-lg border border-border/50 hover:border-primary/30 transition-colors"
+                    className="flex items-center justify-between p-4 rounded-xl border border-border/60 hover:border-primary/40 transition-colors duration-300"
                   >
                     <div className="flex items-center space-x-4">
-                      <div className={`p-2 rounded-lg bg-primary/10 ${method.color}`}>
+                      <div className={`p-2 rounded-xl bg-primary/10 ${method.color}`}>
                         <Icon className="h-5 w-5" />
                       </div>
                       <div>
@@ -108,7 +109,7 @@ export function ContactInfo() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="transition-neon hover:neon-glow bg-transparent"
+                      className="bg-transparent hover:border-primary/40 hover:text-primary transition-colors duration-300"
                       asChild
                     >
                       <a href={method.href} target="_blank" rel="noopener noreferrer">
@@ -123,9 +124,11 @@ export function ContactInfo() {
       </Card>
 
       {/* Additional Contact Methods */}
-      <Card className="border-primary/20 bg-card/50 backdrop-blur-sm">
+      <Card className={cardClass}>
         <CardContent className="p-6">
-          <h3 className="text-xl font-semibold mb-6">Otras Formas de Contacto</h3>
+          <h3 className="text-xl font-semibold mb-6">
+            <GradientText>Otras Formas de Contacto</GradientText>
+          </h3>
           <div className="space-y-4">
             {contactMethods
               .filter((method) => !method.primary)
@@ -134,7 +137,7 @@ export function ContactInfo() {
                 return (
                   <div key={method.name} className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                      <div className={`p-2 rounded-lg bg-primary/10 ${method.color}`}>
+                      <div className={`p-2 rounded-xl bg-primary/10 ${method.color}`}>
                         <Icon className="h-4 w-4" />
                       </div>
                       <div>
@@ -155,16 +158,18 @@ export function ContactInfo() {
       </Card>
 
       {/* Social Media */}
-      <Card className="border-primary/20 bg-card/50 backdrop-blur-sm">
+      <Card className={cardClass}>
         <CardContent className="p-6">
-          <h3 className="text-xl font-semibold mb-6">Redes Sociales</h3>
+          <h3 className="text-xl font-semibold mb-6">
+            <GradientText>Redes Sociales</GradientText>
+          </h3>
           <div className="space-y-4">
             {socialLinks.map((social) => {
               const Icon = social.icon
               return (
                 <div key={social.name} className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
-                    <div className={`p-2 rounded-lg bg-primary/10 ${social.color}`}>
+                    <div className={`p-2 rounded-xl bg-primary/10 ${social.color}`}>
                       <Icon className="h-4 w-4" />
                     </div>
                     <div>
@@ -185,15 +190,17 @@ export function ContactInfo() {
       </Card>
 
       {/* Additional Information */}
-      <Card className="border-primary/20 bg-card/50 backdrop-blur-sm">
+      <Card className={cardClass}>
         <CardContent className="p-6">
-          <h3 className="text-xl font-semibold mb-6">Información Adicional</h3>
+          <h3 className="text-xl font-semibold mb-6">
+            <GradientText>Información Adicional</GradientText>
+          </h3>
           <div className="space-y-4">
             {additionalInfo.map((info) => {
               const Icon = info.icon
               return (
                 <div key={info.label} className="flex items-center space-x-3">
-                  <div className={`p-2 rounded-lg bg-primary/10 ${info.color}`}>
+                  <div className={`p-2 rounded-xl bg-primary/10 ${info.color}`}>
                     <Icon className="h-4 w-4" />
                   </div>
                   <div>
@@ -208,9 +215,11 @@ export function ContactInfo() {
       </Card>
 
       {/* FAQ */}
-      <Card className="border-primary/20 bg-card/50 backdrop-blur-sm">
+      <Card className={cardClass}>
         <CardContent className="p-6">
-          <h3 className="text-xl font-semibold mb-6">Preguntas Frecuentes</h3>
+          <h3 className="text-xl font-semibold mb-6">
+            <GradientText>Preguntas Frecuentes</GradientText>
+          </h3>
           <div className="space-y-4 text-sm">
             <div>
               <h4 className="font-medium mb-1">¿Cuánto tiempo toma un proyecto?</h4>
@@ -227,6 +236,6 @@ export function ContactInfo() {
           </div>
         </CardContent>
       </Card>
-    </motion.div>
+    </SectionReveal>
   )
 }

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { BackgroundEffects } from "@/components/background-effects"
+import { AuroraBackground } from "@/components/aurora-background"
 import { PageTransition } from "@/components/page-transition"
 import { BlogHero } from "@/components/blog/blog-hero"
 import { BlogGrid } from "@/components/blog/blog-grid"
@@ -65,7 +65,7 @@ export default function BlogPage() {
 
   return (
     <div className="relative min-h-screen">
-      <BackgroundEffects />
+      <AuroraBackground />
       <Header />
 
       <PageTransition>

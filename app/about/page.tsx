@@ -1,6 +1,6 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { BackgroundEffects } from "@/components/background-effects"
+import { AuroraBackground } from "@/components/aurora-background"
 import { PageTransition } from "@/components/page-transition"
 import { AboutHero } from "@/components/about/about-hero"
 import { AboutStory } from "@/components/about/about-story"
@@ -16,7 +16,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div className="relative min-h-screen">
-      <BackgroundEffects />
+      <AuroraBackground />
       <Header />
 
       <PageTransition>

@@ -20,7 +20,7 @@ export function BlogFilters({
   categories,
 }: BlogFiltersProps) {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 rounded-2xl border border-border/60 bg-card/60 backdrop-blur-sm p-5">
       {/* Search */}
       <div className="relative">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -28,19 +28,19 @@ export function BlogFilters({
           placeholder="Buscar artículos..."
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="pl-10"
+          className="pl-10 bg-background/50 border-border/60 focus-visible:ring-primary/40 focus-visible:border-primary/40 transition-colors"
         />
       </div>
 
       {/* Category Filters */}
       <div className="space-y-3">
-        <h3 className="font-semibold">Categorías</h3>
+        <h3 className="text-sm font-semibold tracking-tight text-muted-foreground uppercase">Categorías</h3>
         <div className="flex flex-wrap gap-2">
           <Button
             variant={selectedCategory === null ? "default" : "outline"}
             size="sm"
             onClick={() => onCategoryChange(null)}
-            className="transition-neon hover:neon-glow"
+            className="rounded-full border-border/60 transition-colors duration-300 hover:border-primary/40"
           >
             Todos
           </Button>
@@ -50,7 +50,7 @@ export function BlogFilters({
               variant={selectedCategory === category ? "default" : "outline"}
               size="sm"
               onClick={() => onCategoryChange(category)}
-              className="transition-neon hover:neon-glow"
+              className="rounded-full border-border/60 transition-colors duration-300 hover:border-primary/40"
             >
               {category}
             </Button>

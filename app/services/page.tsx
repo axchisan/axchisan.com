@@ -1,6 +1,6 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { BackgroundEffects } from "@/components/background-effects"
+import { AuroraBackground } from "@/components/aurora-background"
 import { PageTransition } from "@/components/page-transition"
 import { ServicesHero } from "@/components/services/services-hero"
 import { ServicesGrid } from "@/components/services/services-grid"
@@ -16,7 +16,7 @@ export const metadata = {
 export default function ServicesPage() {
   return (
     <div className="relative min-h-screen">
-      <BackgroundEffects />
+      <AuroraBackground />
       <Header />
 
       <PageTransition>

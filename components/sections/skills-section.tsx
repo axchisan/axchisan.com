@@ -42,8 +42,8 @@ export function SkillsSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Mis <span className="text-primary">Habilidades</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
+            Mis <span className="text-gradient">Habilidades</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Tecnologías y herramientas que domino para crear soluciones excepcionales
@@ -72,7 +72,7 @@ export function SkillsSection() {
             ))}
           </div>
         ) : (
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
             {Object.entries(skillsByCategory).map(([category, categorySkills], categoryIndex) => (
               <motion.div
                 key={category}
@@ -81,7 +81,7 @@ export function SkillsSection() {
                 transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="border-primary/20 bg-card/50 backdrop-blur-sm h-full">
+                <Card className="border-border/60 bg-card/60 backdrop-blur-sm h-full hover:border-primary/40 transition-colors duration-300">
                   <CardContent className="p-6">
                     <h3 className="text-xl font-semibold mb-6 text-center capitalize">{category}</h3>
 

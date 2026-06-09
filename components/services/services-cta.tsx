@@ -7,10 +7,11 @@ import Link from "next/link"
 
 export function ServicesCTA() {
   return (
-    <Card className="border-primary/20 bg-gradient-to-r from-primary/5 to-accent/5">
-      <CardContent className="p-8 text-center space-y-6">
+    <Card className="relative overflow-hidden border-border/60 bg-card/40 backdrop-blur-sm">
+      <div className="absolute inset-0 aurora-surface opacity-70" aria-hidden />
+      <CardContent className="relative p-8 text-center space-y-6">
         <div className="space-y-4">
-          <h2 className="text-3xl font-bold">¿Listo para comenzar tu proyecto?</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">¿Listo para comenzar tu proyecto?</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Conversemos sobre tu idea y cómo puedo ayudarte a convertirla en realidad. Ofrezco consultas gratuitas para
             discutir tu proyecto sin compromiso.
@@ -19,7 +20,7 @@ export function ServicesCTA() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/contact">
-            <Button size="lg" className="transition-neon hover:neon-glow">
+            <Button size="lg" className="glow transition-shadow">
               <Mail className="h-5 w-5 mr-2" />
               Contactar por Email
             </Button>
@@ -28,7 +29,7 @@ export function ServicesCTA() {
           <Button
             size="lg"
             variant="outline"
-            className="transition-neon hover:neon-glow bg-transparent"
+            className="bg-transparent"
             onClick={() => window.open("https://wa.me/573183038190", "_blank")}
           >
             <MessageCircle className="h-5 w-5 mr-2" />
@@ -38,7 +39,6 @@ export function ServicesCTA() {
           <Button
             size="lg"
             variant="secondary"
-            className="transition-neon hover:neon-glow"
             onClick={() => window.open("https://calendly.com/axchisan923/30min", "_blank")}
           >
             <Calendar className="h-5 w-5 mr-2" />
@@ -46,7 +46,7 @@ export function ServicesCTA() {
           </Button>
         </div>
 
-        <div className="pt-4 border-t border-primary/20">
+        <div className="pt-4 border-t border-border/60">
           <p className="text-sm text-muted-foreground">
             Respuesta garantizada en menos de 24 horas • Consulta inicial gratuita
           </p>

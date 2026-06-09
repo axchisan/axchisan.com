@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth"
 import { SignInForm } from "@/components/auth/signin-form"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { BackgroundEffects } from "@/components/background-effects"
+import { AuroraBackground } from "@/components/aurora-background"
 
 export const metadata = {
   title: "Iniciar Sesión - Axchi",
@@ -31,7 +31,7 @@ export default async function SignInPage(props: {
 
   return (
     <div className="relative min-h-screen">
-      <BackgroundEffects />
+      <AuroraBackground />
       <Header />
 
       <main className="relative z-10 pt-16">

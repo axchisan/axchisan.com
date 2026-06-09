@@ -1,6 +1,6 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { BackgroundEffects } from "@/components/background-effects"
+import { AuroraBackground } from "@/components/aurora-background"
 import { PageTransition } from "@/components/page-transition"
 import { ContactHero } from "@/components/contact/contact-hero"
 import { ContactForm } from "@/components/contact/contact-form"
@@ -14,7 +14,7 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <div className="relative min-h-screen">
-      <BackgroundEffects />
+      <AuroraBackground />
       <Header />
 
       <PageTransition>

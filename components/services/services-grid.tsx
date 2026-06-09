@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Code, Smartphone, Globe, Zap, Database, Palette } from "lucide-react"
+import { SectionReveal, SectionRevealItem } from "@/components/motion/section-reveal"
+import { TiltCard } from "@/components/ui/tilt-card"
 
 const services = [
   {
@@ -53,42 +55,43 @@ const services = [
 
 export function ServicesGrid() {
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <SectionReveal stagger className="grid sm:grid-cols-2 xl:grid-cols-3 gap-8">
       {services.map((service) => {
         const IconComponent = service.icon
         return (
-          <Card
-            key={service.id}
-            className="border-primary/20 hover:border-primary/40 transition-all duration-300 group"
-          >
-            <CardHeader>
-              <div className="flex items-center space-x-3">
-                <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                  <IconComponent className="h-6 w-6 text-primary" />
-                </div>
-                <CardTitle className="text-xl">{service.title}</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-muted-foreground">{service.description}</p>
+          <SectionRevealItem key={service.id}>
+            <TiltCard className="h-full">
+              <Card className="h-full border-border/60 bg-card/60 backdrop-blur-sm hover:border-primary/40 transition-colors duration-300 group">
+                <CardHeader>
+                  <div className="flex items-center space-x-3">
+                    <div className="p-2 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                      <IconComponent className="h-6 w-6 text-primary" />
+                    </div>
+                    <CardTitle className="text-xl">{service.title}</CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-muted-foreground">{service.description}</p>
 
-              <div className="flex flex-wrap gap-2">
-                {service.technologies.map((tech) => (
-                  <Badge key={tech} variant="secondary" className="text-xs">
-                    {tech}
-                  </Badge>
-                ))}
-              </div>
+                  <div className="flex flex-wrap gap-2">
+                    {service.technologies.map((tech) => (
+                      <Badge key={tech} variant="secondary" className="text-xs">
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
 
-              <div className="flex items-center justify-between pt-4">
-                <Button size="sm" className="transition-neon hover:neon-glow">
-                  Solicitar
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+                  <div className="flex items-center justify-between pt-4">
+                    <Button size="sm" className="glow transition-shadow">
+                      Solicitar
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </TiltCard>
+          </SectionRevealItem>
         )
       })}
-    </div>
+    </SectionReveal>
   )
 }

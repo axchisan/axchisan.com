@@ -19,8 +19,9 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        sans: ["var(--font-geist-sans)", "var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
         mono: [
+          "var(--font-geist-mono)",
           "var(--font-mono)",
           "ui-monospace",
           "Cascadia Code",
@@ -82,6 +83,21 @@ module.exports = {
           4: "hsl(var(--chart-4))",
           5: "hsl(var(--chart-5))",
         },
+        gradient: {
+          from: "hsl(var(--gradient-from))",
+          to: "hsl(var(--gradient-to))",
+        },
+        aurora: {
+          1: "hsl(var(--aurora-1))",
+          2: "hsl(var(--aurora-2))",
+          3: "hsl(var(--aurora-3))",
+        },
+      },
+      backgroundImage: {
+        "gradient-aurora":
+          "linear-gradient(var(--gradient-angle), hsl(var(--gradient-from)), hsl(var(--gradient-to)))",
+        "mesh-aurora":
+          "radial-gradient(40% 50% at 20% 20%, hsl(var(--aurora-1) / 0.18) 0%, transparent 70%), radial-gradient(45% 55% at 80% 30%, hsl(var(--aurora-2) / 0.16) 0%, transparent 70%), radial-gradient(50% 60% at 50% 90%, hsl(var(--aurora-3) / 0.14) 0%, transparent 70%)",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -105,12 +121,28 @@ module.exports = {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.5" },
         },
+        aurora: {
+          "0%, 100%": { transform: "translate3d(0, 0, 0) scale(1)" },
+          "33%": { transform: "translate3d(3%, -4%, 0) scale(1.08)" },
+          "66%": { transform: "translate3d(-3%, 3%, 0) scale(0.96)" },
+        },
+        shimmer: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
+        },
+        "gradient-shift": {
+          "0%, 100%": { "background-position": "0% 50%" },
+          "50%": { "background-position": "100% 50%" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         float: "float 3s ease-in-out infinite",
         "pulse-neon": "pulse-neon 2s ease-in-out infinite",
+        aurora: "aurora 18s ease-in-out infinite",
+        shimmer: "shimmer 2.5s linear infinite",
+        "gradient-shift": "gradient-shift 8s ease infinite",
       },
     },
   },

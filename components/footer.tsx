@@ -52,12 +52,10 @@ export function Footer() {
           {/* Brand section */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center space-x-2 group mb-4">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center transition-neon group-hover:neon-glow">
-                <span className="text-primary-foreground font-mono font-bold text-sm">A</span>
+              <div className="h-9 w-9 rounded-xl bg-gradient-aurora flex items-center justify-center transition-shadow group-hover:glow">
+                <span className="text-white font-mono font-bold text-sm">A</span>
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-                Axchi
-              </span>
+              <span className="text-xl font-bold text-gradient">Axchi</span>
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-md mb-6">
               Desarrollador de software apasionado por crear soluciones tecnológicas innovadoras. Especializado en
@@ -110,7 +108,7 @@ export function Footer() {
                       variant="ghost"
                       size="sm"
                       asChild
-                      className={`justify-start h-auto p-2 ${social.color} transition-neon hover:neon-glow`}
+                      className={`justify-start h-auto p-2 ${social.color} transition-colors`}
                     >
                       <a
                         href={social.href}
