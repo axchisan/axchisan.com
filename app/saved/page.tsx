@@ -12,6 +12,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { FavoriteButton } from "@/components/ui/favorite-button"
+import { EmptyIllustration } from "@/components/illustrations"
 import { Bookmark, FolderOpen, BookOpen, LogIn } from "lucide-react"
 
 interface FavoriteItem {
@@ -77,7 +78,7 @@ export default function SavedPage() {
             ) : favorites.length === 0 ? (
               <Card className="border-border/60 bg-card/60 backdrop-blur-sm max-w-md mx-auto">
                 <CardContent className="p-8 text-center space-y-3">
-                  <Bookmark className="h-10 w-10 text-muted-foreground mx-auto" />
+                  <EmptyIllustration className="mx-auto" />
                   <p className="text-muted-foreground">
                     Aún no has guardado nada. Explora{" "}
                     <Link href="/projects" className="text-primary hover:underline">

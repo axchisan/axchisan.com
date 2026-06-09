@@ -1,6 +1,7 @@
 "use client"
 
 import { SectionReveal, SectionRevealItem } from "@/components/motion/section-reveal"
+import { EmptyIllustration } from "@/components/illustrations"
 import { ProjectCard } from "./project-card"
 import { useProjects } from "@/hooks/use-projects"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -84,7 +85,8 @@ export function ProjectsGrid({ projects: projectsProp, selectedCategory, selecte
 
   if (filteredProjects.length === 0) {
     return (
-      <div className="text-center py-12">
+      <div className="flex flex-col items-center text-center py-12">
+        <EmptyIllustration className="mb-4" />
         <p className="text-muted-foreground">No se encontraron proyectos que coincidan con los filtros</p>
       </div>
     )

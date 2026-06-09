@@ -8,6 +8,7 @@ import Link from "next/link"
 import { formatDistanceToNow } from "date-fns"
 import { es } from "date-fns/locale"
 import { SectionReveal, SectionRevealItem } from "@/components/motion/section-reveal"
+import { EmptyIllustration } from "@/components/illustrations"
 
 interface BlogPost {
   id: string
@@ -33,7 +34,8 @@ interface BlogGridProps {
 export function BlogGrid({ posts, featured = false }: BlogGridProps) {
   if (posts.length === 0) {
     return (
-      <div className="text-center py-12">
+      <div className="flex flex-col items-center text-center py-12">
+        <EmptyIllustration className="mb-4" />
         <p className="text-muted-foreground">No hay artículos disponibles</p>
       </div>
     )

@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Globe, Smartphone, Zap, Code, ArrowRight, Check } from "lucide-react"
 import Link from "next/link"
+import { FloatingShapes } from "@/components/illustrations"
 
 const services = [
   {
@@ -43,8 +44,10 @@ const services = [
 
 export function ServicesSection() {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
+    <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <FloatingShapes className="absolute -right-20 top-0 w-[500px] opacity-60 hidden lg:block" />
+      <FloatingShapes className="absolute -left-24 bottom-0 w-[420px] opacity-50 hidden lg:block -scale-x-100" />
+      <div className="relative max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
