@@ -3,9 +3,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 import { Code, Smartphone, Globe, Zap, Database, Palette } from "lucide-react"
 import { SectionReveal, SectionRevealItem } from "@/components/motion/section-reveal"
 import { TiltCard } from "@/components/ui/tilt-card"
+import { serviceImages } from "@/lib/stock-images"
 
 const services = [
   {
@@ -56,19 +58,28 @@ const services = [
 export function ServicesGrid() {
   return (
     <SectionReveal stagger className="grid sm:grid-cols-2 xl:grid-cols-3 gap-8">
-      {services.map((service) => {
+      {services.map((service, i) => {
         const IconComponent = service.icon
         return (
           <SectionRevealItem key={service.id}>
             <TiltCard className="h-full">
-              <Card className="h-full border-border/60 bg-card/60 backdrop-blur-sm hover:border-primary/40 transition-colors duration-300 group">
-                <CardHeader>
-                  <div className="flex items-center space-x-3">
-                    <div className="p-2 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                      <IconComponent className="h-6 w-6 text-primary" />
-                    </div>
-                    <CardTitle className="text-xl">{service.title}</CardTitle>
+              <Card className="h-full overflow-hidden border-border/60 bg-card/60 backdrop-blur-sm hover:border-primary/40 transition-colors duration-300 group">
+                {/* Banner decorativo (foto real) con overlay on-brand */}
+                <div className="relative aspect-[16/9] overflow-hidden">
+                  <Image
+                    src={serviceImages[i % serviceImages.length]}
+                    alt={service.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/40 to-transparent" />
+                  <div className="absolute bottom-3 left-3 p-2 rounded-xl bg-background/70 backdrop-blur-sm border border-border/60">
+                    <IconComponent className="h-5 w-5 text-primary" />
                   </div>
+                </div>
+                <CardHeader>
+                  <CardTitle className="text-xl">{service.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <p className="text-muted-foreground">{service.description}</p>
