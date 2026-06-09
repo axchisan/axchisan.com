@@ -1,45 +1,18 @@
-"use client"
+import type { Metadata } from "next"
+import { getProjects } from "@/lib/data"
+import { ProjectsPageClient } from "@/components/projects/projects-page-client"
 
-import { useState } from "react"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { AuroraBackground } from "@/components/aurora-background"
-import { PageTransition } from "@/components/page-transition"
-import { ProjectsHero } from "@/components/projects/projects-hero"
-import { ProjectsGrid } from "@/components/projects/projects-grid"
-import { ProjectsFilters } from "@/components/projects/projects-filters"
+export const metadata: Metadata = {
+  title: "Proyectos",
+  description:
+    "Explora mis proyectos de desarrollo web, móvil y software. Una colección de trabajos construidos con tecnologías modernas, filtrables por categoría y tecnología.",
+  alternates: { canonical: "/projects" },
+}
 
-export default function ProjectsPage() {
-  const [selectedCategory, setSelectedCategory] = useState("Todos")
-  const [selectedTechs, setSelectedTechs] = useState<string[]>([])
-  const [searchQuery, setSearchQuery] = useState("")
+export const revalidate = 300
 
-  return (
-    <div className="relative min-h-screen">
-      <AuroraBackground />
-      <Header />
+export default async function ProjectsPage() {
+  const projects = await getProjects()
 
-      <PageTransition>
-        <main className="relative z-10 pt-16">
-          <ProjectsHero />
-          <div className="py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-6xl mx-auto">
-              <ProjectsFilters
-                onCategoryChange={setSelectedCategory}
-                onTechChange={setSelectedTechs}
-                onSearchChange={setSearchQuery}
-              />
-              <ProjectsGrid
-                selectedCategory={selectedCategory}
-                selectedTechs={selectedTechs}
-                searchQuery={searchQuery}
-              />
-            </div>
-          </div>
-        </main>
-      </PageTransition>
-
-      <Footer />
-    </div>
-  )
+  return <ProjectsPageClient projects={projects} />
 }

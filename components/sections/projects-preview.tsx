@@ -62,7 +62,15 @@ export function ProjectsPreview() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <ProjectCard project={project} />
+                <ProjectCard
+                  project={
+                    {
+                      ...project,
+                      likes: (project as any)._count?.likes ?? (project as any).likes ?? 0,
+                      comments: (project as any)._count?.comments ?? (project as any).comments ?? 0,
+                    } as any
+                  }
+                />
               </motion.div>
             ))}
           </div>

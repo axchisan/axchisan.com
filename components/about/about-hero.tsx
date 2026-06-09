@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { PageHero } from "@/components/page-hero"
 import { Card, CardContent } from "@/components/ui/card"
 import { MapPin, Calendar, GraduationCap } from "lucide-react"
@@ -35,11 +36,14 @@ export function AboutHero() {
           <div className="absolute -inset-4 aurora-surface rounded-3xl opacity-60" aria-hidden />
           <Card className="relative border-border/60 bg-card/60 backdrop-blur-sm rounded-2xl">
             <CardContent className="p-8">
-              <div className="aspect-square bg-gradient-to-br from-primary/20 to-primary/5 rounded-xl overflow-hidden mb-6">
-                <img
+              <div className="relative aspect-square bg-gradient-to-br from-primary/20 to-primary/5 rounded-xl overflow-hidden mb-6">
+                <Image
                   src="/axchi.jpg"
                   alt="Duvan Yair Arciniegas (Axchi)"
-                  className="w-full h-full object-cover"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  className="object-cover"
                 />
               </div>
               <div className="text-center">

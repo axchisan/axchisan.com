@@ -6,23 +6,26 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Search, Filter } from "lucide-react"
-import { useProjects } from "@/hooks/use-projects"
 
 interface ProjectsFiltersProps {
+  // Opciones derivadas en el servidor y pasadas por props (sin fetch en cliente).
+  categories: string[]
+  technologies: string[]
   onCategoryChange: (category: string) => void
   onTechChange: (techs: string[]) => void
   onSearchChange: (query: string) => void
 }
 
-export function ProjectsFilters({ onCategoryChange, onTechChange, onSearchChange }: ProjectsFiltersProps) {
-  const { projects } = useProjects()
+export function ProjectsFilters({
+  categories,
+  technologies,
+  onCategoryChange,
+  onTechChange,
+  onSearchChange,
+}: ProjectsFiltersProps) {
   const [selectedCategory, setSelectedCategory] = useState("Todos")
   const [selectedTechs, setSelectedTechs] = useState<string[]>([])
   const [searchQuery, setSearchQuery] = useState("")
-
-  // Extract unique categories and technologies from projects
-  const categories = ["Todos", ...Array.from(new Set(projects.map((p) => p.category).filter(Boolean)))]
-  const technologies = Array.from(new Set(projects.flatMap((p) => p.technologies)))
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category)

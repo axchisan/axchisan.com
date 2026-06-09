@@ -6,9 +6,14 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { AuthProvider } from "@/components/auth-provider"
 import { Toaster } from "@/components/ui/toaster"
+import { SITE_URL } from "@/lib/site"
 
 export const metadata: Metadata = {
-  title: "Axchi - Desarrollador de Software",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Axchi - Desarrollador de Software",
+    template: "%s | Axchi",
+  },
   description:
     "Portafolio personal de Duvan Yair Arciniegas (Axchi) - Desarrollador de Software especializado en soluciones web, multiplataforma y automatización.",
   keywords: ["desarrollador", "software", "web", "móvil", "automatización", "axchi", "programador"],
@@ -63,6 +68,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Duvan Yair Arciniegas",
+              alternateName: "Axchi",
+              url: SITE_URL,
+              jobTitle: "Desarrollador de Software",
+              description:
+                "Desarrollador de Software especializado en soluciones web, multiplataforma y automatización.",
+              sameAs: ["https://github.com/axchisan", "https://instagram.com/axchisan"],
+            }),
+          }}
+        />
+      </head>
       <body className="min-h-screen bg-background font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange={false}>
           <AuthProvider>
