@@ -48,23 +48,23 @@ interface ProjectFilesDisplayProps {
 }
 
 const PLATFORMS = [
-  { value: "Android", label: "Android", icon: Smartphone, color: "bg-green-500/20 text-green-400" },
-  { value: "iOS", label: "iOS", icon: Smartphone, color: "bg-blue-500/20 text-blue-400" },
-  { value: "Windows", label: "Windows", icon: Monitor, color: "bg-blue-600/20 text-blue-300" },
-  { value: "macOS", label: "macOS", icon: Monitor, color: "bg-gray-500/20 text-gray-400" },
-  { value: "Linux", label: "Linux", icon: Monitor, color: "bg-orange-500/20 text-orange-400" },
-  { value: "Web", label: "Web", icon: Globe, color: "bg-purple-500/20 text-purple-400" },
+  { value: "Android", label: "Android", icon: Smartphone, color: "bg-green-500/20 text-green-600 dark:text-green-400" },
+  { value: "iOS", label: "iOS", icon: Smartphone, color: "bg-blue-500/20 text-blue-600 dark:text-blue-400" },
+  { value: "Windows", label: "Windows", icon: Monitor, color: "bg-blue-600/20 text-blue-700 dark:text-blue-300" },
+  { value: "macOS", label: "macOS", icon: Monitor, color: "bg-gray-500/20 text-gray-600 dark:text-gray-400" },
+  { value: "Linux", label: "Linux", icon: Monitor, color: "bg-orange-500/20 text-orange-600 dark:text-orange-400" },
+  { value: "Web", label: "Web", icon: Globe, color: "bg-purple-500/20 text-purple-600 dark:text-purple-400" },
 ]
 
 const CATEGORIES = [
-  { value: "IMAGE", label: "Imagen", icon: ImageIcon, color: "bg-blue-500/20 text-blue-400" },
-  { value: "VIDEO", label: "Video", icon: Video, color: "bg-purple-500/20 text-purple-400" },
-  { value: "DOCUMENT", label: "Documento", icon: FileText, color: "bg-green-500/20 text-green-400" },
-  { value: "EXECUTABLE", label: "Ejecutable", icon: Monitor, color: "bg-red-500/20 text-red-400" },
-  { value: "MOBILE_APP", label: "App Móvil", icon: Smartphone, color: "bg-orange-500/20 text-orange-400" },
-  { value: "ARCHIVE", label: "Archivo", icon: Archive, color: "bg-yellow-500/20 text-yellow-400" },
-  { value: "SOURCE_CODE", label: "Código", icon: Code, color: "bg-cyan-500/20 text-cyan-400" },
-  { value: "OTHER", label: "Otro", icon: File, color: "bg-gray-500/20 text-gray-400" },
+  { value: "IMAGE", label: "Imagen", icon: ImageIcon, color: "bg-blue-500/20 text-blue-600 dark:text-blue-400" },
+  { value: "VIDEO", label: "Video", icon: Video, color: "bg-purple-500/20 text-purple-600 dark:text-purple-400" },
+  { value: "DOCUMENT", label: "Documento", icon: FileText, color: "bg-green-500/20 text-green-600 dark:text-green-400" },
+  { value: "EXECUTABLE", label: "Ejecutable", icon: Monitor, color: "bg-red-500/20 text-red-600 dark:text-red-400" },
+  { value: "MOBILE_APP", label: "App Móvil", icon: Smartphone, color: "bg-orange-500/20 text-orange-600 dark:text-orange-400" },
+  { value: "ARCHIVE", label: "Archivo", icon: Archive, color: "bg-yellow-500/20 text-yellow-600 dark:text-yellow-400" },
+  { value: "SOURCE_CODE", label: "Código", icon: Code, color: "bg-cyan-500/20 text-cyan-600 dark:text-cyan-400" },
+  { value: "OTHER", label: "Otro", icon: File, color: "bg-gray-500/20 text-gray-600 dark:text-gray-400" },
 ]
 
 export function ProjectFilesDisplay({ files, projectTitle, className }: ProjectFilesDisplayProps) {
@@ -81,7 +81,7 @@ export function ProjectFilesDisplay({ files, projectTitle, className }: ProjectF
 
   const getCategoryColor = (category: string) => {
     const categoryInfo = CATEGORIES.find((c) => c.value === category)
-    return categoryInfo?.color || "bg-gray-500/20 text-gray-400"
+    return categoryInfo?.color || "bg-gray-500/20 text-gray-600 dark:text-gray-400"
   }
 
   const getPlatformIcon = (platform?: string) => {
@@ -91,9 +91,9 @@ export function ProjectFilesDisplay({ files, projectTitle, className }: ProjectF
   }
 
   const getPlatformColor = (platform?: string) => {
-    if (!platform) return "bg-gray-500/20 text-gray-400"
+    if (!platform) return "bg-gray-500/20 text-gray-600 dark:text-gray-400"
     const platformInfo = PLATFORMS.find((p) => p.value === platform)
-    return platformInfo?.color || "bg-gray-500/20 text-gray-400"
+    return platformInfo?.color || "bg-gray-500/20 text-gray-600 dark:text-gray-400"
   }
 
   // Agrupar archivos por plataforma

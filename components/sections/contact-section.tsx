@@ -19,7 +19,7 @@ export function ContactSection() {
       description: "Conversemos sobre tu proyecto",
       icon: MessageCircle,
       href: `https://wa.me/${whatsapp}`,
-      color: "text-green-400",
+      color: "text-green-600 dark:text-green-400",
       action: "Chatear",
     },
     {
@@ -27,7 +27,7 @@ export function ContactSection() {
       description: "Llamada directa",
       icon: Phone,
       href: `tel:${phoneTel}`,
-      color: "text-blue-400",
+      color: "text-blue-600 dark:text-blue-400",
       action: "Llamar",
     },
     {
@@ -35,7 +35,7 @@ export function ContactSection() {
       description: email,
       icon: Mail,
       href: `mailto:${email}`,
-      color: "text-purple-400",
+      color: "text-purple-600 dark:text-purple-400",
       action: "Escribir",
     },
   ]
@@ -45,13 +45,13 @@ export function ContactSection() {
       name: "Instagram",
       href: profile?.instagram || "https://instagram.com/axchisan",
       icon: Instagram,
-      color: "text-pink-400",
+      color: "text-pink-600 dark:text-pink-400",
     },
     {
       name: "GitHub",
       href: profile?.github || "https://github.com/axchisan",
       icon: Github,
-      color: "text-gray-400",
+      color: "text-gray-600 dark:text-gray-400",
     },
   ]
 

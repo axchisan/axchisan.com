@@ -28,25 +28,25 @@ export function Footer() {
       name: "GitHub",
       href: profile?.github || "https://github.com/axchisan",
       icon: Github,
-      color: "hover:text-gray-400",
+      color: "hover:text-foreground",
     },
     {
       name: "Instagram",
       href: profile?.instagram || "https://instagram.com/axchisan",
       icon: Instagram,
-      color: "hover:text-pink-400",
+      color: "hover:text-pink-600 dark:hover:text-pink-400",
     },
     {
       name: "WhatsApp",
       href: `https://wa.me/${whatsapp}`,
       icon: MessageCircle,
-      color: "hover:text-green-400",
+      color: "hover:text-green-600 dark:hover:text-green-400",
     },
     {
       name: "Teléfono",
       href: `tel:${phone}`,
       icon: Phone,
-      color: "hover:text-blue-400",
+      color: "hover:text-blue-600 dark:hover:text-blue-400",
     },
   ]
 
