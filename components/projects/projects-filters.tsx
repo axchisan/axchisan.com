@@ -54,7 +54,7 @@ export function ProjectsFilters({ onCategoryChange, onTechChange, onSearchChange
           placeholder="Buscar proyectos..."
           value={searchQuery}
           onChange={(e) => handleSearchChange(e.target.value)}
-          className="pl-10 bg-card/50 border-primary/20"
+          className="pl-10 rounded-xl bg-card/60 backdrop-blur-sm border-border/60 focus-visible:border-primary/40 transition-colors duration-300"
         />
       </div>
 
@@ -72,7 +72,9 @@ export function ProjectsFilters({ onCategoryChange, onTechChange, onSearchChange
               size="sm"
               onClick={() => handleCategoryChange(category)}
               className={
-                selectedCategory === category ? "transition-neon hover:neon-glow" : "bg-transparent hover:bg-primary/10"
+                selectedCategory === category
+                  ? "rounded-full glow"
+                  : "rounded-full bg-card/40 border-border/60 hover:border-primary/40 hover:bg-primary/10 transition-colors duration-300"
               }
             >
               {category}
@@ -90,10 +92,10 @@ export function ProjectsFilters({ onCategoryChange, onTechChange, onSearchChange
               <Badge
                 key={tech}
                 variant={selectedTechs.includes(tech) ? "default" : "outline"}
-                className={`cursor-pointer transition-all ${
+                className={`cursor-pointer rounded-full transition-colors duration-300 ${
                   selectedTechs.includes(tech)
-                    ? "bg-primary text-primary-foreground"
-                    : "hover:bg-primary/10 hover:border-primary/30"
+                    ? "bg-primary text-primary-foreground glow"
+                    : "border-border/60 hover:bg-primary/10 hover:border-primary/40"
                 }`}
                 onClick={() => toggleTech(tech)}
               >

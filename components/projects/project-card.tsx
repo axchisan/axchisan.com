@@ -73,102 +73,132 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const displayImage = project.coverImage || project.images[0] || "/placeholder.svg"
 
   return (
-    <Card className="border-primary/20 bg-card/50 backdrop-blur-sm hover:border-primary/40 transition-all duration-300 group overflow-hidden">
+    <Card className="group flex flex-col overflow-hidden rounded-2xl border-border/60 bg-card/60 backdrop-blur-sm hover:border-primary/40 transition-colors duration-300">
       {/* Project Image */}
-      <div className="relative aspect-video overflow-hidden">
+      <Link href={`/projects/${project.id}`} className="relative block aspect-video overflow-hidden">
         <Image
           src={displayImage || "/placeholder.svg"}
           alt={project.title}
           fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
-        {/* Status badge */}
-        <div className="absolute top-3 left-3">
-          <Badge className={`${statusColors[project.status]} border`}>{statusLabels[project.status]}</Badge>
+        {/* Discrete status + featured badges, single row */}
+        <div className="absolute top-3 left-3 flex items-center gap-2">
+          <Badge className={`${statusColors[project.status]} border text-[11px] font-medium`}>
+            {statusLabels[project.status]}
+          </Badge>
+          {project.featured && (
+            <Badge className="bg-primary/15 text-primary border border-primary/30 text-[11px] font-medium">
+              Destacado
+            </Badge>
+          )}
         </div>
-
-        {/* Featured badge */}
-        {project.featured && (
-          <div className="absolute top-3 right-3">
-            <Badge className="bg-primary/90 text-primary-foreground">Destacado</Badge>
-          </div>
-        )}
 
         {availablePlatforms.length > 0 && (
           <div className="absolute bottom-3 left-3 flex gap-1">
             {availablePlatforms.slice(0, 3).map((platform) => {
               const Icon = getPlatformIcon(platform)
               return (
-                <div key={platform} className="bg-black/60 backdrop-blur-sm rounded-full p-1.5">
+                <div key={platform} className="rounded-full bg-black/50 backdrop-blur-sm p-1.5">
                   <Icon className="h-3 w-3 text-white" />
                 </div>
               )
             })}
             {availablePlatforms.length > 3 && (
-              <div className="bg-black/60 backdrop-blur-sm rounded-full px-2 py-1">
+              <div className="rounded-full bg-black/50 backdrop-blur-sm px-2 py-1">
                 <span className="text-xs text-white">+{availablePlatforms.length - 3}</span>
               </div>
             )}
           </div>
         )}
 
-        {/* Quick actions overlay */}
-        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-2">
-          <Button size="sm" variant="secondary" asChild>
-            <Link href={`/projects/${project.id}`}>
-              <Eye className="h-4 w-4 mr-2" />
-              Ver detalles
-            </Link>
-          </Button>
+        {/* Desktop hover overlay: external actions */}
+        <div className="absolute bottom-3 right-3 hidden sm:flex items-center gap-1.5 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+          {project.githubUrl && (
+            <Button
+              size="sm"
+              variant="secondary"
+              className="h-8 w-8 p-0 rounded-lg"
+              asChild
+              onClick={(e) => e.stopPropagation()}
+            >
+              <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                <Github className="h-4 w-4" />
+                <span className="sr-only">GitHub</span>
+              </a>
+            </Button>
+          )}
+          {project.liveUrl && (
+            <Button
+              size="sm"
+              variant="secondary"
+              className="h-8 w-8 p-0 rounded-lg"
+              asChild
+              onClick={(e) => e.stopPropagation()}
+            >
+              <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="h-4 w-4" />
+                <span className="sr-only">Ver en vivo</span>
+              </a>
+            </Button>
+          )}
+          {project.downloadUrl && (
+            <Button
+              size="sm"
+              variant="secondary"
+              className="h-8 w-8 p-0 rounded-lg"
+              asChild
+              onClick={(e) => e.stopPropagation()}
+            >
+              <a href={project.downloadUrl} target="_blank" rel="noopener noreferrer">
+                <Download className="h-4 w-4" />
+                <span className="sr-only">Descargar</span>
+              </a>
+            </Button>
+          )}
         </div>
-      </div>
+      </Link>
 
-      <CardHeader className="pb-3">
-        <div className="flex items-start justify-between">
-          <div className="flex-1">
-            <h3 className="font-semibold text-lg mb-1 group-hover:text-primary transition-colors">
-              <Link href={`/projects/${project.id}`}>{project.title}</Link>
-            </h3>
-            <p className="text-sm text-muted-foreground mb-3">{project.shortDesc}</p>
-          </div>
-        </div>
+      <CardHeader className="pb-2 pt-4">
+        <h3 className="font-semibold text-lg leading-tight group-hover:text-primary transition-colors">
+          <Link href={`/projects/${project.id}`}>{project.title}</Link>
+        </h3>
+        <p className="text-sm text-muted-foreground line-clamp-1">{project.shortDesc}</p>
+      </CardHeader>
 
+      <CardContent className="flex-1 pt-0 pb-3 space-y-3">
         {/* Technologies */}
-        <div className="flex flex-wrap gap-1">
+        <div className="flex flex-wrap gap-1.5">
           {project.technologies.slice(0, 3).map((tech) => (
-            <Badge key={tech} variant="outline" className="text-xs">
+            <Badge key={tech} variant="outline" className="text-[11px] border-border/60">
               {tech}
             </Badge>
           ))}
           {project.technologies.length > 3 && (
-            <Badge variant="outline" className="text-xs">
+            <Badge variant="outline" className="text-[11px] border-border/60">
               +{project.technologies.length - 3}
             </Badge>
           )}
         </div>
-      </CardHeader>
 
-      <CardContent className="pt-0">
-        <p className="text-sm text-muted-foreground line-clamp-2">{project.description}</p>
+        <p className="hidden sm:block text-sm text-muted-foreground line-clamp-2">{project.description}</p>
 
         {downloadableFiles.length > 0 && (
-          <div className="mt-3 p-2 bg-primary/5 rounded-lg">
-            <div className="flex items-center gap-2 text-sm text-primary">
-              <Download className="h-3 w-3" />
-              <span>
-                {downloadableFiles.length} archivo{downloadableFiles.length !== 1 ? "s" : ""}
-              </span>
-            </div>
+          <div className="inline-flex items-center gap-1.5 rounded-lg bg-primary/5 px-2 py-1 text-xs text-primary">
+            <Download className="h-3 w-3" />
+            <span>
+              {downloadableFiles.length} archivo{downloadableFiles.length !== 1 ? "s" : ""}
+            </span>
           </div>
         )}
       </CardContent>
 
-      <CardFooter className="pt-0">
+      <CardFooter className="pt-0 pb-4">
         <div className="flex items-center justify-between w-full">
-          {/* Engagement */}
-          <div className="flex items-center space-x-4">
+          {/* Engagement — single clean row */}
+          <div className="flex items-center gap-4">
             <LikeButton
               projectId={project.id}
               initialCount={project.likes}
@@ -178,15 +208,15 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
             <Link
               href={`/projects/${project.id}#comments`}
-              className="flex items-center space-x-1 text-sm text-muted-foreground hover:text-primary transition-colors"
+              className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               <MessageCircle className="h-4 w-4" />
               <span>{project.comments}</span>
             </Link>
           </div>
 
-          {/* External links */}
-          <div className="flex items-center space-x-2">
+          {/* External links — compact row on mobile, hover overlay handles desktop */}
+          <div className="flex sm:hidden items-center gap-1">
             {project.githubUrl && (
               <Button size="sm" variant="ghost" className="h-8 w-8 p-0" asChild>
                 <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
@@ -214,6 +244,15 @@ export function ProjectCard({ project }: ProjectCardProps) {
               </Button>
             )}
           </div>
+
+          {/* Desktop CTA */}
+          <Link
+            href={`/projects/${project.id}`}
+            className="hidden sm:inline-flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+          >
+            <Eye className="h-4 w-4" />
+            Ver detalles
+          </Link>
         </div>
       </CardFooter>
     </Card>

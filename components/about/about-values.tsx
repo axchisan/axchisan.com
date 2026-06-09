@@ -1,8 +1,10 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Code, Lightbulb, Users, Zap } from "lucide-react"
+import { GradientText } from "@/components/ui/gradient-text"
+import { TiltCard } from "@/components/ui/tilt-card"
+import { SectionReveal, SectionRevealItem } from "@/components/motion/section-reveal"
 
 const values = [
   {
@@ -35,41 +37,37 @@ export function AboutValues() {
   return (
     <section className="py-20">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="max-w-6xl mx-auto"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 neon-text">Mis Valores</h2>
+        <div className="max-w-6xl mx-auto">
+          <SectionReveal>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-center mb-12">
+              Mis <GradientText>Valores</GradientText>
+            </h2>
+          </SectionReveal>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value, index) => (
-              <motion.div
-                key={value.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Card className="h-full bg-card/50 backdrop-blur-sm border-primary/20 transition-neon hover:neon-glow group">
-                  <CardContent className="p-6 text-center">
-                    <div className="mb-4 flex justify-center">
-                      <div className="p-3 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                        <value.icon className="w-8 h-8 text-primary" />
+          <SectionReveal stagger className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {values.map((value) => (
+              <SectionRevealItem key={value.title}>
+                <TiltCard className="h-full">
+                  <Card className="h-full border-border/60 bg-card/60 backdrop-blur-sm hover:border-primary/40 transition-colors duration-300">
+                    <CardContent className="p-6 text-center">
+                      <div className="mb-4 flex justify-center">
+                        <div className="p-3 rounded-xl bg-primary/10">
+                          <value.icon className="w-8 h-8 text-primary" />
+                        </div>
                       </div>
-                    </div>
 
-                    <h3 className="text-xl font-semibold mb-3 text-primary">{value.title}</h3>
+                      <h3 className="text-xl font-semibold mb-3">
+                        <GradientText>{value.title}</GradientText>
+                      </h3>
 
-                    <p className="text-muted-foreground leading-relaxed text-sm">{value.description}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                      <p className="text-muted-foreground leading-relaxed text-sm">{value.description}</p>
+                    </CardContent>
+                  </Card>
+                </TiltCard>
+              </SectionRevealItem>
             ))}
-          </div>
-        </motion.div>
+          </SectionReveal>
+        </div>
       </div>
     </section>
   )

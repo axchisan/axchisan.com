@@ -52,8 +52,8 @@ export function ServicesSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Mis <span className="text-primary">Servicios</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
+            Mis <span className="text-gradient">Servicios</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Soluciones tecnológicas completas para hacer crecer tu negocio
@@ -71,11 +71,11 @@ export function ServicesSection() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="border-primary/20 bg-card/50 backdrop-blur-sm hover:border-primary/40 transition-all duration-300 group h-full">
+                <Card className="border-border/60 bg-card/60 backdrop-blur-sm hover:border-primary/40 transition-colors duration-300 group h-full">
                   <CardHeader className="pb-4">
                     <div className="flex items-center space-x-4 mb-4">
                       <div
-                        className={`p-3 rounded-lg bg-gradient-to-br ${service.gradient} ${service.color} group-hover:scale-110 transition-transform duration-300`}
+                        className={`p-3 rounded-xl bg-gradient-to-br ${service.gradient} ${service.color} group-hover:scale-110 transition-transform duration-300`}
                       >
                         <Icon className="h-6 w-6" />
                       </div>
@@ -121,14 +121,15 @@ export function ServicesSection() {
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <Card className="border-primary/20 bg-gradient-to-r from-primary/5 to-primary/10 backdrop-blur-sm">
-            <CardContent className="p-8">
-              <h3 className="text-2xl font-bold mb-4">¿Tienes un proyecto en mente?</h3>
+          <Card className="relative overflow-hidden border-border/60 bg-card/40 backdrop-blur-sm">
+            <div className="absolute inset-0 aurora-surface opacity-70" aria-hidden />
+            <CardContent className="relative p-10">
+              <h3 className="text-2xl sm:text-3xl font-bold mb-4">¿Tienes un proyecto en mente?</h3>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
                 Conversemos sobre cómo puedo ayudarte a transformar tu idea en una solución digital exitosa.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="transition-neon hover:neon-glow" asChild>
+                <Button size="lg" className="glow hover:glow transition-shadow" asChild>
                   <Link href="/contact">Iniciar proyecto</Link>
                 </Button>
                 <Button variant="outline" size="lg" asChild>

@@ -77,7 +77,7 @@ export function Header() {
     <header
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-300",
-        scrolled ? "bg-background/80 backdrop-blur-md border-b border-border/50" : "bg-transparent",
+        scrolled ? "glass border-b shadow-sm" : "bg-transparent border-b border-transparent",
       )}
     >
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -85,13 +85,11 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 group">
             <div className="relative">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center transition-neon group-hover:neon-glow">
-                <span className="text-primary-foreground font-mono font-bold text-sm">A</span>
+              <div className="h-9 w-9 rounded-xl bg-gradient-aurora flex items-center justify-center transition-shadow group-hover:glow">
+                <span className="text-white font-mono font-bold text-sm">A</span>
               </div>
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-              Axchi
-            </span>
+            <span className="text-xl font-bold text-gradient">Axchi</span>
           </Link>
 
           {/* Desktop Navigation */}

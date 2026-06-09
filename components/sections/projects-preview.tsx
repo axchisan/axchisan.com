@@ -34,8 +34,8 @@ export function ProjectsPreview() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Proyectos <span className="text-primary">Destacados</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
+            Proyectos <span className="text-gradient">Destacados</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Una selección de mis trabajos más recientes y representativos
@@ -43,7 +43,7 @@ export function ProjectsPreview() {
         </motion.div>
 
         {loading ? (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6 mb-12">
             {[1, 2, 3].map((i) => (
               <div key={i} className="space-y-4">
                 <Skeleton className="h-48 w-full rounded-lg" />
@@ -53,7 +53,7 @@ export function ProjectsPreview() {
             ))}
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6 mb-12">
             {featuredProjects.map((project, index) => (
               <motion.div
                 key={project.id}
@@ -75,7 +75,7 @@ export function ProjectsPreview() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <Button size="lg" className="transition-neon hover:neon-glow" asChild>
+          <Button size="lg" className="glow transition-shadow" asChild>
             <Link href="/projects">
               Ver todos los proyectos
               <ArrowRight className="ml-2 h-5 w-5" />

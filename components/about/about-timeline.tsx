@@ -1,8 +1,9 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { GradientText } from "@/components/ui/gradient-text"
+import { SectionReveal, SectionRevealItem } from "@/components/motion/section-reveal"
 
 const timelineEvents = [
   {
@@ -47,40 +48,38 @@ export function AboutTimeline() {
   return (
     <section className="py-20 bg-muted/20">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="max-w-4xl mx-auto"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 neon-text">Mi Trayectoria</h2>
+        <div className="max-w-4xl mx-auto">
+          <SectionReveal>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-center mb-12">
+              Mi <GradientText>Trayectoria</GradientText>
+            </h2>
+          </SectionReveal>
 
           <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-primary/30 transform md:-translate-x-0.5" />
+            {/* Línea: en móvil pegada a la izquierda, centrada desde md */}
+            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-primary/30" />
 
-            <div className="space-y-8">
+            <SectionReveal stagger staggerDelay={0.12} className="space-y-8">
               {timelineEvents.map((event, index) => (
-                <motion.div
+                <SectionRevealItem
                   key={event.year}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className={`relative flex items-center ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
+                  className={`relative flex items-center ${
+                    index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+                  }`}
                 >
-                  {/* Timeline dot */}
-                  <div className="absolute left-4 md:left-1/2 w-3 h-3 bg-primary rounded-full transform md:-translate-x-1.5 z-10" />
+                  {/* Dot: comparte exactamente el mismo left que la línea */}
+                  <div className="absolute left-4 md:left-1/2 top-6 md:top-1/2 w-3 h-3 -translate-x-1/2 md:-translate-y-1/2 rounded-full bg-primary z-10" />
 
-                  <div className={`w-full md:w-1/2 ${index % 2 === 0 ? "md:pr-8" : "md:pl-8"}`}>
-                    <Card className="ml-8 md:ml-0 bg-card/50 backdrop-blur-sm border-primary/20 transition-neon hover:neon-glow">
+                  <div className={`w-full pl-10 md:pl-0 md:w-1/2 ${index % 2 === 0 ? "md:pr-8" : "md:pl-8"}`}>
+                    <Card className="border-border/60 bg-card/60 backdrop-blur-sm hover:border-primary/40 transition-colors duration-300">
                       <CardContent className="p-6">
                         <div className="flex items-center gap-3 mb-3">
                           <Badge variant="outline" className="text-primary border-primary">
                             {event.year}
                           </Badge>
-                          <h3 className="text-xl font-semibold text-primary">{event.title}</h3>
+                          <h3 className="text-xl font-semibold">
+                            <GradientText>{event.title}</GradientText>
+                          </h3>
                         </div>
 
                         <p className="text-muted-foreground mb-4 leading-relaxed">{event.description}</p>
@@ -95,11 +94,11 @@ export function AboutTimeline() {
                       </CardContent>
                     </Card>
                   </div>
-                </motion.div>
+                </SectionRevealItem>
               ))}
-            </div>
+            </SectionReveal>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )
