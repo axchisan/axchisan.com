@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { AdminLayout } from "@/components/admin/admin-layout"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -151,20 +150,17 @@ export default function CommentsPage() {
 
   if (loading) {
     return (
-      <AdminLayout>
-        <div className="flex items-center justify-center min-h-[400px]">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-            <p>Cargando comentarios...</p>
-          </div>
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p>Cargando comentarios...</p>
         </div>
-      </AdminLayout>
+      </div>
     )
   }
 
   return (
-    <AdminLayout>
-      <div className="space-y-6">
+    <div className="space-y-6">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <h1 className="text-3xl font-bold neon-text">Comentarios</h1>
@@ -201,13 +197,13 @@ export default function CommentsPage() {
             filteredComments.map((comment) => (
               <Card key={comment.id} className="border-primary/20">
                 <CardHeader className="pb-3">
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center space-x-3">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-center space-x-3 min-w-0">
                       <Avatar className="h-10 w-10">
                         <AvatarFallback>{getUserInitials(comment.user.name, comment.user.email)}</AvatarFallback>
                       </Avatar>
-                      <div>
-                        <p className="font-medium">{comment.user.name || comment.user.email}</p>
+                      <div className="min-w-0">
+                        <p className="font-medium truncate">{comment.user.name || comment.user.email}</p>
                         <p className="text-sm text-muted-foreground">
                           {formatDistanceToNow(new Date(comment.createdAt), {
                             addSuffix: true,
@@ -285,7 +281,6 @@ export default function CommentsPage() {
             ))
           )}
         </div>
-      </div>
-    </AdminLayout>
+    </div>
   )
 }

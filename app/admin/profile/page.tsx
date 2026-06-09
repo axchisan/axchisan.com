@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
-import { AdminLayout } from "@/components/admin/admin-layout"
 import { ProfileEditor } from "@/components/admin/profile-editor"
 
 export const metadata = {
@@ -17,14 +16,12 @@ export default async function AdminProfilePage() {
   }
 
   return (
-    <AdminLayout>
-      <div className="space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold">Editar Perfil</h1>
-          <p className="text-muted-foreground">Actualiza tu información personal y profesional.</p>
-        </div>
-        <ProfileEditor />
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold">Editar Perfil</h1>
+        <p className="text-muted-foreground">Actualiza tu información personal y profesional.</p>
       </div>
-    </AdminLayout>
+      <ProfileEditor />
+    </div>
   )
 }

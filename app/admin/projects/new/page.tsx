@@ -4,7 +4,6 @@ import type React from "react"
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { AdminLayout } from "@/components/admin/admin-layout"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -129,8 +128,7 @@ export default function NewProjectPage() {
   }
 
   return (
-    <AdminLayout>
-      <div className="max-w-6xl mx-auto space-y-6">
+    <div className="max-w-6xl mx-auto space-y-6">
         <div className="flex items-center space-x-4">
           <Button variant="outline" size="sm" onClick={() => router.back()}>
             <ArrowLeft className="h-4 w-4 mr-2" />
@@ -393,7 +391,6 @@ export default function NewProjectPage() {
             </Button>
           </div>
         </form>
-      </div>
-    </AdminLayout>
+    </div>
   )
 }

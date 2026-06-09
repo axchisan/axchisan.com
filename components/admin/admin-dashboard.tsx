@@ -211,7 +211,7 @@ export function AdminDashboard() {
                   key={project.id}
                   className="flex items-center justify-between p-3 rounded-lg border border-border/50"
                 >
-                  <div className="flex-1">
+                  <div className="flex-1 min-w-0">
                     <h4 className="font-medium">{project.title}</h4>
                     <div className="flex items-center space-x-4 mt-1">
                       <Badge className={`${statusColors[project.status as keyof typeof statusColors]} border text-xs`}>
@@ -255,7 +255,7 @@ export function AdminDashboard() {
                   key={message.id}
                   className="flex items-start justify-between p-3 rounded-lg border border-border/50"
                 >
-                  <div className="flex-1">
+                  <div className="flex-1 min-w-0">
                     <div className="flex items-center space-x-2">
                       <h4 className="font-medium">{message.name}</h4>
                       {!message.read && <div className="w-2 h-2 bg-primary rounded-full"></div>}

@@ -133,7 +133,7 @@ export default function MessagesPage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         <Card className="border-primary/20">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">

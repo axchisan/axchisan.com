@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { AdminLayout } from "@/components/admin/admin-layout"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -104,20 +103,17 @@ export default function BlogPage() {
 
   if (loading) {
     return (
-      <AdminLayout>
-        <div className="flex items-center justify-center min-h-[400px]">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-            <p>Cargando artículos...</p>
-          </div>
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p>Cargando artículos...</p>
         </div>
-      </AdminLayout>
+      </div>
     )
   }
 
   return (
-    <AdminLayout>
-      <div className="space-y-6">
+    <div className="space-y-6">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <h1 className="text-3xl font-bold neon-text">Blog</h1>
@@ -150,8 +146,8 @@ export default function BlogPage() {
               className="bg-card/50 backdrop-blur-sm border-primary/20 transition-neon hover:neon-glow"
             >
               <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div className="space-y-2 flex-1">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="space-y-2 flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
                       <Badge className={statusColors[post.published ? "published" : "draft"]}>
                         {statusLabels[post.published ? "published" : "draft"]}
@@ -168,7 +164,7 @@ export default function BlogPage() {
                     <CardDescription>{post.excerpt || post.content.substring(0, 150) + "..."}</CardDescription>
                   </div>
                   {post.coverImage && (
-                    <div className="ml-4 w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+                    <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-lg overflow-hidden flex-shrink-0">
                       <img
                         src={post.coverImage || "/placeholder.svg"}
                         alt={post.title}
@@ -228,7 +224,6 @@ export default function BlogPage() {
             )}
           </div>
         )}
-      </div>
-    </AdminLayout>
+    </div>
   )
 }
