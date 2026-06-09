@@ -5,6 +5,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { LikeButton } from "@/components/ui/like-button"
+import { FavoriteButton } from "@/components/ui/favorite-button"
 import { MessageCircle, ExternalLink, Github, Download, Eye, Monitor, Smartphone, Globe } from "lucide-react"
 
 interface ProjectFile {
@@ -213,6 +214,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
               <MessageCircle className="h-4 w-4" />
               <span>{project.comments}</span>
             </Link>
+
+            <FavoriteButton
+              projectId={project.id}
+              showCount={false}
+              className="h-auto p-0 hover:bg-transparent"
+            />
           </div>
 
           {/* External links — compact row on mobile, hover overlay handles desktop */}
