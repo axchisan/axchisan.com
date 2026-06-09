@@ -51,8 +51,8 @@ export default async function ProjectDetailPage({ params }: { params: { id: stri
     description,
     url: `${SITE_URL}/projects/${project.id}`,
     image: project.coverImage || project.images?.[0] || undefined,
-    dateCreated: project.createdAt.toISOString(),
-    dateModified: project.updatedAt.toISOString(),
+    dateCreated: new Date(project.createdAt).toISOString(),
+    dateModified: new Date(project.updatedAt).toISOString(),
     author: { "@type": "Person", name: "Duvan Yair Arciniegas", url: SITE_URL },
     ...(hasFiles ? { applicationCategory: project.category || "Application" } : {}),
   }

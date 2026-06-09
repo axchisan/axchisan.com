@@ -1,0 +1,4 @@
+# Los scripts de shell deben usar saltos de linea LF aunque se editen en Windows,
+# o el contenedor Linux falla con "no such file or directory" al ejecutarlos.
+*.sh text eol=lf
+docker-entrypoint.sh text eol=lf

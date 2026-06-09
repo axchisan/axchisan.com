@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       title: post.title,
       description: post.excerpt ?? undefined,
       images: post.coverImage ? [post.coverImage] : [],
-      publishedTime: (post.publishedAt ?? post.createdAt).toISOString(),
+      publishedTime: new Date(post.publishedAt ?? post.createdAt).toISOString(),
     },
   }
 }
@@ -53,8 +53,8 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     headline: post.title,
     description: post.excerpt ?? undefined,
     image: post.coverImage ? [post.coverImage] : undefined,
-    datePublished: (post.publishedAt ?? post.createdAt).toISOString(),
-    dateModified: post.updatedAt.toISOString(),
+    datePublished: new Date(post.publishedAt ?? post.createdAt).toISOString(),
+    dateModified: new Date(post.updatedAt).toISOString(),
     author: { "@type": "Person", name: "Duvan Yair Arciniegas", url: SITE_URL },
     mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}/blog/${post.slug}` },
   }
