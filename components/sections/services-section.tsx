@@ -12,7 +12,7 @@ const services = [
     description: "Desarrollo de sitios web modernos y responsivos utilizando las últimas tecnologías web.",
     icon: Globe,
     features: ["Diseño Responsivo", "SEO Optimizado", "Carga Rápida", "Fácil Mantenimiento"],
-    color: "text-blue-400",
+    color: "text-blue-600 dark:text-blue-400",
     gradient: "from-blue-500/20 to-cyan-500/20",
   },
   {
@@ -20,7 +20,7 @@ const services = [
     description: "Aplicaciones multiplataforma con Flutter.",
     icon: Smartphone,
     features: ["iOS, Android, Web, Windows, Linux, Mac", "UI/UX Moderno", "Rendimiento Óptimo", "Integración API"],
-    color: "text-green-400",
+    color: "text-green-600 dark:text-green-400",
     gradient: "from-green-500/20 to-emerald-500/20",
   },
   {
@@ -28,7 +28,7 @@ const services = [
     description: "Servicios de automatización para optimizar procesos de negocio.",
     icon: Zap,
     features: ["Workflows Personalizados", "Integración de APIs", "Ahorro de Tiempo", "Escalabilidad"],
-    color: "text-yellow-400",
+    color: "text-yellow-600 dark:text-yellow-400",
     gradient: "from-yellow-500/20 to-orange-500/20",
   },
   {
@@ -36,7 +36,7 @@ const services = [
     description: "Soluciones de software a medida para necesidades específicas de tu negocio.",
     icon: Code,
     features: ["Desarrollo a Medida", "Arquitectura Escalable", "Soporte Técnico", "Documentación"],
-    color: "text-purple-400",
+    color: "text-purple-600 dark:text-purple-400",
     gradient: "from-purple-500/20 to-pink-500/20",
   },
 ]

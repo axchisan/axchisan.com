@@ -13,19 +13,19 @@ const interests = [
   {
     name: "Desarrollo de Juegos",
     icon: Gamepad2,
-    color: "text-rose-400",
+    color: "text-rose-600 dark:text-rose-400",
     description: "Creando experiencias interactivas y divertidas",
   },
   {
     name: "Apasionado por la Música",
     icon: Music,
-    color: "text-violet-400",
+    color: "text-violet-600 dark:text-violet-400",
     description: "La música inspira mi creatividad en el código",
   },
   {
     name: "Programación Creativa",
     icon: Code,
-    color: "text-cyan-400",
+    color: "text-cyan-600 dark:text-cyan-400",
     description: "Explorando nuevas formas de expresión digital",
   },
 ]

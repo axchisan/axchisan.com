@@ -15,19 +15,19 @@ const additionalInfo = [
     icon: MapPin,
     label: "Ubicación",
     value: "Colombia",
-    color: "text-red-400",
+    color: "text-red-600 dark:text-red-400",
   },
   {
     icon: Clock,
     label: "Horario",
     value: "Lun - Vie, 7AM - 5PM COT",
-    color: "text-yellow-400",
+    color: "text-yellow-600 dark:text-yellow-400",
   },
   {
     icon: Globe,
     label: "Idiomas",
     value: "Español, Inglés",
-    color: "text-cyan-400",
+    color: "text-cyan-600 dark:text-cyan-400",
   },
 ]
 
@@ -46,7 +46,7 @@ export function ContactInfo() {
       value: profile?.whatsapp || "+57 318 303 8190",
       href: `https://wa.me/${whatsapp}?text=Hola%20Duvan,%20me%20interesa%20hablar%20sobre%20un%20proyecto`,
       icon: MessageCircle,
-      color: "text-green-400",
+      color: "text-green-600 dark:text-green-400",
       primary: true,
     },
     {
@@ -55,7 +55,7 @@ export function ContactInfo() {
       value: email,
       href: `mailto:${email}`,
       icon: Mail,
-      color: "text-blue-400",
+      color: "text-blue-600 dark:text-blue-400",
       primary: true,
     },
     {
@@ -64,7 +64,7 @@ export function ContactInfo() {
       value: phoneDisplay,
       href: `tel:${phoneTel}`,
       icon: Phone,
-      color: "text-purple-400",
+      color: "text-purple-600 dark:text-purple-400",
       primary: false,
     },
   ]
@@ -75,14 +75,14 @@ export function ContactInfo() {
       username: "@axchisan",
       href: profile?.instagram || "https://instagram.com/axchisan",
       icon: Instagram,
-      color: "text-pink-400",
+      color: "text-pink-600 dark:text-pink-400",
     },
     {
       name: "GitHub",
       username: "@axchisan",
       href: profile?.github || "https://github.com/axchisan",
       icon: Github,
-      color: "text-gray-400",
+      color: "text-gray-600 dark:text-gray-400",
     },
   ]
 
