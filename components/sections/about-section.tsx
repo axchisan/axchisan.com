@@ -67,21 +67,22 @@ export function AboutSection() {
                   </div>
 
                   <p className="text-muted-foreground leading-relaxed mb-6">
-                    Soy un apasionado desarrollador de software, actualmente estudiante en el SENA. Me encanta la
-                    programación y creo soluciones tecnológicas innovadoras para diferentes negocios.
+                    Soy un apasionado desarrollador de software. Desde enero de 2026 trabajo en una empresa de desarrollo
+                    en Bogotá, Colombia, donde construyo soluciones para clientes reales junto a un equipo de
+                    desarrolladores.
                   </p>
 
                   <p className="text-muted-foreground leading-relaxed mb-6">
-                    En mis tiempos libres disfruto creando proyectos y soy un gran apasionado por el aprendizaje. Trabajo
-                    bajo el apodo <GradientText className="font-semibold">Axchi</GradientText>, mi marca personal que
-                    representa innovación y creatividad en el desarrollo de software.
+                    En mi día a día aplico DevOps, pipelines de CI/CD, automatización e integración de agentes de IA.
+                    Trabajo bajo el apodo <GradientText className="font-semibold">Axchi</GradientText>, mi marca personal
+                    que representa innovación y creatividad en el desarrollo de software.
                   </p>
 
                   <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary">Estudiante SENA</Badge>
-                    <Badge variant="secondary">Innovador</Badge>
-                    <Badge variant="secondary">Creativo</Badge>
-                    <Badge variant="secondary">Autodidacta</Badge>
+                    <Badge variant="secondary">DevOps</Badge>
+                    <Badge variant="secondary">CI/CD</Badge>
+                    <Badge variant="secondary">IA / Agentes</Badge>
+                    <Badge variant="secondary">Clientes reales</Badge>
                   </div>
                 </CardContent>
               </Card>

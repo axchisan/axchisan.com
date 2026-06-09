@@ -20,7 +20,7 @@ export function HeroSection() {
   const displayTitle = profile?.title || "Innovación y Creatividad en Desarrollo de Software"
   const displayBio =
     profile?.bio ||
-    "Creo soluciones tecnológicas que transforman ideas en realidad digital. Especializado en desarrollo web, móvil y automatización de procesos."
+    "Desarrollador de software en Bogotá, Colombia. Construyo productos para clientes reales con DevOps, CI/CD, automatización e integración de agentes de inteligencia artificial."
 
   const words = displayTitle.split(" ")
   const titleLead = words.slice(0, 2).join(" ")

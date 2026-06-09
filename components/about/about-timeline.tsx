@@ -39,8 +39,15 @@ const timelineEvents = [
   {
     year: "2025",
     title: "Construcción de Proyectos Más Complejos",
-    description: "Comencé a trabajar en proyectos más complejos y sistemas de gran escala. También aprendí sobre metodologías ágiles, automatización y control de versiones, también adquirí mi propio servidor y dominio. Actualmente estoy trabajando en proyectos para clientes reales y colaborando con otros desarrolladores.",
-    technologies: ["Next.js", "TypeScript", "Docker", "Git", "Flutter", "n8n", "php", "Hostinger", "Coolify", "Vercel" ],
+    description: "Trabajé en proyectos más complejos y sistemas de mayor escala. Aprendí metodologías ágiles, automatización y control de versiones, y adquirí mi propio servidor y dominio para desplegar soluciones reales.",
+    technologies: ["Next.js", "TypeScript", "Docker", "Git", "Flutter", "n8n", "php", "Hostinger", "Coolify", "Vercel"],
+  },
+  {
+    year: "2026",
+    title: "Desarrollador en la Industria",
+    description:
+      "Me uní como desarrollador de software a una empresa en Bogotá, Colombia. Aquí trabajo con clientes reales dentro de un equipo de desarrolladores, aplicando prácticas de DevOps, pipelines de CI/CD, automatización de procesos e integración de agentes de inteligencia artificial en productos de uso real.",
+    technologies: ["DevOps", "CI/CD", "IA / Agentes", "Cloud", "Docker", "Git", "Automatización"],
   },
 ]
 
