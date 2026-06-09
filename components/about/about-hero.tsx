@@ -4,8 +4,22 @@ import Image from "next/image"
 import { PageHero } from "@/components/page-hero"
 import { Card, CardContent } from "@/components/ui/card"
 import { MapPin, Calendar, GraduationCap } from "lucide-react"
+import { useProfile } from "@/hooks/use-profile"
 
 export function AboutHero() {
+  const { profile } = useProfile()
+
+  const fullName = profile?.name || "Duvan Yair Arciniegas"
+  const nameParts = fullName.trim().split(" ")
+  const highlight = nameParts.length > 1 ? nameParts.slice(-1).join(" ") : ""
+  const title = nameParts.length > 1 ? nameParts.slice(0, -1).join(" ") : fullName
+
+  const badge = profile?.title || "Desarrollador de Software"
+  const subtitle =
+    profile?.bio ||
+    'Conocido como "Axchi". Soy un desarrollador de software apasionado por crear soluciones tecnológicas innovadoras. Mi enfoque se centra en transformar ideas complejas en aplicaciones funcionales y elegantes que realmente marquen la diferencia.'
+  const avatar = profile?.avatar || "/axchi.jpg"
+
   const info = [
     { icon: MapPin, label: "Colombia" },
     { icon: Calendar, label: "3+ años de experiencia" },
@@ -15,10 +29,10 @@ export function AboutHero() {
   return (
     <PageHero
       variant="split"
-      badge="Desarrollador de Software"
-      title="Duvan Yair"
-      highlight="Arciniegas"
-      subtitle='Conocido como "Axchi". Soy un desarrollador de software apasionado por crear soluciones tecnológicas innovadoras. Mi enfoque se centra en transformar ideas complejas en aplicaciones funcionales y elegantes que realmente marquen la diferencia.'
+      badge={badge}
+      title={title}
+      highlight={highlight}
+      subtitle={subtitle}
       actions={
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {info.map(({ icon: Icon, label }) => (
@@ -38,8 +52,8 @@ export function AboutHero() {
             <CardContent className="p-8">
               <div className="relative aspect-square bg-gradient-to-br from-primary/20 to-primary/5 rounded-xl overflow-hidden mb-6">
                 <Image
-                  src="/axchi.jpg"
-                  alt="Duvan Yair Arciniegas (Axchi)"
+                  src={avatar}
+                  alt={fullName}
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 33vw"
@@ -47,7 +61,7 @@ export function AboutHero() {
                 />
               </div>
               <div className="text-center">
-                <h3 className="text-xl font-semibold mb-2">Axchi</h3>
+                <h3 className="text-xl font-semibold mb-2">{profile?.name?.split(" ")[0] || "Axchi"}</h3>
                 <p className="text-muted-foreground text-sm">
                   "La innovación nace de la pasión por resolver problemas complejos"
                 </p>

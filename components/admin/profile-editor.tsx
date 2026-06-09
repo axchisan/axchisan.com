@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Slider } from "@/components/ui/slider"
 import { Plus, Trash2, Edit, Save, X, Loader2 } from "lucide-react"
 import { toast } from "sonner"
+import { AvatarUpload } from "@/components/admin/avatar-upload"
 
 interface Profile {
   id?: string
@@ -472,12 +473,10 @@ export function ProfileEditor() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="avatar">URL del Avatar</Label>
-                <Input
-                  id="avatar"
-                  value={profile.avatar || ""}
-                  onChange={(e) => handleProfileChange("avatar", e.target.value)}
-                  placeholder="https://ejemplo.com/avatar.jpg"
+                <Label>Foto de perfil</Label>
+                <AvatarUpload
+                  initialImage={profile.avatar || ""}
+                  onImageChange={(url) => handleProfileChange("avatar", url)}
                 />
               </div>
 

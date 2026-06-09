@@ -5,56 +5,10 @@ import { Button } from "@/components/ui/button"
 import { MessageCircle, Phone, Mail, Instagram, Github, MapPin, Clock, Globe } from "lucide-react"
 import { SectionReveal } from "@/components/motion/section-reveal"
 import { GradientText } from "@/components/ui/gradient-text"
+import { useProfile } from "@/hooks/use-profile"
 
 const cardClass =
   "border-border/60 bg-card/60 backdrop-blur-sm transition-colors duration-300 hover:border-primary/40"
-
-const contactMethods = [
-  {
-    name: "WhatsApp",
-    description: "Respuesta inmediata",
-    value: "+57 318 303 8190",
-    href: "https://wa.me/3183038190?text=Hola%20Duvan,%20me%20interesa%20hablar%20sobre%20un%20proyecto",
-    icon: MessageCircle,
-    color: "text-green-400",
-    primary: true,
-  },
-  {
-    name: "Email",
-    description: "Respuesta en 24h",
-    value: "axchisan923@gmail.com",
-    href: "mailto:axchisan923@gmail.com",
-    icon: Mail,
-    color: "text-blue-400",
-    primary: true,
-  },
-  {
-    name: "Teléfono",
-    description: "Llamada directa",
-    value: "+57 318 303 8190",
-    href: "tel:+573183038190",
-    icon: Phone,
-    color: "text-purple-400",
-    primary: false,
-  },
-]
-
-const socialLinks = [
-  {
-    name: "Instagram",
-    username: "@axchisan",
-    href: "https://instagram.com/axchisan",
-    icon: Instagram,
-    color: "text-pink-400",
-  },
-  {
-    name: "GitHub",
-    username: "@axchisan",
-    href: "https://github.com/axchisan",
-    icon: Github,
-    color: "text-gray-400",
-  },
-]
 
 const additionalInfo = [
   {
@@ -78,6 +32,60 @@ const additionalInfo = [
 ]
 
 export function ContactInfo() {
+  const { profile } = useProfile()
+
+  const email = profile?.email || "axchisan923@gmail.com"
+  const phoneDisplay = profile?.phone || "+57 318 303 8190"
+  const phoneTel = profile?.phone || "+573183038190"
+  const whatsapp = (profile?.whatsapp || "573183038190").replace(/\D/g, "")
+
+  const contactMethods = [
+    {
+      name: "WhatsApp",
+      description: "Respuesta inmediata",
+      value: profile?.whatsapp || "+57 318 303 8190",
+      href: `https://wa.me/${whatsapp}?text=Hola%20Duvan,%20me%20interesa%20hablar%20sobre%20un%20proyecto`,
+      icon: MessageCircle,
+      color: "text-green-400",
+      primary: true,
+    },
+    {
+      name: "Email",
+      description: "Respuesta en 24h",
+      value: email,
+      href: `mailto:${email}`,
+      icon: Mail,
+      color: "text-blue-400",
+      primary: true,
+    },
+    {
+      name: "Teléfono",
+      description: "Llamada directa",
+      value: phoneDisplay,
+      href: `tel:${phoneTel}`,
+      icon: Phone,
+      color: "text-purple-400",
+      primary: false,
+    },
+  ]
+
+  const socialLinks = [
+    {
+      name: "Instagram",
+      username: "@axchisan",
+      href: profile?.instagram || "https://instagram.com/axchisan",
+      icon: Instagram,
+      color: "text-pink-400",
+    },
+    {
+      name: "GitHub",
+      username: "@axchisan",
+      href: profile?.github || "https://github.com/axchisan",
+      icon: Github,
+      color: "text-gray-400",
+    },
+  ]
+
   return (
     <SectionReveal stagger staggerDelay={0.12} className="space-y-6">
       {/* Primary Contact Methods */}
