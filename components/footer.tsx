@@ -4,33 +4,7 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { Github, Instagram, Phone, MessageCircle, Mail, Heart, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
-
-const socialLinks = [
-  {
-    name: "GitHub",
-    href: "https://github.com/axchisan",
-    icon: Github,
-    color: "hover:text-gray-400",
-  },
-  {
-    name: "Instagram",
-    href: "https://instagram.com/axchisan",
-    icon: Instagram,
-    color: "hover:text-pink-400",
-  },
-  {
-    name: "WhatsApp",
-    href: "https://wa.me/3183038190",
-    icon: MessageCircle,
-    color: "hover:text-green-400",
-  },
-  {
-    name: "Teléfono",
-    href: "tel:3183038190",
-    icon: Phone,
-    color: "hover:text-blue-400",
-  },
-]
+import { useProfile } from "@/hooks/use-profile"
 
 const quickLinks = [
   { name: "Inicio", href: "/" },
@@ -43,6 +17,38 @@ const quickLinks = [
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
+  const { profile } = useProfile()
+
+  const email = profile?.email || "axchisan923@gmail.com"
+  const phone = profile?.phone || "+573183038190"
+  const whatsapp = (profile?.whatsapp || "573183038190").replace(/\D/g, "")
+
+  const socialLinks = [
+    {
+      name: "GitHub",
+      href: profile?.github || "https://github.com/axchisan",
+      icon: Github,
+      color: "hover:text-gray-400",
+    },
+    {
+      name: "Instagram",
+      href: profile?.instagram || "https://instagram.com/axchisan",
+      icon: Instagram,
+      color: "hover:text-pink-400",
+    },
+    {
+      name: "WhatsApp",
+      href: `https://wa.me/${whatsapp}`,
+      icon: MessageCircle,
+      color: "hover:text-green-400",
+    },
+    {
+      name: "Teléfono",
+      href: `tel:${phone}`,
+      icon: Phone,
+      color: "hover:text-blue-400",
+    },
+  ]
 
   return (
     <footer className="bg-card border-t border-border/50">
@@ -66,11 +72,11 @@ export function Footer() {
             <div className="space-y-2">
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4 text-primary" />
-                <span>axchisan923@gmail.com</span>
+                <span>{email}</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Phone className="h-4 w-4 text-primary" />
-                <span>+57 318 303 8190</span>
+                <span>{profile?.phone || "+57 318 303 8190"}</span>
               </div>
             </div>
           </div>

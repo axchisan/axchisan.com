@@ -4,8 +4,12 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { MessageCircle, Mail, Calendar } from "lucide-react"
 import Link from "next/link"
+import { useProfile } from "@/hooks/use-profile"
 
 export function ServicesCTA() {
+  const { profile } = useProfile()
+  const whatsapp = (profile?.whatsapp || "573183038190").replace(/\D/g, "")
+
   return (
     <Card className="relative overflow-hidden border-border/60 bg-card/40 backdrop-blur-sm">
       <div className="absolute inset-0 aurora-surface opacity-70" aria-hidden />
@@ -30,7 +34,7 @@ export function ServicesCTA() {
             size="lg"
             variant="outline"
             className="bg-transparent"
-            onClick={() => window.open("https://wa.me/573183038190", "_blank")}
+            onClick={() => window.open(`https://wa.me/${whatsapp}`, "_blank")}
           >
             <MessageCircle className="h-5 w-5 mr-2" />
             WhatsApp

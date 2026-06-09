@@ -4,50 +4,57 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { MessageCircle, Phone, Mail, Instagram, Github } from "lucide-react"
-
-const contactMethods = [
-  {
-    name: "WhatsApp",
-    description: "Conversemos sobre tu proyecto",
-    icon: MessageCircle,
-    href: "https://wa.me/3183038190",
-    color: "text-green-400",
-    action: "Chatear",
-  },
-  {
-    name: "Teléfono",
-    description: "Llamada directa",
-    icon: Phone,
-    href: "tel:3183038190",
-    color: "text-blue-400",
-    action: "Llamar",
-  },
-  {
-    name: "Email",
-    description: "axchisan923@gmail.com",
-    icon: Mail,
-    href: "mailto:axchisan923@gmail.com",
-    color: "text-purple-400",
-    action: "Escribir",
-  },
-]
-
-const socialLinks = [
-  {
-    name: "Instagram",
-    href: "https://instagram.com/axchisan",
-    icon: Instagram,
-    color: "text-pink-400",
-  },
-  {
-    name: "GitHub",
-    href: "https://github.com/axchisan",
-    icon: Github,
-    color: "text-gray-400",
-  },
-]
+import { useProfile } from "@/hooks/use-profile"
 
 export function ContactSection() {
+  const { profile } = useProfile()
+
+  const email = profile?.email || "axchisan923@gmail.com"
+  const phoneTel = profile?.phone || "+573183038190"
+  const whatsapp = (profile?.whatsapp || "573183038190").replace(/\D/g, "")
+
+  const contactMethods = [
+    {
+      name: "WhatsApp",
+      description: "Conversemos sobre tu proyecto",
+      icon: MessageCircle,
+      href: `https://wa.me/${whatsapp}`,
+      color: "text-green-400",
+      action: "Chatear",
+    },
+    {
+      name: "Teléfono",
+      description: "Llamada directa",
+      icon: Phone,
+      href: `tel:${phoneTel}`,
+      color: "text-blue-400",
+      action: "Llamar",
+    },
+    {
+      name: "Email",
+      description: email,
+      icon: Mail,
+      href: `mailto:${email}`,
+      color: "text-purple-400",
+      action: "Escribir",
+    },
+  ]
+
+  const socialLinks = [
+    {
+      name: "Instagram",
+      href: profile?.instagram || "https://instagram.com/axchisan",
+      icon: Instagram,
+      color: "text-pink-400",
+    },
+    {
+      name: "GitHub",
+      href: profile?.github || "https://github.com/axchisan",
+      icon: Github,
+      color: "text-gray-400",
+    },
+  ]
+
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
