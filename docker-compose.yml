@@ -2,11 +2,11 @@ version: '3.8'
 
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        - BUILDKIT_INLINE_CACHE=1
+    # La imagen se construye en GitHub Actions (.github/workflows/deploy.yml) y
+    # se publica en GHCR. Coolify YA NO compila: solo hace `docker pull` + `up`.
+    # Esto evita que el `next build` (intensivo en RAM) cuelgue el servidor.
+    image: ghcr.io/axchisan/miwebpersonal:latest
+    pull_policy: always
     ports:
       - "3015:3000"
     environment:
