@@ -12,18 +12,17 @@ import { Search, Grid3X3, List, Trash2, Download, Copy, ImageIcon, Video, File, 
 import { toast } from "sonner"
 
 interface MediaFile {
-  id: string
-  filename: string
-  originalName: string
+  name: string
+  url: string
   size: number
   type: string
-  url: string
+  category: string
   uploadedAt: string
 }
 
 interface UploadedFileResult {
-  filename: string
-  originalName: string
+  filename?: string
+  originalName?: string
   size: number
   type: string
   url: string
@@ -47,13 +46,20 @@ export function MediaManager() {
   }, [files, searchTerm, filterType])
 
   const fetchFiles = async () => {
+    setIsLoading(true)
     try {
-      // This would be an API call to get uploaded files
-      // For now, we'll simulate with empty array
-      setFiles([])
+      const response = await fetch("/api/upload")
+      if (response.ok) {
+        const data = await response.json()
+        setFiles(Array.isArray(data.files) ? data.files : [])
+      } else {
+        toast.error("Error al cargar los archivos")
+        setFiles([])
+      }
     } catch (error) {
       console.error("Error fetching files:", error)
       toast.error("Error al cargar los archivos")
+      setFiles([])
     } finally {
       setIsLoading(false)
     }
@@ -63,7 +69,7 @@ export function MediaManager() {
     let filtered = files
 
     if (searchTerm) {
-      filtered = filtered.filter((file) => file.originalName.toLowerCase().includes(searchTerm.toLowerCase()))
+      filtered = filtered.filter((file) => file.name.toLowerCase().includes(searchTerm.toLowerCase()))
     }
 
     if (filterType !== "all") {
@@ -85,26 +91,28 @@ export function MediaManager() {
   }
 
   const handleUpload = (uploadedFiles: UploadedFileResult[]) => {
-    const newFiles = uploadedFiles.map((file) => ({
-      id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
-      ...file,
-      uploadedAt: new Date().toISOString(),
-    }))
-
-    setFiles((prev) => [...newFiles, ...prev])
     toast.success(`${uploadedFiles.length} archivo(s) subido(s) exitosamente`)
+    // Refresca desde el servidor para obtener el shape real de los archivos.
+    fetchFiles()
   }
 
-  const handleDelete = async (fileId: string) => {
+  const handleDelete = async (fileUrl: string) => {
     if (!confirm("¿Estás seguro de que quieres eliminar este archivo?")) {
       return
     }
 
     try {
-      // This would be an API call to delete the file
-      setFiles((prev) => prev.filter((file) => file.id !== fileId))
-      setSelectedFiles((prev) => prev.filter((id) => id !== fileId))
-      toast.success("Archivo eliminado exitosamente")
+      const response = await fetch(`/api/upload?path=${encodeURIComponent(fileUrl)}`, {
+        method: "DELETE",
+      })
+
+      if (response.ok) {
+        setSelectedFiles((prev) => prev.filter((url) => url !== fileUrl))
+        toast.success("Archivo eliminado exitosamente")
+        await fetchFiles()
+      } else {
+        toast.error("Error al eliminar el archivo")
+      }
     } catch (error) {
       console.error("Error deleting file:", error)
       toast.error("Error al eliminar el archivo")
@@ -212,13 +220,13 @@ export function MediaManager() {
 
             if (viewMode === "grid") {
               return (
-                <Card key={file.id} className="group hover:shadow-lg transition-shadow">
+                <Card key={file.url} className="group hover:shadow-lg transition-shadow">
                   <CardContent className="p-3">
                     <div className="aspect-square bg-muted rounded-lg mb-2 flex items-center justify-center overflow-hidden">
                       {file.type.startsWith("image/") ? (
                         <img
                           src={file.url || "/placeholder.svg"}
-                          alt={file.originalName}
+                          alt={file.name}
                           className="w-full h-full object-cover"
                         />
                       ) : (
@@ -227,8 +235,8 @@ export function MediaManager() {
                     </div>
 
                     <div className="space-y-1">
-                      <p className="text-sm font-medium truncate" title={file.originalName}>
-                        {file.originalName}
+                      <p className="text-sm font-medium truncate" title={file.name}>
+                        {file.name}
                       </p>
                       <p className="text-xs text-muted-foreground">{formatFileSize(file.size)}</p>
                     </div>
@@ -248,7 +256,7 @@ export function MediaManager() {
                       <Button
                         size="sm"
                         variant="ghost"
-                        onClick={() => handleDelete(file.id)}
+                        onClick={() => handleDelete(file.url)}
                         className="h-6 w-6 p-0 text-destructive hover:text-destructive"
                       >
                         <Trash2 className="h-3 w-3" />
@@ -259,17 +267,17 @@ export function MediaManager() {
               )
             } else {
               return (
-                <Card key={file.id} className="hover:shadow-md transition-shadow">
+                <Card key={file.url} className="hover:shadow-md transition-shadow">
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
                         <Icon className="h-8 w-8 text-primary" />
                         <div>
-                          <p className="font-medium">{file.originalName}</p>
+                          <p className="font-medium">{file.name}</p>
                           <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                             <span>{formatFileSize(file.size)}</span>
                             <Badge variant="secondary" className="text-xs">
-                              {file.type.split("/")[0]}
+                              {file.category}
                             </Badge>
                           </div>
                         </div>
@@ -285,7 +293,7 @@ export function MediaManager() {
                         <Button
                           size="sm"
                           variant="ghost"
-                          onClick={() => handleDelete(file.id)}
+                          onClick={() => handleDelete(file.url)}
                           className="text-destructive hover:text-destructive"
                         >
                           <Trash2 className="h-4 w-4" />
