@@ -13,17 +13,17 @@ const story = [
   {
     title: "La Evolución",
     description:
-      "A lo largo de los años, he evolucionado desde crear simples scripts hasta desarrollar aplicaciones complejas y sistemas de automatización que optimizan procesos empresariales.",
+      "A lo largo de los años evolucioné desde crear simples scripts hasta desarrollar aplicaciones complejas y sistemas de automatización que optimizan procesos empresariales.",
+  },
+  {
+    title: "El Presente",
+    description:
+      "Hoy trabajo como desarrollador de software en una empresa en Bogotá, Colombia, junto a un equipo con el que construyo productos para clientes reales: DevOps, CI/CD, automatización e integración de agentes de inteligencia artificial forman parte de mi día a día.",
   },
   {
     title: "La Misión",
     description:
-      "Mi objetivo es crear soluciones tecnológicas que no solo funcionen, sino que transformen la manera en que las personas y empresas interactúan con la tecnología.",
-  },
-  {
-    title: "El Futuro",
-    description:
-      "Continúo explorando nuevas tecnologías y metodologías para mantenerme a la vanguardia y ofrecer siempre las mejores soluciones a mis clientes.",
+      "Mi objetivo es crear soluciones tecnológicas que no solo funcionen, sino que transformen la manera en que las personas y empresas interactúan con la tecnología, manteniéndome siempre a la vanguardia.",
   },
 ]
 

@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { PageHero } from "@/components/page-hero"
 import { Card, CardContent } from "@/components/ui/card"
-import { MapPin, Calendar, GraduationCap } from "lucide-react"
+import { MapPin, Briefcase, Cpu } from "lucide-react"
 import { useProfile } from "@/hooks/use-profile"
 
 export function AboutHero() {
@@ -17,13 +17,13 @@ export function AboutHero() {
   const badge = profile?.title || "Desarrollador de Software"
   const subtitle =
     profile?.bio ||
-    'Conocido como "Axchi". Soy un desarrollador de software apasionado por crear soluciones tecnológicas innovadoras. Mi enfoque se centra en transformar ideas complejas en aplicaciones funcionales y elegantes que realmente marquen la diferencia.'
+    'Conocido como "Axchi". Desde enero de 2026 trabajo como desarrollador de software en una empresa en Bogotá, Colombia, creando productos para clientes reales con DevOps, CI/CD, automatización e integración de agentes de inteligencia artificial.'
   const avatar = profile?.avatar || "/axchi.jpg"
 
   const info = [
-    { icon: MapPin, label: "Colombia" },
-    { icon: Calendar, label: "3+ años de experiencia" },
-    { icon: GraduationCap, label: "Estudiante SENA" },
+    { icon: MapPin, label: "Bogotá, Colombia" },
+    { icon: Briefcase, label: "Desarrollador en empresa de software" },
+    { icon: Cpu, label: "DevOps · CI/CD · IA" },
   ]
 
   return (

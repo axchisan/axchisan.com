@@ -25,8 +25,8 @@ async function main() {
     create: {
       id: "profile-1",
       name: "Duvan Yair Arciniegas - Axchi",
-      title: "Desarrollador de Software",
-      bio: "Soy un apasionado desarrollador de software, actualmente estudiante en el SENA. Me encanta la programación y creo soluciones tecnológicas innovadoras para diferentes negocios. En mis tiempos libres disfruto creando juegos y soy un gran apasionado por la música. Trabajo bajo el apodo Axchi, mi marca personal que representa innovación y creatividad en el desarrollo de software.",
+      title: "Desarrollador de Software · DevOps & IA",
+      bio: "Soy un desarrollador de software apasionado por construir soluciones que generen impacto real. Desde enero de 2026 trabajo en una empresa de desarrollo de software en Bogotá, Colombia, donde colaboro con un equipo de desarrolladores en proyectos para clientes reales, aplicando prácticas de DevOps, pipelines de CI/CD, automatización de procesos e integración de agentes de inteligencia artificial. Bajo el apodo Axchi, mi marca personal, combino creatividad e innovación para transformar ideas complejas en productos digitales sólidos y elegantes.",
       email: "axchisan923@gmail.com",
       phone: "3183038190",
       whatsapp: "3183038190",
