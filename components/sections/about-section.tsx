@@ -7,6 +7,7 @@ import { GradientText } from "@/components/ui/gradient-text"
 import { AnimatedCounter } from "@/components/ui/animated-counter"
 import { SectionReveal, SectionRevealItem } from "@/components/motion/section-reveal"
 import { TiltCard } from "@/components/ui/tilt-card"
+import { useMetrics } from "@/hooks/use-metrics"
 
 const interests = [
   {
@@ -29,13 +30,14 @@ const interests = [
   },
 ]
 
-const stats = [
-  { label: "Años de Experiencia", value: 3, suffix: "+" },
-  { label: "Proyectos Completados", value: 25, suffix: "+" },
-  { label: "Tecnologías Aprendidas", value: 10, suffix: "+" },
-]
-
 export function AboutSection() {
+  const m = useMetrics()
+  const stats = [
+    { label: "Años de Experiencia", value: m?.yearsExperience ?? 3, suffix: "+" },
+    { label: "Proyectos Completados", value: m?.projectsCount ?? 25, suffix: "+" },
+    { label: "Tecnologías Aprendidas", value: m?.technologiesCount ?? 10, suffix: "+" },
+  ]
+
   return (
     <section id="about" className="py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
