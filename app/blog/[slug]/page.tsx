@@ -6,7 +6,10 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { CommentSection } from "@/components/comments/comment-section"
-import { ArrowLeft, Calendar, Clock, User, Tag } from "lucide-react"
+import { ArrowLeft, Calendar, Clock, User, Tag, Eye } from "lucide-react"
+import { ViewTracker } from "@/components/view-tracker"
+import { LikeButton } from "@/components/ui/like-button"
+import { FavoriteButton } from "@/components/ui/favorite-button"
 import Link from "next/link"
 import { formatDistanceToNow } from "date-fns"
 import { es } from "date-fns/locale"
@@ -62,6 +65,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
+      <ViewTracker endpoint={`/api/blog/${post.slug}/view`} storageKey={`blog-${post.id}`} />
       <div className="container mx-auto px-4 py-8">
         {/* Back Button */}
         <div className="mb-6">
@@ -112,6 +116,11 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                   <User className="h-4 w-4" />
                   <span>{post._count.comments} comentarios</span>
                 </div>
+
+                <div className="flex items-center gap-1">
+                  <Eye className="h-4 w-4" />
+                  <span>{post.views} visualizaciones</span>
+                </div>
               </div>
 
               {/* Tags */}
@@ -127,7 +136,13 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
               )}
 
               {/* Excerpt */}
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">{post.excerpt}</p>
+              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">{post.excerpt}</p>
+
+              {/* Acciones */}
+              <div className="flex items-center gap-4 border-t border-border/60 pt-4">
+                <LikeButton blogPostId={post.id} initialCount={post._count.likes} showCount />
+                <FavoriteButton blogPostId={post.id} initialCount={post._count.favorites} showCount />
+              </div>
             </CardContent>
           </Card>
 

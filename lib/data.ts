@@ -74,7 +74,7 @@ export const getBlogPostBySlug = unstable_cache(
     try {
       return await prisma.blogPost.findUnique({
         where: { slug },
-        include: { _count: { select: { comments: true } } },
+        include: { _count: { select: { comments: true, likes: true, favorites: true } } },
       })
     } catch (error) {
       console.error("getBlogPostBySlug error:", error)

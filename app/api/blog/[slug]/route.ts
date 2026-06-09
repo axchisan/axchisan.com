@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 
-export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {
+export async function GET(_request: NextRequest, { params }: { params: { slug: string } }) {
   try {
     const post = await prisma.blogPost.findUnique({
       where: {
@@ -39,32 +39,7 @@ export async function GET(request: NextRequest, { params }: { params: { slug: st
       return NextResponse.json({ error: "Post not found" }, { status: 404 })
     }
 
-    const userAgent = request.headers.get("user-agent")
-    const ip = request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip")
-
-    const hashedIp = ip ? Buffer.from(ip).toString("base64").slice(0, 10) : null
-
-    await prisma.blogView
-      .create({
-        data: {
-          blogPostId: post.id,
-          userAgent: userAgent?.slice(0, 255),
-          ip: hashedIp,
-        },
-      })
-      .catch(() => {
-        // Ignore errors for analytics
-      })
-
-    await prisma.blogPost
-      .update({
-        where: { id: post.id },
-        data: { views: { increment: 1 } },
-      })
-      .catch(() => {
-        // Ignore errors for view counter
-      })
-
+    // El conteo de vistas se hace en POST /api/blog/[slug]/view (no en GET).
     return NextResponse.json(post)
   } catch (error) {
     console.error("Blog post fetch error:", error)

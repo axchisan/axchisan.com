@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(_request: NextRequest, { params }: { params: { id: string } }) {
   try {
     const project = await prisma.project.findUnique({
       where: { id: params.id },
@@ -36,32 +36,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
       return NextResponse.json({ error: "Project not found" }, { status: 404 })
     }
 
-    const userAgent = request.headers.get("user-agent")
-    const ip = request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip")
-
-    const hashedIp = ip ? Buffer.from(ip).toString("base64").slice(0, 10) : null
-
-    await prisma.projectView
-      .create({
-        data: {
-          projectId: params.id,
-          userAgent: userAgent?.slice(0, 255),
-          ip: hashedIp,
-        },
-      })
-      .catch(() => {
-        // Ignore errors for analytics
-      })
-
-    await prisma.project
-      .update({
-        where: { id: params.id },
-        data: { views: { increment: 1 } },
-      })
-      .catch(() => {
-        // Ignore errors for view counter
-      })
-
+    // El conteo de vistas se hace en POST /api/projects/[id]/view (no en GET).
     return NextResponse.json(project)
   } catch (error) {
     console.error("Project fetch error:", error)

@@ -10,6 +10,8 @@ import { CommentSection } from "@/components/comments/comment-section"
 import { ProjectFilesDisplay } from "@/components/projects/project-files-display"
 import { ArrowLeft, ExternalLink, Github, Download, Calendar, Tag, Eye, Heart, Star } from "lucide-react"
 import { LikeButton } from "@/components/ui/like-button"
+import { FavoriteButton } from "@/components/ui/favorite-button"
+import { ViewTracker } from "@/components/view-tracker"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import rehypeRaw from "rehype-raw"
@@ -65,6 +67,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
 
   return (
     <div className="min-h-screen bg-background">
+      <ViewTracker endpoint={`/api/projects/${project.id}/view`} storageKey={`project-${project.id}`} />
       <div className="container mx-auto px-4 py-8 space-y-8">
         {/* Header */}
         <div className="flex items-center space-x-4">
@@ -106,10 +109,11 @@ export function ProjectDetailClient({ project }: { project: Project }) {
               initialCount={project._count?.likes || project.likes?.length || 0}
               showCount={true}
             />
-            <div className="flex items-center gap-1">
-              <Star className="h-4 w-4" />
-              <span>{project._count?.favorites || project.favorites?.length || 0} favoritos</span>
-            </div>
+            <FavoriteButton
+              projectId={project.id}
+              initialCount={project._count?.favorites || project.favorites?.length || 0}
+              showCount={true}
+            />
             {project.files && project.files.length > 0 && (
               <div className="flex items-center gap-1">
                 <Download className="h-4 w-4" />
