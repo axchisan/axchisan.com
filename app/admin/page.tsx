@@ -2,7 +2,6 @@ import { redirect } from "next/navigation"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
 import { AdminDashboard } from "@/components/admin/admin-dashboard"
-import { AdminLayout } from "@/components/admin/admin-layout"
 
 export const metadata = {
   title: "Panel de Administración - Axchi",
@@ -16,9 +15,5 @@ export default async function AdminPage() {
     redirect("/auth/signin")
   }
 
-  return (
-    <AdminLayout>
-      <AdminDashboard />
-    </AdminLayout>
-  )
+  return <AdminDashboard />
 }

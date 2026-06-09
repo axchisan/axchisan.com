@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
-import { AdminLayout } from "@/components/admin/admin-layout"
 import { MediaManager } from "@/components/admin/media-manager"
 
 export const metadata = {
@@ -16,9 +15,5 @@ export default async function MediaPage() {
     redirect("/auth/signin")
   }
 
-  return (
-    <AdminLayout>
-      <MediaManager />
-    </AdminLayout>
-  )
+  return <MediaManager />
 }
