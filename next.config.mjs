@@ -4,11 +4,14 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ['@prisma/client', 'bcryptjs'],
   },
+  // El lint y el type-check NO se ejecutan durante el build de produccion:
+  // son el paso mas caro en CPU/RAM y saturaban el servidor (build de ~50 min
+  // + timeout). Validar tipos/lint en local o CI con `npm run lint` y `tsc`.
   eslint: {
-    ignoreDuringBuilds: false,
+    ignoreDuringBuilds: true,
   },
   typescript: {
-    ignoreBuildErrors: false,
+    ignoreBuildErrors: true,
   },
   images: {
     remotePatterns: [
