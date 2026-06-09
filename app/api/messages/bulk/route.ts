@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { getServerSession } from "next-auth"
+import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 
@@ -36,7 +36,7 @@ export async function PUT(request: NextRequest) {
         return NextResponse.json({ error: "Invalid action" }, { status: 400 })
     }
 
-    const result = await prisma.message.updateMany({
+    const result = await prisma.contactMessage.updateMany({
       where: {
         id: { in: messageIds },
       },
@@ -67,7 +67,7 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: "Message IDs are required" }, { status: 400 })
     }
 
-    const result = await prisma.message.deleteMany({
+    const result = await prisma.contactMessage.deleteMany({
       where: {
         id: { in: messageIds },
       },

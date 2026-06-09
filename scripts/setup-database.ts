@@ -146,7 +146,7 @@ async function setupDatabase() {
       await prisma.project.upsert({
         where: { title: project.title },
         update: {},
-        create: project,
+        create: project as any,
       })
     }
 

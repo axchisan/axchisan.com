@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { writeFile, mkdir } from "fs/promises"
 import { join } from "path"
-import { getServerSession } from "next-auth"
+import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 
@@ -140,7 +140,8 @@ export async function POST(request: NextRequest) {
       const extension = file.name.split(".").pop()
       const filename = `${timestamp}-${randomString}.${extension}`
 
-      let fileInfo = SUPPORTED_TYPES[file.type as keyof typeof SUPPORTED_TYPES]
+      let fileInfo: { category: string; folder: string; extensions?: string[] } =
+        SUPPORTED_TYPES[file.type as keyof typeof SUPPORTED_TYPES]
       if (!fileInfo) {
         fileInfo = getCategoryByExtension(file.name)
       }

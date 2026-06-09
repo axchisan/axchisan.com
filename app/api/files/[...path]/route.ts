@@ -58,7 +58,7 @@ export async function GET(request: NextRequest, { params }: { params: { path: st
 
       console.log("[v0] Successfully serving file:", fullPath, "Content-Type:", contentType)
 
-      return new NextResponse(fileBuffer, {
+      return new NextResponse(new Uint8Array(fileBuffer), {
         headers: {
           "Content-Type": contentType,
           "Cache-Control": "public, max-age=31536000, immutable",

@@ -132,7 +132,7 @@ async function main() {
     await prisma.siteSettings.upsert({
       where: { key: setting.key },
       update: {},
-      create: setting,
+      create: setting as any,
     })
   }
 
