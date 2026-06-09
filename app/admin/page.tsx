@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation"
-import { getServerSession } from "next-auth"
+import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
 import { AdminDashboard } from "@/components/admin/admin-dashboard"
 import { AdminLayout } from "@/components/admin/admin-layout"

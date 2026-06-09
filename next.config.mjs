@@ -5,10 +5,10 @@ const nextConfig = {
     serverComponentsExternalPackages: ['@prisma/client', 'bcryptjs'],
   },
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
   },
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   images: {
     remotePatterns: [

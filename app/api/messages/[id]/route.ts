@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { getServerSession } from "next-auth"
+import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 
@@ -10,7 +10,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    const message = await prisma.message.findUnique({
+    const message = await prisma.contactMessage.findUnique({
       where: { id: params.id },
     })
 
@@ -35,13 +35,13 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     const data = await request.json()
     const { status, adminNotes } = data
 
-    const message = await prisma.message.update({
+    const message = await prisma.contactMessage.update({
       where: { id: params.id },
       data: {
-        status: status || undefined,
-        adminNotes: adminNotes !== undefined ? adminNotes : undefined,
-        readAt: status === "READ" && !data.readAt ? new Date() : undefined,
-        respondedAt: status === "RESPONDED" && !data.respondedAt ? new Date() : undefined,
+        status: status ? (status as any) : undefined,
+        // 'adminNotes' no existe en el schema; se mapea al campo 'response'
+        ...(adminNotes !== undefined ? { response: adminNotes } : {}),
+        respondedAt: status === "RESOLVED" && !data.respondedAt ? new Date() : undefined,
       },
     })
 
@@ -59,7 +59,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    await prisma.message.delete({
+    await prisma.contactMessage.delete({
       where: { id: params.id },
     })
 

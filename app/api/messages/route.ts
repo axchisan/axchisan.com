@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { getServerSession } from "next-auth"
+import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 
@@ -33,13 +33,13 @@ export async function GET(request: NextRequest) {
     }
 
     const [messages, total] = await Promise.all([
-      prisma.message.findMany({
+      prisma.contactMessage.findMany({
         where,
         orderBy: { createdAt: "desc" },
         skip,
         take: limit,
       }),
-      prisma.message.count({ where }),
+      prisma.contactMessage.count({ where }),
     ])
 
     return NextResponse.json({
@@ -60,21 +60,19 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const data = await request.json()
-    const { name, email, subject, message, phone, company } = data
+    const { name, email, subject, message } = data
 
     if (!name || !email || !message) {
       return NextResponse.json({ error: "Name, email, and message are required" }, { status: 400 })
     }
 
-    const newMessage = await prisma.message.create({
+    const newMessage = await prisma.contactMessage.create({
       data: {
         name,
         email,
         subject: subject || "Nuevo mensaje de contacto",
         message,
-        phone: phone || null,
-        company: company || null,
-        status: "UNREAD",
+        // status por defecto: PENDING (definido en el schema); read: false
       },
     })
 
