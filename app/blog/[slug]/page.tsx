@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
+import { getBlogPostBySlug } from "@/lib/data"
+import { SITE_URL } from "@/lib/site"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -12,43 +14,8 @@ import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import rehypeRaw from "rehype-raw"
 
-interface BlogPost {
-  id: string
-  title: string
-  slug: string
-  excerpt: string
-  content: string
-  coverImage: string | null
-  published: boolean
-  featured: boolean
-  readTime: number
-  createdAt: string
-  updatedAt: string
-  tags: string[]
-  _count: {
-    comments: number
-  }
-}
-
-async function getBlogPost(slug: string): Promise<BlogPost | null> {
-  try {
-    const response = await fetch(`${process.env.NEXTAUTH_URL}/api/blog/${slug}`, {
-      cache: "no-store",
-    })
-
-    if (!response.ok) {
-      return null
-    }
-
-    return response.json()
-  } catch (error) {
-    console.error("Error fetching blog post:", error)
-    return null
-  }
-}
-
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const post = await getBlogPost(params.slug)
+  const post = await getBlogPostBySlug(params.slug)
 
   if (!post) {
     return {
@@ -58,24 +25,43 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
   return {
     title: post.title,
-    description: post.excerpt,
+    description: post.excerpt ?? undefined,
+    alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {
+      type: "article",
       title: post.title,
-      description: post.excerpt,
+      description: post.excerpt ?? undefined,
       images: post.coverImage ? [post.coverImage] : [],
+      publishedTime: (post.publishedAt ?? post.createdAt).toISOString(),
     },
   }
 }
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = await getBlogPost(params.slug)
+  const post = await getBlogPostBySlug(params.slug)
 
   if (!post || !post.published) {
     notFound()
   }
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt ?? undefined,
+    image: post.coverImage ? [post.coverImage] : undefined,
+    datePublished: (post.publishedAt ?? post.createdAt).toISOString(),
+    dateModified: post.updatedAt.toISOString(),
+    author: { "@type": "Person", name: "Duvan Yair Arciniegas", url: SITE_URL },
+    mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}/blog/${post.slug}` },
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <div className="container mx-auto px-4 py-8">
         {/* Back Button */}
         <div className="mb-6">

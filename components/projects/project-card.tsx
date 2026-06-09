@@ -54,7 +54,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
   const downloadableFiles = project.files ? project.files.filter((f) => f.isDownloadable) : []
 
-  const getPlatformIcon = (platform: string) => {
+  const getPlatformIcon = (platform: string | null | undefined) => {
     switch (platform) {
       case "Android":
       case "iOS":

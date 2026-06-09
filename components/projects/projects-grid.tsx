@@ -7,16 +7,27 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { useState, useEffect } from "react"
 
 interface ProjectsGridProps {
+  // Cuando se pasan `projects` por props (SSR), se usan directamente sin fetch.
+  projects?: any[]
   selectedCategory?: string
   selectedTechs?: string[]
   searchQuery?: string
 }
 
-export function ProjectsGrid({ selectedCategory, selectedTechs = [], searchQuery }: ProjectsGridProps) {
-  const { projects, loading, error } = useProjects()
+export function ProjectsGrid({ projects: projectsProp, selectedCategory, selectedTechs = [], searchQuery }: ProjectsGridProps) {
+  // Modo controlado: los projects ya vienen filtrados desde el Server Component.
+  const controlled = projectsProp !== undefined
+
+  const { projects: fetchedProjects, loading, error } = useProjects()
+  const projects = controlled ? (projectsProp as any[]) : fetchedProjects
   const [filteredProjects, setFilteredProjects] = useState(projects)
 
   useEffect(() => {
+    if (controlled) {
+      setFilteredProjects(projects)
+      return
+    }
+
     let filtered = projects
 
     // Filter by category
@@ -26,7 +37,9 @@ export function ProjectsGrid({ selectedCategory, selectedTechs = [], searchQuery
 
     // Filter by technologies
     if (selectedTechs.length > 0) {
-      filtered = filtered.filter((project) => selectedTechs.some((tech) => project.technologies.includes(tech)))
+      filtered = filtered.filter((project) =>
+        selectedTechs.some((tech: string) => project.technologies.includes(tech)),
+      )
     }
 
     // Filter by search query
@@ -35,14 +48,14 @@ export function ProjectsGrid({ selectedCategory, selectedTechs = [], searchQuery
         (project) =>
           project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
           project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          project.technologies.some((tech) => tech.toLowerCase().includes(searchQuery.toLowerCase())),
+          project.technologies.some((tech: string) => tech.toLowerCase().includes(searchQuery.toLowerCase())),
       )
     }
 
     setFilteredProjects(filtered)
-  }, [projects, selectedCategory, selectedTechs, searchQuery])
+  }, [controlled, projects, selectedCategory, selectedTechs, searchQuery])
 
-  if (error) {
+  if (!controlled && error) {
     return (
       <div className="text-center py-12">
         <p className="text-muted-foreground">Error al cargar los proyectos</p>
@@ -50,7 +63,7 @@ export function ProjectsGrid({ selectedCategory, selectedTechs = [], searchQuery
     )
   }
 
-  if (loading) {
+  if (!controlled && loading) {
     return (
       <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-8">
         {[1, 2, 3, 4, 5, 6].map((i) => (
