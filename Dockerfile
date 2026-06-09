@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 FROM node:18-alpine AS base
 
 # Install dependencies only when needed
@@ -7,9 +8,15 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-RUN \
+# npm resiliente a redes lentas/inestables (evita EIDLETIMEOUT en el build).
+RUN npm config set fetch-timeout 600000 \
+  && npm config set fetch-retries 5 \
+  && npm config set fetch-retry-mintimeout 20000 \
+  && npm config set fetch-retry-maxtimeout 120000
+# Caché persistente de npm (BuildKit): reintentos y rebuilds reutilizan descargas.
+RUN --mount=type=cache,target=/root/.npm \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
+  elif [ -f package-lock.json ]; then npm ci --no-audit --no-fund; \
   elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
   else echo "Lockfile not found." && exit 1; \
   fi
