@@ -9,6 +9,7 @@ import { formatDistanceToNow } from "date-fns"
 import { es } from "date-fns/locale"
 import { SectionReveal, SectionRevealItem } from "@/components/motion/section-reveal"
 import { EmptyIllustration } from "@/components/illustrations"
+import { blogFallbackImage } from "@/lib/stock-images"
 
 interface BlogPost {
   id: string
@@ -53,7 +54,7 @@ export function BlogGrid({ posts, featured = false }: BlogGridProps) {
             <div className="grid md:grid-cols-2 gap-0">
               <div className="relative aspect-video md:aspect-auto md:h-full overflow-hidden">
                 <img
-                  src={featuredPost.coverImage || "/placeholder.svg?height=400&width=600&query=blog featured image"}
+                  src={featuredPost.coverImage || blogFallbackImage(featuredPost.slug || featuredPost.title)}
                   alt={featuredPost.title}
                   className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -152,7 +153,7 @@ function BlogCard({ post }: { post: BlogPost }) {
     <Card className="border-border/60 bg-card/60 backdrop-blur-sm hover:border-primary/40 transition-colors duration-300 group h-full flex flex-col overflow-hidden">
       <div className="aspect-video relative overflow-hidden">
         <img
-          src={post.coverImage || "/placeholder.svg?height=200&width=400&query=blog post image"}
+          src={post.coverImage || blogFallbackImage(post.slug || post.title)}
           alt={post.title}
           className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
         />
