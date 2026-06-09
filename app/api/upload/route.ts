@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { writeFile, mkdir } from "fs/promises"
-import { join } from "path"
+import { writeFile, mkdir, readdir, stat, unlink } from "fs/promises"
+import { join, resolve, relative, sep, extname } from "path"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
@@ -218,5 +218,144 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("Upload error:", error)
     return NextResponse.json({ error: "Failed to upload files" }, { status: 500 })
+  }
+}
+
+const MIME_BY_EXTENSION: Record<string, string> = {
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".png": "image/png",
+  ".gif": "image/gif",
+  ".webp": "image/webp",
+  ".svg": "image/svg+xml",
+  ".mp4": "video/mp4",
+  ".webm": "video/webm",
+  ".ogg": "video/ogg",
+  ".avi": "video/x-msvideo",
+  ".mov": "video/quicktime",
+  ".pdf": "application/pdf",
+  ".txt": "text/plain",
+  ".doc": "application/msword",
+  ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  ".zip": "application/zip",
+  ".rar": "application/x-rar-compressed",
+  ".7z": "application/x-7z-compressed",
+  ".tar": "application/x-tar",
+  ".gz": "application/gzip",
+  ".exe": "application/x-msdownload",
+  ".msi": "application/x-msi",
+  ".dmg": "application/x-apple-diskimage",
+  ".deb": "application/x-debian-package",
+  ".rpm": "application/x-rpm",
+  ".apk": "application/vnd.android.package-archive",
+}
+
+interface ListedFile {
+  name: string
+  url: string
+  size: number
+  type: string
+  category: string
+  uploadedAt: string
+}
+
+async function collectFiles(dir: string, baseDir: string, acc: ListedFile[]): Promise<void> {
+  let entries
+  try {
+    entries = await readdir(dir, { withFileTypes: true })
+  } catch {
+    return
+  }
+
+  for (const entry of entries) {
+    const fullPath = join(dir, entry.name)
+    if (entry.isDirectory()) {
+      await collectFiles(fullPath, baseDir, acc)
+    } else if (entry.isFile()) {
+      const fileStats = await stat(fullPath)
+      const relPath = relative(baseDir, fullPath).split(sep).join("/")
+      const segments = relPath.split("/")
+      const category = segments.length > 1 ? segments[0] : "other"
+      const extension = extname(entry.name).toLowerCase()
+      acc.push({
+        name: entry.name,
+        url: `/api/files/${relPath}`,
+        size: fileStats.size,
+        type: MIME_BY_EXTENSION[extension] || (extension ? extension.slice(1) : "application/octet-stream"),
+        category,
+        uploadedAt: fileStats.mtime.toISOString(),
+      })
+    }
+  }
+}
+
+// Lista todos los archivos dentro de public/uploads. Solo admin.
+export async function GET() {
+  try {
+    const session = await getServerSession(authOptions)
+    if (!session || session.user.role !== "ADMIN") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
+
+    const uploadsDir = join(process.cwd(), "public", "uploads")
+    const files: ListedFile[] = []
+    await collectFiles(uploadsDir, uploadsDir, files)
+
+    files.sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt))
+
+    return NextResponse.json({ files })
+  } catch (error) {
+    console.error("Files list error:", error)
+    return NextResponse.json({ error: "Failed to list files" }, { status: 500 })
+  }
+}
+
+// Borra un archivo dentro de public/uploads. Solo admin.
+export async function DELETE(request: NextRequest) {
+  try {
+    const session = await getServerSession(authOptions)
+    if (!session || session.user.role !== "ADMIN") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
+
+    let target = request.nextUrl.searchParams.get("path")
+    if (!target) {
+      const body = await request.json().catch(() => null)
+      target = body?.url ?? null
+    }
+
+    if (!target) {
+      return NextResponse.json({ error: "Missing file path" }, { status: 400 })
+    }
+
+    // Normaliza prefijos conocidos a una ruta relativa dentro de uploads.
+    let relativePath = target
+    if (relativePath.startsWith("/api/files/")) {
+      relativePath = relativePath.slice("/api/files/".length)
+    } else if (relativePath.startsWith("/uploads/")) {
+      relativePath = relativePath.slice("/uploads/".length)
+    } else if (relativePath.startsWith("uploads/")) {
+      relativePath = relativePath.slice("uploads/".length)
+    }
+    relativePath = relativePath.replace(/^\/+/, "")
+
+    const uploadsDir = resolve(process.cwd(), "public", "uploads")
+    const resolvedPath = resolve(uploadsDir, relativePath)
+
+    // Protección contra path traversal: debe quedar dentro de public/uploads.
+    if (resolvedPath !== uploadsDir && !resolvedPath.startsWith(uploadsDir + sep)) {
+      return NextResponse.json({ error: "Invalid file path" }, { status: 400 })
+    }
+
+    try {
+      await unlink(resolvedPath)
+    } catch {
+      return NextResponse.json({ error: "File not found" }, { status: 404 })
+    }
+
+    return NextResponse.json({ ok: true })
+  } catch (error) {
+    console.error("File delete error:", error)
+    return NextResponse.json({ error: "Failed to delete file" }, { status: 500 })
   }
 }
