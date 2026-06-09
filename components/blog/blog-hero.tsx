@@ -2,8 +2,10 @@
 
 import { BookOpen } from "lucide-react"
 import { PageHero } from "@/components/page-hero"
+import { useMetrics } from "@/hooks/use-metrics"
 
 export function BlogHero() {
+  const m = useMetrics()
   return (
     <PageHero
       icon={BookOpen}
@@ -11,9 +13,8 @@ export function BlogHero() {
       highlight="Blog"
       subtitle="Comparto mis experiencias, aprendizajes y reflexiones sobre desarrollo de software, tecnología y programación."
       metrics={[
-        { value: 50, suffix: "+", label: "Artículos" },
-        { value: 30, suffix: "+", label: "Publicaciones" },
-        { value: 15, label: "Categorías" },
+        { value: m?.blogPostsCount ?? 15, suffix: "+", label: "Artículos" },
+        { value: m?.categoriesCount ?? 8, suffix: "+", label: "Categorías" },
       ]}
     />
   )

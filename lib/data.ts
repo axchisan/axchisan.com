@@ -85,6 +85,49 @@ export const getBlogPostBySlug = unstable_cache(
   { revalidate: REVALIDATE, tags: ["blog"] },
 )
 
+/** Métricas reales derivadas de la BD + métricas editables (SiteSettings). */
+export const getSiteMetrics = unstable_cache(
+  async () => {
+    try {
+      const [projects, blog] = await Promise.all([
+        prisma.project.findMany({ where: { status: "COMPLETED" }, select: { technologies: true } }),
+        prisma.blogPost.findMany({ where: { published: true }, select: { tags: true } }),
+      ])
+      const technologies = new Set(projects.flatMap((p) => p.technologies))
+      const categories = new Set(blog.flatMap((b) => b.tags))
+
+      const settings = await prisma.siteSettings.findMany({
+        where: { key: { in: ["years_experience", "clients_count"] } },
+      })
+      const get = (key: string, fallback: number) => {
+        const n = Number(settings.find((s) => s.key === key)?.value)
+        return Number.isFinite(n) && n > 0 ? n : fallback
+      }
+
+      return {
+        projectsCount: projects.length,
+        technologiesCount: technologies.size,
+        blogPostsCount: blog.length,
+        categoriesCount: categories.size,
+        yearsExperience: get("years_experience", 3),
+        clientsCount: get("clients_count", 15),
+      }
+    } catch (error) {
+      console.error("getSiteMetrics error:", error)
+      return {
+        projectsCount: 25,
+        technologiesCount: 10,
+        blogPostsCount: 15,
+        categoriesCount: 8,
+        yearsExperience: 3,
+        clientsCount: 15,
+      }
+    }
+  },
+  ["site-metrics"],
+  { revalidate: REVALIDATE, tags: ["projects", "blog", "settings"] },
+)
+
 /** Slugs/ids para sitemap (ligero, sin relaciones). */
 export const getPublishedBlogSlugs = unstable_cache(
   async () => prisma.blogPost.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
