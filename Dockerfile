@@ -20,6 +20,10 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
+# DATABASE_URL placeholder solo para `prisma generate` y la evaluación del módulo
+# en build (las páginas son force-dynamic, no conectan en build). En runtime,
+# Coolify inyecta el DATABASE_URL real.
+ENV DATABASE_URL="postgresql://placeholder:placeholder@localhost:5432/placeholder?schema=public"
 RUN npx prisma generate
 RUN npm run build
 
