@@ -12,6 +12,8 @@ export const metadata: Metadata = {
     "Artículos sobre desarrollo de software, automatización, IA y las decisiones técnicas detrás de productos digitales reales.",
 }
 
+export const dynamic = "force-dynamic"
+
 export default async function BlogPage() {
   const { posts, categories } = await getBlogPosts()
 
