@@ -1,26 +1,131 @@
 @import "tailwindcss";
 
+/* ============================================================
+   Axchi Studio — Design System · Dirección A: Technical Editorial
+   Dark-first. Dials: VARIANCE 6 / MOTION 5 / DENSITY 3
+   ============================================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Superficies */
+  --bg:        #0A0B0D;  /* canvas casi negro, leve tinte frío */
+  --surface:   #14161A;  /* tarjetas */
+  --surface-2: #1A1D22;  /* hover / elevación */
+  --border:    #23262B;
+  --border-strong: #33373D;
+
+  /* Texto */
+  --text:      #F4F5F7;
+  --muted:     #8A9099;
+  --faint:     #5A6068;
+
+  /* Marca */
+  --accent:        #C6F24E;  /* lima eléctrico */
+  --accent-ink:    #0A0B0D;  /* texto sobre acento */
+  --accent-soft:   color-mix(in srgb, var(--accent) 14%, transparent);
+  --signal:        #FF5C38;  /* secundario (alertas/destacados puntuales) */
+
+  /* Estado */
+  --destructive: #E5484D;
+
+  /* Radios / sombras */
+  --radius:     0.875rem;  /* 14px */
+  --radius-sm:  0.5rem;
+  --radius-lg:  1.25rem;
+  --shadow-glow: 0 0 32px -8px var(--accent);
+
+  /* Easings (Emil) */
+  --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colores expuestos como utilidades Tailwind (bg-bg, text-muted, etc.) */
+  --color-bg:            var(--bg);
+  --color-surface:       var(--surface);
+  --color-surface-2:     var(--surface-2);
+  --color-border:        var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text:          var(--text);
+  --color-muted:         var(--muted);
+  --color-faint:         var(--faint);
+  --color-accent:        var(--accent);
+  --color-accent-ink:    var(--accent-ink);
+  --color-accent-soft:   var(--accent-soft);
+  --color-signal:        var(--signal);
+  --color-destructive:   var(--destructive);
+
+  /* Tipografía (las vars --font-* las define next/font en layout) */
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans:    var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    var(--font-jetbrains-mono), ui-monospace, "JetBrains Mono", monospace;
+
+  --radius:    var(--radius);
+  --radius-sm: var(--radius-sm);
+  --radius-lg: var(--radius-lg);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+  }
+  /* Focus visible accesible */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Etiqueta mono reutilizable */
+  .mono-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;       /* 11px */
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  /* Brillo aurora puntual del hero */
+  .hero-glow::before {
+    content: "";
+    position: absolute;
+    inset: -30% -10% auto auto;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--accent-soft), transparent 60%);
+    filter: blur(20px);
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+/* Respeta prefers-reduced-motion: solo opacidad, sin movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

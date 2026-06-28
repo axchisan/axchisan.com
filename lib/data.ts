@@ -140,3 +140,48 @@ export const getPublicProjectIds = unstable_cache(
   ["project-ids"],
   { revalidate: REVALIDATE, tags: ["projects"] },
 )
+
+/** Servicios activos, ordenados. */
+export const getServices = unstable_cache(
+  async () => {
+    try {
+      return await prisma.service.findMany({
+        where: { isActive: true },
+        orderBy: { order: "asc" },
+      })
+    } catch (error) {
+      console.error("getServices error:", error)
+      return []
+    }
+  },
+  ["services-list"],
+  { revalidate: REVALIDATE, tags: ["services"] },
+)
+
+/** Perfil del founder (único registro). */
+export const getProfile = unstable_cache(
+  async () => {
+    try {
+      return await prisma.profile.findFirst()
+    } catch (error) {
+      console.error("getProfile error:", error)
+      return null
+    }
+  },
+  ["profile"],
+  { revalidate: REVALIDATE, tags: ["profile"] },
+)
+
+/** Skills agrupadas por categoría (para /sobre). */
+export const getSkills = unstable_cache(
+  async () => {
+    try {
+      return await prisma.skill.findMany({ orderBy: [{ category: "asc" }, { order: "asc" }] })
+    } catch (error) {
+      console.error("getSkills error:", error)
+      return []
+    }
+  },
+  ["skills-list"],
+  { revalidate: REVALIDATE, tags: ["skills"] },
+)
