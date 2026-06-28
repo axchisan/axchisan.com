@@ -12,6 +12,8 @@ export const metadata: Metadata = {
     "Axchi es un studio de ingeniería de software en Bogotá fundado por Duvan Yair Arciniegas. Construimos productos digitales con criterio.",
 }
 
+export const dynamic = "force-dynamic"
+
 const VALUES = [
   { t: "Criterio sobre moda", d: "Elegimos la tecnología adecuada para el problema, no la que está de moda." },
   { t: "Calidad invisible", d: "Los detalles que nadie nota son los que hacen que un producto se sienta sólido." },
