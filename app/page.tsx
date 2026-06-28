@@ -7,6 +7,8 @@ import { InsightsSection } from "@/components/home/insights-section"
 import { CtaSection } from "@/components/home/cta-section"
 import { getServices, getProjects, getBlogPosts, getSiteMetrics } from "@/lib/data"
 
+export const dynamic = "force-dynamic"
+
 export default async function HomePage() {
   const [metrics, services, projects, blog] = await Promise.all([
     getSiteMetrics(),

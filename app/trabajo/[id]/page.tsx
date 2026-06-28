@@ -8,7 +8,9 @@ import { Header } from "@/components/site/header"
 import { Footer } from "@/components/site/footer"
 import { Button } from "@/components/ui/button"
 import { GithubIcon } from "@/components/site/social-icons"
-import { getProjectById, getPublicProjectIds } from "@/lib/data"
+import { getProjectById } from "@/lib/data"
+
+export const dynamic = "force-dynamic"
 
 type Params = { params: Promise<{ id: string }> }
 
@@ -25,11 +27,6 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       images: project.coverImage ? [project.coverImage] : undefined,
     },
   }
-}
-
-export async function generateStaticParams() {
-  const ids = await getPublicProjectIds()
-  return ids.map((p) => ({ id: p.id }))
 }
 
 export default async function ProjectPage({ params }: Params) {
