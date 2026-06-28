@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google"
+import { Toaster } from "sonner"
 import "./globals.css"
 import { SITE_URL } from "@/lib/site"
 
@@ -71,7 +72,20 @@ export default function RootLayout({
       lang="es"
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="min-h-screen bg-bg text-text">{children}</body>
+      <body className="min-h-screen bg-bg text-text">
+        {children}
+        <Toaster
+          theme="dark"
+          position="bottom-right"
+          toastOptions={{
+            style: {
+              background: "var(--surface)",
+              border: "1px solid var(--border)",
+              color: "var(--text)",
+            },
+          }}
+        />
+      </body>
     </html>
   )
 }
