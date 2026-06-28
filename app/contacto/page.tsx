@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   description: "Hablemos sobre tu proyecto. Escríbenos por el formulario, email o WhatsApp.",
 }
 
+export const dynamic = "force-dynamic"
+
 export default async function ContactoPage() {
   const profile = await getProfile()
   const email = profile?.email ?? "axchisan923@gmail.com"

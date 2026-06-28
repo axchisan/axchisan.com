@@ -13,6 +13,8 @@ export const metadata: Metadata = {
     "Desarrollo web, aplicaciones multiplataforma, automatización con IA y software a medida. Lo que el studio puede construir para tu negocio.",
 }
 
+export const dynamic = "force-dynamic"
+
 const PROCESS = [
   { k: "01", t: "Entendemos", d: "Escuchamos el problema real y definimos el alcance con claridad." },
   { k: "02", t: "Diseñamos", d: "Proponemos la arquitectura y la experiencia antes de escribir código." },

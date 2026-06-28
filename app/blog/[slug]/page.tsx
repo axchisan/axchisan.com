@@ -7,8 +7,10 @@ import remarkGfm from "remark-gfm"
 import rehypeRaw from "rehype-raw"
 import { Header } from "@/components/site/header"
 import { Footer } from "@/components/site/footer"
-import { getBlogPostBySlug, getPublishedBlogSlugs } from "@/lib/data"
+import { getBlogPostBySlug } from "@/lib/data"
 import { formatDate } from "@/lib/utils"
+
+export const dynamic = "force-dynamic"
 
 type Params = { params: Promise<{ slug: string }> }
 
@@ -26,11 +28,6 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       images: post.coverImage ? [post.coverImage] : undefined,
     },
   }
-}
-
-export async function generateStaticParams() {
-  const slugs = await getPublishedBlogSlugs()
-  return slugs.map((s) => ({ slug: s.slug }))
 }
 
 export default async function BlogPostPage({ params }: Params) {

@@ -12,6 +12,8 @@ export const metadata: Metadata = {
     "Casos y productos que hemos diseñado y construido: web, multiplataforma, automatización e IA para clientes reales.",
 }
 
+export const dynamic = "force-dynamic"
+
 export default async function TrabajoPage() {
   const projects = await getProjects()
 
