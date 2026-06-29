@@ -172,6 +172,45 @@ export const getProfile = unstable_cache(
   { revalidate: REVALIDATE, tags: ["profile"] },
 )
 
+/**
+ * Serie de vistas por día (últimos N días) para sparklines del admin.
+ * Rellena días sin datos con 0 para una serie continua. No cacheado (admin).
+ */
+export async function getViewsAnalytics(days = 30) {
+  const empty = { projects: Array(days).fill(0) as number[], blog: Array(days).fill(0) as number[], totalProjects: 0, totalBlog: 0 }
+  try {
+    const since = new Date()
+    since.setUTCHours(0, 0, 0, 0)
+    since.setUTCDate(since.getUTCDate() - (days - 1))
+
+    const [pv, bv] = await Promise.all([
+      prisma.projectView.findMany({ where: { createdAt: { gte: since } }, select: { createdAt: true } }),
+      prisma.blogView.findMany({ where: { createdAt: { gte: since } }, select: { createdAt: true } }),
+    ])
+
+    const bucket = (rows: { createdAt: Date }[]) => {
+      const arr = Array(days).fill(0) as number[]
+      for (const r of rows) {
+        const d = new Date(r.createdAt)
+        d.setUTCHours(0, 0, 0, 0)
+        const idx = Math.floor((d.getTime() - since.getTime()) / 86400000)
+        if (idx >= 0 && idx < days) arr[idx] += 1
+      }
+      return arr
+    }
+
+    return {
+      projects: bucket(pv),
+      blog: bucket(bv),
+      totalProjects: pv.length,
+      totalBlog: bv.length,
+    }
+  } catch (error) {
+    console.error("getViewsAnalytics error:", error)
+    return empty
+  }
+}
+
 /** Skills agrupadas por categoría (para /sobre). */
 export const getSkills = unstable_cache(
   async () => {
