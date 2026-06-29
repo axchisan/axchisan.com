@@ -9,6 +9,7 @@ import { Header } from "@/components/site/header"
 import { Footer } from "@/components/site/footer"
 import { getBlogPostBySlug } from "@/lib/data"
 import { formatDate } from "@/lib/utils"
+import { SITE_URL } from "@/lib/site"
 
 export const dynamic = "force-dynamic"
 
@@ -21,6 +22,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title: post.title,
     description: post.excerpt ?? undefined,
+    alternates: { canonical: `/blog/${slug}` },
     openGraph: {
       title: post.title,
       description: post.excerpt ?? undefined,
@@ -38,7 +40,25 @@ export default async function BlogPostPage({ params }: Params) {
   return (
     <>
       <Header />
-      <main className="px-7 pt-28 md:pt-32">
+      <main id="contenido" tabIndex={-1} className="px-7 pt-28 md:pt-32">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BlogPosting",
+              headline: post.title,
+              description: post.excerpt ?? undefined,
+              image: post.coverImage ? `${SITE_URL}${post.coverImage}` : undefined,
+              datePublished: (post.publishedAt ?? post.createdAt).toISOString(),
+              dateModified: post.updatedAt.toISOString(),
+              author: { "@type": "Person", name: "Duvan Yair Arciniegas", url: SITE_URL },
+              publisher: { "@type": "Organization", name: "Axchi Studio", url: SITE_URL },
+              mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
+              keywords: post.tags.join(", "),
+            }),
+          }}
+        />
         <article className="mx-auto max-w-3xl">
           <Link href="/blog" className="mono-label inline-flex items-center gap-2 text-muted transition-colors hover:text-text">
             <ArrowLeft className="h-3.5 w-3.5" /> Blog
@@ -64,7 +84,7 @@ export default async function BlogPostPage({ params }: Params) {
 
           {post.coverImage && (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={post.coverImage} alt={post.title} className="mt-8 w-full rounded-2xl border border-border" />
+            <img src={post.coverImage} alt={post.title} loading="lazy" decoding="async" className="mt-8 w-full rounded-2xl border border-border" />
           )}
 
           <div className="prose-axchi mt-9">

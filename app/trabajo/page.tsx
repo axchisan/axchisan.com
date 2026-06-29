@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Trabajo",
   description:
     "Casos y productos que hemos diseñado y construido: web, multiplataforma, automatización e IA para clientes reales.",
+  alternates: { canonical: "/trabajo" },
 }
 
 export const dynamic = "force-dynamic"
@@ -20,7 +21,7 @@ export default async function TrabajoPage() {
   return (
     <>
       <Header />
-      <main>
+      <main id="contenido" tabIndex={-1}>
         <PageHero
           kicker="Trabajo · Casos en producción"
           title="Cosas que hemos construido"

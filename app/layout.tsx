@@ -32,6 +32,7 @@ export const metadata: Metadata = {
   },
   description:
     "Studio de ingeniería de software en Bogotá. Diseñamos, construimos y automatizamos productos digitales para clientes reales: web, multiplataforma e IA.",
+  alternates: { canonical: "/" },
   keywords: [
     "studio de software",
     "desarrollo web",

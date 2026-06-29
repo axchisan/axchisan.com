@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Studio",
   description:
     "Axchi es un studio de ingeniería de software en Bogotá fundado por Duvan Yair Arciniegas. Construimos productos digitales con criterio.",
+  alternates: { canonical: "/sobre" },
 }
 
 export const dynamic = "force-dynamic"
@@ -31,7 +32,7 @@ export default async function SobrePage() {
   return (
     <>
       <Header />
-      <main>
+      <main id="contenido" tabIndex={-1}>
         <PageHero
           kicker="El studio"
           title="Software construido con criterio"
