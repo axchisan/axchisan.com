@@ -1,6 +1,8 @@
 import Link from "next/link"
-import { FolderGit2, FileText, Cpu, Wrench, Mail, ArrowUpRight, type LucideIcon } from "lucide-react"
+import { FolderGit2, FileText, Cpu, Wrench, Mail, ArrowUpRight, Eye, type LucideIcon } from "lucide-react"
 import { prisma } from "@/lib/prisma"
+import { getViewsAnalytics } from "@/lib/data"
+import { Sparkline } from "@/components/admin/sparkline"
 
 export const dynamic = "force-dynamic"
 
@@ -23,7 +25,7 @@ async function getStats() {
 type Card = { label: string; value: number; href?: string; badge?: number; icon: LucideIcon }
 
 export default async function AdminDashboard() {
-  const s = await getStats()
+  const [s, views] = await Promise.all([getStats(), getViewsAnalytics(30)])
   const cards: Card[] = [
     { label: "Proyectos", value: s.projects, href: "/admin/projects", icon: FolderGit2 },
     { label: "Posts", value: s.posts, href: "/admin/blog", icon: FileText },
@@ -37,7 +39,31 @@ export default async function AdminDashboard() {
       <h1 className="font-display text-2xl font-semibold tracking-[-0.02em]">Dashboard</h1>
       <p className="mt-1 text-sm text-muted">Resumen del contenido del sitio.</p>
 
-      <div className="mt-7 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+      {/* Analítica de vistas (últimos 30 días) */}
+      <div className="mt-7 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {[
+          { label: "Vistas de proyectos", total: views.totalProjects, series: views.projects },
+          { label: "Vistas del blog", total: views.totalBlog, series: views.blog },
+        ].map((v) => (
+          <div key={v.label} className="rounded-2xl border border-border bg-surface p-5">
+            <div className="flex items-start justify-between">
+              <div>
+                <div className="flex items-center gap-2 text-faint">
+                  <Eye className="h-4 w-4" strokeWidth={1.6} />
+                  <span className="mono-label">{v.label}</span>
+                </div>
+                <div className="mt-2 font-display text-3xl font-semibold tabular-nums">{v.total}</div>
+              </div>
+              <span className="mono-label mt-1">30 días</span>
+            </div>
+            <div className="mt-3">
+              <Sparkline data={v.series} />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
         {cards.map((c) => {
           const Icon = c.icon
           const inner = (
