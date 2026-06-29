@@ -9,6 +9,7 @@ import { getProfile } from "@/lib/data"
 export const metadata: Metadata = {
   title: "Contacto",
   description: "Hablemos sobre tu proyecto. Escríbenos por el formulario, email o WhatsApp.",
+  alternates: { canonical: "/contacto" },
 }
 
 export const dynamic = "force-dynamic"
@@ -21,7 +22,7 @@ export default async function ContactoPage() {
   return (
     <>
       <Header />
-      <main>
+      <main id="contenido" tabIndex={-1}>
         <PageHero
           kicker="Contacto"
           title="Conversemos sobre tu proyecto"

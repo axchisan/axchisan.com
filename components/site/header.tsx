@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -15,9 +15,28 @@ const NAV = [
 
 export function Header() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-bg/72 backdrop-blur-md">
+    <header
+      className={cn(
+        "sticky top-0 z-50 border-b bg-bg/72 backdrop-blur-md transition-[border-color,box-shadow] duration-300",
+        scrolled ? "border-border shadow-[0_8px_30px_-12px_rgba(0,0,0,0.6)]" : "border-transparent",
+      )}
+    >
+      <a
+        href="#contenido"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-[60] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:uppercase focus:tracking-[0.08em] focus:text-accent-ink"
+      >
+        Saltar al contenido
+      </a>
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-7">
         <Link href="/" className="flex items-center gap-2 font-display text-lg font-bold tracking-[-0.02em]">
           <span className="inline-block h-[9px] w-[9px] rounded-[2px] bg-accent" />
