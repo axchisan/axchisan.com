@@ -27,7 +27,7 @@ export default async function HomePage() {
   return (
     <>
       <Header />
-      <main>
+      <main id="contenido" tabIndex={-1}>
         <HeroInteractive stats={stats} />
         <ServicesSection services={services} />
         <WorkSection projects={projects.slice(0, 3)} />
