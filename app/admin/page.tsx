@@ -22,10 +22,10 @@ async function getStats() {
 export default async function AdminDashboard() {
   const s = await getStats()
   const cards = [
-    { label: "Proyectos", value: s.projects },
-    { label: "Posts", value: s.posts },
+    { label: "Proyectos", value: s.projects, href: "/admin/projects" },
+    { label: "Posts", value: s.posts, href: "/admin/blog" },
+    { label: "Skills", value: s.skills, href: "/admin/skills" },
     { label: "Servicios", value: s.services },
-    { label: "Skills", value: s.skills },
     { label: "Mensajes", value: s.messages, href: "/admin/messages", badge: s.unread },
   ]
 
@@ -60,10 +60,6 @@ export default async function AdminDashboard() {
         })}
       </div>
 
-      <p className="mt-8 text-sm text-faint">
-        La edición de proyectos, blog y media llega en el próximo incremento. Por ahora puedes
-        gestionar mensajes, perfil y ajustes.
-      </p>
     </div>
   )
 }

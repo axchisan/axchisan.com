@@ -4,11 +4,14 @@ import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { signOut } from "next-auth/react"
-import { LayoutDashboard, Mail, User, Settings, LogOut, Menu, X } from "lucide-react"
+import { LayoutDashboard, FolderGit2, FileText, Cpu, Mail, User, Settings, LogOut, Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const NAV = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/projects", label: "Proyectos", icon: FolderGit2 },
+  { href: "/admin/blog", label: "Blog", icon: FileText },
+  { href: "/admin/skills", label: "Skills", icon: Cpu },
   { href: "/admin/messages", label: "Mensajes", icon: Mail },
   { href: "/admin/profile", label: "Perfil", icon: User },
   { href: "/admin/settings", label: "Ajustes", icon: Settings },
