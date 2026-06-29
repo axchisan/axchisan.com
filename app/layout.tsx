@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google"
 import { Toaster } from "sonner"
 import "./globals.css"
@@ -62,7 +62,23 @@ export const metadata: Metadata = {
       "Software que se siente extraordinario. Web · Multiplataforma · Automatización · IA.",
     creator: "@axchisan",
   },
-  robots: { index: true, follow: true },
+  category: "technology",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+}
+
+export const viewport: Viewport = {
+  themeColor: "#0A0B0D",
+  colorScheme: "dark",
 }
 
 export default function RootLayout({

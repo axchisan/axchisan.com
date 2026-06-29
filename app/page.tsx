@@ -18,10 +18,10 @@ export default async function HomePage() {
   ])
 
   const stats = [
-    { n: String(metrics.projectsCount).padStart(2, "0"), label: "en producción" },
-    { n: String(metrics.clientsCount).padStart(2, "0"), label: "clientes" },
-    { n: `${metrics.yearsExperience}+`, label: "años" },
-    { n: `${metrics.technologiesCount}+`, label: "tecnologías" },
+    { value: metrics.projectsCount, pad: 2, label: "en producción" },
+    { value: metrics.clientsCount, pad: 2, label: "clientes" },
+    { value: metrics.yearsExperience, suffix: "+", label: "años" },
+    { value: metrics.technologiesCount, suffix: "+", label: "tecnologías" },
   ]
 
   return (
