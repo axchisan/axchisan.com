@@ -3,10 +3,11 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
-import { Pencil, Trash2 } from "lucide-react"
+import { Pencil, Trash2, FileText } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { EmptyState } from "@/components/admin/empty-state"
 
 type Item = {
   slug: string
@@ -35,7 +36,16 @@ export function BlogList({ items }: { items: Item[] }) {
     }
   }
 
-  if (items.length === 0) return <Card className="p-10 text-center text-muted">Aún no hay posts.</Card>
+  if (items.length === 0)
+    return (
+      <EmptyState
+        icon={FileText}
+        title="Aún no hay posts"
+        description="Escribe tu primer artículo para construir autoridad técnica. Aparecerá en el blog."
+        actionHref="/admin/blog/new"
+        actionLabel="Nuevo post"
+      />
+    )
 
   return (
     <div className="flex flex-col gap-3">
