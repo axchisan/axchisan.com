@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { ImageUpload } from "@/components/admin/image-upload"
 import { MultiImageUpload } from "@/components/admin/multi-image-upload"
+import { FileUpload, type ProjectFileItem } from "@/components/admin/file-upload"
 
 export type ProjectInput = {
   id?: string
@@ -25,6 +26,7 @@ export type ProjectInput = {
   liveUrl?: string | null
   coverImage?: string | null
   images?: string[]
+  files?: ProjectFileItem[]
   order?: number
 }
 
@@ -40,6 +42,7 @@ export function ProjectForm({ initial }: { initial?: ProjectInput }) {
   const [loading, setLoading] = useState(false)
   const [coverImage, setCoverImage] = useState(initial?.coverImage ?? "")
   const [images, setImages] = useState<string[]>(initial?.images ?? [])
+  const [files, setFiles] = useState<ProjectFileItem[]>(initial?.files ?? [])
   const [featured, setFeatured] = useState(initial?.featured ?? false)
   const [status, setStatus] = useState(initial?.status ?? "COMPLETED")
 
@@ -64,6 +67,7 @@ export function ProjectForm({ initial }: { initial?: ProjectInput }) {
       featured,
       coverImage,
       images,
+      files,
     }
     try {
       const res = await fetch(isEdit ? `/api/projects/${initial!.id}` : "/api/projects", {
@@ -147,6 +151,10 @@ export function ProjectForm({ initial }: { initial?: ProjectInput }) {
           <div>
             <Label>Galería de imágenes</Label>
             <MultiImageUpload value={images} onChange={setImages} />
+          </div>
+          <div>
+            <Label>Archivos descargables</Label>
+            <FileUpload value={files} onChange={setFiles} />
           </div>
         </CardContent>
       </Card>

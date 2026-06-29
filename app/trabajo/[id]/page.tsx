@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowLeft, ExternalLink } from "lucide-react"
+import { ArrowLeft, ExternalLink, Download } from "lucide-react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import { Header } from "@/components/site/header"
@@ -99,6 +99,34 @@ export default async function ProjectPage({ params }: Params) {
               // eslint-disable-next-line @next/next/no-img-element
               <img key={i} src={src} alt={`${p.title} ${i + 1}`} loading="lazy" decoding="async" className="w-full rounded-xl border border-border" />
             ))}
+          </div>
+        )}
+
+        {p.files?.filter((f) => f.isDownloadable).length > 0 && (
+          <div className="mx-auto mt-12 max-w-3xl">
+            <h2 className="mb-4 font-display text-xl font-semibold">Descargas</h2>
+            <div className="flex flex-col gap-2.5">
+              {p.files
+                .filter((f) => f.isDownloadable)
+                .map((f) => (
+                  <a
+                    key={f.id}
+                    href={f.url}
+                    download
+                    className="group flex items-center gap-3 rounded-xl border border-border bg-surface px-4 py-3 transition-colors hover:border-accent/40 hover:bg-surface-2"
+                  >
+                    <Download className="h-5 w-5 shrink-0 text-accent" />
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-[15px] text-text">{f.displayName ?? f.originalName}</p>
+                      <p className="font-mono text-[10px] uppercase tracking-[0.08em] text-faint">
+                        {f.category}
+                        {f.size ? ` · ${(f.size / 1024 / 1024).toFixed(1)} MB` : ""}
+                      </p>
+                    </div>
+                    <span className="mono-label text-muted transition-colors group-hover:text-accent">Descargar</span>
+                  </a>
+                ))}
+            </div>
           </div>
         )}
 
