@@ -218,10 +218,11 @@
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 0;
   opacity: 0;
   transition: opacity 0.3s ease;
   background: radial-gradient(
-    240px circle at var(--mx, 50%) var(--my, 50%),
+    260px circle at var(--mx, 50%) var(--my, 50%),
     var(--accent-soft),
     transparent 70%
   );
@@ -229,6 +230,11 @@
 }
 .spotlight:hover::before {
   opacity: 1;
+}
+/* El contenido de la tarjeta queda por encima del glow */
+.spotlight > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* Divider con gradiente */
