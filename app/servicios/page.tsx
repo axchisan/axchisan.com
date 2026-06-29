@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "Servicios",
   description:
     "Desarrollo web, aplicaciones multiplataforma, automatización con IA y software a medida. Lo que el studio puede construir para tu negocio.",
+  alternates: { canonical: "/servicios" },
 }
 
 export const dynamic = "force-dynamic"
@@ -28,7 +29,7 @@ export default async function ServiciosPage() {
   return (
     <>
       <Header />
-      <main>
+      <main id="contenido" tabIndex={-1}>
         <PageHero
           kicker="Servicios · Qué construimos"
           title="Software a la medida de tu problema"

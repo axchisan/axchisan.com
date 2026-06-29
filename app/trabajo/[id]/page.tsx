@@ -21,6 +21,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title: project.title,
     description: project.shortDesc ?? project.description.slice(0, 160),
+    alternates: { canonical: `/trabajo/${id}` },
     openGraph: {
       title: project.title,
       description: project.shortDesc ?? undefined,
@@ -37,7 +38,7 @@ export default async function ProjectPage({ params }: Params) {
   return (
     <>
       <Header />
-      <main className="px-7 pt-28 md:pt-32">
+      <main id="contenido" tabIndex={-1} className="px-7 pt-28 md:pt-32">
         <div className="mx-auto max-w-4xl">
           <Link href="/trabajo" className="mono-label inline-flex items-center gap-2 text-muted transition-colors hover:text-text">
             <ArrowLeft className="h-3.5 w-3.5" /> Trabajo
@@ -83,7 +84,7 @@ export default async function ProjectPage({ params }: Params) {
 
         {p.coverImage && (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={p.coverImage} alt={p.title} className="mx-auto mt-10 w-full max-w-5xl rounded-2xl border border-border" />
+          <img src={p.coverImage} alt={p.title} loading="lazy" decoding="async" className="mx-auto mt-10 w-full max-w-5xl rounded-2xl border border-border" />
         )}
 
         {p.content && (
@@ -96,7 +97,7 @@ export default async function ProjectPage({ params }: Params) {
           <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2">
             {p.images.map((src, i) => (
               // eslint-disable-next-line @next/next/no-img-element
-              <img key={i} src={src} alt={`${p.title} ${i + 1}`} className="w-full rounded-xl border border-border" />
+              <img key={i} src={src} alt={`${p.title} ${i + 1}`} loading="lazy" decoding="async" className="w-full rounded-xl border border-border" />
             ))}
           </div>
         )}

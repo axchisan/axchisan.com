@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Blog",
   description:
     "Artículos sobre desarrollo de software, automatización, IA y las decisiones técnicas detrás de productos digitales reales.",
+  alternates: { canonical: "/blog" },
 }
 
 export const dynamic = "force-dynamic"
@@ -20,7 +21,7 @@ export default async function BlogPage() {
   return (
     <>
       <Header />
-      <main>
+      <main id="contenido" tabIndex={-1}>
         <PageHero
           kicker="Insights · Notas del studio"
           title="Ideas, decisiones y aprendizajes"
