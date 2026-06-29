@@ -8,7 +8,9 @@ export const dynamic = "force-dynamic"
 
 export default async function EditProjectPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const project = await prisma.project.findUnique({ where: { id } }).catch(() => null)
+  const project = await prisma.project
+    .findUnique({ where: { id }, include: { files: { orderBy: { order: "asc" } } } })
+    .catch(() => null)
   if (!project) notFound()
 
   return (
@@ -33,6 +35,19 @@ export default async function EditProjectPage({ params }: { params: Promise<{ id
             liveUrl: project.liveUrl,
             coverImage: project.coverImage,
             images: project.images,
+            files: project.files.map((f) => ({
+              id: f.id,
+              filename: f.filename,
+              originalName: f.originalName,
+              displayName: f.displayName ?? f.originalName,
+              url: f.url,
+              size: f.size,
+              type: f.type,
+              category: f.category,
+              platform: f.platform,
+              version: f.version,
+              isDownloadable: f.isDownloadable,
+            })),
             order: project.order,
           }}
         />
