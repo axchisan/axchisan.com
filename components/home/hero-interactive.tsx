@@ -3,8 +3,9 @@
 import { useEffect, useRef } from "react"
 import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "motion/react"
 import { Button } from "@/components/ui/button"
+import { NumberTicker } from "@/components/ui/number-ticker"
 
-type Stat = { n: string; label: string }
+type Stat = { value: number; suffix?: string; pad?: number; label: string }
 
 const LEAD = ["Construimos", "software", "que", "se", "siente"]
 
@@ -164,6 +165,8 @@ export function HeroInteractive({ stats }: { stats: Stat[] }) {
       ref={sectionRef}
       className="relative flex min-h-[92vh] items-center overflow-hidden px-7 pt-24"
     >
+      {/* Grid sutil de fondo */}
+      <div aria-hidden className="bg-grid mask-fade pointer-events-none absolute inset-0 -z-[2]" />
       {/* Constelación */}
       <canvas
         ref={canvasRef}
@@ -214,7 +217,9 @@ export function HeroInteractive({ stats }: { stats: Stat[] }) {
           <div className="flex flex-wrap gap-x-12 gap-y-6 border-t border-border pt-6">
             {stats.map((s) => (
               <div key={s.label}>
-                <dt className="font-display text-3xl font-semibold">{s.n}</dt>
+                <dt className="font-display text-3xl font-semibold">
+                  <NumberTicker value={s.value} suffix={s.suffix} pad={s.pad} />
+                </dt>
                 <dd className="mono-label mt-1">{s.label}</dd>
               </div>
             ))}
