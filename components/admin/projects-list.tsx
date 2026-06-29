@@ -4,10 +4,11 @@ import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
-import { Pencil, Trash2 } from "lucide-react"
+import { Pencil, Trash2, FolderGit2 } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { EmptyState } from "@/components/admin/empty-state"
 
 type Item = {
   id: string
@@ -37,7 +38,16 @@ export function ProjectsList({ items }: { items: Item[] }) {
     }
   }
 
-  if (items.length === 0) return <Card className="p-10 text-center text-muted">Aún no hay proyectos.</Card>
+  if (items.length === 0)
+    return (
+      <EmptyState
+        icon={FolderGit2}
+        title="Aún no hay proyectos"
+        description="Crea tu primer caso para mostrarlo en el sitio. Aparecerá en la sección Trabajo."
+        actionHref="/admin/projects/new"
+        actionLabel="Nuevo proyecto"
+      />
+    )
 
   return (
     <div className="flex flex-col gap-3">

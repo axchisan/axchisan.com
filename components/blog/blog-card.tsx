@@ -1,6 +1,6 @@
-import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 import { formatDate } from "@/lib/utils"
+import { SpotlightCard } from "@/components/ui/spotlight-card"
 
 type Post = {
   slug: string
@@ -14,10 +14,7 @@ type Post = {
 
 export function BlogCard({ post, featured = false }: { post: Post; featured?: boolean }) {
   return (
-    <Link
-      href={`/blog/${post.slug}`}
-      className="group flex flex-col rounded-2xl border border-border bg-surface p-6 transition-[transform,border-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1 hover:border-border-strong"
-    >
+    <SpotlightCard href={`/blog/${post.slug}`} className="flex h-full flex-col p-6">
       <div className="flex items-center gap-3">
         <span className="mono-label text-accent">{post.tags[0] ?? "Artículo"}</span>
         {featured && (
@@ -39,6 +36,6 @@ export function BlogCard({ post, featured = false }: { post: Post; featured?: bo
         </span>
         <ArrowUpRight className="h-4.5 w-4.5 text-accent transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </div>
-    </Link>
+    </SpotlightCard>
   )
 }
