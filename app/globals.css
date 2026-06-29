@@ -176,6 +176,80 @@
   to { background-position: -200% 0; }
 }
 
+/* ===== Texturas y elementos gráficos (técnicas anti-slop) ===== */
+
+/* Fondo de puntos sutil — textura técnica */
+.bg-dotted {
+  background-image: radial-gradient(circle, hsl(0 0% 100% / 0.05) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+.bg-dotted-accent {
+  background-image: radial-gradient(circle, var(--accent) 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity: 0.06;
+}
+/* Grid de líneas finas */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, hsl(0 0% 100% / 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(0 0% 100% / 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+/* Máscara radial para desvanecer texturas hacia los bordes */
+.mask-fade {
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 100%);
+}
+
+/* Borde con gradiente (hairline de marca) */
+.border-gradient {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 55%, transparent), transparent 60%) border-box;
+}
+
+/* Spotlight que sigue al cursor (usa --mx/--my en px desde el componente) */
+.spotlight {
+  position: relative;
+  overflow: hidden;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(
+    240px circle at var(--mx, 50%) var(--my, 50%),
+    var(--accent-soft),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/* Divider con gradiente */
+.divider-gradient {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+}
+
+/* Grain sutil (overlay de ruido) */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.025;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
 /* Respeta prefers-reduced-motion: solo opacidad, sin movimiento */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
