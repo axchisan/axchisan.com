@@ -139,6 +139,43 @@
 .prose-axchi img{border-radius:12px;border:1px solid var(--border)}
 .prose-axchi hr{border:none;border-top:1px solid var(--border);margin:2.4em 0}
 
+/* ===== Hero interactivo ===== */
+/* Revelado de palabras (clip + subida), una sola vez al cargar */
+.hero-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+.hero-word > span {
+  display: inline-block;
+  transform: translateY(110%);
+  opacity: 0;
+  animation: word-rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--i, 0) * 70ms + 0.1s);
+}
+@keyframes word-rise {
+  to { transform: translateY(0); opacity: 1; }
+}
+/* Barrido de gradiente sobre la palabra acento */
+.text-sweep {
+  background: linear-gradient(
+    100deg,
+    var(--accent) 0%,
+    #e9ffb0 25%,
+    var(--accent) 50%,
+    #9fe07a 75%,
+    var(--accent) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: sweep 6s linear infinite;
+}
+@keyframes sweep {
+  to { background-position: -200% 0; }
+}
+
 /* Respeta prefers-reduced-motion: solo opacidad, sin movimiento */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
