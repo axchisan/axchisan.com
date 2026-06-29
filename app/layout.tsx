@@ -73,6 +73,37 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
       <body className="min-h-screen bg-bg text-text">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              name: "Axchi Studio",
+              description:
+                "Studio de ingeniería de software en Bogotá: desarrollo web, aplicaciones multiplataforma, automatización e integración de IA.",
+              url: SITE_URL,
+              email: "axchisan923@gmail.com",
+              telephone: "+573183038190",
+              areaServed: "Worldwide",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Bogotá",
+                addressCountry: "CO",
+              },
+              founder: {
+                "@type": "Person",
+                name: "Duvan Yair Arciniegas",
+                alternateName: "Axchi",
+              },
+              sameAs: [
+                "https://github.com/axchisan",
+                "https://www.instagram.com/axchisan",
+                "https://www.linkedin.com/in/duvan-yair-arciniegas-gerena-535690339",
+              ],
+            }),
+          }}
+        />
         {children}
         <Toaster
           theme="dark"
