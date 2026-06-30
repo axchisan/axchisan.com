@@ -8,6 +8,7 @@ import { Header } from "@/components/site/header"
 import { Footer } from "@/components/site/footer"
 import { Button } from "@/components/ui/button"
 import { GithubIcon } from "@/components/site/social-icons"
+import { ViewTracker } from "@/components/view-tracker"
 import { getProjectById } from "@/lib/data"
 
 export const dynamic = "force-dynamic"
@@ -37,6 +38,7 @@ export default async function ProjectPage({ params }: Params) {
 
   return (
     <>
+      <ViewTracker endpoint={`/api/projects/${p.id}/view`} />
       <Header />
       <main id="contenido" tabIndex={-1} className="px-7 pt-28 md:pt-32">
         <div className="mx-auto max-w-4xl">
