@@ -136,8 +136,12 @@
 .prose-axchi code{font-family:var(--font-mono);font-size:.86em;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:.12em .4em}
 .prose-axchi pre{background:#0e1014;border:1px solid var(--border);border-radius:12px;padding:1.1em 1.25em;overflow-x:auto}
 .prose-axchi pre code{background:none;border:none;padding:0;font-size:.85em;color:#e3e6ea}
-.prose-axchi img{border-radius:12px;border:1px solid var(--border)}
+.prose-axchi img{max-width:100%;height:auto;border-radius:12px;border:1px solid var(--border)}
 .prose-axchi hr{border:none;border-top:1px solid var(--border);margin:2.4em 0}
+.prose-axchi table{display:block;width:100%;overflow-x:auto;border-collapse:collapse;font-size:.92em}
+.prose-axchi th,.prose-axchi td{border:1px solid var(--border);padding:.5em .7em;text-align:left}
+.prose-axchi th{background:var(--surface-2);font-weight:600}
+.prose-axchi :where(p,h1,h2,h3,h4,li){overflow-wrap:anywhere}
 
 /* ===== Hero interactivo ===== */
 /* Revelado de palabras (clip + subida), una sola vez al cargar */
