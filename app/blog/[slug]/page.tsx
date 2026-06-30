@@ -7,6 +7,7 @@ import remarkGfm from "remark-gfm"
 import rehypeRaw from "rehype-raw"
 import { Header } from "@/components/site/header"
 import { Footer } from "@/components/site/footer"
+import { ViewTracker } from "@/components/view-tracker"
 import { getBlogPostBySlug } from "@/lib/data"
 import { formatDate } from "@/lib/utils"
 import { SITE_URL } from "@/lib/site"
@@ -39,6 +40,7 @@ export default async function BlogPostPage({ params }: Params) {
 
   return (
     <>
+      <ViewTracker endpoint={`/api/blog/${post.slug}/view`} />
       <Header />
       <main id="contenido" tabIndex={-1} className="px-7 pt-28 md:pt-32">
         <script
