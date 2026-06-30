@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 import { ArrowLeft, ExternalLink, Download } from "lucide-react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
+import rehypeRaw from "rehype-raw"
 import { Header } from "@/components/site/header"
 import { Footer } from "@/components/site/footer"
 import { Button } from "@/components/ui/button"
@@ -91,7 +92,7 @@ export default async function ProjectPage({ params }: Params) {
 
         {p.content && (
           <div className="prose-axchi mx-auto mt-12 max-w-3xl">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{p.content}</ReactMarkdown>
+            <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>{p.content}</ReactMarkdown>
           </div>
         )}
 
