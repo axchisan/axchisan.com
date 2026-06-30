@@ -40,7 +40,7 @@ export default async function ServiciosPage() {
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-5 md:grid-cols-2">
             {services.map((s, i) => (
               <Reveal key={s.id} delay={(i % 2) * 0.06}>
-                <div className="flex h-full flex-col rounded-2xl border border-border bg-surface p-7">
+                <div className="flex h-full flex-col rounded-2xl border border-border bg-surface p-7 transition-[transform,border-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1 hover:border-accent/30">
                   <span className="font-mono text-[11px] tracking-[0.1em] text-accent">
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -73,7 +73,7 @@ export default async function ServiciosPage() {
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {PROCESS.map((p, i) => (
                 <Reveal key={p.k} delay={i * 0.06}>
-                  <div className="rounded-2xl border border-border bg-surface p-6">
+                  <div className="h-full rounded-2xl border border-border bg-surface p-6 transition-colors duration-200 hover:border-accent/30">
                     <span className="font-display text-3xl font-semibold text-accent">{p.k}</span>
                     <h3 className="mt-3 font-display text-lg font-semibold">{p.t}</h3>
                     <p className="mt-1.5 text-sm text-muted">{p.d}</p>
