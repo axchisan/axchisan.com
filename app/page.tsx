@@ -11,8 +11,8 @@ export const dynamic = "force-dynamic"
 export default async function Home() {
   const [projects, blog] = await Promise.all([getProjects(), getBlogPosts()])
 
-  const destacados = projects.filter((p) => p.featured).slice(0, 3)
-  const mostrados = destacados.length > 0 ? destacados : projects.slice(0, 3)
+  const destacados = projects.filter((p) => p.featured).slice(0, 4)
+  const mostrados = destacados.length > 0 ? destacados : projects.slice(0, 4)
   const articulos = blog.posts.slice(0, 3)
 
   return (
