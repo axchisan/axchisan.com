@@ -88,7 +88,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" className={`${instrumentSans.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+    <html
+      lang="es"
+      // Next 16 exige declararlo para no aplicar el scroll suave a los cambios
+      // de ruta, donde produce un salto largo en lugar de una navegación.
+      data-scroll-behavior="smooth"
+      className={`${instrumentSans.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
       <body className="min-h-screen bg-paper text-ink">
         <script
           type="application/ld+json"

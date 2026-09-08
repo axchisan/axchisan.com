@@ -2,7 +2,8 @@ import { config as loadEnv } from "dotenv"
 import { PrismaClient } from "@prisma/client"
 
 // Mismo orden de precedencia que Next: .env.local gana sobre .env.
-loadEnv({ path: ".env.local" })
+// ENV_FILE permite apuntar a la rama de pruebas sin tocar el entorno local.
+loadEnv({ path: process.env.ENV_FILE ?? ".env.local" })
 loadEnv({ path: ".env" })
 
 import { PrismaPg } from "@prisma/adapter-pg"

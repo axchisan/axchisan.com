@@ -74,8 +74,8 @@ export function ProjectsList({ items }: { items: Item[] }) {
             <span className="text-[0.875rem] text-faint">{ESTADO[p.status] ?? p.status}</span>
           </div>
           <div className="flex shrink-0 gap-2">
-            <Button variant="outline" size="sm" href={`/admin/projects/${p.id}`}>
-              <Pencil className="h-4 w-4" />
+            <Button variant="outline" size="sm" href={`/admin/projects/${p.id}`} aria-label={`Editar ${p.title}`}>
+              <Pencil className="h-4 w-4" aria-hidden />
             </Button>
             <Button
               variant="outline"
@@ -83,8 +83,9 @@ export function ProjectsList({ items }: { items: Item[] }) {
               disabled={busy === p.id}
               onClick={() => remove(p.id, p.title)}
               className="text-danger hover:border-danger/50"
+              aria-label={`Eliminar ${p.title}`}
             >
-              <Trash2 className="h-4 w-4" />
+              <Trash2 className="h-4 w-4" aria-hidden />
             </Button>
           </div>
         </Card>

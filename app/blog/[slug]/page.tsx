@@ -9,12 +9,11 @@ import { Footer } from "@/components/site/footer"
 import { ViewTracker } from "@/components/view-tracker"
 import { getBlogPostBySlug } from "@/lib/data"
 import { PROFILE, SITE_URL } from "@/lib/site"
+import { formatDate, toDate } from "@/lib/utils"
 
 export const dynamic = "force-dynamic"
 
 type Params = { params: Promise<{ slug: string }> }
-
-const FECHA = new Intl.DateTimeFormat("es-CO", { day: "numeric", month: "long", year: "numeric" })
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params
@@ -28,7 +27,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       title: post.title,
       description: post.excerpt ?? undefined,
       type: "article",
-      publishedTime: (post.publishedAt ?? post.createdAt).toISOString(),
+      publishedTime: toDate(post.publishedAt ?? post.createdAt).toISOString(),
       images: post.coverImage ? [post.coverImage] : undefined,
     },
   }
@@ -39,7 +38,7 @@ export default async function BlogPostPage({ params }: Params) {
   const post = await getBlogPostBySlug(slug)
   if (!post || !post.published) notFound()
 
-  const publicado = post.publishedAt ?? post.createdAt
+  const publicado = toDate(post.publishedAt ?? post.createdAt)
 
   return (
     <>
@@ -56,7 +55,7 @@ export default async function BlogPostPage({ params }: Params) {
               headline: post.title,
               description: post.excerpt ?? undefined,
               datePublished: publicado.toISOString(),
-              dateModified: post.updatedAt.toISOString(),
+              dateModified: toDate(post.updatedAt).toISOString(),
               author: { "@type": "Person", name: PROFILE.name, url: SITE_URL },
               mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
             }),
@@ -72,7 +71,7 @@ export default async function BlogPostPage({ params }: Params) {
         <header className="enter measure pb-10 pt-8">
           <h1>{post.title}</h1>
           <p className="mt-4 text-[0.9375rem] text-faint">
-            <time dateTime={publicado.toISOString()}>{FECHA.format(publicado)}</time>
+            <time dateTime={publicado.toISOString()}>{formatDate(publicado)}</time>
             {post.readTime ? <span className="ml-4">{post.readTime} min de lectura</span> : null}
           </p>
           {post.tags.length > 0 && (
