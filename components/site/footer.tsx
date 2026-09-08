@@ -37,9 +37,14 @@ export function Footer() {
 
       <div className="mx-auto flex max-w-5xl flex-col gap-2 px-5 pb-10 text-[0.875rem] text-faint sm:flex-row sm:items-center sm:justify-between sm:px-8">
         <p>© {new Date().getFullYear()} {PROFILE.name}</p>
-        <a href={`mailto:${PROFILE.email}`} className="link">
-          {PROFILE.email}
-        </a>
+        <div className="flex items-center gap-5">
+          <Link href="/privacidad" className="transition-colors hover:text-ink">
+            Privacidad
+          </Link>
+          <a href={`mailto:${PROFILE.email}`} className="link">
+            {PROFILE.email}
+          </a>
+        </div>
       </div>
     </footer>
   )
