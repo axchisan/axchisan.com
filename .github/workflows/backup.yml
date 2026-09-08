@@ -1,0 +1,58 @@
+name: Copia de seguridad de la base de datos
+
+# La base de datos anterior se perdió entera al dar de baja el VPS. Esto vuelca
+# el contenido cada semana, lo cifra y lo guarda como artefacto del workflow.
+#
+# El repositorio es público y los artefactos de un repo público son
+# descargables por cualquiera: el volcado NUNCA puede subirse en claro.
+#
+# Secretos necesarios:
+#   DATABASE_URL_DIRECT  cadena de conexión directa de Neon (sin -pooler)
+#   BACKUP_PASSPHRASE    frase para cifrar y descifrar el volcado
+
+on:
+  schedule:
+    # Lunes a las 06:00 UTC (01:00 en Bogotá).
+    - cron: "0 6 * * 1"
+  workflow_dispatch: {}
+
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Instalar pg_dump 18
+        # La versión mayor de pg_dump debe coincidir con la del servidor (Neon
+        # corre PostgreSQL 18); la que trae el runner se queda corta.
+        run: |
+          curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc \
+            | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/pgdg.gpg
+          echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" \
+            | sudo tee /etc/apt/sources.list.d/pgdg.list
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client-18
+
+      - name: Volcar y cifrar
+        env:
+          DATABASE_URL_DIRECT: ${{ secrets.DATABASE_URL_DIRECT }}
+          BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+        run: |
+          set -euo pipefail
+          if [ -z "${DATABASE_URL_DIRECT}" ] || [ -z "${BACKUP_PASSPHRASE}" ]; then
+            echo "Faltan los secretos DATABASE_URL_DIRECT o BACKUP_PASSPHRASE" >&2
+            exit 1
+          fi
+          name="axchisan-$(date -u +%Y%m%d).sql.gz"
+          pg_dump --no-owner --no-privileges "${DATABASE_URL_DIRECT}" | gzip -9 > "${name}"
+          echo "Volcado sin cifrar: $(du -h "${name}" | cut -f1)"
+          gpg --batch --yes --symmetric --cipher-algo AES256 \
+              --passphrase "${BACKUP_PASSPHRASE}" "${name}"
+          rm -f "${name}"
+          ls -lh "${name}.gpg"
+
+      - name: Guardar el artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: db-backup-${{ github.run_id }}
+          path: "*.sql.gz.gpg"
+          retention-days: 90
+          if-no-files-found: error

@@ -4,17 +4,7 @@ import { useRef, useState } from "react"
 import { toast } from "sonner"
 import { ImagePlus, X, Loader2 } from "lucide-react"
 
-async function uploadOne(file: File): Promise<string> {
-  const fd = new FormData()
-  fd.append("file", file)
-  const res = await fetch("/api/admin/upload-image", { method: "POST", body: fd })
-  if (!res.ok) {
-    const e = await res.json().catch(() => ({}))
-    throw new Error(e.error || "Error al subir")
-  }
-  const { url } = await res.json()
-  return url as string
-}
+import { uploadFiles } from "@/lib/upload-client"
 
 /** Galería de imágenes. value/onChange con array de URLs. */
 export function MultiImageUpload({ value, onChange }: { value: string[]; onChange: (urls: string[]) => void }) {
@@ -25,13 +15,14 @@ export function MultiImageUpload({ value, onChange }: { value: string[]; onChang
     if (!files || files.length === 0) return
     setLoading(true)
     try {
-      const urls = await Promise.all(Array.from(files).map(uploadOne))
-      onChange([...value, ...urls])
-      toast.success(`${urls.length} imagen(es) subida(s)`)
+      const uploaded = await uploadFiles(Array.from(files), { imagesOnly: true })
+      onChange([...value, ...uploaded.map((f) => f.url)])
+      toast.success(`${uploaded.length} imagen(es) subida(s)`)
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Error")
     } finally {
       setLoading(false)
+      if (ref.current) ref.current.value = ""
     }
   }
 

@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from "next/server"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
+import { invalidate } from "@/lib/cache"
 
 export async function GET() {
   try {
@@ -68,6 +69,7 @@ export async function PUT(request: NextRequest) {
       })
     }
 
+    invalidate("profile")
     return NextResponse.json(profile)
   } catch (error) {
     console.error("Profile update error:", error)

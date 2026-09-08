@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from "next/server"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
+import { invalidate } from "@/lib/cache"
 
 export async function GET(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
@@ -134,6 +135,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       },
     })
 
+    invalidate("projects")
     return NextResponse.json(updatedProject)
   } catch (error) {
     console.error("Project update error:", error)
@@ -152,6 +154,7 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
       where: { id: (await params).id },
     })
 
+    invalidate("projects")
     return NextResponse.json({ message: "Project deleted successfully" })
   } catch (error) {
     console.error("Project deletion error:", error)

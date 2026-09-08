@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import { z } from "zod"
 import { prisma } from "@/lib/prisma"
+import { notifyContactMessage } from "@/lib/mail"
 
 const schema = z.object({
   name: z.string().min(2).max(120),
@@ -26,6 +27,11 @@ export async function POST(request: Request) {
         message,
       },
     })
+
+    // El aviso por correo no bloquea la respuesta ni puede hacerla fallar:
+    // el mensaje ya está guardado y quien escribió no tiene por qué enterarse
+    // de un problema con el proveedor de correo.
+    await notifyContactMessage({ name, email, subject, message })
 
     return NextResponse.json({ ok: true })
   } catch (error) {

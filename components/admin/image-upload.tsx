@@ -4,34 +4,29 @@ import { useRef, useState } from "react"
 import { toast } from "sonner"
 import { ImagePlus, X, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
-
-async function uploadOne(file: File): Promise<string> {
-  const fd = new FormData()
-  fd.append("file", file)
-  const res = await fetch("/api/admin/upload-image", { method: "POST", body: fd })
-  if (!res.ok) {
-    const e = await res.json().catch(() => ({}))
-    throw new Error(e.error || "Error al subir")
-  }
-  const { url } = await res.json()
-  return url as string
-}
+import { uploadFile } from "@/lib/upload-client"
 
 /** Subida de una sola imagen (portada). value/onChange con la URL. */
 export function ImageUpload({ value, onChange }: { value?: string; onChange: (url: string) => void }) {
   const ref = useRef<HTMLInputElement>(null)
   const [loading, setLoading] = useState(false)
+  const [progress, setProgress] = useState(0)
 
   async function handle(file?: File) {
     if (!file) return
     setLoading(true)
+    setProgress(0)
     try {
-      onChange(await uploadOne(file))
+      const { url } = await uploadFile(file, { imagesOnly: true, onProgress: setProgress })
+      onChange(url)
       toast.success("Imagen subida")
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Error")
     } finally {
       setLoading(false)
+      // El input conserva el archivo anterior: sin esto no se puede reintentar
+      // con el mismo archivo tras un fallo.
+      if (ref.current) ref.current.value = ""
     }
   }
 
@@ -67,7 +62,9 @@ export function ImageUpload({ value, onChange }: { value?: string; onChange: (ur
           )}
         >
           {loading ? <Loader2 className="h-6 w-6 animate-spin" /> : <ImagePlus className="h-6 w-6" />}
-          <span className="text-sm">{loading ? "Subiendo…" : "Subir imagen"}</span>
+          <span className="text-sm">
+            {loading ? `Subiendo… ${Math.round(progress * 100)}%` : "Subir imagen"}
+          </span>
         </button>
       )}
     </div>

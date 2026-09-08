@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from "next/server"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
+import { invalidate } from "@/lib/cache"
 
 export async function GET(_request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   try {
@@ -128,6 +129,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       },
     })
 
+    invalidate("blog")
     return NextResponse.json(updatedPost)
   } catch (error) {
     console.error("Blog post update error:", error)
@@ -146,6 +148,7 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
       where: { slug: (await params).slug },
     })
 
+    invalidate("blog")
     return NextResponse.json({ message: "Blog post deleted successfully" })
   } catch (error) {
     console.error("Blog post deletion error:", error)

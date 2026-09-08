@@ -1,17 +1,34 @@
+import { config as loadEnv } from "dotenv"
 import { PrismaClient } from "@prisma/client"
+
+// Mismo orden de precedencia que Next: .env.local gana sobre .env.
+loadEnv({ path: ".env.local" })
+loadEnv({ path: ".env" })
+
+import { PrismaPg } from "@prisma/adapter-pg"
 import bcrypt from "bcryptjs"
 
-const prisma = new PrismaClient()
+// El cliente se construye dentro de main(): los `import` se evalúan antes que
+// loadEnv(), así que a nivel de módulo DATABASE_URL todavía no está definida.
+let prisma: PrismaClient
 
 async function main() {
-  // Create admin user
-  const hashedPassword = await bcrypt.hash("***REMOVED***", 12)
+  prisma = new PrismaClient({ adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }) })
 
-  const admin = await prisma.user.upsert({
-    where: { email: "axchisan923@gmail.com" },
-    update: {},
+  // Credenciales del admin por entorno: nunca en el repositorio.
+  const adminEmail = process.env.ADMIN_EMAIL
+  const adminPassword = process.env.ADMIN_PASSWORD
+  if (!adminEmail || !adminPassword) {
+    throw new Error("Faltan ADMIN_EMAIL y ADMIN_PASSWORD en el entorno (ver .env.example)")
+  }
+
+  const hashedPassword = await bcrypt.hash(adminPassword, 12)
+
+  await prisma.user.upsert({
+    where: { email: adminEmail },
+    update: { password: hashedPassword, role: "ADMIN" },
     create: {
-      email: "axchisan923@gmail.com",
+      email: adminEmail,
       name: "Duvan Yair Arciniegas",
       password: hashedPassword,
       role: "ADMIN",
@@ -145,5 +162,5 @@ main()
     process.exit(1)
   })
   .finally(async () => {
-    await prisma.$disconnect()
+    await prisma?.$disconnect()
   })
