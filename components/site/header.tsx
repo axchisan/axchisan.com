@@ -1,99 +1,101 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { useEffect, useState } from "react"
 import { Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { ThemeToggle } from "./theme-toggle"
 
-const NAV = [
-  { href: "/servicios", label: "Servicios" },
+const RUTAS = [
   { href: "/trabajo", label: "Trabajo" },
-  { href: "/blog", label: "Blog" },
-  { href: "/sobre", label: "Studio" },
+  { href: "/blog", label: "Escritos" },
+  { href: "/servicios", label: "Qué hago" },
+  { href: "/sobre", label: "Sobre mí" },
+  { href: "/contacto", label: "Contacto" },
 ]
 
 export function Header() {
-  const [open, setOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  const pathname = usePathname()
+  const [abierto, setAbierto] = useState(false)
 
+  // Navegar cierra el menú: si no, la ruta cambia detrás de un panel abierto.
+  useEffect(() => setAbierto(false), [pathname])
+
+  // Con el menú desplegado el fondo no debe desplazarse.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
-    onScroll()
-    window.addEventListener("scroll", onScroll, { passive: true })
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
+    document.body.style.overflow = abierto ? "hidden" : ""
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [abierto])
+
+  const activa = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
 
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-50 border-b bg-bg/72 backdrop-blur-md transition-[border-color,box-shadow] duration-300",
-        scrolled ? "border-border shadow-[0_8px_30px_-12px_rgba(0,0,0,0.6)]" : "border-transparent",
-      )}
-    >
-      <a
-        href="#contenido"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-[60] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:uppercase focus:tracking-[0.08em] focus:text-accent-ink"
-      >
-        Saltar al contenido
-      </a>
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-7">
-        <Link href="/" className="flex items-center gap-2 font-display text-lg font-bold tracking-[-0.02em]">
-          <span className="inline-block h-[9px] w-[9px] rounded-[2px] bg-accent" />
-          axchi<span className="font-normal text-muted">/studio</span>
+    <header className="sticky top-0 z-50 border-b border-line bg-paper/85 backdrop-blur-sm">
+      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-5 sm:px-8">
+        <Link
+          href="/"
+          className="rounded-[4px] text-[0.9375rem] font-semibold tracking-[-0.01em] text-ink"
+        >
+          Duvan Arciniegas
         </Link>
 
-        <nav className="hidden items-center gap-7 md:flex">
-          {NAV.map((item) => (
+        <nav className="hidden items-center gap-1 md:flex" aria-label="Principal">
+          {RUTAS.map((r) => (
             <Link
-              key={item.href}
-              href={item.href}
-              className="text-sm text-muted transition-colors hover:text-text"
+              key={r.href}
+              href={r.href}
+              aria-current={activa(r.href) ? "page" : undefined}
+              className={cn(
+                "rounded-[6px] px-2.5 py-1.5 text-[0.9375rem] transition-colors",
+                activa(r.href) ? "text-ink" : "text-graphite hover:text-ink",
+              )}
             >
-              {item.label}
+              {r.label}
             </Link>
           ))}
+          <span className="mx-1 h-4 w-px bg-line" />
+          <ThemeToggle />
         </nav>
 
-        <div className="hidden md:block">
-          <Button href="/contacto" size="sm">
-            Hablemos
-          </Button>
+        <div className="flex items-center gap-1 md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            onClick={() => setAbierto((v) => !v)}
+            className="flex h-9 w-9 items-center justify-center rounded-[8px] text-graphite transition-colors hover:bg-raised hover:text-ink"
+            aria-expanded={abierto}
+            aria-controls="menu-movil"
+            aria-label={abierto ? "Cerrar menú" : "Abrir menú"}
+          >
+            {abierto ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
-
-        <button
-          className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-text md:hidden"
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Cerrar menú" : "Abrir menú"}
-          aria-expanded={open}
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
       </div>
 
-      {/* Menú móvil */}
-      <div
-        className={cn(
-          "overflow-hidden border-t border-border transition-[max-height] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] md:hidden",
-          open ? "max-h-80" : "max-h-0",
-        )}
-      >
-        <nav className="flex flex-col gap-1 px-7 py-4">
-          {NAV.map((item) => (
+      {abierto && (
+        <nav
+          id="menu-movil"
+          aria-label="Principal"
+          className="border-t border-line bg-paper px-5 pb-4 pt-2 md:hidden"
+        >
+          {RUTAS.map((r) => (
             <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className="rounded-lg px-3 py-3 text-base text-muted transition-colors hover:bg-surface-2 hover:text-text"
+              key={r.href}
+              href={r.href}
+              aria-current={activa(r.href) ? "page" : undefined}
+              className={cn(
+                "block rounded-[6px] px-2 py-2.5 text-base transition-colors",
+                activa(r.href) ? "text-ink" : "text-graphite",
+              )}
             >
-              {item.label}
+              {r.label}
             </Link>
           ))}
-          <Button href="/contacto" className="mt-2" onClick={() => setOpen(false)}>
-            Hablemos
-          </Button>
         </nav>
-      </div>
+      )}
     </header>
   )
 }

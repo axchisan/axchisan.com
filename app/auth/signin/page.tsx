@@ -11,15 +11,14 @@ export const metadata: Metadata = {
 
 export default function SigninPage() {
   return (
-    <main className="hero-glow relative flex min-h-screen items-center justify-center overflow-hidden px-7">
-      <div className="relative z-[1] w-full max-w-sm">
-        <Link href="/" className="flex items-center justify-center gap-2 font-display text-lg font-bold tracking-[-0.02em]">
-          <span className="inline-block h-[9px] w-[9px] rounded-[2px] bg-accent" />
-          axchi<span className="font-normal text-muted">/studio</span>
+    <main className="flex min-h-screen items-center justify-center px-5">
+      <div className="w-full max-w-sm">
+        <Link href="/" className="block text-center text-[1.0625rem] font-semibold tracking-[-0.015em]">
+          Duvan Arciniegas
         </Link>
-        <div className="mt-8 rounded-2xl border border-border bg-surface p-7">
-          <h1 className="font-display text-xl font-semibold">Panel de administración</h1>
-          <p className="mt-1 text-sm text-muted">Acceso solo para el equipo.</p>
+        <div className="mt-8 rounded-[12px] border border-line bg-raised p-7">
+          <h1 className="text-xl font-semibold">Panel de administración</h1>
+          <p className="mt-1 text-[0.9375rem] text-graphite">Acceso restringido.</p>
           <div className="mt-6">
             <AuthProvider>
               <Suspense>
@@ -28,7 +27,7 @@ export default function SigninPage() {
             </AuthProvider>
           </div>
         </div>
-        <Link href="/" className="mono-label mt-6 block text-center text-muted transition-colors hover:text-text">
+        <Link href="/" className="text-[0.875rem] text-faint mt-6 block text-center text-graphite transition-colors hover:text-ink">
           ← Volver al sitio
         </Link>
       </div>

@@ -1,22 +1,18 @@
 import type { Metadata, Viewport } from "next"
-import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google"
+import { Instrument_Sans, JetBrains_Mono } from "next/font/google"
 import { Toaster } from "sonner"
 import "./globals.css"
-import { SITE_URL } from "@/lib/site"
+import { PROFILE, SITE_NAME, SITE_URL } from "@/lib/site"
+import { ThemeProvider } from "@/components/theme-provider"
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-})
-
-const inter = Inter({
-  variable: "--font-inter",
+// Una sola familia para todo el sitio. Ver DESIGN.md.
+const instrumentSans = Instrument_Sans({
+  variable: "--font-instrument-sans",
   subsets: ["latin"],
   display: "swap",
 })
 
+// Solo donde hay código o un dato numérico real. Nunca como etiqueta decorativa.
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
@@ -24,42 +20,46 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 })
 
+const DESCRIPTION =
+  "Desarrollador de software en Bogotá. Construyo sistemas completos: canales de contenido " +
+  "automatizados, apps multiplataforma sobre infraestructura serverless y juegos con multijugador " +
+  "autoritativo. Flutter, Spring Boot, Next.js, Python."
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Axchi Studio — Software que se siente extraordinario",
-    template: "%s · Axchi Studio",
+    default: `${SITE_NAME} — Desarrollador de software`,
+    template: `%s · ${SITE_NAME}`,
   },
-  description:
-    "Studio de ingeniería de software en Bogotá. Diseñamos, construimos y automatizamos productos digitales para clientes reales: web, multiplataforma e IA.",
+  description: DESCRIPTION,
   alternates: { canonical: "/" },
   keywords: [
-    "studio de software",
-    "desarrollo web",
-    "apps multiplataforma",
-    "automatización",
-    "IA",
-    "Next.js",
-    "Flutter",
+    "desarrollador de software",
     "Bogotá",
+    "Colombia",
+    "Flutter",
+    "Spring Boot",
+    "Next.js",
+    "Python",
+    "AWS",
+    "automatización",
+    "Duvan Yair Arciniegas",
     "Axchi",
   ],
-  authors: [{ name: "Duvan Yair Arciniegas", url: SITE_URL }],
-  creator: "Axchi Studio",
+  authors: [{ name: PROFILE.name, url: SITE_URL }],
+  creator: PROFILE.name,
   openGraph: {
-    type: "website",
+    type: "profile",
     locale: "es_CO",
     url: SITE_URL,
-    siteName: "Axchi Studio",
-    title: "Axchi Studio — Software que se siente extraordinario",
-    description:
-      "Studio de ingeniería de software en Bogotá. Web, multiplataforma, automatización e IA para clientes reales.",
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} — Desarrollador de software`,
+    description: DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Axchi Studio",
-    description:
-      "Software que se siente extraordinario. Web · Multiplataforma · Automatización · IA.",
+    title: `${SITE_NAME} — Desarrollador de software`,
+    description: DESCRIPTION,
     creator: "@axchisan",
   },
   category: "technology",
@@ -77,62 +77,64 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#0A0B0D",
-  colorScheme: "dark",
+  // Un valor por esquema: la barra del navegador debe seguir al tema.
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fcfcfd" },
+    { media: "(prefers-color-scheme: dark)", color: "#0e1013" },
+  ],
 }
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="es"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
-    >
-      <body className="min-h-screen bg-bg text-text">
+    <html lang="es" className={`${instrumentSans.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+      <body className="min-h-screen bg-paper text-ink">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "ProfessionalService",
-              name: "Axchi Studio",
-              description:
-                "Studio de ingeniería de software en Bogotá: desarrollo web, aplicaciones multiplataforma, automatización e integración de IA.",
+              // Persona, no empresa: el sitio es un portafolio profesional.
+              "@type": "Person",
+              name: PROFILE.name,
+              alternateName: PROFILE.alias,
+              jobTitle: PROFILE.role,
+              description: DESCRIPTION,
               url: SITE_URL,
-              email: "axchisan923@gmail.com",
-              telephone: "+573183038190",
-              areaServed: "Worldwide",
+              email: PROFILE.email,
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "Bogotá",
                 addressCountry: "CO",
               },
-              founder: {
-                "@type": "Person",
-                name: "Duvan Yair Arciniegas",
-                alternateName: "Axchi",
-              },
-              sameAs: [
-                "https://github.com/axchisan",
-                "https://www.instagram.com/axchisan",
-                "https://www.linkedin.com/in/duvan-yair-arciniegas-gerena-535690339",
+              knowsAbout: [
+                "Desarrollo de software",
+                "Flutter",
+                "Spring Boot",
+                "Next.js",
+                "Python",
+                "AWS",
+                "DevOps",
+                "Automatización de procesos",
               ],
+              sameAs: [PROFILE.github, PROFILE.instagram, PROFILE.linkedin],
             }),
           }}
         />
-        {children}
-        <Toaster
-          theme="dark"
-          position="bottom-right"
-          toastOptions={{
-            style: {
-              background: "var(--surface)",
-              border: "1px solid var(--border)",
-              color: "var(--text)",
-            },
-          }}
-        />
+        <ThemeProvider>
+          {children}
+          <Toaster
+            position="bottom-right"
+            toastOptions={{
+              style: {
+                background: "var(--raised)",
+                border: "1px solid var(--line)",
+                color: "var(--ink)",
+              },
+            }}
+          />
+        </ThemeProvider>
       </body>
     </html>
   )

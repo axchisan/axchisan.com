@@ -19,10 +19,10 @@ type Message = {
   createdAt: string | Date
 }
 
-const STATUS: Record<string, { label: string; variant: "default" | "accent" | "success" | "warning" }> = {
+const STATUS: Record<string, { label: string; variant: "default" | "accent" | "positive" | "warning" }> = {
   PENDING: { label: "Pendiente", variant: "warning" },
   IN_PROGRESS: { label: "En curso", variant: "accent" },
-  RESOLVED: { label: "Resuelto", variant: "success" },
+  RESOLVED: { label: "Resuelto", variant: "positive" },
   REJECTED: { label: "Rechazado", variant: "default" },
 }
 
@@ -67,7 +67,7 @@ export function MessagesClient({ initial }: { initial: Message[] }) {
     return (
       <Card className="flex flex-col items-center justify-center gap-3 p-12 text-center">
         <Mail className="h-8 w-8 text-faint" />
-        <p className="text-muted">Aún no hay mensajes.</p>
+        <p className="text-graphite">Aún no hay mensajes.</p>
       </Card>
     )
   }
@@ -81,17 +81,17 @@ export function MessagesClient({ initial }: { initial: Message[] }) {
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-2.5">
-                  <span className="font-display font-semibold">{m.name}</span>
+                  <span className="font-semibold">{m.name}</span>
                   <Badge variant={st.variant}>{st.label}</Badge>
                 </div>
                 <a href={`mailto:${m.email}`} className="text-sm text-accent hover:underline">
                   {m.email}
                 </a>
               </div>
-              <span className="mono-label shrink-0">{formatDate(m.createdAt)}</span>
+              <span className="text-[0.875rem] text-faint shrink-0">{formatDate(m.createdAt)}</span>
             </div>
-            {m.subject && <p className="mt-3 text-sm font-medium text-text">{m.subject}</p>}
-            <p className="mt-1.5 whitespace-pre-wrap text-[15px] text-muted">{m.message}</p>
+            {m.subject && <p className="mt-3 text-sm font-medium text-ink">{m.subject}</p>}
+            <p className="mt-1.5 whitespace-pre-wrap text-[15px] text-graphite">{m.message}</p>
             <div className="mt-4 flex flex-wrap gap-2.5">
               {m.status !== "RESOLVED" && (
                 <Button variant="outline" size="sm" disabled={busy === m.id} onClick={() => setStatus(m.id, "RESOLVED")}>
@@ -103,7 +103,7 @@ export function MessagesClient({ initial }: { initial: Message[] }) {
                 size="sm"
                 disabled={busy === m.id}
                 onClick={() => remove(m.id)}
-                className="text-destructive hover:border-destructive/50"
+                className="text-danger hover:border-danger/50"
               >
                 <Trash2 className="h-4 w-4" /> Eliminar
               </Button>

@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowLeft } from "lucide-react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import rehypeRaw from "rehype-raw"
@@ -9,12 +8,13 @@ import { Header } from "@/components/site/header"
 import { Footer } from "@/components/site/footer"
 import { ViewTracker } from "@/components/view-tracker"
 import { getBlogPostBySlug } from "@/lib/data"
-import { formatDate } from "@/lib/utils"
-import { SITE_URL } from "@/lib/site"
+import { PROFILE, SITE_URL } from "@/lib/site"
 
 export const dynamic = "force-dynamic"
 
 type Params = { params: Promise<{ slug: string }> }
+
+const FECHA = new Intl.DateTimeFormat("es-CO", { day: "numeric", month: "long", year: "numeric" })
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params
@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       title: post.title,
       description: post.excerpt ?? undefined,
       type: "article",
+      publishedTime: (post.publishedAt ?? post.createdAt).toISOString(),
       images: post.coverImage ? [post.coverImage] : undefined,
     },
   }
@@ -38,11 +39,14 @@ export default async function BlogPostPage({ params }: Params) {
   const post = await getBlogPostBySlug(slug)
   if (!post || !post.published) notFound()
 
+  const publicado = post.publishedAt ?? post.createdAt
+
   return (
     <>
       <ViewTracker endpoint={`/api/blog/${post.slug}/view`} />
       <Header />
-      <main id="contenido" tabIndex={-1} className="px-7 pt-28 md:pt-32">
+
+      <main id="contenido" className="mx-auto max-w-5xl px-5 sm:px-8">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -51,57 +55,61 @@ export default async function BlogPostPage({ params }: Params) {
               "@type": "BlogPosting",
               headline: post.title,
               description: post.excerpt ?? undefined,
-              image: post.coverImage ? `${SITE_URL}${post.coverImage}` : undefined,
-              datePublished: new Date(post.publishedAt ?? post.createdAt).toISOString(),
-              dateModified: new Date(post.updatedAt).toISOString(),
-              author: { "@type": "Person", name: "Duvan Yair Arciniegas", url: SITE_URL },
-              publisher: { "@type": "Organization", name: "Axchi Studio", url: SITE_URL },
+              datePublished: publicado.toISOString(),
+              dateModified: post.updatedAt.toISOString(),
+              author: { "@type": "Person", name: PROFILE.name, url: SITE_URL },
               mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
-              keywords: post.tags.join(", "),
             }),
           }}
         />
-        <article className="mx-auto max-w-3xl">
-          <Link href="/blog" className="mono-label inline-flex items-center gap-2 text-muted transition-colors hover:text-text">
-            <ArrowLeft className="h-3.5 w-3.5" /> Blog
+
+        <nav aria-label="Migas" className="pt-8">
+          <Link href="/blog" className="text-[0.9375rem] text-graphite transition-colors hover:text-ink">
+            Volver a escritos
           </Link>
+        </nav>
 
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            {post.tags.slice(0, 4).map((t) => (
-              <span key={t} className="rounded-md border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-[0.1em] text-accent">
-                {t}
-              </span>
-            ))}
-          </div>
-
-          <h1 className="mt-5 font-display text-[clamp(30px,5vw,52px)] font-bold leading-[1.04] tracking-[-0.03em]">
-            {post.title}
-          </h1>
-
-          <div className="mono-label mt-5 border-b border-border pb-7">
-            {formatDate(post.publishedAt ?? post.createdAt)}
-            {post.readTime ? ` · ${post.readTime} min de lectura` : ""}
-            {post.views ? ` · ${post.views} vistas` : ""}
-          </div>
-
-          {post.coverImage && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={post.coverImage} alt={post.title} loading="lazy" decoding="async" className="mt-8 w-full rounded-2xl border border-border" />
+        <header className="enter measure pb-10 pt-8">
+          <h1>{post.title}</h1>
+          <p className="mt-4 text-[0.9375rem] text-faint">
+            <time dateTime={publicado.toISOString()}>{FECHA.format(publicado)}</time>
+            {post.readTime ? <span className="ml-4">{post.readTime} min de lectura</span> : null}
+          </p>
+          {post.tags.length > 0 && (
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {post.tags.map((t) => (
+                <li key={t}>
+                  <Link
+                    href={`/blog?tag=${encodeURIComponent(t)}`}
+                    className="rounded-[5px] border border-line bg-raised px-2 py-0.5 text-[0.875rem] text-graphite transition-colors hover:text-ink"
+                  >
+                    {t}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           )}
+        </header>
 
-          <div className="prose-axchi mt-9">
+        <article className="border-t border-line pt-10">
+          <div className="prose">
             <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
               {post.content}
             </ReactMarkdown>
           </div>
         </article>
 
-        <div className="mx-auto mt-16 max-w-3xl border-t border-border py-10">
-          <Link href="/contacto" className="mono-label text-accent transition-colors hover:text-text">
-            ¿Tienes un proyecto en mente? Hablemos →
-          </Link>
-        </div>
+        <section className="measure mt-16 border-t border-line pt-8">
+          <p className="text-[1.0625rem] text-graphite">
+            ¿Preguntas sobre algo de esto?{" "}
+            <Link href="/contacto" className="link">
+              Escríbeme
+            </Link>
+            .
+          </p>
+        </section>
       </main>
+
       <Footer />
     </>
   )

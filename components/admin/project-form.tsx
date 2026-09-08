@@ -112,7 +112,7 @@ export function ProjectForm({ initial }: { initial?: ProjectInput }) {
               id="status"
               value={status}
               onChange={(e) => setStatus(e.target.value)}
-              className="w-full rounded-lg border border-border bg-bg px-3.5 py-2.5 text-[15px] text-text focus:border-accent focus:outline-none"
+              className="w-full rounded-lg border border-line bg-paper px-3.5 py-2.5 text-[15px] text-ink focus:border-accent focus:outline-none"
             >
               {STATUSES.map((s) => (
                 <option key={s.v} value={s.v}>{s.l}</option>
@@ -137,7 +137,7 @@ export function ProjectForm({ initial }: { initial?: ProjectInput }) {
           </div>
           <label className="flex items-center gap-3 self-end pb-2.5">
             <input type="checkbox" checked={featured} onChange={(e) => setFeatured(e.target.checked)} className="h-4 w-4 accent-[var(--color-accent)]" />
-            <span className="text-sm text-text">Destacado</span>
+            <span className="text-sm text-ink">Destacado</span>
           </label>
         </CardContent>
       </Card>

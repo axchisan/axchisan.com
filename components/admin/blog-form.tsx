@@ -103,11 +103,11 @@ export function BlogForm({ initial }: { initial?: BlogInput }) {
           <div className="flex flex-wrap gap-6 sm:col-span-2">
             <label className="flex items-center gap-3">
               <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="h-4 w-4 accent-[var(--color-accent)]" />
-              <span className="text-sm text-text">Publicado</span>
+              <span className="text-sm text-ink">Publicado</span>
             </label>
             <label className="flex items-center gap-3">
               <input type="checkbox" checked={featured} onChange={(e) => setFeatured(e.target.checked)} className="h-4 w-4 accent-[var(--color-accent)]" />
-              <span className="text-sm text-text">Destacado</span>
+              <span className="text-sm text-ink">Destacado</span>
             </label>
           </div>
         </CardContent>

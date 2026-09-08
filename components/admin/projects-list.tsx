@@ -10,6 +10,13 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { EmptyState } from "@/components/admin/empty-state"
 
+/** El enum de Prisma es en inglés; la interfaz es en español. */
+const ESTADO: Record<string, string> = {
+  COMPLETED: "Completado",
+  IN_PROGRESS: "En curso",
+  ARCHIVED: "Archivado",
+}
+
 type Item = {
   id: string
   title: string
@@ -54,16 +61,17 @@ export function ProjectsList({ items }: { items: Item[] }) {
       {items.map((p) => (
         <Card key={p.id} className="flex items-center gap-4 p-4">
           <div
-            className="h-14 w-20 shrink-0 rounded-lg border border-border bg-cover bg-center"
-            style={{ backgroundImage: p.coverImage ? `url(${p.coverImage})` : "linear-gradient(135deg,#1d2127,#14161a)" }}
+            className="h-14 w-20 shrink-0 rounded-lg border border-line bg-sunken bg-cover bg-center"
+            style={p.coverImage ? { backgroundImage: `url(${p.coverImage})` } : undefined}
+            aria-hidden
           />
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="truncate font-display font-semibold">{p.title}</span>
+              <span className="truncate font-semibold">{p.title}</span>
               {p.featured && <Badge variant="accent">Destacado</Badge>}
               {p.category && <Badge>{p.category}</Badge>}
             </div>
-            <span className="mono-label">{p.status}</span>
+            <span className="text-[0.875rem] text-faint">{ESTADO[p.status] ?? p.status}</span>
           </div>
           <div className="flex shrink-0 gap-2">
             <Button variant="outline" size="sm" href={`/admin/projects/${p.id}`}>
@@ -74,7 +82,7 @@ export function ProjectsList({ items }: { items: Item[] }) {
               size="sm"
               disabled={busy === p.id}
               onClick={() => remove(p.id, p.title)}
-              className="text-destructive hover:border-destructive/50"
+              className="text-danger hover:border-danger/50"
             >
               <Trash2 className="h-4 w-4" />
             </Button>

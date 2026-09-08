@@ -53,11 +53,11 @@ export function BlogList({ items }: { items: Item[] }) {
         <Card key={p.slug} className="flex items-center gap-4 p-4">
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="truncate font-display font-semibold">{p.title}</span>
-              <Badge variant={p.published ? "success" : "warning"}>{p.published ? "Publicado" : "Borrador"}</Badge>
+              <span className="truncate font-semibold">{p.title}</span>
+              <Badge variant={p.published ? "positive" : "warning"}>{p.published ? "Publicado" : "Borrador"}</Badge>
               {p.featured && <Badge variant="accent">Destacado</Badge>}
             </div>
-            {p.tags.length > 0 && <span className="mono-label">{p.tags.slice(0, 4).join(" · ")}</span>}
+            {p.tags.length > 0 && <span className="text-[0.875rem] text-faint">{p.tags.slice(0, 4).join(" · ")}</span>}
           </div>
           <div className="flex shrink-0 gap-2">
             <Button variant="outline" size="sm" href={`/admin/blog/${p.slug}`}>
@@ -68,7 +68,7 @@ export function BlogList({ items }: { items: Item[] }) {
               size="sm"
               disabled={busy === p.slug}
               onClick={() => remove(p.slug, p.title)}
-              className="text-destructive hover:border-destructive/50"
+              className="text-danger hover:border-danger/50"
             >
               <Trash2 className="h-4 w-4" />
             </Button>
