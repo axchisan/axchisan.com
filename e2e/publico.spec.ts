@@ -76,14 +76,30 @@ test.describe("compatibilidad con el sitio anterior", () => {
     })
   }
 
-  test("una ficha de proyecto antigua conserva su identificador", async ({ page, request }) => {
+  test("una ficha antigua sigue resolviendo por su identificador", async ({ page, request }) => {
     const proyectos = await (await request.get("/api/projects")).json()
-    const id = proyectos[0]?.id
-    test.skip(!id, "no hay proyectos")
+    const proyecto = proyectos[0]
+    test.skip(!proyecto, "no hay proyectos")
 
-    const res = await page.goto(`/projects/${id}`)
-    expect(res?.status()).toBe(200)
-    await expect(page).toHaveURL(new RegExp(`/trabajo/${id}$`))
+    // Las URLs canónicas pasaron a usar slug, pero los identificadores viejos
+    // circularon en el sitemap: tienen que seguir sirviendo la ficha.
+    const res = await page.goto(`/trabajo/${proyecto.id}`)
+    expect(res?.status(), "el id antiguo dejó de resolver").toBe(200)
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(proyecto.title)
+
+    // Y la ruta en inglés del sitio anterior también.
+    const heredada = await page.goto(`/projects/${proyecto.id}`)
+    expect(heredada?.status()).toBe(200)
+  })
+
+  test("la URL canónica de un proyecto usa su slug", async ({ page, request }) => {
+    const proyectos = await (await request.get("/api/projects")).json()
+    const conSlug = proyectos.find((p: { slug?: string }) => p.slug)
+    test.skip(!conSlug, "ningún proyecto tiene slug")
+
+    await page.goto(`/trabajo/${conSlug.slug}`)
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute("href")
+    expect(canonical).toContain(`/trabajo/${conSlug.slug}`)
   })
 })
 

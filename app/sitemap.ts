@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next"
 import { SITE_URL } from "@/lib/site"
-import { getPublishedBlogSlugs, getPublicProjectIds } from "@/lib/data"
+import { getPublishedBlogSlugs, getPublicProjectRefs } from "@/lib/data"
 
 export const dynamic = "force-dynamic"
 
@@ -13,7 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }))
 
   try {
-    const [posts, projects] = await Promise.all([getPublishedBlogSlugs(), getPublicProjectIds()])
+    const [posts, projects] = await Promise.all([getPublishedBlogSlugs(), getPublicProjectRefs()])
     const blog = posts.map((p) => ({
       url: `${SITE_URL}/blog/${p.slug}`,
       lastModified: p.updatedAt,
@@ -21,7 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     }))
     const work = projects.map((p) => ({
-      url: `${SITE_URL}/trabajo/${p.id}`,
+      url: `${SITE_URL}/trabajo/${p.slug ?? p.id}`,
       lastModified: p.updatedAt,
       changeFrequency: "monthly" as const,
       priority: 0.7,

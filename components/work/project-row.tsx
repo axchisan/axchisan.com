@@ -2,6 +2,7 @@ import Link from "next/link"
 
 export interface ProjectRowData {
   id: string
+  slug: string | null
   title: string
   shortDesc: string | null
   description: string
@@ -21,7 +22,7 @@ export function ProjectRow({ project }: { project: ProjectRowData }) {
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
         <h3 className="text-[1.375rem] font-semibold tracking-[-0.02em]">
           <Link
-            href={`/trabajo/${project.id}`}
+            href={`/trabajo/${project.slug ?? project.id}`}
             className="rounded-[4px] transition-colors group-hover:text-accent"
           >
             {project.title}
