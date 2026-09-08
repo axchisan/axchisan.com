@@ -1,31 +1,45 @@
 import type { Metadata } from "next"
-import { Compass, Sparkles, MessageSquare } from "lucide-react"
 import { Header } from "@/components/site/header"
 import { Footer } from "@/components/site/footer"
-import { PageHero } from "@/components/site/page-hero"
 import { Button } from "@/components/ui/button"
-import { Reveal } from "@/components/ui/reveal"
-import { getProfile, getSkills, getSiteMetrics } from "@/lib/data"
+import { getProfile, getSkills } from "@/lib/data"
+import { PROFILE } from "@/lib/site"
 
 export const metadata: Metadata = {
-  title: "Studio",
+  title: "Sobre mí",
   description:
-    "Axchi es un studio de ingeniería de software en Bogotá fundado por Duvan Yair Arciniegas. Construimos productos digitales con criterio.",
+    "Duvan Yair Arciniegas, desarrollador de software en Bogotá. Tecnólogo en Análisis y Desarrollo de Software, con experiencia en DevOps, CI/CD e integración de agentes de IA.",
   alternates: { canonical: "/sobre" },
 }
 
 export const dynamic = "force-dynamic"
 
-const VALUES = [
-  { t: "Criterio sobre moda", d: "Elegimos la tecnología adecuada para el problema, no la que está de moda.", icon: Compass },
-  { t: "Calidad invisible", d: "Los detalles que nadie nota son los que hacen que un producto se sienta sólido.", icon: Sparkles },
-  { t: "Comunicación directa", d: "Sin rodeos ni intermediarios: hablas con quien construye.", icon: MessageSquare },
+/** Recorrido profesional. Fechas explícitas: un portafolio sin fechas no dice nada. */
+const TRAYECTORIA = [
+  {
+    periodo: "2026",
+    titulo: "Desarrollador de software · Bogotá",
+    detalle:
+      "Un año en una empresa de desarrollo trabajando sobre proyectos con clientes reales: prácticas de DevOps, pipelines de CI/CD, automatización de procesos e integración de agentes de IA en el flujo de trabajo del equipo.",
+  },
+  {
+    periodo: "2025 — 2026",
+    titulo: "Tecnólogo en Análisis y Desarrollo de Software · SENA",
+    detalle:
+      "Formación técnica y etapa productiva. De ahí salieron los primeros sistemas que terminaron en manos de otras personas, como el control de inventario de los ambientes de formación.",
+  },
+  {
+    periodo: "En paralelo",
+    titulo: "Proyectos propios",
+    detalle:
+      "Es donde aprendo lo que no enseña un curso: qué cuesta operar una arquitectura, cuándo un servidor sobra y por qué conviene escribir la decisión antes que el código.",
+  },
 ]
 
 export default async function SobrePage() {
-  const [profile, skills, metrics] = await Promise.all([getProfile(), getSkills(), getSiteMetrics()])
+  const [profile, skills] = await Promise.all([getProfile(), getSkills()])
 
-  const byCategory = skills.reduce<Record<string, typeof skills>>((acc, s) => {
+  const porCategoria = skills.reduce<Record<string, typeof skills>>((acc, s) => {
     ;(acc[s.category] ??= []).push(s)
     return acc
   }, {})
@@ -33,113 +47,81 @@ export default async function SobrePage() {
   return (
     <>
       <Header />
-      <main id="contenido" tabIndex={-1}>
-        <PageHero
-          kicker="El studio"
-          title="Software construido con criterio"
-          description="Axchi es un studio de ingeniería de software en Bogotá. Diseñamos, construimos y automatizamos productos digitales para clientes reales — con foco en hacer cosas que de verdad funcionen."
-        />
 
-        {/* Valores — bento */}
-        <section className="px-7 py-14">
-          <div className="mx-auto max-w-6xl">
-            {/* Manifiesto destacado */}
-            <Reveal>
-              <div className="relative overflow-hidden rounded-2xl border border-border bg-surface p-8 md:p-12">
-                <div aria-hidden className="bg-dotted-accent mask-fade pointer-events-none absolute inset-0" />
-                <div className="relative">
-                  <span className="mono-label text-accent">Cómo pensamos</span>
-                  <p className="mt-4 max-w-3xl font-display text-[clamp(22px,3.2vw,34px)] font-semibold leading-snug tracking-[-0.02em]">
-                    Construimos software como si lo fuéramos a usar nosotros: con criterio,
-                    cuidado y la convicción de que <span className="text-accent">los detalles importan</span>.
-                  </p>
+      <main id="contenido" className="mx-auto max-w-5xl px-5 sm:px-8">
+        <header className="enter py-14 sm:py-16">
+          <h1>Sobre mí</h1>
+          <p className="measure mt-5 text-[1.0625rem] leading-relaxed">
+            {profile?.bio?.trim() ||
+              "Desarrollador de software en Bogotá. Me interesa el punto donde una decisión técnica se convierte en una consecuencia medible: cuánto cuesta operar un sistema, cuánto tarda en arrancar, qué pasa cuando falla a mitad."}
+          </p>
+        </header>
+
+        <section className="border-t border-line pt-12">
+          <h2>Recorrido</h2>
+          <ol className="mt-8">
+            {TRAYECTORIA.map((t) => (
+              <li
+                key={t.titulo}
+                className="grid gap-1 border-t border-line py-6 first:border-t-0 first:pt-0 sm:grid-cols-[10rem_1fr] sm:gap-8"
+              >
+                <p className="text-[0.9375rem] text-faint">{t.periodo}</p>
+                <div>
+                  <h3 className="text-[1.0625rem] font-semibold tracking-[-0.015em]">{t.titulo}</h3>
+                  <p className="measure mt-1.5 text-[1rem] leading-relaxed text-graphite">{t.detalle}</p>
                 </div>
-              </div>
-            </Reveal>
-
-            {/* Valores */}
-            <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
-              {VALUES.map((v, i) => {
-                const Icon = v.icon
-                return (
-                  <Reveal key={v.t} delay={i * 0.06}>
-                    <div className="group h-full rounded-2xl border border-border bg-surface p-7 transition-colors hover:border-accent/30">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-bg text-accent transition-colors group-hover:border-accent/40">
-                        <Icon className="h-5 w-5" strokeWidth={1.6} />
-                      </div>
-                      <h3 className="mt-5 font-display text-xl font-semibold">{v.t}</h3>
-                      <p className="mt-2 text-[15px] text-muted">{v.d}</p>
-                    </div>
-                  </Reveal>
-                )
-              })}
-            </div>
-          </div>
+              </li>
+            ))}
+          </ol>
         </section>
 
-        {/* Founder (segundo plano) */}
-        <section className="px-7 py-10">
-          <div className="mx-auto max-w-6xl rounded-3xl border border-border bg-surface p-8 md:p-10">
-            <span className="mono-label text-accent">Detrás del studio</span>
-            <div className="mt-5 grid grid-cols-1 gap-8 md:grid-cols-[1fr_1.6fr]">
-              <div>
-                <h2 className="font-display text-2xl font-semibold">{profile?.name?.split(" - ")[0] ?? "Duvan Yair Arciniegas"}</h2>
-                <p className="mono-label mt-2">{profile?.title ?? "Fundador · Desarrollador de Software"}</p>
-                <div className="mt-5 flex flex-wrap gap-x-10 gap-y-4">
-                  <div><div className="font-display text-2xl font-semibold">{metrics.projectsCount}</div><div className="mono-label mt-1">productos</div></div>
-                  <div><div className="font-display text-2xl font-semibold">{metrics.yearsExperience}+</div><div className="mono-label mt-1">años</div></div>
-                  <div><div className="font-display text-2xl font-semibold">{metrics.technologiesCount}+</div><div className="mono-label mt-1">tecnologías</div></div>
-                </div>
-              </div>
-              <p className="text-[15px] leading-relaxed text-muted">
-                {profile?.bio ??
-                  "Desarrollador de software apasionado por construir soluciones con impacto real. Bajo la marca Axchi combina ingeniería, DevOps e IA para transformar ideas complejas en productos sólidos."}
-              </p>
-            </div>
-          </div>
-        </section>
+        {Object.keys(porCategoria).length > 0 && (
+          <section className="mt-14 border-t border-line pt-11">
+            <h2>Herramientas</h2>
+            <p className="measure mt-3 text-[1.0625rem] text-graphite">
+              Lo que he usado en proyectos que terminaron funcionando, agrupado por dónde encaja.
+            </p>
 
-        {/* Stack / capacidades */}
-        {Object.keys(byCategory).length > 0 && (
-          <section className="px-7 py-12">
-            <div className="mx-auto max-w-6xl">
-              <Reveal>
-                <h2 className="mb-8 border-b border-border pb-4 font-display text-[clamp(24px,3.2vw,34px)] font-semibold tracking-[-0.02em]">
-                  Stack & capacidades
-                </h2>
-              </Reveal>
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {Object.entries(byCategory).map(([cat, items], i) => (
-                  <Reveal key={cat} delay={(i % 3) * 0.06}>
-                    <div className="h-full rounded-2xl border border-border bg-surface p-6 transition-colors duration-200 hover:border-accent/30">
-                      <span className="mono-label text-accent">{cat}</span>
-                      <ul className="mt-3 flex flex-wrap gap-2">
-                        {items.map((s) => (
-                          <li key={s.id} className="rounded-md border border-border px-2.5 py-1 text-sm text-text">
-                            {s.name}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-            </div>
+            <dl className="mt-8">
+              {Object.entries(porCategoria).map(([categoria, lista]) => (
+                <div
+                  key={categoria}
+                  className="grid gap-2 border-t border-line py-5 first:border-t-0 first:pt-0 sm:grid-cols-[10rem_1fr] sm:gap-8"
+                >
+                  <dt className="text-[0.9375rem] text-faint">{categoria}</dt>
+                  <dd className="flex flex-wrap gap-2">
+                    {lista.map((s) => (
+                      <span
+                        key={s.id}
+                        className="rounded-[5px] border border-line bg-raised px-2 py-0.5 text-[0.875rem] text-graphite"
+                      >
+                        {s.name}
+                      </span>
+                    ))}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </section>
         )}
 
-        <section className="px-7 pb-20 pt-6">
-          <div className="mx-auto max-w-6xl rounded-3xl border border-border bg-surface px-8 py-14 text-center">
-            <h2 className="font-display text-[clamp(24px,3.6vw,38px)] font-bold tracking-[-0.02em]">
-              Trabajemos juntos
-            </h2>
-            <p className="mx-auto mt-3 max-w-lg text-muted">Cuéntanos tu idea. Respondemos personalmente.</p>
-            <div className="mt-7 flex justify-center">
-              <Button href="/contacto" size="lg">Hablemos →</Button>
-            </div>
+        <section className="mt-14 border-t border-line pt-11">
+          <h2>Dónde encontrarme</h2>
+          <p className="measure mt-3 text-[1.0625rem] text-graphite">
+            El código está en GitHub y la trayectoria en LinkedIn. Para lo demás, el correo.
+          </p>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <Button href="/contacto">Escríbeme</Button>
+            <a href={PROFILE.github} target="_blank" rel="noreferrer noopener" className="link text-[0.9375rem]">
+              GitHub
+            </a>
+            <a href={PROFILE.linkedin} target="_blank" rel="noreferrer noopener" className="link text-[0.9375rem]">
+              LinkedIn
+            </a>
           </div>
         </section>
       </main>
+
       <Footer />
     </>
   )

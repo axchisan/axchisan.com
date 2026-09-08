@@ -10,8 +10,8 @@ export default async function AdminMessagesPage() {
 
   return (
     <div>
-      <h1 className="font-display text-2xl font-semibold tracking-[-0.02em]">Mensajes</h1>
-      <p className="mt-1 text-sm text-muted">Mensajes recibidos por el formulario de contacto.</p>
+      <h1 className="text-2xl font-semibold tracking-[-0.02em]">Mensajes</h1>
+      <p className="mt-1 text-sm text-graphite">Mensajes recibidos por el formulario de contacto.</p>
       <div className="mt-7">
         <MessagesClient initial={messages} />
       </div>

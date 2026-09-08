@@ -1,67 +1,117 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { Header } from "@/components/site/header"
 import { Footer } from "@/components/site/footer"
-import { PageHero } from "@/components/site/page-hero"
-import { BlogCard } from "@/components/blog/blog-card"
-import { Reveal } from "@/components/ui/reveal"
 import { getBlogPosts } from "@/lib/data"
+import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title: "Escritos",
   description:
-    "Artículos sobre desarrollo de software, automatización, IA y las decisiones técnicas detrás de productos digitales reales.",
+    "Notas sobre arquitectura, costos de infraestructura y las decisiones técnicas detrás de los sistemas que construyo.",
   alternates: { canonical: "/blog" },
 }
 
 export const dynamic = "force-dynamic"
 
-export default async function BlogPage() {
+const FECHA = new Intl.DateTimeFormat("es-CO", { day: "numeric", month: "long", year: "numeric" })
+
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tag?: string }>
+}) {
+  const { tag } = await searchParams
   const { posts, categories } = await getBlogPosts()
+
+  // Antes estos filtros eran spans decorativos que no filtraban nada.
+  const visibles = tag ? posts.filter((p) => p.tags.includes(tag)) : posts
 
   return (
     <>
       <Header />
-      <main id="contenido" tabIndex={-1}>
-        <PageHero
-          kicker="Insights · Notas del studio"
-          title="Ideas, decisiones y aprendizajes"
-          description="Escribimos sobre lo que construimos: desarrollo web, multiplataforma, automatización e IA — y el porqué de cada decisión técnica."
-        />
 
-        <section className="px-7 py-14">
-          <div className="mx-auto max-w-6xl">
-            {categories.length > 0 && (
-              <Reveal>
-                <div className="mb-10 flex flex-wrap gap-2">
-                  <span className="rounded-full border border-accent bg-accent-soft px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.08em] text-accent">
-                    Todo
-                  </span>
-                  {categories.slice(0, 8).map((c) => (
-                    <span
-                      key={c}
-                      className="rounded-full border border-border px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.08em] text-muted"
-                    >
-                      {c}
-                    </span>
-                  ))}
-                </div>
-              </Reveal>
-            )}
+      <main id="contenido" className="mx-auto max-w-5xl px-5 sm:px-8">
+        <header className="enter py-14 sm:py-16">
+          <h1>Escritos</h1>
+          <p className="measure mt-4 text-[1.0625rem] leading-relaxed text-graphite">
+            Cómo se decidieron las cosas y qué costó cada decisión.
+          </p>
+        </header>
 
-            {posts.length === 0 ? (
-              <p className="text-muted">Aún no hay artículos publicados.</p>
-            ) : (
-              <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-                {posts.map((post, i) => (
-                  <Reveal key={post.slug} delay={(i % 3) * 0.06}>
-                    <BlogCard post={post} />
-                  </Reveal>
-                ))}
-              </div>
-            )}
-          </div>
+        <section className="border-t border-line pt-10">
+          {categories.length > 0 && (
+            <nav aria-label="Filtrar por tema" className="mb-8 flex flex-wrap gap-2">
+              <Link
+                href="/blog"
+                aria-current={!tag ? "page" : undefined}
+                className={cn(
+                  "rounded-[6px] border px-2.5 py-1 text-[0.875rem] transition-colors",
+                  !tag
+                    ? "border-accent bg-accent-weak text-accent"
+                    : "border-line text-graphite hover:text-ink",
+                )}
+              >
+                Todo
+              </Link>
+              {categories.map((c) => (
+                <Link
+                  key={c}
+                  href={`/blog?tag=${encodeURIComponent(c)}`}
+                  aria-current={tag === c ? "page" : undefined}
+                  className={cn(
+                    "rounded-[6px] border px-2.5 py-1 text-[0.875rem] transition-colors",
+                    tag === c
+                      ? "border-accent bg-accent-weak text-accent"
+                      : "border-line text-graphite hover:text-ink",
+                  )}
+                >
+                  {c}
+                </Link>
+              ))}
+            </nav>
+          )}
+
+          {visibles.length === 0 ? (
+            <p className="text-graphite">
+              {tag ? (
+                <>
+                  No hay artículos sobre {tag}.{" "}
+                  <Link href="/blog" className="link">
+                    Ver todos
+                  </Link>
+                </>
+              ) : (
+                "Todavía no hay artículos publicados."
+              )}
+            </p>
+          ) : (
+            <ul>
+              {visibles.map((post) => (
+                <li key={post.slug} className="border-t border-line py-7 first:border-t-0 first:pt-0">
+                  <h2 className="text-[1.375rem] font-semibold tracking-[-0.02em]">
+                    <Link href={`/blog/${post.slug}`} className="transition-colors hover:text-accent">
+                      {post.title}
+                    </Link>
+                  </h2>
+                  {post.excerpt && (
+                    <p className="measure mt-2 text-[1.0625rem] leading-relaxed text-graphite">
+                      {post.excerpt}
+                    </p>
+                  )}
+                  <p className="mt-3 text-[0.875rem] text-faint">
+                    <time dateTime={(post.publishedAt ?? post.createdAt).toISOString()}>
+                      {FECHA.format(post.publishedAt ?? post.createdAt)}
+                    </time>
+                    {post.readTime ? <span className="ml-4">{post.readTime} min de lectura</span> : null}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          )}
         </section>
       </main>
+
       <Footer />
     </>
   )

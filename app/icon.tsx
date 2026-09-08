@@ -4,7 +4,7 @@ export const runtime = "nodejs"
 export const size = { width: 64, height: 64 }
 export const contentType = "image/png"
 
-/** Favicon: monograma "a" en lima sobre canvas oscuro con esquina de marca. */
+/** Favicon: monograma sobre grafito. Sin resplandores ni acentos ácidos. */
 export default function Icon() {
   return new ImageResponse(
     (
@@ -15,42 +15,23 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#0A0B0D",
-          borderRadius: 14,
-          position: "relative",
+          background: "#14171c",
+          borderRadius: 12,
         }}
       >
         <div
           style={{
-            position: "absolute",
-            inset: 0,
-            borderRadius: 14,
-            border: "2px solid #1f2937",
-          }}
-        />
-        <div
-          style={{
-            fontSize: 44,
-            fontWeight: 700,
-            color: "#C6F24E",
+            display: "flex",
+            fontSize: 40,
+            fontWeight: 600,
+            color: "#fcfcfd",
             fontFamily: "sans-serif",
             lineHeight: 1,
-            marginTop: -2,
+            letterSpacing: -2,
           }}
         >
-          a
+          da
         </div>
-        <div
-          style={{
-            position: "absolute",
-            right: 9,
-            top: 11,
-            width: 8,
-            height: 8,
-            borderRadius: 2,
-            background: "#C6F24E",
-          }}
-        />
       </div>
     ),
     { ...size },

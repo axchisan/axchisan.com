@@ -3,23 +3,28 @@ import Link from "next/link"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
+/**
+ * Los botones son de texto en caja baja, con la misma familia que el resto del
+ * sitio. Nada de versalitas monoespaciadas, resplandores ni flechas pegadas al
+ * texto: la etiqueta dice qué pasa al pulsar y eso basta.
+ */
 const button = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[10px] font-mono text-xs uppercase tracking-[0.08em] font-medium transition-[transform,box-shadow,background-color,border-color,color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] disabled:pointer-events-none disabled:opacity-50 cursor-pointer focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[8px] font-medium " +
+    "transition-[background-color,border-color,color] duration-150 ease-[var(--ease)] " +
+    "disabled:pointer-events-none disabled:opacity-50 cursor-pointer " +
+    "focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2",
   {
     variants: {
       variant: {
-        primary:
-          "bg-accent text-accent-ink border border-accent hover:shadow-[0_0_32px_-8px_var(--color-accent)]",
-        outline:
-          "border border-border text-text hover:border-border-strong hover:bg-surface-2",
-        ghost: "text-muted hover:text-text hover:bg-surface-2",
-        signal:
-          "bg-signal text-bg border border-signal hover:shadow-[0_0_32px_-8px_var(--color-signal)]",
+        primary: "bg-accent text-on-accent hover:bg-accent-hover",
+        outline: "border border-line-firm text-ink hover:bg-raised",
+        ghost: "text-graphite hover:bg-raised hover:text-ink",
+        danger: "bg-danger text-white hover:opacity-90",
       },
       size: {
-        sm: "h-9 px-4",
-        md: "h-11 px-5",
-        lg: "h-12 px-7 text-[13px]",
+        sm: "h-8 px-3 text-[0.875rem]",
+        md: "h-10 px-4 text-[0.9375rem]",
+        lg: "h-11 px-5 text-[1rem]",
       },
     },
     defaultVariants: { variant: "primary", size: "md" },

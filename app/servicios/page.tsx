@@ -1,103 +1,74 @@
 import type { Metadata } from "next"
-import { Check } from "lucide-react"
 import { Header } from "@/components/site/header"
 import { Footer } from "@/components/site/footer"
-import { PageHero } from "@/components/site/page-hero"
 import { Button } from "@/components/ui/button"
-import { Reveal } from "@/components/ui/reveal"
 import { getServices } from "@/lib/data"
 
 export const metadata: Metadata = {
-  title: "Servicios",
+  title: "Qué hago",
   description:
-    "Desarrollo web, aplicaciones multiplataforma, automatización con IA y software a medida. Lo que el studio puede construir para tu negocio.",
+    "Tipos de sistema que puedo tomar de punta a punta: aplicaciones web y multiplataforma, automatización de procesos e infraestructura serverless.",
   alternates: { canonical: "/servicios" },
 }
 
 export const dynamic = "force-dynamic"
 
-const PROCESS = [
-  { k: "01", t: "Entendemos", d: "Escuchamos el problema real y definimos el alcance con claridad." },
-  { k: "02", t: "Diseñamos", d: "Proponemos la arquitectura y la experiencia antes de escribir código." },
-  { k: "03", t: "Construimos", d: "Iteramos en entregas funcionales, con calidad y comunicación constante." },
-  { k: "04", t: "Lanzamos", d: "Desplegamos, medimos y damos soporte. El producto sigue vivo." },
-]
-
-export default async function ServiciosPage() {
+export default async function QueHagoPage() {
   const services = await getServices()
 
   return (
     <>
       <Header />
-      <main id="contenido" tabIndex={-1}>
-        <PageHero
-          kicker="Servicios · Qué construimos"
-          title="Software a la medida de tu problema"
-          description="No vendemos features sueltas: entregamos productos que resuelven algo concreto para tu negocio, bien construidos y mantenibles."
-        />
 
-        <section className="px-7 py-14">
-          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-5 md:grid-cols-2">
-            {services.map((s, i) => (
-              <Reveal key={s.id} delay={(i % 2) * 0.06}>
-                <div className="flex h-full flex-col rounded-2xl border border-border bg-surface p-7 transition-[transform,border-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1 hover:border-accent/30">
-                  <span className="font-mono text-[11px] tracking-[0.1em] text-accent">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h2 className="mt-3 font-display text-2xl font-semibold tracking-[-0.01em]">{s.title}</h2>
-                  <p className="mt-2.5 text-[15px] leading-relaxed text-muted">{s.description}</p>
-                  {s.features?.length > 0 && (
-                    <ul className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+      <main id="contenido" className="mx-auto max-w-5xl px-5 sm:px-8">
+        <header className="enter py-14 sm:py-16">
+          <h1>Qué hago</h1>
+          <p className="measure mt-4 text-[1.0625rem] leading-relaxed text-graphite">
+            Los tipos de sistema que puedo tomar completos: del modelo de datos al despliegue, la
+            monitorización y la factura mensual.
+          </p>
+        </header>
+
+        <section className="border-t border-line pt-10">
+          {services.length === 0 ? (
+            <p className="text-graphite">Nada publicado todavía.</p>
+          ) : (
+            <ul>
+              {services.map((s) => (
+                <li key={s.id} className="border-t border-line py-8 first:border-t-0 first:pt-0">
+                  <h2 className="text-[1.375rem] font-semibold tracking-[-0.02em]">{s.title}</h2>
+                  <p className="measure mt-2 text-[1.0625rem] leading-relaxed text-graphite">
+                    {s.description}
+                  </p>
+                  {s.features.length > 0 && (
+                    <ul className="mt-4 flex flex-wrap gap-2">
                       {s.features.map((f) => (
-                        <li key={f} className="flex items-start gap-2 text-sm text-text">
-                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                        <li
+                          key={f}
+                          className="rounded-[5px] border border-line bg-raised px-2 py-0.5 text-[0.875rem] text-graphite"
+                        >
                           {f}
                         </li>
                       ))}
                     </ul>
                   )}
-                  {s.price && <p className="mt-5 font-mono text-sm text-muted">Desde {s.price}</p>}
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </section>
-
-        <section className="px-7 py-14">
-          <div className="mx-auto max-w-6xl">
-            <Reveal>
-              <h2 className="mb-9 border-b border-border pb-4 font-display text-[clamp(26px,3.4vw,38px)] font-semibold tracking-[-0.02em]">
-                Cómo trabajamos
-              </h2>
-            </Reveal>
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {PROCESS.map((p, i) => (
-                <Reveal key={p.k} delay={i * 0.06}>
-                  <div className="h-full rounded-2xl border border-border bg-surface p-6 transition-colors duration-200 hover:border-accent/30">
-                    <span className="font-display text-3xl font-semibold text-accent">{p.k}</span>
-                    <h3 className="mt-3 font-display text-lg font-semibold">{p.t}</h3>
-                    <p className="mt-1.5 text-sm text-muted">{p.d}</p>
-                  </div>
-                </Reveal>
+                </li>
               ))}
-            </div>
-          </div>
+            </ul>
+          )}
         </section>
 
-        <section className="px-7 pb-20 pt-6">
-          <div className="mx-auto max-w-6xl rounded-3xl border border-border bg-surface px-8 py-14 text-center">
-            <h2 className="font-display text-[clamp(24px,3.6vw,38px)] font-bold tracking-[-0.02em]">
-              ¿Empezamos tu proyecto?
-            </h2>
-            <p className="mx-auto mt-3 max-w-lg text-muted">
-              Cuéntanos qué necesitas y te decimos cómo lo abordaríamos, sin compromiso.
-            </p>
-            <div className="mt-7 flex justify-center">
-              <Button href="/contacto" size="lg">Hablemos →</Button>
-            </div>
+        <section className="mt-20 border-t border-line pt-12">
+          <h2>¿Encaja con lo que buscas?</h2>
+          <p className="measure mt-3 text-[1.0625rem] text-graphite">
+            Cuéntame qué necesitas resolver y te digo con franqueza si soy la persona indicada.
+          </p>
+          <div className="mt-6">
+            <Button href="/contacto">Escríbeme</Button>
           </div>
         </section>
       </main>
+
       <Footer />
     </>
   )

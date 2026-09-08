@@ -1,15 +1,13 @@
 import type { Metadata } from "next"
 import { Header } from "@/components/site/header"
 import { Footer } from "@/components/site/footer"
-import { PageHero } from "@/components/site/page-hero"
-import { ProjectCard } from "@/components/work/project-card"
-import { Reveal } from "@/components/ui/reveal"
+import { ProjectRow } from "@/components/work/project-row"
 import { getProjects } from "@/lib/data"
 
 export const metadata: Metadata = {
   title: "Trabajo",
   description:
-    "Casos y productos que hemos diseñado y construido: web, multiplataforma, automatización e IA para clientes reales.",
+    "Sistemas que he construido de punta a punta: automatización de contenido, aplicaciones multiplataforma sobre infraestructura serverless, juegos y sistemas institucionales.",
   alternates: { canonical: "/trabajo" },
 }
 
@@ -21,29 +19,25 @@ export default async function TrabajoPage() {
   return (
     <>
       <Header />
-      <main id="contenido" tabIndex={-1}>
-        <PageHero
-          kicker="Trabajo · Casos en producción"
-          title="Cosas que hemos construido"
-          description="Productos reales, en producción, para clientes reales. Cada uno resolvió un problema concreto con la tecnología adecuada."
-        />
 
-        <section className="px-7 py-14">
-          <div className="mx-auto max-w-6xl">
-            {projects.length === 0 ? (
-              <p className="text-muted">Pronto compartiremos casos aquí.</p>
-            ) : (
-              <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-                {projects.map((p, i) => (
-                  <Reveal key={p.id} delay={(i % 3) * 0.06}>
-                    <ProjectCard project={p} />
-                  </Reveal>
-                ))}
-              </div>
-            )}
-          </div>
+      <main id="contenido" className="mx-auto max-w-5xl px-5 sm:px-8">
+        <header className="enter py-14 sm:py-16">
+          <h1>Trabajo</h1>
+          <p className="measure mt-4 text-[1.0625rem] leading-relaxed text-graphite">
+            Cada uno de estos sistemas lo llevé del modelo de datos al despliegue. Las cifras que
+            aparecen salen del proyecto: si no puedo sostener un número, no lo escribo.
+          </p>
+        </header>
+
+        <section className="border-t border-line pt-10">
+          {projects.length === 0 ? (
+            <p className="text-graphite">Todavía no hay proyectos publicados.</p>
+          ) : (
+            projects.map((p) => <ProjectRow key={p.id} project={p} />)
+          )}
         </section>
       </main>
+
       <Footer />
     </>
   )

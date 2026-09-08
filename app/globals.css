@@ -1,63 +1,100 @@
 @import "tailwindcss";
 
-/* ============================================================
-   Axchi Studio — Design System · Dirección A: Technical Editorial
-   Dark-first. Dials: VARIANCE 6 / MOTION 5 / DENSITY 3
-   ============================================================ */
+/* ==========================================================================
+   axchisan.com — sistema de diseño
+   Ver DESIGN.md para el brief y el razonamiento detrás de cada decisión.
+   ========================================================================== */
 
 :root {
-  /* Superficies */
-  --bg:        #0A0B0D;  /* canvas casi negro, leve tinte frío */
-  --surface:   #14161A;  /* tarjetas */
-  --surface-2: #1A1D22;  /* hover / elevación */
-  --border:    #23262B;
-  --border-strong: #33373D;
+  color-scheme: light;
 
-  /* Texto */
-  --text:      #F4F5F7;
-  --muted:     #8A9099;
-  --faint:     #5A6068;
+  /* Superficies y texto — escala neutra fría */
+  --paper:     #fcfcfd;
+  --raised:    #f5f6f8;
+  --sunken:    #eef0f3;
+  --ink:       #14171c;
+  --graphite:  #5c6472;
+  --faint:     #8b93a1;
+  --line:      #e3e6eb;
+  --line-firm: #cdd2da;
 
-  /* Marca */
-  --accent:        #C6F24E;  /* lima eléctrico */
-  --accent-ink:    #0A0B0D;  /* texto sobre acento */
-  --accent-soft:   color-mix(in srgb, var(--accent) 14%, transparent);
-  --signal:        #FF5C38;  /* secundario (alertas/destacados puntuales) */
+  /* El acento marca interacción. Nunca decora. */
+  --accent:       #3454d1;
+  --accent-hover: #2843b4;
+  --accent-weak:  #eef1fc;
+  --on-accent:    #ffffff;
 
-  /* Estado */
-  --destructive: #E5484D;
+  --danger:      #c2323b;
+  --danger-weak: #fdeeef;
+  --positive:    #1f7a4d;
+  --warning:     #9a6206;
+  --warning-weak: #fdf4e3;
 
-  /* Radios / sombras */
-  --radius:     0.875rem;  /* 14px */
-  --radius-sm:  0.5rem;
-  --radius-lg:  1.25rem;
-  --shadow-glow: 0 0 32px -8px var(--accent);
+  --radius:    8px;
+  --radius-sm: 5px;
+  --radius-lg: 12px;
 
-  /* Easings (Emil) */
-  --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
-  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  /* Una sola curva para todo: la coherencia del movimiento se nota. */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --paper:     #0e1013;
+  --raised:    #171a1f;
+  --sunken:    #0a0c0f;
+  --ink:       #f2f4f7;
+  --graphite:  #98a1b0;
+  --faint:     #6b7480;
+  --line:      #252a31;
+  --line-firm: #363c45;
+
+  --accent:       #7c95f5;
+  --accent-hover: #93a8f8;
+  --accent-weak:  #191f33;
+  --on-accent:    #0e1013;
+
+  --danger:      #f0787f;
+  --danger-weak: #2a1719;
+  --positive:    #4ec08a;
+  --warning:     #e0a852;
+  --warning-weak: #2a2116;
 }
 
 @theme inline {
-  /* Colores expuestos como utilidades Tailwind (bg-bg, text-muted, etc.) */
-  --color-bg:            var(--bg);
-  --color-surface:       var(--surface);
-  --color-surface-2:     var(--surface-2);
-  --color-border:        var(--border);
-  --color-border-strong: var(--border-strong);
-  --color-text:          var(--text);
-  --color-muted:         var(--muted);
-  --color-faint:         var(--faint);
-  --color-accent:        var(--accent);
-  --color-accent-ink:    var(--accent-ink);
-  --color-accent-soft:   var(--accent-soft);
-  --color-signal:        var(--signal);
-  --color-destructive:   var(--destructive);
+  --color-paper:     var(--paper);
+  --color-raised:    var(--raised);
+  --color-sunken:    var(--sunken);
+  --color-ink:       var(--ink);
+  --color-graphite:  var(--graphite);
+  --color-faint:     var(--faint);
+  --color-line:      var(--line);
+  --color-line-firm: var(--line-firm);
+  --color-accent:      var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-weak: var(--accent-weak);
+  --color-on-accent:   var(--on-accent);
+  --color-danger:      var(--danger);
+  --color-danger-weak: var(--danger-weak);
+  --color-positive:    var(--positive);
+  --color-warning:      var(--warning);
+  --color-warning-weak: var(--warning-weak);
 
-  /* Tipografía (las vars --font-* las define next/font en layout) */
-  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
-  --font-sans:    var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono:    var(--font-jetbrains-mono), ui-monospace, "JetBrains Mono", monospace;
+  /* Una familia para todo. La mono solo donde hay código o un dato real. */
+  --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", monospace;
+
+  /* Escala tipográfica, razón 1.25 redondeada a píxeles enteros */
+  --text-2xs: 0.75rem;    /* 12 */
+  --text-xs:  0.875rem;   /* 14 */
+  --text-sm:  1rem;       /* 16 */
+  --text-base: 1.25rem;   /* 20 */
+  --text-lg:  1.5625rem;  /* 25 */
+  --text-xl:  1.9375rem;  /* 31 */
+  --text-2xl: 2.4375rem;  /* 39 */
+  --text-3xl: 3.0625rem;  /* 49 */
+  --text-4xl: 3.8125rem;  /* 61 */
 
   --radius:    var(--radius);
   --radius-sm: var(--radius-sm);
@@ -66,206 +103,184 @@
 
 @layer base {
   * {
-    border-color: var(--border);
+    border-color: var(--line);
   }
+
   html {
+    /* El desplazamiento suave marea a quien lo tiene desactivado por necesidad. */
     scroll-behavior: smooth;
-    color-scheme: dark;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
   body {
-    background: var(--bg);
-    color: var(--text);
+    background: var(--paper);
+    color: var(--ink);
     font-family: var(--font-sans);
-    line-height: 1.55;
+    font-size: 1rem;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    font-feature-settings: "cv05" 1, "ss01" 1;
   }
+
+  h1, h2, h3, h4 {
+    font-weight: 600;
+    line-height: 1.1;
+    /* El tracking cerrado solo funciona en tamaños grandes; a 16px arruina la
+       legibilidad, así que se aplica por elemento y no de forma global. */
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  h1 { font-size: var(--text-3xl); letter-spacing: -0.032em; }
+  h2 { font-size: var(--text-xl); }
+  h3 { font-size: var(--text-base); letter-spacing: -0.015em; }
+
+  p { text-wrap: pretty; }
+
   ::selection {
     background: var(--accent);
-    color: var(--accent-ink);
+    color: var(--on-accent);
   }
-  h1, h2, h3, h4 {
-    font-family: var(--font-display);
-    letter-spacing: -0.02em;
-    line-height: 1.02;
-  }
-  /* Focus visible accesible */
+
   :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
-    border-radius: 4px;
+    border-radius: 3px;
+  }
+
+  /* El navegador no debe pintar un foco por defecto sobre lo que ya no es
+     interactivo tras hacer clic con el ratón. */
+  :focus:not(:focus-visible) {
+    outline: none;
   }
 }
 
 @layer components {
-  /* Etiqueta mono reutilizable */
-  .mono-label {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;       /* 11px */
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
+  /* Medida de lectura. 68 caracteres es el techo cómodo para esta sans. */
+  .measure {
+    max-width: 68ch;
   }
-  /* Brillo aurora puntual del hero */
-  .hero-glow::before {
-    content: "";
-    position: absolute;
-    inset: -30% -10% auto auto;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, var(--accent-soft), transparent 60%);
-    filter: blur(20px);
-    pointer-events: none;
-    z-index: 0;
+
+  /* Enlace dentro de prosa: subrayado desde el principio, no al pasar el ratón.
+     Un enlace que no se ve como enlace hasta que lo tocas no es un enlace. */
+  .link {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    transition: color 0.15s var(--ease);
+  }
+  .link:hover {
+    color: var(--accent-hover);
   }
 }
 
-/* Prosa para artículos del blog (markdown) */
-.prose-axchi{color:var(--text);font-size:1.0625rem;line-height:1.75;max-width:72ch}
-.prose-axchi > * + *{margin-top:1.15em}
-.prose-axchi h2{font-family:var(--font-display);font-size:1.7rem;font-weight:600;margin-top:2.2em;margin-bottom:.2em;letter-spacing:-.02em}
-.prose-axchi h3{font-family:var(--font-display);font-size:1.3rem;font-weight:600;margin-top:1.8em;letter-spacing:-.01em}
-.prose-axchi p{color:#d7dade}
-.prose-axchi a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
-.prose-axchi strong{color:var(--text);font-weight:600}
-.prose-axchi ul,.prose-axchi ol{padding-left:1.3em;color:#d7dade}
-.prose-axchi ul{list-style:disc}.prose-axchi ol{list-style:decimal}
-.prose-axchi li{margin-top:.4em}
-.prose-axchi li::marker{color:var(--accent)}
-.prose-axchi blockquote{border-left:2px solid var(--accent);padding-left:1.1em;color:var(--muted);font-style:italic}
-.prose-axchi code{font-family:var(--font-mono);font-size:.86em;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:.12em .4em}
-.prose-axchi pre{background:#0e1014;border:1px solid var(--border);border-radius:12px;padding:1.1em 1.25em;overflow-x:auto}
-.prose-axchi pre code{background:none;border:none;padding:0;font-size:.85em;color:#e3e6ea}
-.prose-axchi img{max-width:100%;height:auto;border-radius:12px;border:1px solid var(--border)}
-.prose-axchi hr{border:none;border-top:1px solid var(--border);margin:2.4em 0}
-.prose-axchi table{display:block;width:100%;overflow-x:auto;border-collapse:collapse;font-size:.92em}
-.prose-axchi th,.prose-axchi td{border:1px solid var(--border);padding:.5em .7em;text-align:left}
-.prose-axchi th{background:var(--surface-2);font-weight:600}
-.prose-axchi :where(p,h1,h2,h3,h4,li){overflow-wrap:anywhere}
-
-/* ===== Hero interactivo ===== */
-/* Revelado de palabras (clip + subida), una sola vez al cargar */
-.hero-word {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: top;
+/* Prosa de artículos y casos de estudio (markdown) */
+.prose {
+  color: var(--ink);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  max-width: 68ch;
 }
-.hero-word > span {
-  display: inline-block;
-  transform: translateY(110%);
-  opacity: 0;
-  animation: word-rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-delay: calc(var(--i, 0) * 70ms + 0.1s);
+.prose > * + * { margin-top: 1.2em; }
+.prose h2 {
+  font-size: var(--text-lg);
+  margin-top: 2.4em;
+  margin-bottom: -0.3em;
 }
-@keyframes word-rise {
-  to { transform: translateY(0); opacity: 1; }
+.prose h3 {
+  font-size: var(--text-base);
+  margin-top: 1.9em;
+  margin-bottom: -0.4em;
 }
-/* Barrido de gradiente sobre la palabra acento */
-.text-sweep {
-  background: linear-gradient(
-    100deg,
-    var(--accent) 0%,
-    #e9ffb0 25%,
-    var(--accent) 50%,
-    #9fe07a 75%,
-    var(--accent) 100%
-  );
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: sweep 6s linear infinite;
+.prose p, .prose li { color: var(--ink); }
+.prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
 }
-@keyframes sweep {
-  to { background-position: -200% 0; }
+.prose strong { font-weight: 600; }
+.prose ul, .prose ol { padding-left: 1.4em; }
+.prose ul { list-style: disc; }
+.prose ol { list-style: decimal; }
+.prose li { margin-top: 0.35em; }
+.prose li::marker { color: var(--faint); }
+.prose blockquote {
+  border-left: 2px solid var(--line-firm);
+  padding-left: 1.1em;
+  color: var(--graphite);
 }
-
-/* ===== Texturas y elementos gráficos (técnicas anti-slop) ===== */
-
-/* Fondo de puntos sutil — textura técnica */
-.bg-dotted {
-  background-image: radial-gradient(circle, hsl(0 0% 100% / 0.05) 1px, transparent 1px);
-  background-size: 26px 26px;
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
 }
-.bg-dotted-accent {
-  background-image: radial-gradient(circle, var(--accent) 1px, transparent 1px);
-  background-size: 30px 30px;
-  opacity: 0.06;
+.prose pre {
+  background: var(--sunken);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1em 1.2em;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.6;
 }
-/* Grid de líneas finas */
-.bg-grid {
-  background-image:
-    linear-gradient(to right, hsl(0 0% 100% / 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, hsl(0 0% 100% / 0.035) 1px, transparent 1px);
-  background-size: 48px 48px;
+.prose pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: inherit;
 }
-/* Máscara radial para desvanecer texturas hacia los bordes */
-.mask-fade {
-  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 100%);
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 100%);
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
 }
-
-/* Borde con gradiente (hairline de marca) */
-.border-gradient {
-  border: 1px solid transparent;
-  background:
-    linear-gradient(var(--surface), var(--surface)) padding-box,
-    linear-gradient(135deg, color-mix(in srgb, var(--accent) 55%, transparent), transparent 60%) border-box;
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 2.6em 0;
+}
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  display: block;
+  overflow-x: auto;
+}
+.prose th, .prose td {
+  border-bottom: 1px solid var(--line);
+  padding: 0.6em 0.9em 0.6em 0;
+  text-align: left;
+}
+.prose th {
+  font-weight: 600;
+  color: var(--graphite);
 }
 
-/* Spotlight que sigue al cursor (usa --mx/--my en px desde el componente) */
-.spotlight {
-  position: relative;
-  overflow: hidden;
+/* El único momento de movimiento de la página: la entrada al cargar.
+   No se repite al hacer scroll ni se aplica a cada sección. */
+@keyframes enter {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
 }
-.spotlight::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  background: radial-gradient(
-    260px circle at var(--mx, 50%) var(--my, 50%),
-    var(--accent-soft),
-    transparent 70%
-  );
-  pointer-events: none;
-}
-.spotlight:hover::before {
-  opacity: 1;
-}
-/* El contenido de la tarjeta queda por encima del glow */
-.spotlight > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* Divider con gradiente */
-.divider-gradient {
-  height: 1px;
-  border: 0;
-  background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
-}
-
-/* Grain sutil (overlay de ruido) */
-.grain::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.025;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* Respeta prefers-reduced-motion: solo opacidad, sin movimiento */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+.enter {
+  animation: enter 0.5s var(--ease) both;
 }

@@ -15,8 +15,8 @@ export default async function AdminProjectsPage() {
     <div>
       <div className="flex items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-semibold tracking-[-0.02em]">Proyectos</h1>
-          <p className="mt-1 text-sm text-muted">{projects.length} proyecto(s).</p>
+          <h1 className="text-2xl font-semibold tracking-[-0.02em]">Proyectos</h1>
+          <p className="mt-1 text-sm text-graphite">{projects.length} proyecto(s).</p>
         </div>
         <Button href="/admin/projects/new">
           <Plus className="h-4 w-4" /> Nuevo

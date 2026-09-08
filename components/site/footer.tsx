@@ -1,59 +1,45 @@
 import Link from "next/link"
-import { GithubIcon, InstagramIcon, LinkedinIcon } from "@/components/site/social-icons"
+import { PROFILE } from "@/lib/site"
+import { GithubIcon, InstagramIcon, LinkedinIcon } from "./social-icons"
 
-const NAV = [
-  { href: "/servicios", label: "Servicios" },
-  { href: "/trabajo", label: "Trabajo" },
-  { href: "/blog", label: "Blog" },
-  { href: "/sobre", label: "Studio" },
-  { href: "/contacto", label: "Contacto" },
+const REDES = [
+  { href: PROFILE.github, label: "GitHub", Icon: GithubIcon },
+  { href: PROFILE.linkedin, label: "LinkedIn", Icon: LinkedinIcon },
+  { href: PROFILE.instagram, label: "Instagram", Icon: InstagramIcon },
 ]
 
 export function Footer() {
   return (
-    <footer className="mt-10 border-t border-border">
-      <div className="mx-auto max-w-6xl px-7 py-14">
-        <div className="flex flex-col justify-between gap-10 md:flex-row">
-          <div className="max-w-sm">
-            <Link href="/" className="flex items-center gap-2 font-display text-lg font-bold tracking-[-0.02em]">
-              <span className="inline-block h-[9px] w-[9px] rounded-[2px] bg-accent" />
-              axchi<span className="font-normal text-muted">/studio</span>
-            </Link>
-            <p className="mt-4 text-sm text-muted">
-              Studio de ingeniería de software en Bogotá. Construimos productos digitales
-              que se sienten extraordinarios.
-            </p>
-          </div>
-
-          <nav className="flex flex-col gap-2.5">
-            <span className="mono-label mb-1">Navegación</span>
-            {NAV.map((item) => (
-              <Link key={item.href} href={item.href} className="text-sm text-muted transition-colors hover:text-text">
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex flex-col gap-2.5">
-            <span className="mono-label mb-1">Conecta</span>
-            <div className="flex gap-3">
-              <a href="https://github.com/axchisan" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-muted transition-colors hover:border-border-strong hover:text-text">
-                <GithubIcon className="h-4.5 w-4.5" />
-              </a>
-              <a href="https://www.instagram.com/axchisan" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-muted transition-colors hover:border-border-strong hover:text-text">
-                <InstagramIcon className="h-4.5 w-4.5" />
-              </a>
-              <a href="https://www.linkedin.com/in/duvan-yair-arciniegas-gerena-535690339" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-muted transition-colors hover:border-border-strong hover:text-text">
-                <LinkedinIcon className="h-4.5 w-4.5" />
-              </a>
-            </div>
-          </div>
+    <footer className="mt-24 border-t border-line">
+      <div className="mx-auto flex max-w-5xl flex-col gap-6 px-5 py-10 sm:px-8 md:flex-row md:items-center md:justify-between">
+        <div>
+          <p className="text-[0.9375rem] text-ink">{PROFILE.name}</p>
+          <p className="mt-0.5 text-[0.9375rem] text-graphite">
+            {PROFILE.role} en {PROFILE.location}
+          </p>
         </div>
 
-        <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-border pt-6 sm:flex-row sm:items-center">
-          <span className="mono-label">© 2026 · Duvan Yair Arciniegas · Bogotá, CO</span>
-          <span className="mono-label">Hecho con criterio</span>
+        <div className="flex items-center gap-1">
+          {REDES.map(({ href, label, Icon }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label={label}
+              className="flex h-9 w-9 items-center justify-center rounded-[8px] text-graphite transition-colors hover:bg-raised hover:text-ink"
+            >
+              <Icon className="h-[18px] w-[18px]" />
+            </a>
+          ))}
         </div>
+      </div>
+
+      <div className="mx-auto flex max-w-5xl flex-col gap-2 px-5 pb-10 text-[0.875rem] text-faint sm:flex-row sm:items-center sm:justify-between sm:px-8">
+        <p>© {new Date().getFullYear()} {PROFILE.name}</p>
+        <a href={`mailto:${PROFILE.email}`} className="link">
+          {PROFILE.email}
+        </a>
       </div>
     </footer>
   )

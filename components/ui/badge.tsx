@@ -2,13 +2,17 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 const variants = {
-  default: "border-border text-muted",
-  accent: "border-accent/40 bg-accent-soft text-accent",
-  success: "border-emerald-500/40 bg-emerald-500/10 text-emerald-400",
-  warning: "border-amber-500/40 bg-amber-500/10 text-amber-400",
-  destructive: "border-destructive/40 bg-destructive/10 text-destructive",
+  default: "border-line bg-raised text-graphite",
+  accent: "border-accent/30 bg-accent-weak text-accent",
+  positive: "border-positive/30 bg-positive/10 text-positive",
+  danger: "border-danger/30 bg-danger-weak text-danger",
+  warning: "border-warning/30 bg-warning-weak text-warning",
 }
 
+/**
+ * Etiqueta de estado o categoría. En caja baja y con la familia del sitio:
+ * las versalitas monoespaciadas son decoración, no información.
+ */
 export function Badge({
   className,
   variant = "default",
@@ -17,7 +21,7 @@ export function Badge({
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-md border px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.08em]",
+        "inline-flex items-center rounded-[5px] border px-2 py-0.5 text-[0.8125rem] leading-5",
         variants[variant],
         className,
       )}

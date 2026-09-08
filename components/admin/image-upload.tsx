@@ -40,13 +40,13 @@ export function ImageUpload({ value, onChange }: { value?: string; onChange: (ur
         onChange={(e) => handle(e.target.files?.[0])}
       />
       {value ? (
-        <div className="group relative w-full max-w-sm overflow-hidden rounded-xl border border-border">
+        <div className="group relative w-full max-w-sm overflow-hidden rounded-[8px] border border-line">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={value} alt="Portada" className="h-44 w-full object-cover" />
           <button
             type="button"
             onClick={() => onChange("")}
-            className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-lg bg-bg/80 text-text transition-colors hover:bg-destructive hover:text-white"
+            className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-lg bg-paper/80 text-ink transition-colors hover:bg-danger hover:text-white"
             aria-label="Quitar imagen"
           >
             <X className="h-4 w-4" />
@@ -58,7 +58,7 @@ export function ImageUpload({ value, onChange }: { value?: string; onChange: (ur
           onClick={() => ref.current?.click()}
           disabled={loading}
           className={cn(
-            "flex h-44 w-full max-w-sm flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border bg-bg text-muted transition-colors hover:border-accent hover:text-text",
+            "flex h-44 w-full max-w-sm flex-col items-center justify-center gap-2 rounded-[8px] border border-dashed border-line bg-paper text-graphite transition-colors hover:border-accent hover:text-ink",
           )}
         >
           {loading ? <Loader2 className="h-6 w-6 animate-spin" /> : <ImagePlus className="h-6 w-6" />}

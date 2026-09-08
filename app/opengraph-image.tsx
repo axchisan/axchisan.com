@@ -1,10 +1,15 @@
 import { ImageResponse } from "next/og"
+import { PROFILE, SITE_NAME } from "@/lib/site"
 
 export const runtime = "nodejs"
-export const alt = "Axchi Studio — Software que se siente extraordinario"
+export const alt = `${SITE_NAME} — ${PROFILE.role}`
 export const size = { width: 1200, height: 630 }
 export const contentType = "image/png"
 
+/**
+ * Tarjeta que se ve al compartir el enlace. Es lo primero que aparece en un
+ * mensaje de LinkedIn o WhatsApp, así que dice quién y qué, sin decoración.
+ */
 export default function OgImage() {
   return new ImageResponse(
     (
@@ -15,68 +20,43 @@ export default function OgImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#0A0B0D",
-          padding: "72px 80px",
+          background: "#14171c",
+          padding: "80px",
           fontFamily: "sans-serif",
-          position: "relative",
         }}
       >
-        <div
-          style={{
-            position: "absolute",
-            top: -160,
-            right: -120,
-            width: 560,
-            height: 560,
-            borderRadius: 9999,
-            background: "radial-gradient(circle, rgba(198,242,78,0.20), transparent 60%)",
-          }}
-        />
-        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <div style={{ width: 22, height: 22, borderRadius: 6, background: "#C6F24E" }} />
-          <div style={{ display: "flex", fontSize: 30, fontWeight: 700 }}>
-            <span style={{ color: "#F4F5F7" }}>axchi</span>
-            <span style={{ color: "#8A9099", fontWeight: 400 }}>/studio</span>
-          </div>
-        </div>
-
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div
             style={{
               display: "flex",
-              color: "#C6F24E",
-              fontSize: 22,
-              letterSpacing: 4,
-              textTransform: "uppercase",
-              marginBottom: 22,
+              fontSize: 82,
+              fontWeight: 600,
+              color: "#fcfcfd",
+              letterSpacing: -3,
+              lineHeight: 1.05,
             }}
           >
-            Studio de software · Bogotá
+            {SITE_NAME}
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              fontSize: 76,
-              fontWeight: 700,
-              lineHeight: 1.04,
-              letterSpacing: -2,
-              maxWidth: 920,
-            }}
-          >
-            <span style={{ color: "#F4F5F7" }}>Construimos software que se siente</span>
-            <span style={{ color: "#C6F24E" }}>&nbsp;extraordinario.</span>
+          <div style={{ display: "flex", marginTop: 20, fontSize: 36, color: "#98a1b0" }}>
+            {PROFILE.role} en {PROFILE.location}
           </div>
         </div>
 
-        <div style={{ display: "flex", gap: 28, color: "#8A9099", fontSize: 24 }}>
-          <span>Web</span>
-          <span style={{ color: "#33373D" }}>·</span>
-          <span>Multiplataforma</span>
-          <span style={{ color: "#33373D" }}>·</span>
-          <span>Automatización</span>
-          <span style={{ color: "#33373D" }}>·</span>
-          <span>IA</span>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            borderTop: "1px solid #363c45",
+            paddingTop: 32,
+          }}
+        >
+          <div style={{ display: "flex", fontSize: 30, color: "#c6cdd8", maxWidth: 900, lineHeight: 1.4 }}>
+            Sistemas completos, del modelo de datos al despliegue.
+          </div>
+          <div style={{ display: "flex", marginTop: 16, fontSize: 26, color: "#6b7480" }}>
+            axchisan.com
+          </div>
         </div>
       </div>
     ),
