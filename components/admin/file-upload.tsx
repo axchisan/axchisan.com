@@ -3,6 +3,7 @@
 import { useRef, useState } from "react"
 import { toast } from "sonner"
 import { Upload, X, Loader2, FileDown } from "lucide-react"
+import { uploadFile } from "@/lib/upload-client"
 
 export type ProjectFileItem = {
   id?: string
@@ -27,28 +28,31 @@ function fmtSize(n: number) {
 export function FileUpload({ value, onChange }: { value: ProjectFileItem[]; onChange: (files: ProjectFileItem[]) => void }) {
   const ref = useRef<HTMLInputElement>(null)
   const [loading, setLoading] = useState(false)
+  const [current, setCurrent] = useState<{ name: string; progress: number } | null>(null)
 
   async function handle(files: FileList | null) {
     if (!files || files.length === 0) return
     setLoading(true)
+    // Los archivos ya subidos se conservan aunque uno posterior falle: son
+    // binarios grandes y volver a subirlos todos por un fallo es inaceptable.
+    const uploaded: ProjectFileItem[] = []
     try {
-      const uploaded: ProjectFileItem[] = []
       for (const f of Array.from(files)) {
-        const fd = new FormData()
-        fd.append("file", f)
-        const res = await fetch("/api/admin/upload-file", { method: "POST", body: fd })
-        if (!res.ok) {
-          const e = await res.json().catch(() => ({}))
-          throw new Error(e.error || `No se pudo subir ${f.name}`)
-        }
-        uploaded.push(await res.json())
+        setCurrent({ name: f.name, progress: 0 })
+        uploaded.push(
+          await uploadFile(f, {
+            onProgress: (progress) => setCurrent({ name: f.name, progress }),
+          }),
+        )
       }
-      onChange([...value, ...uploaded])
       toast.success(`${uploaded.length} archivo(s) subido(s)`)
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Error")
     } finally {
+      if (uploaded.length) onChange([...value, ...uploaded])
       setLoading(false)
+      setCurrent(null)
+      if (ref.current) ref.current.value = ""
     }
   }
 
@@ -80,7 +84,9 @@ export function FileUpload({ value, onChange }: { value: ProjectFileItem[]; onCh
           className="flex items-center justify-center gap-2 rounded-lg border border-dashed border-border bg-bg py-3 text-sm text-muted transition-colors hover:border-accent hover:text-text"
         >
           {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
-          {loading ? "Subiendo…" : "Subir archivo descargable (APK, ZIP, …)"}
+          {current
+            ? `Subiendo ${current.name} — ${Math.round(current.progress * 100)}%`
+            : "Subir archivo descargable (APK, ZIP, …)"}
         </button>
       </div>
     </div>

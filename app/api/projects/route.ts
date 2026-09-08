@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from "next/server"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
+import { invalidate } from "@/lib/cache"
 
 export async function GET() {
   try {
@@ -94,6 +95,7 @@ export async function POST(request: NextRequest) {
       }
     })
 
+    invalidate("projects")
     return NextResponse.json(projectWithFiles)
   } catch (error) {
     console.error("Project creation error:", error)

@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { getServerSession } from "next-auth/next"
-import { revalidateTag } from "next/cache"
+import { invalidate } from "@/lib/cache"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 
@@ -43,7 +43,7 @@ export async function PUT(request: NextRequest) {
       ),
     )
 
-    revalidateTag("settings")
+    invalidate("settings")
     return NextResponse.json({ ok: true })
   } catch (error) {
     console.error("Settings PUT error:", error)

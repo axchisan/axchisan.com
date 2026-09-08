@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from "next/server"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
+import { invalidate } from "@/lib/cache"
 
 export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
@@ -24,6 +25,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       },
     })
 
+    invalidate("skills")
     return NextResponse.json(skill)
   } catch (error) {
     console.error("Skill update error:", error)
@@ -42,6 +44,7 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
       where: { id: (await params).id },
     })
 
+    invalidate("skills")
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error("Skill deletion error:", error)

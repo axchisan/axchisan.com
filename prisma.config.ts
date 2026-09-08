@@ -1,5 +1,10 @@
-import "dotenv/config"
+import { config as loadEnv } from "dotenv"
 import { defineConfig, env } from "prisma/config"
+
+// Next.js carga .env.local por su cuenta; la CLI de Prisma no. Se cargan en el
+// mismo orden de precedencia que usa Next: .env.local gana sobre .env.
+loadEnv({ path: ".env.local" })
+loadEnv({ path: ".env" })
 
 export default defineConfig({
   schema: "prisma/schema.prisma",
@@ -7,8 +12,9 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   datasource: {
-    // Usado por la CLI de Prisma (migrate, db pull/push, studio).
-    // El cliente en runtime usa el adapter pg en lib/prisma.ts.
-    url: env("DATABASE_URL"),
+    // La CLI (migrate, db pull/push, studio) necesita una conexión directa:
+    // el pooler de Neon corre en modo transacción y rompe las migraciones.
+    // El cliente en runtime usa el adapter pg con la URL agrupada.
+    url: env("DIRECT_DATABASE_URL") ?? env("DATABASE_URL"),
   },
 })
