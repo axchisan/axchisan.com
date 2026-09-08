@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Header } from "@/components/site/header"
 import { Footer } from "@/components/site/footer"
 import { getBlogPosts } from "@/lib/data"
-import { cn } from "@/lib/utils"
+import { cn, formatDate, toDate } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: "Escritos",
@@ -13,8 +13,6 @@ export const metadata: Metadata = {
 }
 
 export const dynamic = "force-dynamic"
-
-const FECHA = new Intl.DateTimeFormat("es-CO", { day: "numeric", month: "long", year: "numeric" })
 
 export default async function BlogPage({
   searchParams,
@@ -100,8 +98,8 @@ export default async function BlogPage({
                     </p>
                   )}
                   <p className="mt-3 text-[0.875rem] text-faint">
-                    <time dateTime={(post.publishedAt ?? post.createdAt).toISOString()}>
-                      {FECHA.format(post.publishedAt ?? post.createdAt)}
+                    <time dateTime={toDate(post.publishedAt ?? post.createdAt).toISOString()}>
+                      {formatDate(post.publishedAt ?? post.createdAt)}
                     </time>
                     {post.readTime ? <span className="ml-4">{post.readTime} min de lectura</span> : null}
                   </p>

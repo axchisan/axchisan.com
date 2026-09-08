@@ -5,13 +5,27 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatDate(date: Date | string): string {
-  const dateObj = typeof date === "string" ? new Date(date) : date
-  return dateObj.toLocaleDateString("es-ES", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  })
+/**
+ * Normaliza a Date lo que viene de una consulta cacheada.
+ *
+ * `unstable_cache` guarda el resultado serializado, así que en el primer render
+ * un campo de fecha llega como Date y en los siguientes —al acertar la caché—
+ * llega como string. Todo lo que formatee una fecha tiene que pasar por aquí:
+ * de lo contrario `.toISOString()` revienta con un 500 que solo aparece a
+ * partir de la segunda visita, que es la peor forma de encontrarlo.
+ */
+export function toDate(value: Date | string | number): Date {
+  return value instanceof Date ? value : new Date(value)
+}
+
+const FORMATO_LARGO = new Intl.DateTimeFormat("es-CO", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+})
+
+export function formatDate(date: Date | string | number): string {
+  return FORMATO_LARGO.format(toDate(date))
 }
 
 export function slugify(text: string): string {

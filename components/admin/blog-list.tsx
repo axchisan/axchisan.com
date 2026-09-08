@@ -60,8 +60,8 @@ export function BlogList({ items }: { items: Item[] }) {
             {p.tags.length > 0 && <span className="text-[0.875rem] text-faint">{p.tags.slice(0, 4).join(" · ")}</span>}
           </div>
           <div className="flex shrink-0 gap-2">
-            <Button variant="outline" size="sm" href={`/admin/blog/${p.slug}`}>
-              <Pencil className="h-4 w-4" />
+            <Button variant="outline" size="sm" href={`/admin/blog/${p.slug}`} aria-label={`Editar ${p.title}`}>
+              <Pencil className="h-4 w-4" aria-hidden />
             </Button>
             <Button
               variant="outline"
@@ -69,8 +69,9 @@ export function BlogList({ items }: { items: Item[] }) {
               disabled={busy === p.slug}
               onClick={() => remove(p.slug, p.title)}
               className="text-danger hover:border-danger/50"
+              aria-label={`Eliminar ${p.title}`}
             >
-              <Trash2 className="h-4 w-4" />
+              <Trash2 className="h-4 w-4" aria-hidden />
             </Button>
           </div>
         </Card>

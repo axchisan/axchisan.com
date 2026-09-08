@@ -3,7 +3,8 @@ import { defineConfig, env } from "prisma/config"
 
 // Next.js carga .env.local por su cuenta; la CLI de Prisma no. Se cargan en el
 // mismo orden de precedencia que usa Next: .env.local gana sobre .env.
-loadEnv({ path: ".env.local" })
+// ENV_FILE permite apuntar a la rama de pruebas sin tocar el entorno local.
+loadEnv({ path: process.env.ENV_FILE ?? ".env.local" })
 loadEnv({ path: ".env" })
 
 export default defineConfig({

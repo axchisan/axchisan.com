@@ -127,7 +127,7 @@ export function MediaManager() {
                 ) : (
                   <Icon className="h-8 w-8 text-faint" strokeWidth={1.4} />
                 )}
-                <div className="absolute inset-0 flex items-center justify-center gap-2 bg-paper/80 opacity-0 transition-opacity group-hover:opacity-100">
+                <div className="absolute inset-0 flex items-center justify-center gap-2 bg-paper/80 opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100">
                   <button onClick={() => copy(m.url)} className="flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-raised text-ink transition-colors hover:border-accent hover:text-accent" aria-label="Copiar URL">
                     <Copy className="h-4 w-4" />
                   </button>
