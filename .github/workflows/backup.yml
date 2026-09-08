@@ -30,6 +30,9 @@ jobs:
             | sudo tee /etc/apt/sources.list.d/pgdg.list
           sudo apt-get update
           sudo apt-get install -y postgresql-client-18
+          # El runner ya trae pg_dump 16 antes en el PATH; la versión mayor debe
+          # coincidir con la del servidor o pg_dump aborta.
+          echo "/usr/lib/postgresql/18/bin" >> "$GITHUB_PATH"
 
       - name: Volcar y cifrar
         env:
@@ -41,6 +44,7 @@ jobs:
             echo "Faltan los secretos DATABASE_URL_DIRECT o BACKUP_PASSPHRASE" >&2
             exit 1
           fi
+          pg_dump --version
           name="axchisan-$(date -u +%Y%m%d).sql.gz"
           pg_dump --no-owner --no-privileges "${DATABASE_URL_DIRECT}" | gzip -9 > "${name}"
           echo "Volcado sin cifrar: $(du -h "${name}" | cut -f1)"
