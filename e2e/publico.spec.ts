@@ -1,6 +1,6 @@
 import { test, expect, type Page } from "@playwright/test"
 
-const RUTAS = ["/", "/trabajo", "/blog", "/servicios", "/sobre", "/contacto"]
+const RUTAS = ["/", "/trabajo", "/blog", "/servicios", "/sobre", "/contacto", "/privacidad"]
 
 /** Errores de consola reales, descartando el ruido del servidor de desarrollo. */
 function capturarErrores(page: Page): string[] {
@@ -50,6 +50,40 @@ test.describe("páginas públicas", () => {
     expect(res?.status()).toBe(404)
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible()
     await expect(page.getByRole("link", { name: "Ir al inicio" })).toBeVisible()
+  })
+})
+
+test.describe("compatibilidad con el sitio anterior", () => {
+  // La versión anterior estuvo indexada con rutas en inglés. Si estas
+  // redirecciones desaparecen, cada resultado de Google apuntando al sitio
+  // viejo pasa a devolver 404 y se pierde el posicionamiento ganado.
+  const HEREDADAS: Array<[string, string]> = [
+    ["/about", "/sobre"],
+    ["/services", "/servicios"],
+    ["/contact", "/contacto"],
+    ["/projects", "/trabajo"],
+    ["/privacy", "/privacidad"],
+    ["/terms", "/privacidad"],
+    ["/saved", "/trabajo"],
+    ["/messages", "/contacto"],
+  ]
+
+  for (const [vieja, nueva] of HEREDADAS) {
+    test(`${vieja} redirige a ${nueva}`, async ({ page }) => {
+      const res = await page.goto(vieja)
+      expect(res?.status(), `${vieja} debería resolver`).toBe(200)
+      await expect(page).toHaveURL(new RegExp(`${nueva}$`))
+    })
+  }
+
+  test("una ficha de proyecto antigua conserva su identificador", async ({ page, request }) => {
+    const proyectos = await (await request.get("/api/projects")).json()
+    const id = proyectos[0]?.id
+    test.skip(!id, "no hay proyectos")
+
+    const res = await page.goto(`/projects/${id}`)
+    expect(res?.status()).toBe(200)
+    await expect(page).toHaveURL(new RegExp(`/trabajo/${id}$`))
   })
 })
 
