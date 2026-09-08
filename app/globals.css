@@ -189,10 +189,20 @@
 }
 
 /* Prosa de artículos y casos de estudio (markdown) */
+/* La medida de lectura se aplica al texto, no al contenedor: el código, las
+   tablas y las imágenes no siguen la regla de los 68 caracteres y quedaban
+   recortados dentro de ella. */
 .prose {
   color: var(--ink);
   font-size: 1.0625rem;
   line-height: 1.7;
+}
+.prose p,
+.prose ul,
+.prose ol,
+.prose blockquote,
+.prose h2,
+.prose h3 {
   max-width: 68ch;
 }
 .prose > * + * { margin-top: 1.2em; }
@@ -234,6 +244,7 @@
 }
 .prose pre {
   background: var(--sunken);
+  max-width: 100%;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 1em 1.2em;
