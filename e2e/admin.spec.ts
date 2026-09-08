@@ -96,7 +96,7 @@ test.describe("panel de administración", () => {
     await page.getByRole("button", { name: /Guardar/ }).first().click()
     await page.waitForURL(/\/admin\/projects$/, { timeout: 30_000 })
 
-    await page.goto(`/trabajo/${prueba.id}`)
+    await page.goto(`/trabajo/${prueba.slug ?? prueba.id}`)
     await expect(page.getByText(nuevaDesc)).toBeVisible()
   })
 
@@ -114,7 +114,7 @@ test.describe("panel de administración", () => {
 
     await expect(page.getByText(prueba.title)).toHaveCount(0, { timeout: 20_000 })
 
-    const res = await request.get(`/trabajo/${prueba.id}`)
+    const res = await request.get(`/trabajo/${prueba.slug ?? prueba.id}`)
     expect(res.status(), "el proyecto borrado sigue accesible").toBe(404)
   })
 

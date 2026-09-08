@@ -31,22 +31,29 @@ export const getProjects = unstable_cache(
   { revalidate: REVALIDATE, tags: ["projects"] },
 )
 
-export const getProjectById = unstable_cache(
-  async (id: string) => {
+/**
+ * Busca por slug y, si no lo encuentra, por id.
+ *
+ * Las URLs son `/trabajo/tecnobichos`, pero los identificadores antiguos
+ * siguieron circulando en el sitemap y en enlaces compartidos: mantenerlos
+ * vivos cuesta una consulta y evita romperlos.
+ */
+export const getProjectBySlugOrId = unstable_cache(
+  async (slugOrId: string) => {
     try {
-      return await prisma.project.findUnique({
-        where: { id },
+      return await prisma.project.findFirst({
+        where: { OR: [{ slug: slugOrId }, { id: slugOrId }] },
         include: {
           files: { orderBy: { order: "asc" } },
           _count: { select: { likes: true, comments: true, favorites: true } },
         },
       })
     } catch (error) {
-      console.error("getProjectById error:", error)
+      console.error("getProjectBySlugOrId error:", error)
       return null
     }
   },
-  ["project-by-id"],
+  ["project-by-slug-or-id"],
   { revalidate: REVALIDATE, tags: ["projects"] },
 )
 
@@ -123,8 +130,8 @@ export const getPublishedBlogSlugs = unstable_cache(
   { revalidate: REVALIDATE, tags: ["blog"] },
 )
 
-export const getPublicProjectIds = unstable_cache(
-  async () => prisma.project.findMany({ where: { status: "COMPLETED" }, select: { id: true, updatedAt: true } }),
+export const getPublicProjectRefs = unstable_cache(
+  async () => prisma.project.findMany({ where: { status: "COMPLETED" }, select: { id: true, slug: true, updatedAt: true } }),
   ["project-ids"],
   { revalidate: REVALIDATE, tags: ["projects"] },
 )

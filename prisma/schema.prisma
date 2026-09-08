@@ -78,6 +78,9 @@ model Service {
 model Project {
   id          String @id @default(cuid())
   title       String @unique
+  // URL legible. Un identificador opaco en la URL no dice nada ni a una
+  // persona ni a un buscador.
+  slug        String? @unique
   description String @db.Text
   shortDesc   String?
   content     String? @db.Text

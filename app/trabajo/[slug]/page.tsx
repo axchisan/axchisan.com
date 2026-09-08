@@ -9,21 +9,25 @@ import { Header } from "@/components/site/header"
 import { Footer } from "@/components/site/footer"
 import { GithubIcon } from "@/components/site/social-icons"
 import { ViewTracker } from "@/components/view-tracker"
-import { getProjectById } from "@/lib/data"
+import { PROFILE, SITE_URL } from "@/lib/site"
+import { toDate } from "@/lib/utils"
+import { getProjectBySlugOrId } from "@/lib/data"
 
 export const dynamic = "force-dynamic"
 
-type Params = { params: Promise<{ id: string }> }
+type Params = { params: Promise<{ slug: string }> }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const { id } = await params
-  const project = await getProjectById(id)
+  const { slug } = await params
+  const project = await getProjectBySlugOrId(slug)
   if (!project) return { title: "Proyecto no encontrado" }
   return {
     title: project.title,
     description: project.shortDesc ?? project.description.slice(0, 160),
-    alternates: { canonical: `/trabajo/${id}` },
+    // El canónico apunta siempre al slug, aunque se haya llegado por id.
+    alternates: { canonical: `/trabajo/${project.slug ?? project.id}` },
     openGraph: {
+      type: "article",
       title: project.title,
       description: project.shortDesc ?? undefined,
       images: project.coverImage ? [project.coverImage] : undefined,
@@ -37,8 +41,8 @@ function formatoTamano(bytes: number): string {
 }
 
 export default async function ProjectPage({ params }: Params) {
-  const { id } = await params
-  const p = await getProjectById(id)
+  const { slug } = await params
+  const p = await getProjectBySlugOrId(slug)
   if (!p) notFound()
 
   const descargables = p.files.filter((f) => f.isDownloadable)
@@ -49,6 +53,23 @@ export default async function ProjectPage({ params }: Params) {
       <Header />
 
       <main id="contenido" className="mx-auto max-w-5xl px-5 sm:px-8">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareSourceCode",
+              name: p.title,
+              description: p.shortDesc ?? p.description.slice(0, 200),
+              url: `${SITE_URL}/trabajo/${p.slug ?? p.id}`,
+              codeRepository: p.githubUrl ?? undefined,
+              programmingLanguage: p.technologies,
+              dateModified: toDate(p.updatedAt).toISOString(),
+              author: { "@type": "Person", name: PROFILE.name, url: SITE_URL },
+            }),
+          }}
+        />
+
         <nav aria-label="Migas" className="pt-8">
           <Link href="/trabajo" className="text-[0.9375rem] text-graphite transition-colors hover:text-ink">
             Volver al trabajo
