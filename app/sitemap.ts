@@ -5,11 +5,11 @@ import { getPublishedBlogSlugs, getPublicProjectRefs } from "@/lib/data"
 export const dynamic = "force-dynamic"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const routes = ["", "/servicios", "/trabajo", "/blog", "/sobre", "/contacto", "/privacidad"].map((path) => ({
+  const routes = ["", "/servicios", "/proceso", "/trabajo", "/blog", "/sobre", "/contacto", "/privacidad"].map((path) => ({
     url: `${SITE_URL}${path}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
-    priority: path === "" ? 1 : path === "/privacidad" ? 0.2 : 0.8,
+    priority: path === "" ? 1 : path === "/privacidad" ? 0.2 : path === "/servicios" ? 0.9 : 0.8,
   }))
 
   try {

@@ -6,6 +6,7 @@ import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import rehypeRaw from "rehype-raw"
 import { Header } from "@/components/site/header"
+import { Band, Body } from "@/components/site/band"
 import { Footer } from "@/components/site/footer"
 import { GithubIcon } from "@/components/site/social-icons"
 import { ViewTracker } from "@/components/view-tracker"
@@ -52,7 +53,7 @@ export default async function ProjectPage({ params }: Params) {
       <ViewTracker endpoint={`/api/projects/${p.id}/view`} />
       <Header />
 
-      <main id="contenido" className="mx-auto max-w-5xl px-5 sm:px-8">
+      <main id="contenido">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -70,20 +71,29 @@ export default async function ProjectPage({ params }: Params) {
           }}
         />
 
-        <nav aria-label="Migas" className="pt-8">
-          <Link href="/trabajo" className="text-[0.9375rem] text-graphite transition-colors hover:text-ink">
-            Volver al trabajo
-          </Link>
-        </nav>
+        <Band as="header">
+          <div className="enter py-12 sm:py-16">
+            <nav aria-label="Migas">
+              <Link
+                href="/trabajo"
+                className="text-[0.9375rem] text-on-band-mid transition-colors hover:text-accent"
+              >
+                Volver al trabajo
+              </Link>
+            </nav>
+            <h1 className="mt-6 max-w-[20ch] text-[2.4375rem] leading-[1.06] sm:text-[3.0625rem]">
+              {p.title}
+            </h1>
+            {p.shortDesc && (
+              <p className="mt-5 max-w-[56ch] text-[1.125rem] leading-relaxed text-on-band-mid">
+                {p.shortDesc}
+              </p>
+            )}
+          </div>
+        </Band>
 
-        <header className="enter pb-10 pt-8">
-          <h1 className="max-w-[20ch]">{p.title}</h1>
-          {p.shortDesc && (
-            <p className="measure mt-4 text-[1.1875rem] leading-relaxed text-graphite">{p.shortDesc}</p>
-          )}
-        </header>
-
-        <div className="grid gap-12 border-t border-line pt-10 lg:grid-cols-[1fr_16rem] lg:gap-16">
+        <Body>
+        <div className="grid gap-12 lg:grid-cols-[1fr_17rem] lg:gap-16">
           <article className="min-w-0">
             {p.content ? (
               <div className="prose">
@@ -106,9 +116,9 @@ export default async function ProjectPage({ params }: Params) {
                       <a
                         href={f.url}
                         download
-                        className="flex items-center gap-3 rounded-[8px] border border-line bg-raised px-4 py-3 transition-colors hover:border-line-firm"
+                        className="flex items-center gap-3 rounded-[8px] border border-line bg-card px-4 py-3 transition-colors hover:border-line-firm"
                       >
-                        <Download className="h-4 w-4 shrink-0 text-graphite" aria-hidden />
+                        <Download className="h-4 w-4 shrink-0 text-mid" aria-hidden />
                         <span className="min-w-0 flex-1">
                           <span className="block truncate text-[0.9375rem] text-ink">
                             {f.displayName || f.originalName}
@@ -127,7 +137,7 @@ export default async function ProjectPage({ params }: Params) {
           </article>
 
           {/* Raíl de ficha técnica. La estructura dice qué es cada cosa. */}
-          <aside className="lg:border-l lg:border-line lg:pl-8">
+          <aside className="h-fit rounded-[16px] border border-line bg-card p-6 shadow-card lg:sticky lg:top-24">
             <dl className="space-y-6 text-[0.9375rem]">
               {p.category && (
                 <div>
@@ -143,7 +153,7 @@ export default async function ProjectPage({ params }: Params) {
                     {p.technologies.map((t) => (
                       <span
                         key={t}
-                        className="rounded-[5px] border border-line bg-raised px-2 py-0.5 text-[0.875rem] text-graphite"
+                        className="rounded-[5px] border border-line bg-paper px-2 py-0.5 text-[0.875rem] text-mid"
                       >
                         {t}
                       </span>
@@ -178,6 +188,7 @@ export default async function ProjectPage({ params }: Params) {
             </dl>
           </aside>
         </div>
+        </Body>
       </main>
 
       <Footer />

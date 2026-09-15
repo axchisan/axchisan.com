@@ -3,7 +3,6 @@ import { Instrument_Sans, JetBrains_Mono } from "next/font/google"
 import { Toaster } from "sonner"
 import "./globals.css"
 import { PROFILE, SITE_NAME, SITE_URL } from "@/lib/site"
-import { ThemeProvider } from "@/components/theme-provider"
 
 // Una sola familia para todo el sitio. Ver DESIGN.md.
 const instrumentSans = Instrument_Sans({
@@ -21,19 +20,23 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 const DESCRIPTION =
-  "Desarrollador de software en Bogotá. Construyo sistemas completos: canales de contenido " +
-  "automatizados, apps multiplataforma sobre infraestructura serverless y juegos con multijugador " +
-  "autoritativo. Flutter, Spring Boot, Next.js, Python."
+  "Desarrollo de software a medida, automatización e integración de IA para empresas en Bogotá y " +
+  "en remoto. Aplicaciones web y multiplataforma, con alcance y precio cerrados antes de empezar."
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — Desarrollador de software`,
+    default: `${SITE_NAME} — Desarrollo de software a medida en Bogotá`,
     template: `%s · ${SITE_NAME}`,
   },
   description: DESCRIPTION,
   alternates: { canonical: "/" },
   keywords: [
+    "desarrollo de software a medida",
+    "desarrollo de software Bogotá",
+    "automatización de procesos",
+    "integración de IA",
+    "desarrollador freelance Colombia",
     "desarrollador de software",
     "Bogotá",
     "Colombia",
@@ -49,16 +52,16 @@ export const metadata: Metadata = {
   authors: [{ name: PROFILE.name, url: SITE_URL }],
   creator: PROFILE.name,
   openGraph: {
-    type: "profile",
+    type: "website",
     locale: "es_CO",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — Desarrollador de software`,
+    title: `${SITE_NAME} — Desarrollo de software a medida`,
     description: DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — Desarrollador de software`,
+    title: `${SITE_NAME} — Desarrollo de software a medida`,
     description: DESCRIPTION,
     creator: "@axchisan",
   },
@@ -78,10 +81,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   // Un valor por esquema: la barra del navegador debe seguir al tema.
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fcfcfd" },
-    { media: "(prefers-color-scheme: dark)", color: "#0e1013" },
-  ],
+  themeColor: "#0b0f14",
 }
 
 export default function RootLayout({
@@ -94,7 +94,6 @@ export default function RootLayout({
       // de ruta, donde produce un salto largo en lugar de una navegación.
       data-scroll-behavior="smooth"
       className={`${instrumentSans.variable} ${jetbrainsMono.variable}`}
-      suppressHydrationWarning
     >
       <body className="min-h-screen bg-paper text-ink">
         <script
@@ -102,14 +101,17 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              // Persona, no empresa: el sitio es un portafolio profesional.
-              "@type": "Person",
-              name: PROFILE.name,
-              alternateName: PROFILE.alias,
-              jobTitle: PROFILE.role,
+              // El sitio ofrece servicios: ProfessionalService describe la
+              // oferta, y el fundador queda enlazado dentro.
+              "@type": "ProfessionalService",
+              name: SITE_NAME,
+              founder: { "@type": "Person", name: PROFILE.name },
+              areaServed: ["CO", "Remoto"],
+              priceRange: "$$",
               description: DESCRIPTION,
               url: SITE_URL,
               email: PROFILE.email,
+              telephone: "+573183038190",
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "Bogotá",
@@ -129,19 +131,17 @@ export default function RootLayout({
             }),
           }}
         />
-        <ThemeProvider>
-          {children}
-          <Toaster
-            position="bottom-right"
-            toastOptions={{
-              style: {
-                background: "var(--raised)",
-                border: "1px solid var(--line)",
-                color: "var(--ink)",
-              },
-            }}
-          />
-        </ThemeProvider>
+        {children}
+        <Toaster
+          position="bottom-right"
+          toastOptions={{
+            style: {
+              background: "var(--card)",
+              border: "1px solid var(--line)",
+              color: "var(--ink)",
+            },
+          }}
+        />
       </body>
     </html>
   )

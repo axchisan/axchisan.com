@@ -1,13 +1,12 @@
 import { test, expect } from "@playwright/test"
 import AxeBuilder from "@axe-core/playwright"
 
-const RUTAS = ["/", "/trabajo", "/blog", "/servicios", "/sobre", "/contacto"]
+const RUTAS = ["/", "/servicios", "/proceso", "/trabajo", "/blog", "/sobre", "/contacto", "/privacidad"]
 
 test.describe("accesibilidad", () => {
   for (const ruta of RUTAS) {
-    for (const tema of ["light", "dark"] as const) {
-      test(`${ruta} cumple WCAG A y AA en tema ${tema}`, async ({ page }) => {
-        await page.emulateMedia({ colorScheme: tema })
+    {
+      test(`${ruta} cumple WCAG A y AA`, async ({ page }) => {
         await page.goto(ruta)
         await page.waitForLoadState("networkidle")
 
@@ -20,7 +19,7 @@ test.describe("accesibilidad", () => {
         const resumen = violations.map(
           (v) => `${v.id} (${v.impact}) — ${v.nodes.length} nodo(s): ${v.help}`,
         )
-        expect(resumen, `violaciones en ${ruta} (${tema})`).toEqual([])
+        expect(resumen, `violaciones en ${ruta}`).toEqual([])
       })
     }
   }

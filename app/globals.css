@@ -6,80 +6,79 @@
    ========================================================================== */
 
 :root {
+  /* El sitio es de tema claro con bandas oscuras deliberadas (hero, pie, CTA).
+     No hay conmutador: una web comercial se lee mejor con una sola voz. */
   color-scheme: light;
 
-  /* Superficies y texto — escala neutra fría */
-  --paper:     #fcfcfd;
-  --raised:    #f5f6f8;
-  --sunken:    #eef0f3;
-  --ink:       #14171c;
-  --graphite:  #5c6472;
-  --faint:     #6a707b;
-  --line:      #e3e6eb;
-  --line-firm: #cdd2da;
+  /* ── Superficies ───────────────────────────────────────────────────────
+     La estructura del sitio es rítmica: banda oscura → cuerpo claro → banda
+     oscura. Ese contraste es lo que da cuerpo a la página sin decorarla. */
+  --band:      #0b0f14;   /* hero, pie, secciones de cierre */
+  --band-2:    #121820;   /* superficie elevada dentro de la banda */
+  --band-line: #1e2630;   /* separadores dentro de la banda */
+  --paper:     #f3f6f9;   /* cuerpo */
+  --card:      #ffffff;   /* tarjetas sobre el cuerpo */
+  --line:      #e2e8ef;
+  --line-firm: #cbd5e1;
 
-  /* El acento marca interacción. Nunca decora. */
-  --accent:       #3454d1;
-  --accent-hover: #2843b4;
-  --accent-weak:  #eef1fc;
-  --on-accent:    #ffffff;
+  /* ── Texto ───────────────────────────────────────────────────────────── */
+  --ink:       #0f1720;   /* 16.6:1 sobre cuerpo */
+  --mid:       #4d5866;   /*  6.7:1 */
+  --faint:     #66707d;   /*  4.6:1 — el mínimo accesible, calculado */
+  --on-band:       #ffffff;
+  --on-band-mid:   #9aa7b5;   /* 7.8:1 sobre la banda */
 
-  --danger:      #c2323b;
-  --danger-weak: #fdeeef;
-  --positive:    #1f7a4d;
-  --warning:     #9a6206;
+  /* ── Acento, en dos tonos ─────────────────────────────────────────────
+     Un solo verde no puede servir para texto sobre claro y sobre oscuro: el
+     brillante da 2.8:1 sobre fondo claro y es ilegible. Por eso hay dos.
+     (La referencia que inspira este diseño comete exactamente ese error.) */
+  --accent:        #0ea5a5;   /* sobre la banda oscura: 6.4:1 */
+  --accent-ink:    #0b7c7c;   /* texto de acento sobre claro: 4.6:1 */
+  --accent-hover:  #096767;
+  --accent-weak:   #e6f4f4;
+  --on-accent:     #04201f;   /* texto DENTRO del botón verde: 5.6:1.
+                                 En blanco daría 3.0:1 y fallaría. */
+
+  --danger:      #b3261e;
+  --danger-weak: #fdecea;
+  --positive:    #12694a;
+  --warning:     #8a5a00;
   --warning-weak: #fdf4e3;
 
-  --radius:    8px;
-  --radius-sm: 5px;
-  --radius-lg: 12px;
+  --radius:    10px;
+  --radius-sm: 6px;
+  --radius-lg: 16px;
 
-  /* Una sola curva para todo: la coherencia del movimiento se nota. */
+  --shadow-card: 0 1px 2px rgb(15 23 32 / 0.04), 0 8px 24px -12px rgb(15 23 32 / 0.10);
+
   --ease: cubic-bezier(0.2, 0, 0, 1);
 }
 
-:root[data-theme="dark"] {
-  color-scheme: dark;
-
-  --paper:     #0e1013;
-  --raised:    #171a1f;
-  --sunken:    #0a0c0f;
-  --ink:       #f2f4f7;
-  --graphite:  #98a1b0;
-  --faint:     #7c848e;
-  --line:      #252a31;
-  --line-firm: #363c45;
-
-  --accent:       #7c95f5;
-  --accent-hover: #93a8f8;
-  --accent-weak:  #191f33;
-  --on-accent:    #0e1013;
-
-  --danger:      #f0787f;
-  --danger-weak: #2a1719;
-  --positive:    #4ec08a;
-  --warning:     #e0a852;
-  --warning-weak: #2a2116;
-}
-
 @theme inline {
+  --color-band:      var(--band);
+  --color-band-2:    var(--band-2);
+  --color-band-line: var(--band-line);
   --color-paper:     var(--paper);
-  --color-raised:    var(--raised);
-  --color-sunken:    var(--sunken);
-  --color-ink:       var(--ink);
-  --color-graphite:  var(--graphite);
-  --color-faint:     var(--faint);
+  --color-card:      var(--card);
   --color-line:      var(--line);
   --color-line-firm: var(--line-firm);
-  --color-accent:      var(--accent);
+  --color-ink:       var(--ink);
+  --color-mid:       var(--mid);
+  --color-faint:     var(--faint);
+  --color-on-band:     var(--on-band);
+  --color-on-band-mid: var(--on-band-mid);
+  --color-accent:       var(--accent);
+  --color-accent-ink:   var(--accent-ink);
   --color-accent-hover: var(--accent-hover);
-  --color-accent-weak: var(--accent-weak);
-  --color-on-accent:   var(--on-accent);
+  --color-accent-weak:  var(--accent-weak);
+  --color-on-accent:    var(--on-accent);
   --color-danger:      var(--danger);
   --color-danger-weak: var(--danger-weak);
   --color-positive:    var(--positive);
   --color-warning:      var(--warning);
   --color-warning-weak: var(--warning-weak);
+
+  --shadow-card: var(--shadow-card);
 
   /* Una familia para todo. La mono solo donde hay código o un dato real. */
   --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -95,6 +94,11 @@
   --text-2xl: 2.4375rem;  /* 39 */
   --text-3xl: 3.0625rem;  /* 49 */
   --text-4xl: 3.8125rem;  /* 61 */
+
+  /* Alias heredados: el panel admin aún usa estos nombres. */
+  --color-raised:  var(--card);
+  --color-sunken:  var(--paper);
+  --color-graphite: var(--mid);
 
   --radius:    var(--radius);
   --radius-sm: var(--radius-sm);
@@ -156,7 +160,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--accent-ink);
     outline-offset: 2px;
     border-radius: 3px;
   }
@@ -177,7 +181,7 @@
   /* Enlace dentro de prosa: subrayado desde el principio, no al pasar el ratón.
      Un enlace que no se ve como enlace hasta que lo tocas no es un enlace. */
   .link {
-    color: var(--accent);
+    color: var(--accent-ink);
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.2em;
@@ -218,7 +222,7 @@
 }
 .prose p, .prose li { color: var(--ink); }
 .prose a {
-  color: var(--accent);
+  color: var(--accent-ink);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;

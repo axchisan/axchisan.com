@@ -18,12 +18,12 @@ export interface ProjectRowData {
  */
 export function ProjectRow({ project }: { project: ProjectRowData }) {
   return (
-    <article className="group relative border-t border-line py-8 first:border-t-0 first:pt-0">
+    <article className="group relative border-t border-line py-7 first:border-t-0 first:pt-0">
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
         <h3 className="text-[1.375rem] font-semibold tracking-[-0.02em]">
           <Link
             href={`/trabajo/${project.slug ?? project.id}`}
-            className="rounded-[4px] transition-colors group-hover:text-accent"
+            className="rounded-[4px] text-ink transition-colors group-hover:text-accent-ink"
           >
             {project.title}
             {/* El enlace cubre toda la fila sin anidar interactivos dentro. */}
@@ -31,11 +31,11 @@ export function ProjectRow({ project }: { project: ProjectRowData }) {
           </Link>
         </h3>
         {project.category && (
-          <span className="text-[0.9375rem] text-faint">{project.category}</span>
+          <span className="rounded-full bg-accent-weak px-2.5 py-1 text-[0.8125rem] font-medium text-accent-ink">{project.category}</span>
         )}
       </div>
 
-      <p className="measure mt-2 text-[1.0625rem] leading-relaxed text-graphite">
+      <p className="measure mt-2 text-[1.0625rem] leading-relaxed text-mid">
         {project.shortDesc ?? project.description}
       </p>
 
@@ -44,7 +44,7 @@ export function ProjectRow({ project }: { project: ProjectRowData }) {
           {project.technologies.slice(0, 8).map((t) => (
             <li
               key={t}
-              className="rounded-[5px] border border-line bg-raised px-2 py-0.5 text-[0.8125rem] text-graphite"
+              className="rounded-[5px] border border-line bg-paper px-2 py-0.5 text-[0.8125rem] text-mid"
             >
               {t}
             </li>

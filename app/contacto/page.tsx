@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Header } from "@/components/site/header"
+import { Body, PageBand } from "@/components/site/band"
 import { Footer } from "@/components/site/footer"
 import { ContactForm } from "@/components/contact/contact-form"
 import { getProfile } from "@/lib/data"
@@ -23,16 +24,14 @@ export default async function ContactoPage() {
     <>
       <Header />
 
-      <main id="contenido" className="mx-auto max-w-5xl px-5 sm:px-8">
-        <header className="enter py-14 sm:py-16">
-          <h1>Contacto</h1>
-          <p className="measure mt-4 text-[1.0625rem] leading-relaxed text-graphite">
-            Estoy buscando equipo. Si tienes una vacante, un proyecto o simplemente quieres
-            preguntarme algo sobre alguno de estos sistemas, escríbeme: respondo a todos los mensajes.
-          </p>
-        </header>
+      <main id="contenido">
+        <PageBand
+          titulo="Hablemos de tu proyecto"
+          entradilla="Cuéntame qué necesitas resolver y te digo con franqueza si puedo ayudarte, cómo lo abordaría y qué costaría. Respondo a todos los mensajes, normalmente el mismo día."
+        />
 
-        <div className="grid gap-12 border-t border-line pt-10 lg:grid-cols-[1fr_18rem] lg:gap-16">
+        <Body>
+        <div id="agendar" className="grid scroll-mt-24 gap-12 lg:grid-cols-[1fr_19rem] lg:gap-16">
           <section>
             <h2 className="sr-only">Formulario de contacto</h2>
             <ContactForm />
@@ -40,8 +39,8 @@ export default async function ContactoPage() {
 
           {/* Raíl de metadatos: los canales directos, para quien prefiere no
               rellenar un formulario. */}
-          <aside className="lg:border-l lg:border-line lg:pl-8">
-            <h2 className="text-[0.9375rem] font-medium text-faint">Directo</h2>
+          <aside className="rounded-[16px] border border-line bg-card p-6 shadow-card">
+            <h2 className="text-[1.0625rem] font-semibold text-ink">Contacto directo</h2>
             <dl className="mt-4 space-y-5 text-[0.9375rem]">
               <div>
                 <dt className="text-faint">Correo</dt>
@@ -74,11 +73,12 @@ export default async function ContactoPage() {
               </div>
               <div>
                 <dt className="text-faint">Ubicación</dt>
-                <dd className="mt-0.5 text-graphite">{PROFILE.location}</dd>
+                <dd className="mt-0.5 text-mid">{PROFILE.location}</dd>
               </div>
             </dl>
           </aside>
         </div>
+        </Body>
       </main>
 
       <Footer />

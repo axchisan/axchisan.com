@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Header } from "@/components/site/header"
+import { Body, PageBand } from "@/components/site/band"
 import { Footer } from "@/components/site/footer"
 import { PROFILE } from "@/lib/site"
 
@@ -17,13 +18,11 @@ export default function PrivacidadPage() {
     <>
       <Header />
 
-      <main id="contenido" className="mx-auto max-w-5xl px-5 sm:px-8">
-        <header className="enter py-14 sm:py-16">
-          <h1>Privacidad</h1>
-          <p className="mt-3 text-[0.9375rem] text-faint">Actualizado el {ACTUALIZADO}</p>
-        </header>
+      <main id="contenido">
+        <PageBand titulo="Privacidad" entradilla={`Actualizado el ${ACTUALIZADO}`} />
 
-        <div className="prose border-t border-line pt-10 pb-4">
+        <Body>
+        <div className="prose">
           <p>
             Este sitio es un portafolio personal. No vende nada, no tiene cuentas de usuario y no
             comparte datos con terceros con fines publicitarios. Aun así recoge dos cosas, y conviene
@@ -102,6 +101,7 @@ export default function PrivacidadPage() {
             , que es público.
           </p>
         </div>
+        </Body>
       </main>
 
       <Footer />
