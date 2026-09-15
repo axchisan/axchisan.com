@@ -58,7 +58,7 @@ export function ImageUpload({ value, onChange }: { value?: string; onChange: (ur
           onClick={() => ref.current?.click()}
           disabled={loading}
           className={cn(
-            "flex h-44 w-full max-w-sm flex-col items-center justify-center gap-2 rounded-[8px] border border-dashed border-line bg-paper text-graphite transition-colors hover:border-accent hover:text-ink",
+            "flex h-44 w-full max-w-sm flex-col items-center justify-center gap-2 rounded-[8px] border border-dashed border-line bg-paper text-mid transition-colors hover:border-accent-ink hover:text-ink",
           )}
         >
           {loading ? <Loader2 className="h-6 w-6 animate-spin" /> : <ImagePlus className="h-6 w-6" />}

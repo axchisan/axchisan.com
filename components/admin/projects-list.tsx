@@ -61,7 +61,7 @@ export function ProjectsList({ items }: { items: Item[] }) {
       {items.map((p) => (
         <Card key={p.id} className="flex items-center gap-4 p-4">
           <div
-            className="h-14 w-20 shrink-0 rounded-lg border border-line bg-sunken bg-cover bg-center"
+            className="h-14 w-20 shrink-0 rounded-lg border border-line bg-paper bg-cover bg-center"
             style={p.coverImage ? { backgroundImage: `url(${p.coverImage})` } : undefined}
             aria-hidden
           />

@@ -31,6 +31,13 @@ export const metadata: Metadata = {
   },
   description: DESCRIPTION,
   alternates: { canonical: "/" },
+  // Iconos y tarjeta social como archivos estáticos en lugar de generarlos con
+  // next/og en cada petición: son imágenes que nunca cambian, y su motor de
+  // render en WASM costaba 0,6 MB del presupuesto del Worker.
+  icons: {
+    icon: [{ url: "/favicon-64.png", type: "image/png", sizes: "64x64" }],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180" }],
+  },
   keywords: [
     "desarrollo de software a medida",
     "desarrollo de software Bogotá",
@@ -58,11 +65,13 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: `${SITE_NAME} — Desarrollo de software a medida`,
     description: DESCRIPTION,
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: `${SITE_NAME} — software a medida para empresas` }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${SITE_NAME} — Desarrollo de software a medida`,
     description: DESCRIPTION,
+    images: ["/og.png"],
     creator: "@axchisan",
   },
   category: "technology",

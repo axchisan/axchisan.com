@@ -112,7 +112,7 @@ export function ProjectForm({ initial }: { initial?: ProjectInput }) {
               id="status"
               value={status}
               onChange={(e) => setStatus(e.target.value)}
-              className="w-full rounded-lg border border-line bg-paper px-3.5 py-2.5 text-[15px] text-ink focus:border-accent focus:outline-none"
+              className="w-full rounded-lg border border-line bg-paper px-3.5 py-2.5 text-[15px] text-ink focus:border-accent-ink focus:outline-none"
             >
               {STATUSES.map((s) => (
                 <option key={s.v} value={s.v}>{s.l}</option>

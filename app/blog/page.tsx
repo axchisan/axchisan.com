@@ -7,9 +7,9 @@ import { getBlogPosts } from "@/lib/data"
 import { cn, formatDate, toDate } from "@/lib/utils"
 
 export const metadata: Metadata = {
-  title: "Escritos",
+  title: "Ideas",
   description:
-    "Notas sobre arquitectura, costos de infraestructura y las decisiones técnicas detrás de los sistemas que construyo.",
+    "Arquitectura, costos de infraestructura y automatización, con los números por delante. Lo que hay detrás de las decisiones técnicas de los sistemas que construyo.",
   alternates: { canonical: "/blog" },
 }
 

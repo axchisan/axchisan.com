@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import { signOut } from "next-auth/react"
 import { LayoutDashboard, FolderGit2, FileText, Cpu, Images, Mail, User, Settings, LogOut, Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { LogoMark } from "@/components/site/logo"
 
 const NAV = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
@@ -29,7 +30,10 @@ export function AdminShell({ children, userName }: { children: React.ReactNode; 
     <div className="min-h-screen bg-paper">
       {/* Topbar móvil */}
       <div className="flex items-center justify-between border-b border-line px-5 py-3 lg:hidden">
-        <Link href="/admin" className="font-semibold tracking-[-0.015em]">Duvan Arciniegas<span className="ml-1.5 font-normal text-graphite">admin</span></Link>
+        <Link href="/admin" className="inline-flex items-center gap-2.5 font-semibold tracking-[-0.015em]">
+          <LogoMark className="h-[20px] w-[27.8px]" />
+          Axchi<span className="font-normal text-mid">admin</span>
+        </Link>
         <button onClick={() => setOpen((v) => !v)} aria-label="Menú" className="flex h-9 w-9 items-center justify-center rounded-lg border border-line">
           {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
         </button>
@@ -39,14 +43,14 @@ export function AdminShell({ children, userName }: { children: React.ReactNode; 
         {/* Sidebar */}
         <aside
           className={cn(
-            "fixed inset-y-0 left-0 z-40 w-60 -translate-x-full border-r border-line bg-raised transition-transform lg:static lg:translate-x-0",
+            "fixed inset-y-0 left-0 z-40 w-60 -translate-x-full border-r border-line bg-card transition-transform lg:static lg:translate-x-0",
             open && "translate-x-0",
           )}
         >
           <div className="flex h-full flex-col p-4">
             <Link href="/" className="mb-6 flex items-center gap-2 px-2 text-lg font-bold tracking-[-0.02em]">
               <span className="inline-block h-[9px] w-[9px] rounded-[2px] bg-accent" />
-              axchi<span className="font-normal text-graphite">/admin</span>
+              <span className="inline-flex items-center gap-2.5"><LogoMark className="h-[20px] w-[27.8px]" />Axchi<span className="font-normal text-mid">admin</span></span>
             </Link>
             <nav className="flex flex-1 flex-col gap-1">
               {NAV.map((item) => {
@@ -59,8 +63,8 @@ export function AdminShell({ children, userName }: { children: React.ReactNode; 
                     className={cn(
                       "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors",
                       isActive(item.href)
-                        ? "bg-accent-weak text-accent"
-                        : "text-graphite hover:bg-raised hover:text-ink",
+                        ? "bg-accent-weak text-accent-ink"
+                        : "text-mid hover:bg-card hover:text-ink",
                     )}
                   >
                     <Icon className="h-4 w-4" />
@@ -73,7 +77,7 @@ export function AdminShell({ children, userName }: { children: React.ReactNode; 
               <p className="px-3 pb-2 text-xs text-faint">{userName}</p>
               <button
                 onClick={() => signOut({ callbackUrl: "/" })}
-                className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-graphite transition-colors hover:bg-raised hover:text-ink"
+                className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-mid transition-colors hover:bg-card hover:text-ink"
               >
                 <LogOut className="h-4 w-4" /> Cerrar sesión
               </button>

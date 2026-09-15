@@ -79,7 +79,7 @@ export function MediaManager() {
 
   if (loading) {
     return (
-      <Card className="flex items-center justify-center gap-3 p-12 text-graphite">
+      <Card className="flex items-center justify-center gap-3 p-12 text-mid">
         <Loader2 className="h-5 w-5 animate-spin" /> Cargando archivos…
       </Card>
     )
@@ -89,7 +89,7 @@ export function MediaManager() {
     return (
       <Card className="flex flex-col items-center gap-3 p-12 text-center">
         <ImagePlus className="h-8 w-8 text-faint" />
-        <p className="text-graphite">No hay archivos subidos todavía.</p>
+        <p className="text-mid">No hay archivos subidos todavía.</p>
         <p className="text-sm text-faint">Los archivos que subas en proyectos y blog aparecerán aquí.</p>
       </Card>
     )
@@ -100,7 +100,7 @@ export function MediaManager() {
       <div className="mb-5 flex flex-wrap gap-2">
         <button
           onClick={() => setFilter("all")}
-          className={`rounded-full border px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.08em] transition-colors ${filter === "all" ? "border-accent bg-accent-weak text-accent" : "border-line text-graphite hover:text-ink"}`}
+          className={`rounded-full border px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.08em] transition-colors ${filter === "all" ? "border-accent-ink bg-accent-weak text-accent-ink" : "border-line text-mid hover:text-ink"}`}
         >
           Todo ({files.length})
         </button>
@@ -108,7 +108,7 @@ export function MediaManager() {
           <button
             key={c}
             onClick={() => setFilter(c)}
-            className={`rounded-full border px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.08em] transition-colors ${filter === c ? "border-accent bg-accent-weak text-accent" : "border-line text-graphite hover:text-ink"}`}
+            className={`rounded-full border px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.08em] transition-colors ${filter === c ? "border-accent-ink bg-accent-weak text-accent-ink" : "border-line text-mid hover:text-ink"}`}
           >
             {c}
           </button>
@@ -128,10 +128,10 @@ export function MediaManager() {
                   <Icon className="h-8 w-8 text-faint" strokeWidth={1.4} />
                 )}
                 <div className="absolute inset-0 flex items-center justify-center gap-2 bg-paper/80 opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100">
-                  <button onClick={() => copy(m.url)} className="flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-raised text-ink transition-colors hover:border-accent hover:text-accent" aria-label="Copiar URL">
+                  <button onClick={() => copy(m.url)} className="flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-card text-ink transition-colors hover:border-accent-ink hover:text-accent-ink" aria-label="Copiar URL">
                     <Copy className="h-4 w-4" />
                   </button>
-                  <button onClick={() => remove(m.url)} disabled={busy === m.url} className="flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-raised text-ink transition-colors hover:border-danger hover:text-danger" aria-label="Eliminar">
+                  <button onClick={() => remove(m.url)} disabled={busy === m.url} className="flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-card text-ink transition-colors hover:border-danger hover:text-danger" aria-label="Eliminar">
                     <Trash2 className="h-4 w-4" />
                   </button>
                 </div>

@@ -9,11 +9,12 @@ export default function manifest(): MetadataRoute.Manifest {
       "Portafolio de Duvan Yair Arciniegas, desarrollador de software en Bogotá: sistemas completos, del modelo de datos al despliegue.",
     start_url: "/",
     display: "standalone",
-    background_color: "#fcfcfd",
-    theme_color: "#fcfcfd",
+    background_color: "#0b0f14",
+    theme_color: "#0b0f14",
     icons: [
-      { src: "/icon", sizes: "64x64", type: "image/png" },
-      { src: "/apple-icon", sizes: "180x180", type: "image/png" },
+      { src: "/favicon-64.png", sizes: "64x64", type: "image/png" },
+      { src: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+      { src: "/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
     ],
   }
 }

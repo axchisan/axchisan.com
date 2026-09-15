@@ -62,7 +62,7 @@ export function FileUpload({ value, onChange }: { value: ProjectFileItem[]; onCh
       <div className="flex flex-col gap-2">
         {value.map((f, i) => (
           <div key={f.url + i} className="flex items-center gap-3 rounded-lg border border-line bg-paper px-3.5 py-2.5">
-            <FileDown className="h-4 w-4 shrink-0 text-accent" />
+            <FileDown className="h-4 w-4 shrink-0 text-accent-ink" />
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm text-ink">{f.displayName || f.originalName}</p>
               <p className="font-mono text-[10px] text-faint">{f.category} · {fmtSize(f.size)}</p>
@@ -81,7 +81,7 @@ export function FileUpload({ value, onChange }: { value: ProjectFileItem[]; onCh
           type="button"
           onClick={() => ref.current?.click()}
           disabled={loading}
-          className="flex items-center justify-center gap-2 rounded-lg border border-dashed border-line bg-paper py-3 text-sm text-graphite transition-colors hover:border-accent hover:text-ink"
+          className="flex items-center justify-center gap-2 rounded-lg border border-dashed border-line bg-paper py-3 text-sm text-mid transition-colors hover:border-accent-ink hover:text-ink"
         >
           {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
           {current

@@ -11,7 +11,7 @@ export default async function AdminSkillsPage() {
   return (
     <div>
       <h1 className="text-2xl font-semibold tracking-[-0.02em]">Skills</h1>
-      <p className="mt-1 text-sm text-graphite">Tecnologías y capacidades que aparecen en /sobre.</p>
+      <p className="mt-1 text-sm text-mid">Tecnologías y capacidades que aparecen en /sobre.</p>
       <div className="mt-7 max-w-3xl">
         <SkillsClient initial={skills} />
       </div>

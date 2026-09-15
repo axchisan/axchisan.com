@@ -24,9 +24,9 @@ export default function PrivacidadPage() {
         <Body>
         <div className="prose">
           <p>
-            Este sitio es un portafolio personal. No vende nada, no tiene cuentas de usuario y no
-            comparte datos con terceros con fines publicitarios. Aun así recoge dos cosas, y conviene
-            que sepas cuáles.
+            Este sitio presenta servicios de desarrollo de software. No cobra en línea, no tiene
+            cuentas de usuario, no usa cookies de seguimiento y no comparte datos con terceros con
+            fines publicitarios. Aun así recoge dos cosas, y conviene que sepas cuáles.
           </p>
 
           <h2>Lo que envías tú</h2>
@@ -37,9 +37,10 @@ export default function PrivacidadPage() {
             la dirección de contacto de este sitio para no tardar en verlo.
           </p>
           <p>
-            No se usan para boletines, no se ceden y no alimentan ninguna herramienta de marketing.
-            Se conservan mientras la conversación tenga sentido; puedes pedir que se borren cuando
-            quieras.
+            Se usan para responderte y, si el proyecto avanza, para el intercambio propio de un
+            encargo. No se usan para boletines, no se ceden y no alimentan ninguna herramienta de
+            marketing. Se conservan mientras la relación tenga sentido; puedes pedir que se borren
+            cuando quieras.
           </p>
 
           <h2>Lo que se registra solo</h2>
@@ -88,7 +89,7 @@ export default function PrivacidadPage() {
           </p>
           <p>
             Conforme a la Ley 1581 de 2012 de Colombia sobre protección de datos personales, el
-            responsable del tratamiento es {PROFILE.name}, en {PROFILE.location}.
+            responsable del tratamiento es {PROFILE.name}, que opera bajo la marca Axchi en {PROFILE.location}.
           </p>
 
           <h2>Cambios</h2>

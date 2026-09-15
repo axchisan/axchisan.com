@@ -7,7 +7,7 @@ import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 
 const field =
-  "w-full rounded-lg border border-line bg-paper px-4 py-3 text-[15px] text-ink placeholder:text-faint transition-colors focus:border-accent focus:outline-none"
+  "w-full rounded-lg border border-line bg-paper px-4 py-3 text-[15px] text-ink placeholder:text-faint transition-colors focus:border-accent-ink focus:outline-none"
 
 export function SigninForm() {
   const [loading, setLoading] = useState(false)

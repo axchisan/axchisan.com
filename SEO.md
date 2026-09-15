@@ -1,5 +1,8 @@
 # SEO — qué está hecho y qué te toca a ti
 
+> **Actualizado tras el cambio de enfoque.** El sitio pasó de portafolio personal a estudio que
+> vende servicios de desarrollo. Eso cambia las consultas objetivo, y con ellas la parte 5.
+
 ## Punto de partida
 
 Search Console reportaba, a 7 de septiembre de 2026: **0 páginas indexadas, 7 no indexadas.**
@@ -22,9 +25,10 @@ Nada de esto requiere acción tuya. Está y se mantiene solo.
 | `robots.txt` | `app/robots.ts` | Permite el sitio, bloquea `/admin`, `/api/` y `/auth`, y apunta al sitemap |
 | Metadatos por página | cada `page.tsx` | Título y descripción propios; nada hereda el genérico |
 | Canónicos | `alternates.canonical` | URL única por página; evita que se cuente contenido duplicado |
-| Open Graph | `app/opengraph-image.tsx` | Tarjeta al compartir en LinkedIn y WhatsApp, generada por código |
-| Datos estructurados | `layout.tsx`, fichas, artículos | `Person` global, `SoftwareSourceCode` por proyecto, `BlogPosting` por artículo |
+| Open Graph | `public/og.png` | Tarjeta al compartir en LinkedIn y WhatsApp. Es un archivo fijo: generarla en cada petición costaba 0,6 MB de motor de render |
+| Datos estructurados | `layout.tsx`, fichas, artículos | `ProfessionalService` global con dirección y teléfono, `SoftwareSourceCode` por proyecto, `BlogPosting` por artículo |
 | URLs legibles | `/trabajo/tecnobichos` | Antes eran identificadores opacos |
+| Datos de la oferta | `app/servicios/page.tsx` | `ItemList` de `Service` con proveedor y área de cobertura: Google ve un catálogo, no un texto |
 | Redirecciones heredadas | `next.config.ts` | `/about`, `/projects`, `/contact`… del sitio anterior redirigen con 308 |
 | `www` → dominio principal | Vercel | Un solo dominio canónico |
 | Renderizado en servidor | todo el sitio | Google ve el contenido en el HTML inicial, sin ejecutar JavaScript |
@@ -61,14 +65,15 @@ Hazlo con estas seis, **de una en una** (hay cuota diaria, unas 10-12):
 
 ```
 https://axchisan.com/
+https://axchisan.com/servicios
+https://axchisan.com/proceso
 https://axchisan.com/trabajo
 https://axchisan.com/sobre
-https://axchisan.com/blog
 https://axchisan.com/trabajo/tecnobichos
-https://axchisan.com/trabajo/calculadora-de-gastos
 ```
 
-Al día siguiente repite con el resto de fichas. No sirve de nada pedirlo dos veces para la misma URL.
+`/servicios` va en segundo lugar a propósito: es la página que resuelve la intención de contratar,
+que ahora es el objetivo. Al día siguiente repite con el resto de fichas y con `/blog`. No sirve de nada pedirlo dos veces para la misma URL.
 
 ### 2.4 Revisa el informe de cobertura a los 3–4 días
 
@@ -91,20 +96,20 @@ Bing alimenta también a DuckDuckGo y a ChatGPT cuando busca. Cuesta dos minutos
 3. **Importar desde Google Search Console** y autoriza
 
 Importa propiedad, verificación y sitemap de golpe. Con la competencia que hay en Bing, un
-portafolio bien hecho posiciona bastante más fácil que en Google.
+sitio bien hecho posiciona bastante más fácil que en Google.
 
 ---
 
 ## Parte 4 — Lo que de verdad mueve la aguja
 
-Para un sitio personal nuevo, el factor decisivo no son los metadatos —ya están bien— sino que
+Para un sitio nuevo, el factor decisivo no son los metadatos —ya están bien— sino que
 **existan enlaces desde sitios que Google ya visita a diario**. Cada uno de estos vale más que
 cualquier ajuste técnico:
 
 | Dónde | Qué hacer | Por qué importa |
 |---|---|---|
 | **Perfil de GitHub** | Campo *Website* → `https://axchisan.com` | Google rastrea GitHub constantemente |
-| **README de tu perfil** (`axchisan/axchisan`) | Enlaza el sitio y tus 3 mejores proyectos | Es la primera página que ve un reclutador técnico |
+| **README de tu perfil** (`axchisan/axchisan`) | Enlaza el sitio y tus 3 mejores proyectos | Es la primera página que ve quien te evalúa |
 | **LinkedIn** | Sección *Destacado* y campo *Sitio web* del perfil | Alta autoridad de dominio |
 | **Cada repo destacado** | Campo *Website* → la ficha correspondiente, p. ej. `axchisan.com/trabajo/tecnobichos` | Enlaces temáticos, que pesan más que los genéricos |
 | **Instagram / firma de correo** | El enlace, sin más | Tráfico directo |
@@ -114,19 +119,43 @@ web** crea una red de enlaces coherente entre dos sitios tuyos que hablan de lo 
 
 ---
 
-## Parte 5 — Contenido, que es la parte lenta
+## Parte 5 — Las consultas que ahora importan
 
-Un portafolio con diez proyectos posiciona por tu nombre. Para posicionar por algo más hace falta que
-haya páginas que respondan preguntas que la gente escribe en Google.
+Con el enfoque comercial, el objetivo deja de ser posicionar por tu nombre y pasa a ser aparecer
+cuando alguien busca **contratar**. Son dos intenciones distintas y se atacan distinto.
 
-Ahí están los dos artículos en borrador. **"Una aplicación completa por un centavo al mes"** apunta a
-búsquedas reales —costo de AWS Lambda, SnapStart, alternativas gratuitas a un VPS— y esas búsquedas
-las hace justo el tipo de persona que contrata.
+### Las que puedes ganar
 
-Revísalos, ajústalos a tu voz y publícalos desde el panel. Uno bueno al mes vale más que diez
-apresurados.
+Búsquedas locales y específicas, donde la competencia es asumible:
 
----
+| Consulta | Dónde se ataca |
+|---|---|
+| desarrollo de software a medida Bogotá | home y `/servicios` |
+| automatización de procesos con IA Colombia | `/servicios#automatizacion` |
+| desarrollador Flutter Colombia | `/servicios#multiplataforma` |
+| integrar IA en mi empresa | artículo de Tecnobichos |
+| cuánto cuesta desarrollar una aplicación | falta escribirlo — ver abajo |
+
+### Las que no vas a ganar, y está bien
+
+"Desarrollo de software", "software empresarial", "app móvil" a secas: las dominan agencias con
+presupuesto de anuncios. Perseguirlas es quemar meses. La palanca real de un estudio pequeño es la
+**especificidad**: *quién*, *dónde* y *para qué problema*.
+
+### El artículo que falta
+
+Dos borradores están escritos y apuntan a búsquedas técnicas reales. Pero el que más conversión
+traería no existe todavía: **"cuánto cuesta desarrollar una aplicación a medida en Colombia"**.
+
+Es la pregunta que escribe en Google exactamente quien está a punto de contratar, casi nadie la
+responde con cifras honestas, y responderla con rangos reales y lo que hace variar el precio te
+posiciona como alguien que no tiene nada que esconder. Vale más que diez artículos técnicos.
+
+### Ficha de Google Business
+
+Si vas a vender servicios locales, una ficha de empresa en Google —aunque no tengas oficina, se
+puede registrar como área de servicio— te mete en el mapa y en el panel lateral para búsquedas con
+"Bogotá". Es gratis y es de las cosas con mejor relación esfuerzo/resultado que quedan.
 
 ## Parte 6 — Plazos realistas
 
@@ -136,6 +165,7 @@ apresurados.
 | 1–2 semanas | Las páginas principales indexadas; empiezas a salir por "Duvan Arciniegas" |
 | 1–2 meses | Las fichas de proyecto indexadas; primeras impresiones por términos técnicos |
 | 3–6 meses | Los artículos empiezan a traer tráfico, si los publicas |
+| 6+ meses | Consultas comerciales con intención de contratar, que son las que convierten |
 
 No mires Search Console a diario: los datos llegan con 2–3 días de retraso y sacarás conclusiones de
 ruido. Una revisión semanal es suficiente.

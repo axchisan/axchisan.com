@@ -1,42 +1,39 @@
-import {
-  DeleteObjectCommand,
-  GetObjectCommand,
-  ListObjectsV2Command,
-  PutObjectCommand,
-  S3Client,
-} from "@aws-sdk/client-s3"
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
-import { extname } from "path"
+import { AwsClient } from "aws4fetch"
 
 /**
  * Almacenamiento de archivos sobre Cloudflare R2 (API compatible con S3).
  *
- * El hosting es serverless: el sistema de archivos es efímero y de solo lectura,
- * así que nada puede escribirse en `public/`. Y como el cuerpo de una petición
- * está limitado a unos pocos MB, los archivos grandes no pueden pasar por una
- * API route: el navegador sube directo a R2 con una URL prefirmada y el servidor
- * solo registra los metadatos.
+ * El hosting es serverless: el sistema de archivos es efímero y de solo
+ * lectura, así que nada puede escribirse en `public/`. Y como el cuerpo de una
+ * petición está limitado a unos pocos MB, los archivos grandes no pueden pasar
+ * por una API route: el navegador sube directo a R2 con una URL prefirmada y el
+ * servidor solo registra los metadatos.
+ *
+ * Se usa `aws4fetch` (6 KB) en lugar del SDK de AWS (1,4 MB). Todo lo que hace
+ * falta aquí es firmar peticiones con SigV4, y el SDK completo no cabía en el
+ * presupuesto de tamaño del Worker.
  */
 
 const ACCOUNT_ID = process.env.R2_ACCOUNT_ID
 const BUCKET = process.env.R2_BUCKET ?? "axchisan-media"
 const PUBLIC_URL = (process.env.R2_PUBLIC_URL ?? "").replace(/\/+$/, "")
 
-let client: S3Client | null = null
+let client: AwsClient | null = null
 
-function s3(): S3Client {
+function firmante(): AwsClient {
   if (client) return client
   const accessKeyId = process.env.R2_ACCESS_KEY_ID
   const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY
   if (!ACCOUNT_ID || !accessKeyId || !secretAccessKey) {
     throw new Error("Faltan las credenciales de R2 (R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY)")
   }
-  client = new S3Client({
-    region: "auto",
-    endpoint: `https://${ACCOUNT_ID}.r2.cloudflarestorage.com`,
-    credentials: { accessKeyId, secretAccessKey },
-  })
+  client = new AwsClient({ accessKeyId, secretAccessKey, service: "s3", region: "auto" })
   return client
+}
+
+/** Endpoint S3 del bucket. */
+function urlObjeto(key: string): string {
+  return `https://${ACCOUNT_ID}.r2.cloudflarestorage.com/${BUCKET}/${key.split("/").map(encodeURIComponent).join("/")}`
 }
 
 export function isStorageConfigured(): boolean {
@@ -116,7 +113,12 @@ const MIME_BY_EXTENSION: Record<string, string> = {
 }
 
 export function extensionOf(filename: string): string {
-  return extname(filename).toLowerCase().replace(".", "")
+  // Sin `path.extname`: el runtime de Workers no necesita cargar el módulo de
+  // Node para esto. Un nombre sin punto, o que empiece por punto, no tiene
+  // extensión.
+  const punto = filename.lastIndexOf(".")
+  if (punto <= 0) return ""
+  return filename.slice(punto + 1).toLowerCase()
 }
 
 export function classify(filename: string): { folder: Folder; category: string } {
@@ -152,29 +154,42 @@ export function keyFromUrl(url: string): string | null {
 }
 
 /** URL prefirmada para que el navegador suba el archivo directo a R2. */
-export async function presignUpload(
-  key: string,
-  contentType: string,
-  expiresIn = 600,
-): Promise<string> {
-  return getSignedUrl(s3(), new PutObjectCommand({ Bucket: BUCKET, Key: key, ContentType: contentType }), {
-    expiresIn,
-  })
+export async function presignUpload(key: string, contentType: string, expiresIn = 600): Promise<string> {
+  const firmada = await firmante().sign(
+    new Request(`${urlObjeto(key)}?X-Amz-Expires=${expiresIn}`, { method: "PUT" }),
+    // signQuery mete la firma en la query en lugar de en una cabecera, que es
+    // lo que permite entregar la URL al navegador.
+    { aws: { signQuery: true, allHeaders: false } },
+  )
+  return firmada.url
 }
 
 /** URL prefirmada de lectura. Solo para objetos que no deban ser públicos. */
 export async function presignDownload(key: string, expiresIn = 600): Promise<string> {
-  return getSignedUrl(s3(), new GetObjectCommand({ Bucket: BUCKET, Key: key }), { expiresIn })
+  const firmada = await firmante().sign(
+    new Request(`${urlObjeto(key)}?X-Amz-Expires=${expiresIn}`, { method: "GET" }),
+    { aws: { signQuery: true } },
+  )
+  return firmada.url
 }
 
 /** Subida desde el servidor. Para archivos pequeños generados por la propia app. */
-export async function putObject(key: string, body: Buffer | Uint8Array, contentType: string): Promise<string> {
-  await s3().send(new PutObjectCommand({ Bucket: BUCKET, Key: key, Body: body, ContentType: contentType }))
+export async function putObject(key: string, body: Uint8Array, contentType: string): Promise<string> {
+  const res = await firmante().fetch(urlObjeto(key), {
+    method: "PUT",
+    body: body as BodyInit,
+    headers: { "Content-Type": contentType },
+  })
+  if (!res.ok) throw new Error(`R2 rechazó la subida (HTTP ${res.status})`)
   return publicUrl(key)
 }
 
 export async function deleteObject(key: string): Promise<void> {
-  await s3().send(new DeleteObjectCommand({ Bucket: BUCKET, Key: key }))
+  const res = await firmante().fetch(urlObjeto(key), { method: "DELETE" })
+  // 404 al borrar no es un error: el objetivo era que no estuviera.
+  if (!res.ok && res.status !== 404) {
+    throw new Error(`R2 rechazó el borrado (HTTP ${res.status})`)
+  }
 }
 
 export interface StoredObject {
@@ -188,35 +203,53 @@ export interface StoredObject {
   uploadedAt: string
 }
 
-/** Inventario del bucket, para el gestor de medios del panel. */
+/** Un valor de una etiqueta XML. Evita traer un parser entero para esto. */
+function etiqueta(xml: string, nombre: string): string | undefined {
+  const m = xml.match(new RegExp(`<${nombre}>([^<]*)</${nombre}>`))
+  return m?.[1]
+}
+
+/**
+ * Inventario del bucket, para el gestor de medios del panel.
+ *
+ * La API de listado de S3 devuelve XML. Se extrae con expresiones regulares en
+ * lugar de añadir un parser: el formato es fijo, los nombres de objeto no
+ * contienen `<` porque los genera `buildKey`, y un parser costaría más espacio
+ * del que queda en el presupuesto del Worker.
+ */
 export async function listObjects(prefix?: string, limit = 1000): Promise<StoredObject[]> {
   const out: StoredObject[] = []
   let token: string | undefined
 
   do {
-    const page = await s3().send(
-      new ListObjectsV2Command({
-        Bucket: BUCKET,
-        Prefix: prefix,
-        ContinuationToken: token,
-        MaxKeys: Math.min(limit - out.length, 1000),
-      }),
-    )
-    for (const item of page.Contents ?? []) {
-      if (!item.Key || item.Key.endsWith("/")) continue
-      const name = item.Key.split("/").pop() ?? item.Key
+    const url = new URL(`https://${ACCOUNT_ID}.r2.cloudflarestorage.com/${BUCKET}`)
+    url.searchParams.set("list-type", "2")
+    url.searchParams.set("max-keys", String(Math.min(limit - out.length, 1000)))
+    if (prefix) url.searchParams.set("prefix", prefix)
+    if (token) url.searchParams.set("continuation-token", token)
+
+    const res = await firmante().fetch(url.toString())
+    if (!res.ok) throw new Error(`R2 rechazó el listado (HTTP ${res.status})`)
+    const xml = await res.text()
+
+    for (const bloque of xml.match(/<Contents>[\s\S]*?<\/Contents>/g) ?? []) {
+      const key = etiqueta(bloque, "Key")
+      if (!key || key.endsWith("/")) continue
+      const name = key.split("/").pop() ?? key
       out.push({
-        key: item.Key,
+        key,
         name,
-        url: publicUrl(item.Key),
-        size: item.Size ?? 0,
+        url: publicUrl(key),
+        size: Number(etiqueta(bloque, "Size") ?? 0),
         type: contentTypeOf(name),
         category: classify(name).category,
-        folder: item.Key.includes("/") ? item.Key.split("/")[0] : "other",
-        uploadedAt: (item.LastModified ?? new Date()).toISOString(),
+        folder: key.includes("/") ? key.split("/")[0] : "other",
+        uploadedAt: etiqueta(bloque, "LastModified") ?? new Date().toISOString(),
       })
     }
-    token = page.IsTruncated ? page.NextContinuationToken : undefined
+
+    token =
+      etiqueta(xml, "IsTruncated") === "true" ? etiqueta(xml, "NextContinuationToken") : undefined
   } while (token && out.length < limit)
 
   out.sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt))
