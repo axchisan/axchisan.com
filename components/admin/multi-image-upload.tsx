@@ -48,7 +48,7 @@ export function MultiImageUpload({ value, onChange }: { value: string[]; onChang
           type="button"
           onClick={() => ref.current?.click()}
           disabled={loading}
-          className="flex h-24 w-24 flex-col items-center justify-center gap-1 rounded-lg border border-dashed border-line bg-paper text-graphite transition-colors hover:border-accent hover:text-ink"
+          className="flex h-24 w-24 flex-col items-center justify-center gap-1 rounded-lg border border-dashed border-line bg-paper text-mid transition-colors hover:border-accent-ink hover:text-ink"
         >
           {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <ImagePlus className="h-5 w-5" />}
           <span className="text-[11px]">Añadir</span>

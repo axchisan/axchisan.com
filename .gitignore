@@ -45,3 +45,6 @@ next-env.d.ts
 /playwright-report
 /blob-report
 /playwright/.cache
+
+# OpenNext / Cloudflare (migración descartada)
+/.open-next

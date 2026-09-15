@@ -5,6 +5,7 @@ import { Band, Body, PageBand } from "@/components/site/band"
 import { ServiceCard } from "@/components/site/service-card"
 import { Button } from "@/components/ui/button"
 import { SERVICIOS } from "@/lib/servicios"
+import { PROFILE, SITE_NAME, SITE_URL } from "@/lib/site"
 
 export const metadata: Metadata = {
   title: "Servicios",
@@ -19,6 +20,35 @@ export default function ServiciosPage() {
       <Header />
 
       <main id="contenido">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ItemList",
+              name: "Servicios de Axchi",
+              itemListElement: SERVICIOS.map((s, i) => ({
+                "@type": "ListItem",
+                position: i + 1,
+                item: {
+                  "@type": "Service",
+                  name: s.titulo,
+                  description: s.descripcion,
+                  serviceType: s.gancho,
+                  url: `${SITE_URL}/servicios#${s.id}`,
+                  areaServed: [{ "@type": "Country", name: "Colombia" }, "Remoto"],
+                  provider: {
+                    "@type": "ProfessionalService",
+                    name: SITE_NAME,
+                    url: SITE_URL,
+                    email: PROFILE.email,
+                  },
+                },
+              })),
+            }),
+          }}
+        />
+
         <PageBand
           titulo="Qué puedo construirte"
           entradilla="Cuatro tipos de encargo que tomo completos: del modelo de datos al despliegue, la monitorización y la factura mensual. Cada uno con un proyecto real que lo demuestra."

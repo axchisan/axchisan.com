@@ -7,15 +7,15 @@ import { getProfile, getSkills } from "@/lib/data"
 import { PROFILE } from "@/lib/site"
 
 export const metadata: Metadata = {
-  title: "Sobre mí",
+  title: "Quién está detrás",
   description:
-    "Duvan Yair Arciniegas, desarrollador de software en Bogotá. Tecnólogo en Análisis y Desarrollo de Software, con experiencia en DevOps, CI/CD e integración de agentes de IA.",
+    "Axchi es Duvan Yair Arciniegas, desarrollador de software en Bogotá. Hablas directamente con quien escribe el código: sin capas de gestión y sin equipos que facturar de más.",
   alternates: { canonical: "/sobre" },
 }
 
 export const dynamic = "force-dynamic"
 
-/** Recorrido profesional. Fechas explícitas: un portafolio sin fechas no dice nada. */
+/** Recorrido. Fechas explícitas: una trayectoria sin fechas no dice nada. */
 const TRAYECTORIA = [
   {
     periodo: "2026",

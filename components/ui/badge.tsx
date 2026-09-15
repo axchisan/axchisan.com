@@ -2,7 +2,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 const variants = {
-  default: "border-line bg-raised text-graphite",
+  default: "border-line bg-card text-mid",
   accent: "border-accent/30 bg-accent-weak text-accent",
   positive: "border-positive/30 bg-positive/10 text-positive",
   danger: "border-danger/30 bg-danger-weak text-danger",

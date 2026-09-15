@@ -97,7 +97,7 @@ export const getBlogPostBySlug = unstable_cache(
  *
  * La versión anterior devolvía valores fabricados cuando la consulta fallaba
  * (25 proyectos, 15 clientes) y el sitio los mostraba como si fueran ciertos.
- * Un portafolio no puede publicar un número que no puede sostener: si la
+ * Un sitio que vende servicios no puede publicar un número que no puede sostener: si la
  * consulta falla, se devuelve null y la interfaz omite el dato.
  */
 export const getSiteMetrics = unstable_cache(

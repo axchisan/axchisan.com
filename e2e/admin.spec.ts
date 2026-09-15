@@ -34,9 +34,14 @@ test.describe("panel de administración", () => {
     await page.locator('input[name="password"], input[type="password"]').fill("contrasena-incorrecta")
     await page.getByRole("button", { name: /Iniciar sesión/ }).click()
 
-    // No debe entrar bajo ningún concepto.
+    // No debe entrar bajo ningún concepto. Se compara la RUTA y no la URL
+    // entera: NextAuth deja "?callbackUrl=/admin" en la query, y desde Next
+    // 16.3 ya no lo codifica, así que una regex sobre la URL daría un falso
+    // positivo aunque el acceso se haya denegado correctamente.
     await page.waitForTimeout(3000)
-    expect(page.url()).not.toMatch(/\/admin/)
+    expect(new URL(page.url()).pathname, "entró al panel con la contraseña incorrecta").not.toMatch(
+      /^\/admin/,
+    )
   })
 
   test("cada sección del panel carga", async ({ page }) => {

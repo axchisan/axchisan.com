@@ -1,4 +1,4 @@
-import { createHash } from "crypto"
+import { createHash } from "node:crypto"
 
 /**
  * Seudonimiza la dirección IP de una visita.

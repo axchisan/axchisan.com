@@ -90,10 +90,10 @@ export function SkillsClient({ initial }: { initial: Skill[] }) {
 
       {Object.entries(grouped).map(([cat, items]) => (
         <div key={cat}>
-          <h3 className="text-[0.875rem] text-faint mb-2 text-accent">{cat}</h3>
+          <h3 className="text-[0.875rem] text-faint mb-2 text-accent-ink">{cat}</h3>
           <div className="flex flex-wrap gap-2">
             {items.map((s) => (
-              <span key={s.id} className="inline-flex items-center gap-2 rounded-lg border border-line bg-raised px-3 py-1.5 text-sm">
+              <span key={s.id} className="inline-flex items-center gap-2 rounded-lg border border-line bg-card px-3 py-1.5 text-sm">
                 {s.name}
                 <button
                   onClick={() => remove(s.id)}

@@ -95,11 +95,6 @@
   --text-3xl: 3.0625rem;  /* 49 */
   --text-4xl: 3.8125rem;  /* 61 */
 
-  /* Alias heredados: el panel admin aún usa estos nombres. */
-  --color-raised:  var(--card);
-  --color-sunken:  var(--paper);
-  --color-graphite: var(--mid);
-
   --radius:    var(--radius);
   --radius-sm: var(--radius-sm);
   --radius-lg: var(--radius-lg);
@@ -236,18 +231,18 @@
 .prose blockquote {
   border-left: 2px solid var(--line-firm);
   padding-left: 1.1em;
-  color: var(--graphite);
+  color: var(--mid);
 }
 .prose code {
   font-family: var(--font-mono);
   font-size: 0.875em;
-  background: var(--raised);
+  background: var(--card);
   border: 1px solid var(--line);
   border-radius: 4px;
   padding: 0.1em 0.35em;
 }
 .prose pre {
-  background: var(--sunken);
+  background: var(--paper);
   max-width: 100%;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -287,7 +282,7 @@
 }
 .prose th {
   font-weight: 600;
-  color: var(--graphite);
+  color: var(--mid);
 }
 
 /* El único momento de movimiento de la página: la entrada al cargar.

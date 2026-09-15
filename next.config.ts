@@ -2,7 +2,7 @@ import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
   // Prisma 7 (+ adapter pg) y bcryptjs no deben empaquetarse por el bundler RSC.
-  serverExternalPackages: ["@prisma/client", "@prisma/adapter-pg", "bcryptjs"],
+  serverExternalPackages: ["@prisma/client", "@prisma/adapter-neon", "bcryptjs"],
   images: {
     remotePatterns: [
       // Dominio definitivo del bucket R2, cuando el DNS apunte a Cloudflare.
