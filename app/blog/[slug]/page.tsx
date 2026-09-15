@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import rehypeRaw from "rehype-raw"
 import { Header } from "@/components/site/header"
+import { Band, Body } from "@/components/site/band"
 import { Footer } from "@/components/site/footer"
 import { ViewTracker } from "@/components/view-tracker"
 import { getBlogPostBySlug } from "@/lib/data"
@@ -45,7 +46,7 @@ export default async function BlogPostPage({ params }: Params) {
       <ViewTracker endpoint={`/api/blog/${post.slug}/view`} />
       <Header />
 
-      <main id="contenido" className="mx-auto max-w-5xl px-5 sm:px-8">
+      <main id="contenido">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -62,15 +63,20 @@ export default async function BlogPostPage({ params }: Params) {
           }}
         />
 
-        <nav aria-label="Migas" className="pt-8">
-          <Link href="/blog" className="text-[0.9375rem] text-graphite transition-colors hover:text-ink">
-            Volver a escritos
-          </Link>
-        </nav>
-
-        <header className="enter measure pb-10 pt-8">
-          <h1>{post.title}</h1>
-          <p className="mt-4 text-[0.9375rem] text-faint">
+        <Band as="header">
+          <div className="enter py-12 sm:py-16">
+            <nav aria-label="Migas">
+              <Link
+                href="/blog"
+                className="text-[0.9375rem] text-on-band-mid transition-colors hover:text-accent"
+              >
+                Volver a Ideas
+              </Link>
+            </nav>
+            <h1 className="mt-6 max-w-[24ch] text-[2.125rem] leading-[1.1] sm:text-[2.75rem]">
+              {post.title}
+            </h1>
+          <p className="mt-5 text-[0.9375rem] text-on-band-mid">
             <time dateTime={publicado.toISOString()}>{formatDate(publicado)}</time>
             {post.readTime ? <span className="ml-4">{post.readTime} min de lectura</span> : null}
           </p>
@@ -80,7 +86,7 @@ export default async function BlogPostPage({ params }: Params) {
                 <li key={t}>
                   <Link
                     href={`/blog?tag=${encodeURIComponent(t)}`}
-                    className="rounded-[5px] border border-line bg-raised px-2 py-0.5 text-[0.875rem] text-graphite transition-colors hover:text-ink"
+                    className="rounded-[5px] border border-band-line bg-band-2 px-2 py-0.5 text-[0.875rem] text-on-band-mid transition-colors hover:text-accent"
                   >
                     {t}
                   </Link>
@@ -88,9 +94,11 @@ export default async function BlogPostPage({ params }: Params) {
               ))}
             </ul>
           )}
-        </header>
+          </div>
+        </Band>
 
-        <article className="border-t border-line pt-10">
+        <Body>
+        <article>
           <div className="prose">
             <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
               {post.content}
@@ -99,7 +107,7 @@ export default async function BlogPostPage({ params }: Params) {
         </article>
 
         <section className="measure mt-16 border-t border-line pt-8">
-          <p className="text-[1.0625rem] text-graphite">
+          <p className="text-[1.0625rem] text-mid">
             ¿Preguntas sobre algo de esto?{" "}
             <Link href="/contacto" className="link">
               Escríbeme
@@ -107,6 +115,7 @@ export default async function BlogPostPage({ params }: Params) {
             .
           </p>
         </section>
+        </Body>
       </main>
 
       <Footer />

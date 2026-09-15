@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { Header } from "@/components/site/header"
+import { Body, PageBand } from "@/components/site/band"
 import { Footer } from "@/components/site/footer"
 import { getBlogPosts } from "@/lib/data"
 import { cn, formatDate, toDate } from "@/lib/utils"
@@ -29,15 +30,13 @@ export default async function BlogPage({
     <>
       <Header />
 
-      <main id="contenido" className="mx-auto max-w-5xl px-5 sm:px-8">
-        <header className="enter py-14 sm:py-16">
-          <h1>Escritos</h1>
-          <p className="measure mt-4 text-[1.0625rem] leading-relaxed text-graphite">
-            Cómo se decidieron las cosas y qué costó cada decisión.
-          </p>
-        </header>
+      <main id="contenido">
+        <PageBand
+          titulo="Ideas"
+          entradilla="Cómo se decidieron las cosas y qué costó cada decisión. Arquitectura, costos de infraestructura y automatización, con los números por delante."
+        />
 
-        <section className="border-t border-line pt-10">
+        <Body>
           {categories.length > 0 && (
             <nav aria-label="Filtrar por tema" className="mb-8 flex flex-wrap gap-2">
               <Link
@@ -46,8 +45,8 @@ export default async function BlogPage({
                 className={cn(
                   "rounded-[6px] border px-2.5 py-1 text-[0.875rem] transition-colors",
                   !tag
-                    ? "border-accent bg-accent-weak text-accent"
-                    : "border-line text-graphite hover:text-ink",
+                    ? "border-accent-ink bg-accent-weak text-accent-ink"
+                    : "border-line bg-card text-mid hover:text-ink",
                 )}
               >
                 Todo
@@ -60,8 +59,8 @@ export default async function BlogPage({
                   className={cn(
                     "rounded-[6px] border px-2.5 py-1 text-[0.875rem] transition-colors",
                     tag === c
-                      ? "border-accent bg-accent-weak text-accent"
-                      : "border-line text-graphite hover:text-ink",
+                      ? "border-accent-ink bg-accent-weak text-accent-ink"
+                      : "border-line bg-card text-mid hover:text-ink",
                   )}
                 >
                   {c}
@@ -71,7 +70,7 @@ export default async function BlogPage({
           )}
 
           {visibles.length === 0 ? (
-            <p className="text-graphite">
+            <p className="text-mid">
               {tag ? (
                 <>
                   No hay artículos sobre {tag}.{" "}
@@ -88,12 +87,12 @@ export default async function BlogPage({
               {visibles.map((post) => (
                 <li key={post.slug} className="border-t border-line py-7 first:border-t-0 first:pt-0">
                   <h2 className="text-[1.375rem] font-semibold tracking-[-0.02em]">
-                    <Link href={`/blog/${post.slug}`} className="transition-colors hover:text-accent">
+                    <Link href={`/blog/${post.slug}`} className="text-ink transition-colors hover:text-accent-ink">
                       {post.title}
                     </Link>
                   </h2>
                   {post.excerpt && (
-                    <p className="measure mt-2 text-[1.0625rem] leading-relaxed text-graphite">
+                    <p className="measure mt-2 text-[1.0625rem] leading-relaxed text-mid">
                       {post.excerpt}
                     </p>
                   )}
@@ -107,7 +106,7 @@ export default async function BlogPage({
               ))}
             </ul>
           )}
-        </section>
+        </Body>
       </main>
 
       <Footer />

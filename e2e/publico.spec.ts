@@ -1,6 +1,6 @@
 import { test, expect, type Page } from "@playwright/test"
 
-const RUTAS = ["/", "/trabajo", "/blog", "/servicios", "/sobre", "/contacto", "/privacidad"]
+const RUTAS = ["/", "/servicios", "/proceso", "/trabajo", "/blog", "/sobre", "/contacto", "/privacidad"]
 
 /** Errores de consola reales, descartando el ruido del servidor de desarrollo. */
 function capturarErrores(page: Page): string[] {
@@ -49,7 +49,7 @@ test.describe("páginas públicas", () => {
     const res = await page.goto("/ruta-que-no-existe-jamas")
     expect(res?.status()).toBe(404)
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible()
-    await expect(page.getByRole("link", { name: "Ir al inicio" })).toBeVisible()
+    await expect(page.getByRole("link", { name: "Ir al inicio", exact: true })).toBeVisible()
   })
 })
 
@@ -108,11 +108,11 @@ test.describe("navegación", () => {
     await page.goto("/")
 
     const enlaces = [
+      { nombre: "Servicios", url: "/servicios" },
       { nombre: "Trabajo", url: "/trabajo" },
-      { nombre: "Escritos", url: "/blog" },
-      { nombre: "Qué hago", url: "/servicios" },
-      { nombre: "Sobre mí", url: "/sobre" },
-      { nombre: "Contacto", url: "/contacto" },
+      { nombre: "Cómo trabajo", url: "/proceso" },
+      { nombre: "Ideas", url: "/blog" },
+      { nombre: "Quién está detrás", url: "/sobre" },
     ]
 
     for (const { nombre, url } of enlaces) {
@@ -148,25 +148,6 @@ test.describe("navegación", () => {
       if (res.status() >= 400) rotos.push(`${href} → ${res.status()}`)
     }
     expect(rotos, "enlaces internos rotos").toEqual([])
-  })
-})
-
-test.describe("tema", () => {
-  test("el conmutador cambia entre claro y oscuro y persiste", async ({ page }) => {
-    await page.goto("/")
-
-    const raiz = page.locator("html")
-    const boton = page.getByRole("button", { name: /Cambiar a tema/ })
-
-    const antes = await raiz.getAttribute("data-theme")
-    await boton.click()
-    await expect(raiz).not.toHaveAttribute("data-theme", antes ?? "")
-
-    const despues = await raiz.getAttribute("data-theme")
-
-    // La elección debe sobrevivir a una recarga: si no, no sirve de nada.
-    await page.reload()
-    await expect(raiz).toHaveAttribute("data-theme", despues!)
   })
 })
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Header } from "@/components/site/header"
+import { Body, PageBand } from "@/components/site/band"
 import { Footer } from "@/components/site/footer"
 import { Button } from "@/components/ui/button"
 import { getProfile, getSkills } from "@/lib/data"
@@ -48,17 +49,23 @@ export default async function SobrePage() {
     <>
       <Header />
 
-      <main id="contenido" className="mx-auto max-w-5xl px-5 sm:px-8">
-        <header className="enter py-14 sm:py-16">
-          <h1>Sobre mí</h1>
-          <p className="measure mt-5 text-[1.0625rem] leading-relaxed">
-            {profile?.bio?.trim() ||
-              "Desarrollador de software en Bogotá. Me interesa el punto donde una decisión técnica se convierte en una consecuencia medible: cuánto cuesta operar un sistema, cuánto tarda en arrancar, qué pasa cuando falla a mitad."}
-          </p>
-        </header>
+      <main id="contenido">
+        <PageBand
+          titulo="Quién está detrás"
+          entradilla="Axchi es una sola persona: Duvan Yair Arciniegas. Eso significa que hablas directamente con quien escribe el código, sin capas de gestión — y también que digo que no cuando un encargo me queda grande."
+        />
 
-        <section className="border-t border-line pt-12">
-          <h2>Recorrido</h2>
+        <Body>
+          <section>
+            <h2 className="text-[1.9375rem] text-ink">En una línea</h2>
+            <p className="measure mt-4 text-[1.0625rem] leading-relaxed text-mid">
+              {profile?.bio?.trim() ||
+                "Desarrollador de software en Bogotá. Me interesa el punto donde una decisión técnica se convierte en una consecuencia medible: cuánto cuesta operar un sistema, cuánto tarda en arrancar en frío, qué pasa cuando falla a la mitad."}
+            </p>
+          </section>
+
+        <section className="mt-16 border-t border-line pt-12">
+          <h2 className="text-[1.9375rem] text-ink">Recorrido</h2>
           <ol className="mt-8">
             {TRAYECTORIA.map((t) => (
               <li
@@ -68,7 +75,7 @@ export default async function SobrePage() {
                 <p className="text-[0.9375rem] text-faint">{t.periodo}</p>
                 <div>
                   <h3 className="text-[1.0625rem] font-semibold tracking-[-0.015em]">{t.titulo}</h3>
-                  <p className="measure mt-1.5 text-[1rem] leading-relaxed text-graphite">{t.detalle}</p>
+                  <p className="measure mt-1.5 text-[1rem] leading-relaxed text-mid">{t.detalle}</p>
                 </div>
               </li>
             ))}
@@ -76,9 +83,9 @@ export default async function SobrePage() {
         </section>
 
         {Object.keys(porCategoria).length > 0 && (
-          <section className="mt-14 border-t border-line pt-11">
-            <h2>Herramientas</h2>
-            <p className="measure mt-3 text-[1.0625rem] text-graphite">
+          <section className="mt-16 border-t border-line pt-12">
+            <h2 className="text-[1.9375rem] text-ink">Herramientas</h2>
+            <p className="measure mt-3 text-[1.0625rem] text-mid">
               Lo que he usado en proyectos que terminaron funcionando, agrupado por dónde encaja.
             </p>
 
@@ -93,7 +100,7 @@ export default async function SobrePage() {
                     {lista.map((s) => (
                       <span
                         key={s.id}
-                        className="rounded-[5px] border border-line bg-raised px-2 py-0.5 text-[0.875rem] text-graphite"
+                        className="rounded-[5px] border border-line bg-card px-2 py-0.5 text-[0.875rem] text-mid"
                       >
                         {s.name}
                       </span>
@@ -105,9 +112,9 @@ export default async function SobrePage() {
           </section>
         )}
 
-        <section className="mt-14 border-t border-line pt-11">
-          <h2>Dónde encontrarme</h2>
-          <p className="measure mt-3 text-[1.0625rem] text-graphite">
+        <section className="mt-16 border-t border-line pt-12">
+          <h2 className="text-[1.9375rem] text-ink">Dónde encontrarme</h2>
+          <p className="measure mt-3 text-[1.0625rem] text-mid">
             El código está en GitHub y la trayectoria en LinkedIn. Para lo demás, el correo.
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -120,6 +127,7 @@ export default async function SobrePage() {
             </a>
           </div>
         </section>
+        </Body>
       </main>
 
       <Footer />
