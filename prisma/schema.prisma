@@ -186,6 +186,15 @@ model ContactMessage {
   status    MessageStatus @default(PENDING)
   response  String? @db.Text
   respondedAt DateTime?
+
+  // Datos de la cotización. Opcionales: los mensajes anteriores no los tienen.
+  telefono    String?
+  sector      String?
+  necesidad   String?
+  presupuesto String?
+  plazo       String?
+  /** Página desde la que se cotizó, para saber qué ficha o demo convierte. */
+  origen      String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -296,6 +305,10 @@ model BlogFile {
 
 model SiteAnalytics {
   id        String @id @default(cuid())
+  /// visita, demo, whatsapp o cotizacion: los pasos del embudo.
+  evento    String @default("visita")
+  /// Contexto del evento, p. ej. la demo abierta.
+  detalle   String?
   path      String // Ruta visitada
   userAgent String? // User agent del visitante
   ip        String? // IP del visitante (hasheada por privacidad)
@@ -304,6 +317,7 @@ model SiteAnalytics {
   device    String? // Tipo de dispositivo
   createdAt DateTime @default(now())
 
+  @@index([evento, createdAt])
   @@map("site_analytics")
 }
 

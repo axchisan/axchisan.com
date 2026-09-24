@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { registrarEvento } from "@/lib/eventos"
 
 type Opcion = { valor: string; texto: string }
 type Errores = Partial<Record<"name" | "contacto" | "email" | "message", string>>
@@ -46,6 +47,17 @@ export function CotizacionForm({
   const [enviando, setEnviando] = useState(false)
   const [enviado, setEnviado] = useState(false)
   const [errores, setErrores] = useState<Errores>({})
+  // La página desde la que se llegó a cotizar, si es de este sitio: dice qué
+  // ficha o demo convence. Se lee al montar, antes de que cambie la historia.
+  const [origen] = useState(() => {
+    if (typeof document === "undefined" || !document.referrer) return undefined
+    try {
+      const url = new URL(document.referrer)
+      return url.host === window.location.host ? url.pathname + url.search : `externo: ${url.host}`
+    } catch {
+      return undefined
+    }
+  })
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -61,16 +73,8 @@ export function CotizacionForm({
       return
     }
 
-    const negocio = negocios.find((n) => n.valor === d.negocio)?.texto ?? "Sin indicar"
-    const plan = planes.find((p) => p.valor === d.plan)?.texto ?? "Sin indicar"
-    const message = [
-      `Negocio: ${negocio}`,
-      `Qué necesita: ${plan}`,
-      `Presupuesto: ${d.presupuesto || "Sin indicar"}`,
-      `Plazo: ${d.plazo || "Sin indicar"}`,
-      "",
-      d.message.trim(),
-    ].join("\n")
+    const negocio = negocios.find((n) => n.valor === d.negocio)?.texto
+    const plan = planes.find((p) => p.valor === d.plan)?.texto
 
     setEnviando(true)
     try {
@@ -81,13 +85,19 @@ export function CotizacionForm({
           name: d.name,
           email: d.email,
           telefono: d.telefono,
-          subject: `Cotización: ${negocio}, ${plan}`,
-          message,
+          subject: `Cotización: ${negocio ?? "negocio sin indicar"}, ${plan ?? "sin plan elegido"}`,
+          message: d.message.trim(),
+          sector: negocio,
+          necesidad: plan,
+          presupuesto: d.presupuesto || undefined,
+          plazo: d.plazo || undefined,
+          origen,
         }),
       })
       if (!res.ok) throw new Error(String(res.status))
       setEnviado(true)
       toast.success("Recibimos tu solicitud. Te respondemos el mismo día hábil.")
+      registrarEvento("cotizacion", negocio)
       form.reset()
     } catch {
       toast.error("No se pudo enviar. Escríbenos por WhatsApp y lo vemos por ahí.")

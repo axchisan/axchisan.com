@@ -165,6 +165,35 @@ test.describe("panel de administración", () => {
     expect(tras.status(), "el artículo borrado sigue accesible").toBe(404)
   })
 
+  test("una cotización llega al panel con sus datos", async ({ page, request }) => {
+    const nombre = `${MARCA} cotizacion ${Date.now()}`
+    const res = await request.post("/api/contact", {
+      data: {
+        name: nombre,
+        telefono: "300 000 0000",
+        message: "Cotización de prueba de la suite.",
+        sector: "Veterinarias",
+        necesidad: "Citas en línea",
+        presupuesto: "Prefiero pagar por mes",
+        origen: "/soluciones/veterinarias",
+      },
+    })
+    expect(res.status()).toBe(200)
+
+    await entrar(page)
+    await page.goto("/admin/messages")
+    await expect(page.getByText(nombre, { exact: true })).toBeVisible()
+    await expect(page.getByText("/soluciones/veterinarias").first()).toBeVisible()
+    // El número colombiano de 10 dígitos se completa con el indicativo 57.
+    await expect(page.locator('a[href*="wa.me/573000000000"]').first()).toBeVisible()
+
+    // La suite no deja rastro en la base.
+    const lista = await (await page.request.get(`/api/messages?search=${encodeURIComponent(nombre)}`)).json()
+    for (const m of (lista.messages ?? []) as { id: string; name: string }[]) {
+      if (m.name === nombre) await page.request.delete(`/api/messages/${m.id}`)
+    }
+  })
+
   test("cerrar sesión deja el panel inaccesible", async ({ page }) => {
     await entrar(page)
     await page.getByRole("button", { name: /Cerrar sesión/ }).click()

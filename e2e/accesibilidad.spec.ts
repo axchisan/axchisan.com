@@ -28,8 +28,10 @@ test.describe("accesibilidad", () => {
           .exclude("nextjs-portal")
           .analyze()
 
+        // El primer nodo y su causa: sin ellos, un fallo intermitente no se puede diagnosticar.
         const resumen = violations.map(
-          (v) => `${v.id} (${v.impact}) — ${v.nodes.length} nodo(s): ${v.help}`,
+          (v) =>
+            `${v.id} (${v.impact}) — ${v.nodes.length} nodo(s): ${v.help} | ${v.nodes[0]?.target.join(" ")} | ${v.nodes[0]?.failureSummary?.split("\n")[1]?.trim()}`,
         )
         expect(resumen, `violaciones en ${ruta}`).toEqual([])
       })

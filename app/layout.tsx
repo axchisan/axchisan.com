@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next"
 import { Instrument_Sans, JetBrains_Mono } from "next/font/google"
 import { Toaster } from "sonner"
+import { Medicion } from "@/components/medicion"
 import "./globals.css"
 import { LEGAL_NAME, PROFILE, SITE_NAME, SITE_URL, WHATSAPP } from "@/lib/site"
 
@@ -136,6 +137,7 @@ export default function RootLayout({
           }}
         />
         {children}
+        <Medicion />
         <Toaster
           position="bottom-right"
           toastOptions={{

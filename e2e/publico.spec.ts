@@ -226,3 +226,24 @@ test.describe("iconos", () => {
     }
   })
 })
+
+test.describe("medición", () => {
+  test("registra eventos válidos e ignora los que no lo son", async ({ request }) => {
+    const valido = await request.post("/api/eventos", { data: { evento: "visita", ruta: "/planes" } })
+    expect(valido.status()).toBe(204)
+    // Un evento inventado o del panel no se guarda, pero tampoco da error.
+    const invalido = await request.post("/api/eventos", { data: { evento: "compra", ruta: "/planes" } })
+    expect(invalido.status()).toBe(204)
+    const panel = await request.post("/api/eventos", { data: { evento: "visita", ruta: "/admin" } })
+    expect(panel.status()).toBe(204)
+  })
+
+  test("un toque en WhatsApp se registra como evento", async ({ page }) => {
+    await page.goto("/soluciones/veterinarias")
+    const peticion = page.waitForRequest((r) => r.url().endsWith("/api/eventos") && (r.postData() ?? "").includes("whatsapp"))
+    // Se evita abrir WhatsApp de verdad: solo interesa el registro.
+    await page.route("https://wa.me/**", (r) => r.abort())
+    await page.getByRole("link", { name: "Cotizar por WhatsApp" }).first().click()
+    await peticion
+  })
+})

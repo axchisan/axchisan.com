@@ -46,37 +46,6 @@ export const getBlogPostBySlug = unstable_cache(
   { revalidate: REVALIDATE, tags: ["blog"] },
 )
 
-/**
- * Cifras contadas contra la base. Ninguna se inventa.
- *
- * La versión anterior devolvía valores fabricados cuando la consulta fallaba
- * (25 proyectos, 15 clientes) y el sitio los mostraba como si fueran ciertos.
- * Un sitio que vende servicios no puede publicar un número que no puede sostener: si la
- * consulta falla, se devuelve null y la interfaz omite el dato.
- */
-export const getSiteMetrics = unstable_cache(
-  async () => {
-    try {
-      const [projects, blog] = await Promise.all([
-        prisma.project.findMany({ where: { status: "COMPLETED" }, select: { technologies: true } }),
-        prisma.blogPost.findMany({ where: { published: true }, select: { tags: true } }),
-      ])
-
-      return {
-        projectsCount: projects.length,
-        technologiesCount: new Set(projects.flatMap((p) => p.technologies)).size,
-        blogPostsCount: blog.length,
-        categoriesCount: new Set(blog.flatMap((b) => b.tags)).size,
-      }
-    } catch (error) {
-      console.error("getSiteMetrics error:", error)
-      return null
-    }
-  },
-  ["site-metrics"],
-  { revalidate: REVALIDATE, tags: ["projects", "blog", "settings"] },
-)
-
 /** Slugs/ids para sitemap (ligero, sin relaciones). */
 export const getPublishedBlogSlugs = unstable_cache(
   async () => prisma.blogPost.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
@@ -84,42 +53,75 @@ export const getPublishedBlogSlugs = unstable_cache(
   { revalidate: REVALIDATE, tags: ["blog"] },
 )
 
-/**
- * Serie de vistas por día (últimos N días) para sparklines del admin.
- * Rellena días sin datos con 0 para una serie continua. No cacheado (admin).
- */
-export async function getViewsAnalytics(days = 30) {
-  const empty = { projects: Array(days).fill(0) as number[], blog: Array(days).fill(0) as number[], totalProjects: 0, totalBlog: 0 }
-  try {
-    const since = new Date()
-    since.setUTCHours(0, 0, 0, 0)
-    since.setUTCDate(since.getUTCDate() - (days - 1))
 
-    const [pv, bv] = await Promise.all([
-      prisma.projectView.findMany({ where: { createdAt: { gte: since } }, select: { createdAt: true } }),
-      prisma.blogView.findMany({ where: { createdAt: { gte: since } }, select: { createdAt: true } }),
+/**
+ * Embudo de los últimos N días: visitas, demos abiertas, clics a WhatsApp y
+ * cotizaciones, más las páginas que más visitas y contactos traen. Para el
+ * panel; no se cachea.
+ */
+export async function getEmbudo(days = 30) {
+  const since = new Date()
+  since.setUTCHours(0, 0, 0, 0)
+  since.setUTCDate(since.getUTCDate() - (days - 1))
+  const vacio = {
+    pasos: { visita: 0, demo: 0, whatsapp: 0, cotizacion: 0 },
+    serie: Array(days).fill(0) as number[],
+    paginas: [] as { ruta: string; visitas: number; whatsapp: number }[],
+    demos: [] as { demo: string; aperturas: number }[],
+  }
+  try {
+    const [porEvento, eventos, cotizaciones, demos] = await Promise.all([
+      prisma.siteAnalytics.groupBy({ by: ["evento"], where: { createdAt: { gte: since } }, _count: { _all: true } }),
+      prisma.siteAnalytics.findMany({
+        where: { createdAt: { gte: since }, evento: { in: ["visita", "whatsapp"] } },
+        select: { evento: true, path: true, createdAt: true },
+      }),
+      prisma.contactMessage.count({ where: { createdAt: { gte: since } } }),
+      prisma.siteAnalytics.groupBy({
+        by: ["detalle"],
+        where: { createdAt: { gte: since }, evento: "demo" },
+        _count: { _all: true },
+      }),
     ])
 
-    const bucket = (rows: { createdAt: Date }[]) => {
-      const arr = Array(days).fill(0) as number[]
-      for (const r of rows) {
-        const d = new Date(r.createdAt)
-        d.setUTCHours(0, 0, 0, 0)
-        const idx = Math.floor((d.getTime() - since.getTime()) / 86400000)
-        if (idx >= 0 && idx < days) arr[idx] += 1
-      }
-      return arr
+    const pasos = { ...vacio.pasos }
+    for (const e of porEvento) {
+      if (e.evento in pasos) pasos[e.evento as keyof typeof pasos] = e._count._all
     }
+    // Las cotizaciones se cuentan en la tabla de mensajes: es la fuente real.
+    pasos.cotizacion = cotizaciones
+
+    const serie = [...vacio.serie]
+    const porRuta = new Map<string, { visitas: number; whatsapp: number }>()
+    for (const e of eventos) {
+      const fila = porRuta.get(e.path) ?? { visitas: 0, whatsapp: 0 }
+      if (e.evento === "visita") {
+        fila.visitas += 1
+        const d = new Date(e.createdAt)
+        d.setUTCHours(0, 0, 0, 0)
+        const i = Math.floor((d.getTime() - since.getTime()) / 86_400_000)
+        if (i >= 0 && i < days) serie[i] += 1
+      } else {
+        fila.whatsapp += 1
+      }
+      porRuta.set(e.path, fila)
+    }
+
+    const paginas = [...porRuta.entries()]
+      .map(([ruta, v]) => ({ ruta, ...v }))
+      .sort((a, b) => b.whatsapp - a.whatsapp || b.visitas - a.visitas)
+      .slice(0, 8)
 
     return {
-      projects: bucket(pv),
-      blog: bucket(bv),
-      totalProjects: pv.length,
-      totalBlog: bv.length,
+      pasos,
+      serie,
+      paginas,
+      demos: demos
+        .map((d) => ({ demo: d.detalle ?? "sin nombre", aperturas: d._count._all }))
+        .sort((a, b) => b.aperturas - a.aperturas),
     }
   } catch (error) {
-    console.error("getViewsAnalytics error:", error)
-    return empty
+    console.error("getEmbudo error:", error)
+    return vacio
   }
 }
-

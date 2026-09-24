@@ -10,10 +10,11 @@
 | Fase | Estado |
 |---|---|
 | F0 · Saneamiento | **Hecha** (24 sep 2026): nombre "Axchi", WhatsApp en una sola constante, documentos obsoletos retirados, hooks y 6 dependencias sin uso eliminados, ajustes muertos del panel retirados, iconos y OG generados desde el logo (`npm run iconos`, `npm run og`), `/favicon.ico` servido. Pendiente: 13 errores de lint anteriores a esta fase (`any` en rutas de API y `setState` en efectos), se corrigen al tocar esos archivos |
-| Precios | **Hecho**: modelo completo en `PRECIOS.md`; fuente única en `lib/catalogo/planes.ts` |
+| Precios | **Revisado el 24 sep 2026**: techo de $3.000.000 y suscripciones desde $39.900 al mes (`PRECIOS.md`, `lib/catalogo/planes.ts`) |
 | F1 · Documentos | **Hecha**: `DESIGN.md` y `MARCA.md` reescritos, guía de voz en `DESIGN.md`, brief de Canela, licencias, `README.md`. Pendiente: `SEO.md` parte 5 (consultas por sector) |
-| F2 · Infraestructura | **Casi hecha**: demos comunes (`demos/comun/`), catálogo en código (`lib/catalogo/`), plantilla de ficha, capturas reales (`npm run capturas`). Pendiente: analítica del embudo y campos propios de la cotización en la base (hoy van dentro del mensaje) |
+| F2 · Infraestructura | **Hecha**: demos comunes, catálogo en código, plantilla de ficha, capturas reales, cotización con campos propios en la base y medición del embudo (visitas, demos, WhatsApp, cotizaciones) en el tablero del panel |
 | F3 · Sitio comercial | **Hecha** (24 sep 2026): portada, `/soluciones` y fichas, `/planes`, `/a-medida`, `/proceso`, `/empresa`, `/cotizar` con formulario calificado, `/guias`, redirecciones 308 en un salto, sitemap nuevo, WhatsApp flotante en celular. Proyectos de GitHub retirados del sitio público (siguen en el panel) |
+| Correo `@axchisan.com` | Plan listo en `docs/correo-dominio.md` (Zoho Mail gratuito). Esperando el registro en Zoho y los cambios de DNS |
 | F4a · Canela | **Hecha**: portada, reserva en cuatro pasos, panel con Hoy, Agenda, Pacientes, ficha clínica, consulta con fórmula imprimible, Recordatorios y Resumen. 20 pruebas E2E en escritorio y celular, incluida WCAG AA |
 
 ## 0. En cinco líneas

@@ -11,7 +11,7 @@ export default async function AdminMessagesPage() {
   return (
     <div>
       <h1 className="text-2xl font-semibold tracking-[-0.02em]">Mensajes</h1>
-      <p className="mt-1 text-sm text-mid">Mensajes recibidos por el formulario de contacto.</p>
+      <p className="mt-1 text-sm text-mid">Cotizaciones y mensajes recibidos desde el sitio.</p>
       <div className="mt-7">
         <MessagesClient initial={messages} />
       </div>

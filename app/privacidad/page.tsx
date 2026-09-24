@@ -46,7 +46,8 @@ export default function PrivacidadPage() {
 
           <h2>Lo que se registra solo</h2>
           <p>
-            Para saber qué contenido interesa, se cuenta cada visita a un artículo. De cada visita se guardan la ruta, el navegador declarado y un{" "}
+            Para saber qué páginas y demos terminan en un contacto, se cuentan las visitas a cada
+            página, las veces que se abre una demo y los toques en los botones de WhatsApp. De cada visita se guardan la ruta, el navegador declarado y un{" "}
             <strong>identificador derivado de la dirección IP</strong>.
           </p>
           <p>
@@ -59,8 +60,8 @@ export default function PrivacidadPage() {
           <p>Este sitio guarda en tu navegador, y solo ahí:</p>
           <ul>
             <li>
-              Una marca temporal que evita contar dos veces la misma visita mientras la pestaña sigue
-              abierta.
+              Una marca que evita contar dos veces la misma página mientras la pestaña sigue abierta.
+              Se borra sola al cerrarla.
             </li>
             <li>
               <strong>Lo que hagas en las demos.</strong> Las demos son negocios ficticios: las citas,
