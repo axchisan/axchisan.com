@@ -1,99 +1,105 @@
 # Sistema de diseño — axchisan.com
 
+Reescrito el 24 de septiembre de 2026 con el giro comercial (ver `REESTRUCTURACION.md`). La versión
+anterior estaba escrita para reclutadores; queda en el historial de git.
+
 ## Brief
 
-**Sujeto:** Duvan Yair Arciniegas (Axchi). Desarrollador de software, Bogotá. Tecnólogo ADSO (SENA).
-Trabajó en una empresa de software en Bogotá desde enero de 2026 en DevOps, CI/CD, automatización
-e integración de agentes de IA.
+**Qué es:** Axchi, estudio de software de una persona en Bogotá, que vende páginas web, tiendas y
+sistemas a negocios pequeños y medianos.
 
-**Audiencia:** quien contrata perfiles técnicos —CTOs, líderes de ingeniería, reclutadores
-especializados— en Colombia y remoto LATAM. Escanea en treinta segundos y descarta.
+**Audiencia:** el dueño de un negocio (una veterinaria, una tienda, un restaurante), no técnico,
+casi siempre desde el celular. Llega desde Google, Instagram o una recomendación de WhatsApp.
+Se pregunta tres cosas: *¿esto me sirve a mí?, ¿cuánto cuesta?, ¿es de fiar?*
 
-**Trabajo del sitio:** convencer, rápido, de que esta persona construye sistemas completos y razona
-sobre decisiones de ingeniería. Después, hacer trivial el contacto.
+**Trabajo del sitio:** que la persona se reconozca en su sector, pruebe una demo que funciona y
+escriba por WhatsApp sabiendo ya cuánto le costaría.
 
-**Qué lo distingue de verdad:** no es que sepa React. Es que construye **sistemas que funcionan
-solos**: un canal de contenido que se produce y publica sin intervención, una app de finanzas
-multiplataforma que cuesta 0,01 USD al mes, un juego con servidor multijugador autoritativo. Escribe
-ADRs. Mide costos. Ese es el material del que sale el diseño.
+**Qué lo distingue:** no tiene que imaginarse nada. Cada solución tiene una demo real que se puede
+abrir desde el celular, y el precio se ve antes de preguntar.
 
-## De qué se está huyendo
+## Principios
 
-El sitio anterior reproducía, casi punto por punto, el catálogo de señales de página generada por IA:
+1. **Las demos abren la página.** Lo primero que se puede hacer es probar algo, no leer un eslogan.
+2. **El precio no se esconde.** "Desde $ 300.000" es visible en la portada, en planes y en cada ficha.
+3. **Cada afirmación lleva una cifra o una demo que la respalde.** "Rápido" no; "3 días hábiles" sí.
+4. **El cliente entiende cada frase sin saber de software.** Lo técnico existe, pero plegado o en `/a-medida`.
+5. **El acento marca interacción, nunca decora.**
+6. **Un solo momento de movimiento** al cargar. Lo demás responde a una acción.
 
-| Señal | Dónde estaba |
+## Color
+
+Tema claro con bandas oscuras deliberadas (cabecera, portada, cierres). Contraste calculado, no
+elegido a ojo: cualquier cambio obliga a correr `npx playwright test e2e/accesibilidad.spec.ts`.
+
+| Ficha | Hex | Uso |
+|---|---|---|
+| `band` | `#0B0F14` | Bandas oscuras y fondo de la marca |
+| `paper` | `#F3F6F9` | Cuerpo |
+| `card` | `#FFFFFF` | Superficies |
+| `ink` | `#0F1720` | Texto principal (16,6:1) |
+| `mid` | `#4D5866` | Texto secundario (6,7:1) |
+| `faint` | `#66707D` | Mínimo accesible (4,6:1) |
+| `accent` | `#0EA5A5` | Interacción sobre la banda (6,4:1), botón principal |
+| `accent-ink` | `#0B7C7C` | Texto de acento sobre claro (4,6:1) |
+| `on-accent` | `#04201F` | Texto dentro del botón de acento (5,6:1) |
+
+Los valores viven en `app/globals.css`; esta tabla solo los resume.
+
+## Tipografía
+
+- **Instrument Sans**, una sola familia para todo el sitio. Titulares en 600 con tracking cerrado; texto en 400 con altura de línea 1,65 y medida máxima de 68 caracteres.
+- **JetBrains Mono**, solo donde hay código real (artículos técnicos). Nunca como etiqueta.
+- Precios con `tabular-nums`, para que las cifras de una tabla se alineen.
+
+Escala 1,25: `12 · 14 · 16 · 20 · 25 · 31 · 39 · 49 · 61`.
+
+## Composición
+
+- Todo alineado a la izquierda, salvo los cierres de página, que son una sola frase y un botón.
+- Los sectores y las fichas **no** van en tres tarjetas iguales con la misma sombra: el peso de cada elemento responde a su contenido. Una demo disponible pesa más que un sector pendiente.
+- Las capturas de las demos son siempre capturas reales, generadas por `npm run capturas`. Nunca una maqueta que prometa algo que la demo no hace.
+
+## Iconografía
+
+- **lucide-react**, trazo 1,75, tamaños 16 / 20 / 24. Sin emojis.
+- Cada sector tiene un solo icono, definido en `lib/catalogo`, y se usa igual en todas partes.
+- Marcas de terceros (WhatsApp, Instagram, GitHub) como SVG propios en `components/site/social-icons.tsx`.
+- Los iconos de la aplicación salen del logo con `npm run iconos`.
+
+## Voz
+
+La marca habla como empresa ("te respondemos", "en Axchi…") y al cliente se le habla de tú. La
+primera persona del singular solo aparece en `/empresa`, donde se presenta quién está detrás. Nunca
+"nuestro equipo" ni "nuestros expertos": es una persona, y decir otra cosa es mentir.
+
+| Así sí | Así no |
 |---|---|
-| Fondo casi negro + un acento verde ácido | `#0A0B0D` + `#C6F24E` |
-| Una sola palabra del titular en otro color | "software que se siente **extraordinario**" |
-| Eyebrow en versalitas monoespaciadas con tracking | `.mono-label` sobre cada sección |
-| Cadenas de metadatos unidas por `·` | "STUDIO DE SOFTWARE · BOGOTÁ, CO" |
-| Flecha `→` pegada al texto del botón | "VER TRABAJO →" |
-| Resplandor radial difuminado | `.hero-glow` |
-| Monoespaciada como decoración | etiquetas, cifras, pies |
+| Tus clientes piden cita desde el celular | Sistema de agendamiento omnicanal |
+| Lista en 3 días hábiles | Entrega ágil |
+| Desde $ 300.000 | Precios competitivos |
+| Pruébala antes de contratar | Solicita una demo |
+| El dominio y los datos quedan a tu nombre | Soluciones escalables y seguras |
+| Cotizar por WhatsApp | Iniciar conversación |
+| Te respondemos el mismo día hábil | Respondemos a la brevedad |
+| Si una plataforma ya lo resuelve, te lo decimos | Soluciones a la medida de cada cliente |
+| Recordatorios de vacunas que salen solos | Automatización inteligente con IA |
+| Una página, un panel y tus datos | Ecosistema digital integral |
 
-Ninguna de esas construcciones vuelve.
+## Patrones prohibidos
 
-## Decisiones
+Heredados de la versión anterior y vigentes (ver también `AGENTS.md`): versalitas monoespaciadas
+como etiqueta, flechas pegadas al texto de un botón, cadenas de metadatos unidas por `·`, una
+palabra del titular en otro color, animaciones de entrada por sección al hacer scroll, resplandores
+radiales difuminados.
 
-### Concepto: el trabajo primero
+## Demos
 
-**No hay hero de marketing.** La página abre con una línea de identidad —quién, qué hace, dónde,
-disponibilidad— y entra directo al trabajo. Un titular que dice "construimos software
-extraordinario" gasta el espacio más valioso de la página en una frase que no informa; quien lee
-tiene treinta segundos y quiere ver sistemas.
-
-Es la decisión menos obvia del rediseño y la que más lo diferencia: casi ningún portafolio se atreve
-a quitarse el hero.
-
-### Color
-
-Escala neutra fría, definida en OKLCH para que claro y oscuro se deriven con la misma percepción de
-contraste. El acento **solo marca interacción** —enlaces, foco, estado activo—, nunca decora.
-
-| Ficha | Claro | Oscuro | Uso |
-|---|---|---|---|
-| `paper` | `#FCFCFD` | `#0E1013` | fondo |
-| `raised` | `#F5F6F8` | `#171A1F` | superficie elevada |
-| `ink` | `#14171C` | `#F2F4F7` | texto principal |
-| `graphite` | `#5C6472` | `#98A1B0` | texto secundario |
-| `line` | `#E3E6EB` | `#252A31` | separadores |
-| `accent` | `#3454D1` | `#7C95F5` | interacción |
-
-### Tipografía
-
-**Una sola familia**, con rango real de peso y tamaño. Emparejar una display con una de texto es el
-recurso por defecto; usar bien una sola es más difícil y se nota.
-
-- **Instrument Sans** — todo. Titulares en 600 con tracking cerrado (−0.03em) a tamaños grandes;
-  texto en 400 con altura de línea 1.65 y medida máxima de 68 caracteres.
-- **JetBrains Mono** — exclusivamente donde hay código o un dato numérico real. Nunca como etiqueta
-  decorativa.
-
-Escala (proporción 1.25, redondeada a píxeles enteros):
-`12 · 14 · 16 · 20 · 25 · 31 · 39 · 49 · 61`
-
-### Retícula
-
-Rejilla de 12 columnas con una **asimetría estructural**: la prosa vive en una columna de medida
-legible alineada a la izquierda, y los metadatos —stack, año, rol, enlaces— en un raíl estrecho a la
-derecha. Es la forma que tiene la documentación técnica de emparejar texto y ficha, y aquí la
-estructura significa: un separador dice "otro sistema", el raíl dice "ficha técnica".
-
-Los proyectos **no van en rejilla de tarjetas**. Van en filas a todo el ancho separadas por una
-línea. Tres tarjetas iguales con la misma sombra suave es el kit por defecto; una fila deja respirar
-el contenido y admite que cada proyecto tenga distinto peso.
-
-Todo alineado a la izquierda. Nada centrado.
-
-### Principios
-
-1. **El trabajo abre la página.** Sin hero de marketing.
-2. **Cada afirmación lleva un número o no aparece.** "Rápido" no; "0,01 USD/mes" sí.
-3. **El acento marca interacción, nunca decora.**
-4. **Un solo momento de movimiento** al cargar. Lo demás responde a una acción de la persona.
-5. **La estructura informa.** Ningún borde, línea ni etiqueta que no signifique algo.
+Cada demo tiene su propia identidad y su brief en `docs/demos/`. Estas reglas no se les aplican,
+salvo el piso de calidad y los patrones prohibidos. La barra de Axchi y el recorrido "Cómo funciona"
+usan los colores del sitio, para que se distinga la explicación de la cosa explicada.
 
 ## Piso de calidad
 
-Responsive hasta 360px · foco de teclado visible en todo elemento interactivo · `prefers-reduced-motion`
-respetado · contraste WCAG AA como mínimo · claro y oscuro completos, ninguno como añadido.
+Responsive desde 360 px, foco de teclado visible, `prefers-reduced-motion` respetado, contraste WCAG
+AA verificado con axe en cada ruta pública y en cada demo.

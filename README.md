@@ -1,8 +1,12 @@
 # axchisan.com
 
-Portafolio y blog de **Duvan Yair Arciniegas**, desarrollador de software en Bogotá.
-Sitio público con panel de administración propio: proyectos, artículos, mensajes de contacto y
-gestión de archivos, sin depender de un CMS externo.
+Sitio comercial de **Axchi**, estudio de software de Duvan Yair Arciniegas en Bogotá, que vende
+páginas web, tiendas y sistemas a negocios. El centro del sitio es un catálogo de soluciones por
+sector, cada una con una demo funcionando (`/demo/*`), y los precios a la vista.
+
+Documentos rectores: [`REESTRUCTURACION.md`](REESTRUCTURACION.md) (plan y avance),
+[`PRECIOS.md`](PRECIOS.md) (modelo de precios), [`DESIGN.md`](DESIGN.md) (diseño y voz),
+[`MARCA.md`](MARCA.md) (marca) y `docs/demos/` (brief de cada demo).
 
 **En vivo:** [axchisan.com](https://axchisan.com)
 

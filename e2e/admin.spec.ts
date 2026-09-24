@@ -64,7 +64,9 @@ test.describe("panel de administración", () => {
     }
   })
 
-  test("crear un proyecto lo publica en el sitio sin esperar a la caché", async ({ page }) => {
+  // Los proyectos ya no se muestran en el sitio público (ver REESTRUCTURACION.md,
+  // decisión D4), pero el panel los sigue gestionando.
+  test("crear un proyecto desde el panel", async ({ page }) => {
     await entrar(page)
     const titulo = `${MARCA} ${Date.now()}`
 
@@ -75,14 +77,9 @@ test.describe("panel de administración", () => {
 
     await page.waitForURL(/\/admin\/projects$/, { timeout: 30_000 })
     await expect(page.getByText(titulo)).toBeVisible()
-
-    // El punto de la prueba: la invalidación de caché. Antes de arreglarla,
-    // el sitio público seguía sirviendo la lista vieja hasta cinco minutos.
-    await page.goto("/trabajo")
-    await expect(page.getByText(titulo)).toBeVisible()
   })
 
-  test("editar un proyecto y ver el cambio en el sitio", async ({ page, request }) => {
+  test("editar un proyecto guarda el cambio", async ({ page, request }) => {
     await entrar(page)
 
     // El id sale de la API en lugar de rastrear el DOM: un selector que
@@ -100,11 +97,13 @@ test.describe("panel de administración", () => {
     await page.getByRole("button", { name: /Guardar/ }).first().click()
     await page.waitForURL(/\/admin\/projects$/, { timeout: 30_000 })
 
-    await page.goto(`/trabajo/${prueba.slug ?? prueba.id}`)
-    await expect(page.getByText(nuevaDesc)).toBeVisible()
+    const tras = await (await request.get("/api/projects")).json()
+    const editado = tras.find((p: { id: string }) => p.id === prueba.id)
+    // El primer campo «Descripción…» del formulario es la descripción corta.
+    expect(editado.shortDesc).toBe(nuevaDesc)
   })
 
-  test("borrar el proyecto de prueba lo retira del sitio", async ({ page, request }) => {
+  test("borrar el proyecto de prueba", async ({ page, request }) => {
     await entrar(page)
 
     const proyectos = await (await request.get("/api/projects")).json()
@@ -118,8 +117,8 @@ test.describe("panel de administración", () => {
 
     await expect(page.getByText(prueba.title)).toHaveCount(0, { timeout: 20_000 })
 
-    const res = await request.get(`/trabajo/${prueba.slug ?? prueba.id}`)
-    expect(res.status(), "el proyecto borrado sigue accesible").toBe(404)
+    const tras = await (await request.get("/api/projects")).json()
+    expect(tras.some((p: { id: string }) => p.id === prueba.id), "el proyecto borrado sigue en la API").toBe(false)
   })
 
   test("ciclo completo de un artículo: crear, publicar, filtrar y borrar", async ({ page }) => {
@@ -144,7 +143,7 @@ test.describe("panel de administración", () => {
     expect(creado.status(), "no se pudo crear el artículo").toBeLessThan(300)
 
     // Aparece en el listado sin esperar a que caduque la caché.
-    await page.goto("/blog")
+    await page.goto("/guias")
     await expect(page.getByRole("link", { name: titulo })).toBeVisible()
 
     // El filtro por etiqueta filtra de verdad.
@@ -153,16 +152,16 @@ test.describe("panel de administración", () => {
     await expect(page.getByRole("link", { name: titulo })).toBeVisible()
 
     // El detalle se abre y sobrevive a una segunda visita (acierto de caché).
-    await page.goto(`/blog/${slug}`)
+    await page.goto(`/guias/${slug}`)
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(titulo)
-    const segunda = await page.goto(`/blog/${slug}`)
+    const segunda = await page.goto(`/guias/${slug}`)
     expect(segunda?.status(), "el detalle falla al acertar la caché").toBe(200)
 
     // Limpieza: la suite no deja rastro en la base.
     const borrado = await page.request.delete(`/api/blog/${slug}`)
     expect(borrado.status()).toBeLessThan(300)
 
-    const tras = await page.request.get(`/blog/${slug}`)
+    const tras = await page.request.get(`/guias/${slug}`)
     expect(tras.status(), "el artículo borrado sigue accesible").toBe(404)
   })
 

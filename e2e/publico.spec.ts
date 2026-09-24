@@ -1,6 +1,18 @@
 import { test, expect, type Page } from "@playwright/test"
 
-const RUTAS = ["/", "/servicios", "/proceso", "/trabajo", "/blog", "/sobre", "/contacto", "/privacidad"]
+const RUTAS = [
+  "/",
+  "/soluciones",
+  "/soluciones/veterinarias",
+  "/soluciones/tiendas-de-cosmeticos",
+  "/planes",
+  "/proceso",
+  "/a-medida",
+  "/empresa",
+  "/cotizar",
+  "/guias",
+  "/privacidad",
+]
 
 /** Errores de consola reales, descartando el ruido del servidor de desarrollo. */
 function capturarErrores(page: Page): string[] {
@@ -53,54 +65,38 @@ test.describe("páginas públicas", () => {
   })
 })
 
-test.describe("compatibilidad con el sitio anterior", () => {
-  // La versión anterior estuvo indexada con rutas en inglés. Si estas
-  // redirecciones desaparecen, cada resultado de Google apuntando al sitio
-  // viejo pasa a devolver 404 y se pierde el posicionamiento ganado.
+test.describe("compatibilidad con rutas anteriores", () => {
+  // El sitio anterior estuvo indexado con rutas en inglés, y el portafolio con
+  // /trabajo, /blog, /sobre… Cada una redirige a su destino final en un solo
+  // salto: si desaparecen, los resultados de Google pasan a dar 404.
   const HEREDADAS: Array<[string, string]> = [
-    ["/about", "/sobre"],
-    ["/services", "/servicios"],
-    ["/contact", "/contacto"],
-    ["/projects", "/trabajo"],
+    ["/servicios", "/planes"],
+    ["/trabajo", "/soluciones"],
+    ["/trabajo/tecnobichos", "/soluciones"],
+    ["/sobre", "/empresa"],
+    ["/contacto", "/cotizar"],
+    ["/blog", "/guias"],
+    ["/about", "/empresa"],
+    ["/services", "/planes"],
+    ["/contact", "/cotizar"],
+    ["/projects", "/soluciones"],
+    ["/projects/abc123", "/soluciones"],
     ["/privacy", "/privacidad"],
     ["/terms", "/privacidad"],
-    ["/saved", "/trabajo"],
-    ["/messages", "/contacto"],
+    ["/saved", "/soluciones"],
+    ["/messages", "/cotizar"],
   ]
 
   for (const [vieja, nueva] of HEREDADAS) {
-    test(`${vieja} redirige a ${nueva}`, async ({ page }) => {
+    test(`${vieja} redirige a ${nueva}`, async ({ page, request }) => {
+      const directa = await request.get(vieja, { maxRedirects: 0 })
+      expect(directa.status(), `${vieja} debería redirigir en un salto`).toBe(308)
+      expect(directa.headers()["location"]).toMatch(new RegExp(`${nueva}$`))
       const res = await page.goto(vieja)
       expect(res?.status(), `${vieja} debería resolver`).toBe(200)
       await expect(page).toHaveURL(new RegExp(`${nueva}$`))
     })
   }
-
-  test("una ficha antigua sigue resolviendo por su identificador", async ({ page, request }) => {
-    const proyectos = await (await request.get("/api/projects")).json()
-    const proyecto = proyectos[0]
-    test.skip(!proyecto, "no hay proyectos")
-
-    // Las URLs canónicas pasaron a usar slug, pero los identificadores viejos
-    // circularon en el sitemap: tienen que seguir sirviendo la ficha.
-    const res = await page.goto(`/trabajo/${proyecto.id}`)
-    expect(res?.status(), "el id antiguo dejó de resolver").toBe(200)
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText(proyecto.title)
-
-    // Y la ruta en inglés del sitio anterior también.
-    const heredada = await page.goto(`/projects/${proyecto.id}`)
-    expect(heredada?.status()).toBe(200)
-  })
-
-  test("la URL canónica de un proyecto usa su slug", async ({ page, request }) => {
-    const proyectos = await (await request.get("/api/projects")).json()
-    const conSlug = proyectos.find((p: { slug?: string }) => p.slug)
-    test.skip(!conSlug, "ningún proyecto tiene slug")
-
-    await page.goto(`/trabajo/${conSlug.slug}`)
-    const canonical = await page.locator('link[rel="canonical"]').getAttribute("href")
-    expect(canonical).toContain(`/trabajo/${conSlug.slug}`)
-  })
 })
 
 test.describe("navegación", () => {
@@ -108,11 +104,11 @@ test.describe("navegación", () => {
     await page.goto("/")
 
     const enlaces = [
-      { nombre: "Servicios", url: "/servicios" },
-      { nombre: "Proyectos", url: "/trabajo" },
-      { nombre: "Cómo trabajo", url: "/proceso" },
-      { nombre: "Publicaciones", url: "/blog" },
-      { nombre: "Empresa", url: "/sobre" },
+      { nombre: "Soluciones", url: "/soluciones" },
+      { nombre: "Planes y precios", url: "/planes" },
+      { nombre: "Proceso", url: "/proceso" },
+      { nombre: "A medida", url: "/a-medida" },
+      { nombre: "Sobre Axchi", url: "/empresa" },
     ]
 
     for (const { nombre, url } of enlaces) {
@@ -151,50 +147,70 @@ test.describe("navegación", () => {
   })
 })
 
-test.describe("formulario de contacto", () => {
+test.describe("cotización", () => {
   test("bloquea el envío vacío y señala los campos", async ({ page }) => {
-    await page.goto("/contacto")
-    await page.getByRole("button", { name: "Enviar mensaje" }).click()
+    await page.goto("/cotizar")
+    await page.getByRole("button", { name: "Pedir cotización" }).click()
 
     await expect(page.getByText("Escribe tu nombre.")).toBeVisible()
-    await expect(page.getByText("Revisa el correo: falta algo.")).toBeVisible()
-    await expect(page.getByText("Cuéntame un poco más.")).toBeVisible()
+    await expect(page.getByText("Déjanos un WhatsApp o un correo para responderte.")).toBeVisible()
+    await expect(page.getByText("Cuéntanos un poco más de lo que necesitas.")).toBeVisible()
   })
 
   test("rechaza un correo mal formado", async ({ page }) => {
-    await page.goto("/contacto")
-    await page.getByLabel("Nombre").fill("Prueba Automática")
-    await page.getByLabel("Correo").fill("esto-no-es-un-correo")
-    await page.getByLabel("Mensaje").fill("Mensaje de prueba con longitud suficiente.")
-    await page.getByRole("button", { name: "Enviar mensaje" }).click()
+    await page.goto("/cotizar")
+    await page.getByLabel("Tu nombre").fill("Prueba Automática")
+    await page.getByLabel(/^Correo/).fill("esto-no-es-un-correo")
+    await page.getByLabel("Cuéntanos qué necesitas").fill("Mensaje de prueba con longitud suficiente.")
+    await page.getByRole("button", { name: "Pedir cotización" }).click()
 
     await expect(page.getByText("Revisa el correo: falta algo.")).toBeVisible()
   })
 
-  test("envía un mensaje válido y limpia el formulario", async ({ page }) => {
-    await page.goto("/contacto")
-    await page.getByLabel("Nombre").fill("Prueba Automática")
-    await page.getByLabel("Correo").fill("prueba@example.com")
-    await page.getByLabel(/Asunto/).fill("Suite E2E")
-    await page.getByLabel("Mensaje").fill("Mensaje generado por la suite de pruebas end-to-end.")
-    await page.getByRole("button", { name: "Enviar mensaje" }).click()
+  test("llega con el negocio y el plan elegidos desde una ficha", async ({ page }) => {
+    await page.goto("/cotizar?negocio=veterinarias&plan=citas-en-linea")
+    await expect(page.getByLabel("Tipo de negocio")).toHaveValue("veterinarias")
+    await expect(page.getByLabel("Qué necesitas", { exact: true })).toHaveValue("citas-en-linea")
+  })
 
-    await expect(page.getByText("Mensaje enviado. Te respondo pronto.")).toBeVisible({ timeout: 20_000 })
-    await expect(page.getByLabel("Nombre")).toHaveValue("")
+  test("envía una cotización solo con WhatsApp", async ({ page }) => {
+    await page.goto("/cotizar?negocio=veterinarias")
+    await page.getByText("Entre $ 1.000.000 y $ 3.000.000").click()
+    await page.getByLabel("Cuéntanos qué necesitas").fill("Cotización generada por la suite de pruebas end-to-end.")
+    await page.getByLabel("Tu nombre").fill("Prueba Automática")
+    await page.getByLabel("WhatsApp", { exact: true }).fill("300 000 0000")
+    await page.getByRole("button", { name: "Pedir cotización" }).click()
+
+    await expect(page.getByRole("status").filter({ hasText: "Recibimos tu solicitud" })).toBeVisible({ timeout: 20_000 })
+    await expect(page.getByLabel("Tu nombre")).toHaveValue("")
   })
 })
 
-test.describe("detalle de proyecto", () => {
-  test("desde el listado se abre un proyecto con su ficha", async ({ page }) => {
-    await page.goto("/trabajo")
+test.describe("catálogo", () => {
+  test("desde la portada se llega a la demo de la veterinaria", async ({ page }) => {
+    await page.goto("/")
+    await page.getByRole("link", { name: "Abrir la demo" }).first().click()
+    await expect(page).toHaveURL(/\/demo\/canela$/)
+  })
 
-    const primero = page.locator("article").first()
-    const titulo = (await primero.getByRole("heading").textContent())!.trim()
-    await primero.getByRole("link").first().click()
+  test("la ficha muestra el precio de entrada y lleva a la demo", async ({ page }) => {
+    await page.goto("/soluciones/veterinarias")
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("veterinarias")
+    await expect(page.getByText("$ 300.000").first()).toBeVisible()
+    await page.getByRole("link", { name: "Probar la demo" }).first().click()
+    await expect(page).toHaveURL(/\/demo\/canela$/)
+  })
 
-    await expect(page).toHaveURL(/\/trabajo\/.+/)
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText(titulo)
-    await expect(page.getByRole("link", { name: "Volver al trabajo" })).toBeVisible()
+  test("una solución que no existe da 404", async ({ request }) => {
+    const res = await request.get("/soluciones/no-existe")
+    expect(res.status()).toBe(404)
+  })
+
+  test("el sitemap tiene las fichas y no las demos", async ({ request }) => {
+    const xml = await (await request.get("/sitemap.xml")).text()
+    expect(xml).toContain("/soluciones/veterinarias")
+    expect(xml).not.toContain("/demo/")
+    expect(xml).not.toContain("/trabajo")
   })
 })
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { Header } from "@/components/site/header"
 import { Body, PageBand } from "@/components/site/band"
 import { Footer } from "@/components/site/footer"
-import { PROFILE } from "@/lib/site"
+import { LEGAL_NAME, PROFILE } from "@/lib/site"
 
 export const metadata: Metadata = {
   title: "Privacidad",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/privacidad" },
 }
 
-const ACTUALIZADO = "8 de septiembre de 2026"
+const ACTUALIZADO = "24 de septiembre de 2026"
 
 export default function PrivacidadPage() {
   return (
@@ -31,10 +31,11 @@ export default function PrivacidadPage() {
 
           <h2>Lo que envías tú</h2>
           <p>
-            Si usas el formulario de contacto, se guardan el <strong>nombre</strong>, el{" "}
-            <strong>correo</strong>, el <strong>asunto</strong> y el <strong>mensaje</strong> que
-            escribas. Se usan para una sola cosa: responderte. Además se envía una copia por correo a
-            la dirección de contacto de este sitio para no tardar en verlo.
+            Si pides una cotización, se guardan tu <strong>nombre</strong>, tu{" "}
+            <strong>WhatsApp</strong> o tu <strong>correo</strong>, el tipo de negocio, lo que
+            necesitas, el presupuesto y el plazo que elijas, y el <strong>mensaje</strong> que
+            escribas. Además se envía una copia por correo a la dirección de contacto de este sitio
+            para no tardar en verlo. Si escribes por WhatsApp, la conversación queda en WhatsApp.
           </p>
           <p>
             Se usan para responderte y, si el proyecto avanza, para el intercambio propio de un
@@ -45,8 +46,7 @@ export default function PrivacidadPage() {
 
           <h2>Lo que se registra solo</h2>
           <p>
-            Para saber qué contenido interesa, se cuenta cada visita a la página de un proyecto o de
-            un artículo. De cada visita se guardan la ruta, el navegador declarado y un{" "}
+            Para saber qué contenido interesa, se cuenta cada visita a un artículo. De cada visita se guardan la ruta, el navegador declarado y un{" "}
             <strong>identificador derivado de la dirección IP</strong>.
           </p>
           <p>
@@ -56,14 +56,17 @@ export default function PrivacidadPage() {
           </p>
 
           <h2>Almacenamiento en tu navegador</h2>
-          <p>Este sitio guarda dos cosas en tu navegador, ninguna de ellas identificativa:</p>
+          <p>Este sitio guarda en tu navegador, y solo ahí:</p>
           <ul>
-            <li>
-              <strong>Tu preferencia de tema</strong> (claro u oscuro), para no volver a preguntarte.
-            </li>
             <li>
               Una marca temporal que evita contar dos veces la misma visita mientras la pestaña sigue
               abierta.
+            </li>
+            <li>
+              <strong>Lo que hagas en las demos.</strong> Las demos son negocios ficticios: las citas,
+              mascotas o pedidos que registres se guardan únicamente en tu navegador para que la
+              demo funcione, nunca se envían a ningún servidor, y se borran con el botón «Restablecer»
+              o al limpiar los datos del sitio.
             </li>
           </ul>
           <p>
@@ -89,7 +92,8 @@ export default function PrivacidadPage() {
           </p>
           <p>
             Conforme a la Ley 1581 de 2012 de Colombia sobre protección de datos personales, el
-            responsable del tratamiento es {PROFILE.name}, con domicilio en {PROFILE.location}.
+            responsable del tratamiento es {PROFILE.name}, que opera bajo el nombre comercial{" "}
+            {LEGAL_NAME}, con domicilio en {PROFILE.location}.
           </p>
 
           <h2>Cambios</h2>

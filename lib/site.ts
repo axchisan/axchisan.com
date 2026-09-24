@@ -15,6 +15,9 @@ export const WHATSAPP = {
   visible: "+57 318 303 8190",
 } as const
 
+/** Mensaje con el que abre el chat desde el sitio. */
+export const MENSAJE_WHATSAPP = "Hola, vi axchisan.com y quiero cotizar algo para mi negocio."
+
 export function whatsappUrl(mensaje?: string) {
   const base = `https://wa.me/${WHATSAPP.e164}`
   return mensaje ? `${base}?text=${encodeURIComponent(mensaje)}` : base
