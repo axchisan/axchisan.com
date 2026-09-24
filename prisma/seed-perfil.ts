@@ -83,7 +83,7 @@ async function main() {
       name: "Duvan Yair Arciniegas",
       title: "Fundador y responsable técnico",
       bio: BIO,
-      email: "axchisan923@gmail.com",
+      email: "contacto@axchisan.com",
       phone: "3183038190",
       whatsapp: "3183038190",
       instagram: "@axchisan",

@@ -14,7 +14,7 @@
 | F1 · Documentos | **Hecha**: `DESIGN.md` y `MARCA.md` reescritos, guía de voz en `DESIGN.md`, brief de Canela, licencias, `README.md`. Pendiente: `SEO.md` parte 5 (consultas por sector) |
 | F2 · Infraestructura | **Hecha**: demos comunes, catálogo en código, plantilla de ficha, capturas reales, cotización con campos propios en la base y medición del embudo (visitas, demos, WhatsApp, cotizaciones) en el tablero del panel |
 | F3 · Sitio comercial | **Hecha** (24 sep 2026): portada, `/soluciones` y fichas, `/planes`, `/a-medida`, `/proceso`, `/empresa`, `/cotizar` con formulario calificado, `/guias`, redirecciones 308 en un salto, sitemap nuevo, WhatsApp flotante en celular. Proyectos de GitHub retirados del sitio público (siguen en el panel) |
-| Correo `@axchisan.com` | Plan listo en `docs/correo-dominio.md` (Zoho Mail gratuito). Esperando el registro en Zoho y los cambios de DNS |
+| Correo `@axchisan.com` | **Hecho**: `contacto@axchisan.com` en Zoho Mail, en el sitio y como destino de los avisos. Falta el registro DMARC (`docs/correo-dominio.md`) |
 | F4a · Canela | **Hecha**: portada, reserva en cuatro pasos, panel con Hoy, Agenda, Pacientes, ficha clínica, consulta con fórmula imprimible, Recordatorios y Resumen. 20 pruebas E2E en escritorio y celular, incluida WCAG AA |
 
 ## 0. En cinco líneas

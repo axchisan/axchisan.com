@@ -28,7 +28,7 @@ export const PROFILE = {
   alias: "Axchi",
   role: "Páginas web, tiendas y sistemas para negocios",
   location: "Bogotá, Colombia",
-  email: "axchisan923@gmail.com",
+  email: "contacto@axchisan.com",
   github: "https://github.com/axchisan",
   linkedin: "https://www.linkedin.com/in/duvan-yair-arciniegas-gerena-535690339",
   instagram: "https://www.instagram.com/axchisan",

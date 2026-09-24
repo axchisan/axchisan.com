@@ -1,7 +1,15 @@
-# Correo con el dominio: `hola@axchisan.com`
+# Correo con el dominio: `contacto@axchisan.com`
 
-Plan del 24 de septiembre de 2026. Hoy el sitio publica `axchisan923@gmail.com`; una dirección con
-el dominio propio es lo mínimo que espera un negocio que va a pagar.
+> **Hecho el 24 de septiembre de 2026.** Zoho Mail gratuito con `contacto@axchisan.com` (pública) y
+> `duvanyairarciniegas@axchisan.com` (administrador). MX, SPF, DKIM y verificación de Zoho
+> publicados y comprobados con `dig` contra los servidores de Hostinger. El sitio, los avisos del
+> formulario (`CONTACT_TO_EMAIL` en Vercel) y el perfil del panel ya usan `contacto@axchisan.com`.
+> Un aviso de prueba enviado por Resend figuró como entregado.
+>
+> **Pendiente:** el registro DMARC (paso 2, última fila). No bloquea nada, pero sin él algunos
+> proveedores confían menos en los correos del dominio.
+
+Lo que sigue es el plan original, que se conserva como referencia.
 
 ## Estado actual del DNS (verificado con `dig`)
 
@@ -33,7 +41,7 @@ el cambio es solo de registros DNS y no afecta al sitio.
 
 | Dirección | Uso |
 |---|---|
-| `hola@axchisan.com` | La pública: sitio, cotizaciones, firma, redes |
+| `contacto@axchisan.com` | La pública: sitio, cotizaciones, firma, redes |
 | `duvan@axchisan.com` | Personal, para contratos y proveedores (alias o segundo usuario) |
 | `avisos@axchisan.com` | Solo remitente de los avisos automáticos, vía Resend. No recibe |
 
@@ -59,7 +67,7 @@ significa la raíz del dominio.
 | MX | `@` | `mx3.zoho.com` | 50 |
 | TXT | `@` | `v=spf1 include:zohomail.com ~all` | — |
 | TXT | `zmail._domainkey` | la clave DKIM que genera Zoho (el nombre exacto lo da Zoho) | — |
-| TXT | `_dmarc` | `v=DMARC1; p=none; rua=mailto:hola@axchisan.com` | — |
+| TXT | `_dmarc` | `v=DMARC1; p=none; rua=mailto:contacto@axchisan.com` | — |
 
 Advertencias:
 
@@ -76,18 +84,18 @@ dig +short axchisan.com TXT         # Google, Zoho y el SPF
 dig +short _dmarc.axchisan.com TXT
 ```
 
-Y una prueba real: un correo desde Gmail a `hola@axchisan.com` y una respuesta de vuelta.
+Y una prueba real: un correo desde Gmail a `contacto@axchisan.com` y una respuesta de vuelta.
 
 ### 4. Cambiar el sitio (lo hago yo, cuando el paso 3 esté bien)
 
 | Qué | Dónde | Cambio |
 |---|---|---|
-| Correo público | `PROFILE.email` en `lib/site.ts` | `hola@axchisan.com`. Lo usan el pie, `/cotizar`, `/empresa`, `/privacidad` y los datos estructurados |
-| Destino de los avisos | `CONTACT_TO_EMAIL` en Vercel | `hola@axchisan.com` |
+| Correo público | `PROFILE.email` en `lib/site.ts` | `contacto@axchisan.com`. Lo usan el pie, `/cotizar`, `/empresa`, `/privacidad` y los datos estructurados |
+| Destino de los avisos | `CONTACT_TO_EMAIL` en Vercel | `contacto@axchisan.com` |
 | Remitente de los avisos | `CONTACT_FROM_EMAIL` en Vercel | `Axchi <avisos@axchisan.com>` |
 | Perfil del panel | tabla `profiles` | correo nuevo, desde el panel |
 
-**Por qué el sitio no cambia antes:** publicar `hola@axchisan.com` sin buzón detrás haría rebotar los
+**Por qué el sitio no cambia antes:** publicar `contacto@axchisan.com` sin buzón detrás haría rebotar los
 correos de los primeros clientes.
 
 ### 5. Fuera del sitio (te toca a ti)
