@@ -7,9 +7,9 @@ import { getBlogPosts } from "@/lib/data"
 import { cn, formatDate, toDate } from "@/lib/utils"
 
 export const metadata: Metadata = {
-  title: "Ideas",
+  title: "Publicaciones técnicas",
   description:
-    "Arquitectura, costos de infraestructura y automatización, con los números por delante. Lo que hay detrás de las decisiones técnicas de los sistemas que construyo.",
+    "Notas sobre arquitectura, automatización, infraestructura y decisiones de ingeniería aplicadas a proyectos de software.",
   alternates: { canonical: "/blog" },
 }
 
@@ -32,8 +32,8 @@ export default async function BlogPage({
 
       <main id="contenido">
         <PageBand
-          titulo="Ideas"
-          entradilla="Cómo se decidieron las cosas y qué costó cada decisión. Arquitectura, costos de infraestructura y automatización, con los números por delante."
+          titulo="Publicaciones técnicas"
+          entradilla="Decisiones de arquitectura, automatización e infraestructura explicadas a partir de problemas y sistemas concretos."
         />
 
         <Body>

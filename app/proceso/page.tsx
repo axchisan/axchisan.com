@@ -76,9 +76,9 @@ export default function ProcesoPage() {
 
         <div className="bg-card">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-            <h2 className="text-[1.9375rem] text-ink">Lo que te garantizo</h2>
+            <h2 className="text-[1.9375rem] text-ink">Principios de colaboración</h2>
             <p className="mt-3 max-w-[58ch] text-[1.0625rem] leading-relaxed text-mid">
-              Seis compromisos concretos. Si alguno no se cumple, tienes con qué reclamármelo.
+              Criterios que orientan la comunicación, la entrega y el traspaso técnico durante el proyecto.
             </p>
             <ul className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {COMPROMISOS.map((c) => (
@@ -94,13 +94,13 @@ export default function ProcesoPage() {
         <Band>
           <div className="py-20 text-center sm:py-24">
             <h2 className="mx-auto max-w-[22ch] text-[1.9375rem] sm:text-[2.4375rem]">
-              Empecemos por una conversación
+              Definamos el siguiente paso
             </h2>
             <p className="mx-auto mt-5 max-w-[52ch] text-[1.0625rem] leading-relaxed text-on-band-mid">
-              Media hora, sin costo y sin compromiso. Sales de ahí sabiendo si esto tiene sentido.
+              Comparte la necesidad y el contexto disponible para evaluar el alcance técnico inicial.
             </p>
             <div className="mt-9 flex justify-center">
-              <Button href="/contacto#agendar" size="lg">Hablemos de tu proyecto</Button>
+              <Button href="/contacto#agendar" size="lg">Contactar</Button>
             </div>
           </div>
         </Band>

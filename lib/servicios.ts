@@ -15,8 +15,8 @@ export const SERVICIOS: Servicio[] = [
     titulo: "Aplicaciones web",
     gancho: "Del modelo de datos al despliegue",
     descripcion:
-      "Plataformas completas con su panel de administración, para que el equipo cambie el contenido " +
-      "sin llamar al programador. Renderizado en servidor, así que Google indexa lo que hay dentro.",
+      "Plataformas web con API, base de datos, panel de administración, autenticación y despliegue. " +
+      "La implementación incorpora renderizado en servidor, indexación y pruebas automatizadas.",
     incluye: [
       "Next.js y React con TypeScript estricto",
       "Base de datos PostgreSQL y panel propio",
@@ -24,7 +24,7 @@ export const SERVICIOS: Servicio[] = [
       "SEO técnico, sitemap y datos estructurados",
       "Pruebas automatizadas de cada recorrido",
     ],
-    prueba: { texto: "este mismo sitio, con su código público", href: "/trabajo" },
+    prueba: { texto: "Ver proyectos web", href: "/trabajo" },
   },
   {
     id: "multiplataforma",
@@ -32,9 +32,8 @@ export const SERVICIOS: Servicio[] = [
     titulo: "Apps multiplataforma",
     gancho: "Un código, tres plataformas",
     descripcion:
-      "Flutter para web, Android y escritorio a la vez, con backend propio. Incluye los casos " +
-      "incómodos que suelen quedarse fuera del presupuesto: funcionar sin conexión, sincronizar " +
-      "entre dispositivos e integrarse con sistemas que ya están en producción.",
+      "Aplicaciones Flutter para web, Android y escritorio con backend propio. El alcance puede incluir " +
+      "uso sin conexión, sincronización entre dispositivos e integración con sistemas existentes.",
     incluye: [
       "Flutter para web, Android y macOS",
       "Modo sin conexión y sincronización",
@@ -47,11 +46,10 @@ export const SERVICIOS: Servicio[] = [
     id: "automatizacion",
     icono: Bot,
     titulo: "Automatización e IA",
-    gancho: "Quitar el paso que hace una persona a mano",
+    gancho: "Integrar sistemas y reducir tareas repetitivas",
     descripcion:
-      "Casi siempre hay alguien haciendo de traductor entre dos sistemas que no se hablan. Ese paso " +
-      "se puede quitar. Orquestación, integración de APIs y modelos de lenguaje donde de verdad " +
-      "aportan, con las máquinas de estado necesarias para que un fallo a mitad no deje todo roto.",
+      "Orquestación de procesos, integración de APIs y uso de modelos de lenguaje cuando son adecuados " +
+      "para el flujo. Los procesos se diseñan con estados, trazabilidad, reintentos y puntos de revisión.",
     incluye: [
       "Orquestación con n8n y flujos propios",
       "Integración de APIs y agentes de IA",
@@ -64,11 +62,10 @@ export const SERVICIOS: Servicio[] = [
     id: "infraestructura",
     icono: Server,
     titulo: "Infraestructura y costos",
-    gancho: "Elegir arquitectura mirando la factura",
+    gancho: "Arquitectura con criterios de operación y costo",
     descripcion:
-      "La conversación sobre arquitectura empieza casi siempre por el rendimiento y casi nunca por " +
-      "el costo, que es lo que decide si un proyecto sigue vivo en un año. Serverless, " +
-      "infraestructura como código y despliegue continuo, con el desglose de gastos por escrito.",
+      "Diseño de infraestructura serverless, automatización de despliegues e infraestructura como código. " +
+      "Las decisiones consideran rendimiento, mantenibilidad, seguridad y costos operativos.",
     incluye: [
       "AWS Lambda, contenedores o serverless",
       "Infraestructura como código con Terraform",
@@ -76,7 +73,7 @@ export const SERVICIOS: Servicio[] = [
       "Copias de seguridad verificadas, no solo programadas",
       "Desglose de costos antes de decidir",
     ],
-    prueba: { texto: "una app que opera por 0,01 USD al mes", href: "/trabajo/calculadora-de-gastos" },
+    prueba: { texto: "Ver caso de estudio", href: "/trabajo/calculadora-de-gastos" },
   },
 ]
 
@@ -86,24 +83,24 @@ export const PROCESO = [
     titulo: "Conversación",
     duracion: "Sin costo",
     detalle:
-      "Media hora para entender qué problema hay que resolver. Si no soy la persona indicada, te lo digo ahí mismo y te ahorro el presupuesto.",
+      "Revisión inicial del problema, los objetivos, las restricciones y la información técnica disponible.",
   },
   {
     titulo: "Propuesta con alcance y precio",
     duracion: "2 a 3 días",
     detalle:
-      "Qué entra, qué no entra, cuánto cuesta y cuánto tarda. Por escrito y cerrado. Si algo cambia después, se habla antes de tocarlo.",
+      "Definición documentada de alcance, entregables, estimación y supuestos técnicos antes de iniciar la implementación.",
   },
   {
     titulo: "Construcción con entregas parciales",
     duracion: "Según alcance",
     detalle:
-      "Ves avances funcionando desde la primera semana, no una presentación al final. Cada entrega se despliega en un enlace que puedes abrir y probar.",
+      "Entregas incrementales en entornos verificables para revisar funcionalidad, resolver dudas y ajustar el alcance de forma controlada.",
   },
   {
     titulo: "Entrega y traspaso",
     duracion: "Incluido",
     detalle:
-      "El código queda en tu repositorio, la documentación explica cómo operarlo y te enseño a hacerlo. Sin dependencia de mí para el día a día.",
+      "Entrega de código, documentación operativa y acceso a los recursos necesarios para continuar la evolución del sistema.",
   },
 ]

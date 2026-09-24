@@ -27,21 +27,21 @@ export default async function Home() {
         <Band>
           <div className="enter grid gap-12 py-20 sm:py-24 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-16">
             <div>
-              <h1 className="max-w-[17ch] text-[2.4375rem] leading-[1.06] sm:text-[3.0625rem] lg:text-[3.5rem]">
-                Software que funciona el lunes por la mañana.
+              <h1 className="max-w-[19ch] text-[2.4375rem] leading-[1.06] sm:text-[3.0625rem] lg:text-[3.5rem]">
+                Soluciones de software listas para operar.
               </h1>
               <p className="mt-6 max-w-[54ch] text-[1.125rem] leading-relaxed text-on-band-mid">
-                Desarrollo aplicaciones, automatizaciones e integraciones de IA para empresas que
-                necesitan resolver algo concreto. Sin equipos que facturar de más, sin demos que se
-                caen en producción.
+                Axchi diseña e implementa aplicaciones, integraciones y
+                automatizaciones para operaciones y productos digitales, con criterios de operación,
+                costo y mantenimiento desde el inicio.
               </p>
 
               <div className="mt-9 flex flex-wrap items-center gap-3">
                 <Button href="/contacto#agendar" size="lg">
-                  Hablemos de tu proyecto
+                Iniciar conversación
                 </Button>
                 <Button href="/trabajo" variant="outline-band" size="lg">
-                  Ver trabajo real
+                  Ver casos de estudio
                 </Button>
               </div>
 
@@ -57,19 +57,19 @@ export default async function Home() {
                 {
                   dato: "0,01 USD",
                   unidad: "al mes de operación",
-                  detalle: "Una app con API, base de datos y tres clientes.",
+                  detalle: "Aplicación con API, base de datos y tres clientes.",
                   href: "/trabajo/calculadora-de-gastos",
                 },
                 {
                   dato: "1 paso",
                   unidad: "manual en todo el proceso",
-                  detalle: "Un canal de contenido que se produce y publica solo.",
+                  detalle: "Flujo de contenido con revisión humana antes de publicar.",
                   href: "/trabajo/tecnobichos",
                 },
                 {
-                  dato: "10 proyectos",
-                  unidad: "con su código publicado",
-                  detalle: "Se pueden abrir, leer y verificar uno por uno.",
+                  dato: "10 sistemas",
+                  unidad: "documentados para revisión",
+                  detalle: "Casos de estudio con arquitectura, alcance y tecnologías.",
                   href: "/trabajo",
                 },
               ].map((m) => (
@@ -91,8 +91,8 @@ export default async function Home() {
 
         <Body>
           <SectionHead
-            titulo="En qué puedo ayudarte"
-            entradilla="Cuatro tipos de encargo que puedo tomar completos, del modelo de datos al despliegue y la factura mensual. Cada uno con un proyecto real al lado que lo demuestra."
+            titulo="Áreas de trabajo"
+            entradilla="Capacidades técnicas aplicadas de punta a punta: desde el modelo de datos y las integraciones hasta el despliegue, las pruebas y la operación."
           />
           <div className="grid gap-6 md:grid-cols-2">
             {SERVICIOS.map((s) => (
@@ -106,10 +106,10 @@ export default async function Home() {
             <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
               <SectionHead
                 titulo="Trabajo"
-                entradilla="Sistemas completos, no maquetas. Todos con su código publicado."
+                entradilla="Casos de estudio de sistemas implementados: contexto, decisiones técnicas y tecnologías utilizadas."
                 accion={
                   <Link href="/trabajo" className="link text-[0.9375rem] font-medium">
-                    Ver los diez proyectos
+                    Ver todos los proyectos
                   </Link>
                 }
               />
@@ -125,7 +125,7 @@ export default async function Home() {
         <Body>
           <SectionHead
             titulo="Cómo trabajo"
-            entradilla="Cuatro etapas y ninguna sorpresa. Sabes qué entra, cuánto cuesta y cuándo lo tienes antes de que empiece nada."
+            entradilla="Un proceso definido para acordar alcance, validar avances y entregar un sistema que pueda operar y mantenerse."
           />
           <ol className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {PROCESO.map((etapa, i) => (
@@ -149,8 +149,8 @@ export default async function Home() {
           <div className="bg-card">
             <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
               <SectionHead
-                titulo="Ideas"
-                entradilla="Cómo se decidieron las cosas y qué costó cada decisión."
+            titulo="Publicaciones técnicas"
+            entradilla="Decisiones de ingeniería documentadas a partir de sistemas concretos."
                 accion={
                   <Link href="/blog" className="link text-[0.9375rem] font-medium">
                     Todos los artículos
@@ -181,18 +181,18 @@ export default async function Home() {
         <Band>
           <div className="py-20 text-center sm:py-24">
             <h2 className="mx-auto max-w-[20ch] text-[1.9375rem] sm:text-[2.4375rem]">
-              ¿Tienes algo que resolver?
+              ¿Buscas apoyo para un proyecto de software?
             </h2>
             <p className="mx-auto mt-5 max-w-[52ch] text-[1.0625rem] leading-relaxed text-on-band-mid">
-              Cuéntame qué necesitas y te digo con franqueza si puedo ayudarte, cuánto costaría y
-              cuánto tardaría. La primera conversación no cuesta nada.
+              Comparte el contexto, los objetivos y las restricciones. Evaluaré el alcance y te
+              responderé con una propuesta técnica clara.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <Button href="/contacto#agendar" size="lg">
-                Hablemos de tu proyecto
+                Contactar
               </Button>
               <Button href="/proceso" variant="outline-band" size="lg">
-                Ver cómo trabajo
+                Conocer el proceso
               </Button>
             </div>
           </div>

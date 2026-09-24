@@ -4,7 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { signOut } from "next-auth/react"
-import { LayoutDashboard, FolderGit2, FileText, Cpu, Images, Mail, User, Settings, LogOut, Menu, X } from "lucide-react"
+import { LayoutDashboard, FolderGit2, FileText, Cpu, Images, Mail, User, LogOut, Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { LogoMark } from "@/components/site/logo"
 
@@ -16,7 +16,6 @@ const NAV = [
   { href: "/admin/media", label: "Media", icon: Images },
   { href: "/admin/messages", label: "Mensajes", icon: Mail },
   { href: "/admin/profile", label: "Perfil", icon: User },
-  { href: "/admin/settings", label: "Ajustes", icon: Settings },
 ]
 
 export function AdminShell({ children, userName }: { children: React.ReactNode; userName: string }) {

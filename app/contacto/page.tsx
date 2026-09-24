@@ -4,12 +4,12 @@ import { Body, PageBand } from "@/components/site/band"
 import { Footer } from "@/components/site/footer"
 import { ContactForm } from "@/components/contact/contact-form"
 import { getProfile } from "@/lib/data"
-import { PROFILE } from "@/lib/site"
+import { PROFILE, WHATSAPP, whatsappUrl } from "@/lib/site"
 
 export const metadata: Metadata = {
   title: "Contacto",
   description:
-    "Escríbeme si buscas a alguien que se haga cargo de un sistema completo. Respondo a todos los mensajes.",
+    "Contacto profesional para proyectos de desarrollo de software, automatización, integraciones e infraestructura.",
   alternates: { canonical: "/contacto" },
 }
 
@@ -18,7 +18,6 @@ export const dynamic = "force-dynamic"
 export default async function ContactoPage() {
   const profile = await getProfile()
   const email = profile?.email ?? PROFILE.email
-  const whatsapp = (profile?.whatsapp ?? "3183038190").replace(/\D/g, "")
 
   return (
     <>
@@ -26,8 +25,8 @@ export default async function ContactoPage() {
 
       <main id="contenido">
         <PageBand
-          titulo="Hablemos de tu proyecto"
-          entradilla="Cuéntame qué necesitas resolver y te digo con franqueza si puedo ayudarte, cómo lo abordaría y qué costaría. Respondo a todos los mensajes, normalmente el mismo día."
+          titulo="Contacto"
+          entradilla="Comparte el contexto, los objetivos y las restricciones de tu proyecto. Axchi revisará la información y responderá con una primera orientación técnica."
         />
 
         <Body>
@@ -54,12 +53,12 @@ export default async function ContactoPage() {
                 <dt className="text-faint">WhatsApp</dt>
                 <dd className="mt-0.5">
                   <a
-                    href={`https://wa.me/57${whatsapp}`}
+                    href={whatsappUrl()}
                     target="_blank"
                     rel="noreferrer noopener"
                     className="link"
                   >
-                    +57 {whatsapp}
+                    {WHATSAPP.visible}
                   </a>
                 </dd>
               </div>

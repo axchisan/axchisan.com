@@ -50,8 +50,8 @@ export default function ServiciosPage() {
         />
 
         <PageBand
-          titulo="Qué puedo construirte"
-          entradilla="Cuatro tipos de encargo que tomo completos: del modelo de datos al despliegue, la monitorización y la factura mensual. Cada uno con un proyecto real que lo demuestra."
+          titulo="Capacidades de desarrollo"
+          entradilla="Áreas en las que puedo asumir la implementación técnica: arquitectura, desarrollo, integración, pruebas y despliegue según las necesidades de cada proyecto."
         />
 
         <Body>
@@ -64,23 +64,23 @@ export default function ServiciosPage() {
 
         <div className="bg-card">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-            <h2 className="text-[1.9375rem] text-ink">Lo que no hago</h2>
+            <h2 className="text-[1.9375rem] text-ink">Alcance de trabajo</h2>
             <p className="mt-3 max-w-[58ch] text-[1.0625rem] leading-relaxed text-mid">
-              Decirlo por adelantado ahorra una reunión a los dos.
+              Definir qué tipo de proyectos encajan permite evaluar una colaboración con claridad desde el inicio.
             </p>
             <ul className="mt-8 grid gap-4 md:grid-cols-3">
               {[
                 {
-                  t: "Tiendas sobre Shopify o WordPress",
-                  d: "Si lo que necesitas es una tienda estándar, esas plataformas lo resuelven mejor y más barato de lo que yo podría.",
+                  t: "Implementaciones estándar de comercio electrónico",
+                  d: "Para una tienda sin requisitos técnicos particulares, una plataforma especializada suele ser la alternativa más eficiente.",
                 },
                 {
-                  t: "Diseño gráfico de marca",
-                  d: "Diseño interfaces, no identidades. Para un logo o un manual de marca necesitas a alguien de esa disciplina.",
+                  t: "Identidad visual y branding",
+                  d: "El alcance se centra en producto e interfaces. La identidad de marca requiere una especialidad de diseño distinta.",
                 },
                 {
-                  t: "Mantener código que no puedo leer",
-                  d: "Sin acceso al repositorio y sin forma de reproducir el entorno, cualquier presupuesto que te diera sería inventado.",
+                  t: "Mantenimiento sin acceso técnico verificable",
+                  d: "Para evaluar un sistema existente se requiere acceso al repositorio, dependencias y una forma de reproducir el entorno.",
                 },
               ].map((x) => (
                 <li key={x.t} className="rounded-[16px] border border-line bg-paper p-6">
@@ -95,15 +95,14 @@ export default function ServiciosPage() {
         <Band>
           <div className="py-20 text-center sm:py-24">
             <h2 className="mx-auto max-w-[22ch] text-[1.9375rem] sm:text-[2.4375rem]">
-              ¿Encaja con lo que necesitas?
+              ¿El alcance coincide con tu necesidad?
             </h2>
             <p className="mx-auto mt-5 max-w-[52ch] text-[1.0625rem] leading-relaxed text-on-band-mid">
-              Media hora de conversación basta para saberlo. Si no soy la persona indicada, te lo digo
-              ahí mismo.
+              Con el contexto adecuado puedo evaluar viabilidad, alcance técnico y próximos pasos.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Button href="/contacto#agendar" size="lg">Hablemos de tu proyecto</Button>
-              <Button href="/trabajo" variant="outline-band" size="lg">Ver el trabajo</Button>
+              <Button href="/contacto#agendar" size="lg">Contactar</Button>
+              <Button href="/trabajo" variant="outline-band" size="lg">Ver proyectos</Button>
             </div>
           </div>
         </Band>

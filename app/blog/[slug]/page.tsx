@@ -70,7 +70,7 @@ export default async function BlogPostPage({ params }: Params) {
                 href="/blog"
                 className="text-[0.9375rem] text-on-band-mid transition-colors hover:text-accent"
               >
-                Volver a Ideas
+                Volver a publicaciones
               </Link>
             </nav>
             <h1 className="mt-6 max-w-[24ch] text-[2.125rem] leading-[1.1] sm:text-[2.75rem]">
