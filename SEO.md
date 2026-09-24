@@ -27,8 +27,10 @@ Nada de esto requiere acción tuya. Está y se mantiene solo.
 | Canónicos | `alternates.canonical` | URL única por página; evita que se cuente contenido duplicado |
 | Open Graph | `public/og.png` | Tarjeta al compartir en LinkedIn y WhatsApp. Es un archivo fijo: generarla en cada petición costaba 0,6 MB de motor de render |
 | Datos estructurados | `layout.tsx`, fichas, artículos | `ProfessionalService` global con dirección y teléfono, `SoftwareSourceCode` por proyecto, `BlogPosting` por artículo |
-| URLs legibles | `/trabajo/tecnobichos` | Antes eran identificadores opacos |
-| Datos de la oferta | `app/servicios/page.tsx` | `ItemList` de `Service` con proveedor y área de cobertura: Google ve un catálogo, no un texto |
+| Fichas por sector | `/soluciones/veterinarias`, `/soluciones/salones-y-barberias` | Una página por intención de búsqueda, con `Service`, precio desde y `FAQPage` |
+| Datos de la oferta | `app/planes/page.tsx` | `OfferCatalog` con el precio mínimo de cada plan: Google ve un catálogo con precios, no un texto |
+| Demos fuera del índice | `app/demo/layout.tsx` | Las demos son negocios ficticios: `noindex, follow` y fuera del sitemap |
+| Redirecciones de la reestructuración | `next.config.ts` | `/servicios`, `/trabajo`, `/sobre`, `/contacto` y `/blog` redirigen en un solo salto |
 | Redirecciones heredadas | `next.config.ts` | `/about`, `/projects`, `/contact`… del sitio anterior redirigen con 308 |
 | `www` → dominio principal | Vercel | Un solo dominio canónico |
 | Renderizado en servidor | todo el sitio | Google ve el contenido en el HTML inicial, sin ejecutar JavaScript |
@@ -61,19 +63,22 @@ obtener*, espera una hora y actualiza — suele ser que aún no lo ha leído.
 
 Barra superior → pega la URL → Enter → espera el análisis → **Solicitar indexación**.
 
-Hazlo con estas seis, **de una en una** (hay cuota diaria, unas 10-12):
+Hazlo con estas, **de una en una** (hay cuota diaria, unas 10-12):
 
 ```
 https://axchisan.com/
-https://axchisan.com/servicios
-https://axchisan.com/proceso
-https://axchisan.com/trabajo
-https://axchisan.com/sobre
-https://axchisan.com/trabajo/tecnobichos
+https://axchisan.com/soluciones
+https://axchisan.com/soluciones/veterinarias
+https://axchisan.com/soluciones/salones-y-barberias
+https://axchisan.com/planes
+https://axchisan.com/soluciones/tiendas-de-cosmeticos
+https://axchisan.com/cotizar
 ```
 
-`/servicios` va en segundo lugar a propósito: es la página que resuelve la intención de contratar,
-que ahora es el objetivo. Al día siguiente repite con el resto de fichas y con `/blog`. No sirve de nada pedirlo dos veces para la misma URL.
+Las fichas van antes que las páginas generales: son las que resuelven la búsqueda de alguien que
+ya sabe qué negocio tiene. Cada vez que se publique una ficha nueva, se pide su indexación el mismo
+día. Las URLs antiguas (`/trabajo/...`, `/servicios`) no se piden: Google las irá cambiando solo al
+encontrar la redirección.
 
 ### 2.4 Revisa el informe de cobertura a los 3–4 días
 
@@ -111,7 +116,7 @@ cualquier ajuste técnico:
 | **Perfil de GitHub** | Campo *Website* → `https://axchisan.com` | Google rastrea GitHub constantemente |
 | **README de tu perfil** (`axchisan/axchisan`) | Enlaza el sitio y tus 3 mejores proyectos | Es la primera página que ve quien te evalúa |
 | **LinkedIn** | Sección *Destacado* y campo *Sitio web* del perfil | Alta autoridad de dominio |
-| **Cada repo destacado** | Campo *Website* → la ficha correspondiente, p. ej. `axchisan.com/trabajo/tecnobichos` | Enlaces temáticos, que pesan más que los genéricos |
+| **Perfil de WhatsApp Business e Instagram** | El enlace a la ficha del sector al que le vendes, no a la portada | Quien llega desde ahí ya está en la página que lo convence |
 | **Instagram / firma de correo** | El enlace, sin más | Tráfico directo |
 
 Ese último punto de la tabla es el que más se descuida: **apuntar cada repositorio a su ficha en tu
@@ -126,15 +131,22 @@ cuando alguien busca **contratar**. Son dos intenciones distintas y se atacan di
 
 ### Las que puedes ganar
 
-Búsquedas locales y específicas, donde la competencia es asumible:
+Búsquedas de dueños de negocio, locales y específicas. Cada una tiene su página:
 
 | Consulta | Dónde se ataca |
 |---|---|
-| desarrollo de software a medida Bogotá | home y `/servicios` |
-| automatización de procesos con IA Colombia | `/servicios#automatizacion` |
-| desarrollador Flutter Colombia | `/servicios#multiplataforma` |
-| integrar IA en mi empresa | artículo de Tecnobichos |
-| cuánto cuesta desarrollar una aplicación | falta escribirlo — ver abajo |
+| página web para veterinaria | `/soluciones/veterinarias` |
+| software para veterinarias Colombia | `/soluciones/veterinarias` |
+| sistema de citas para veterinaria | `/soluciones/veterinarias` |
+| página web para barbería | `/soluciones/salones-y-barberias` |
+| sistema de reservas para salón de belleza | `/soluciones/salones-y-barberias` |
+| programa para cuadrar caja y comisiones salón | `/soluciones/salones-y-barberias` |
+| tienda en línea para cosméticos / jabones artesanales | `/soluciones/tiendas-de-cosmeticos` |
+| cuánto cuesta una página web en Colombia | `/planes` |
+| página web por mensualidad | `/planes#suscripciones` |
+
+Cada demo nueva suma su sector a esta tabla. La regla: **una intención, una página**. No se crean
+dos fichas que compitan por la misma búsqueda.
 
 ### Las que no vas a ganar, y está bien
 
@@ -144,8 +156,7 @@ presupuesto de anuncios. Perseguirlas es quemar meses. La palanca real de un est
 
 ### El artículo que falta
 
-Dos borradores están escritos y apuntan a búsquedas técnicas reales. Pero el que más conversión
-traería no existe todavía: **"cuánto cuesta desarrollar una aplicación a medida en Colombia"**.
+El que más conversión traería no existe todavía: **"cuánto cuesta desarrollar una aplicación a medida en Colombia"**.
 
 Es la pregunta que escribe en Google exactamente quien está a punto de contratar, casi nadie la
 responde con cifras honestas, y responderla con rangos reales y lo que hace variar el precio te
@@ -162,7 +173,7 @@ puede registrar como área de servicio— te mete en el mapa y en el panel later
 | Cuándo | Qué esperar |
 |---|---|
 | 24–72 h | La home aparece al buscar `site:axchisan.com` |
-| 1–2 semanas | Las páginas principales indexadas; empiezas a salir por "Duvan Arciniegas" |
+| 1–2 semanas | Las páginas principales indexadas; empiezas a salir por "Axchi" |
 | 1–2 meses | Las fichas de proyecto indexadas; primeras impresiones por términos técnicos |
 | 3–6 meses | Los artículos empiezan a traer tráfico, si los publicas |
 | 6+ meses | Consultas comerciales con intención de contratar, que son las que convierten |
@@ -193,4 +204,4 @@ Y en el navegador:
 - **No compres enlaces.** Es la forma más rápida de recibir una penalización manual.
 - **No repitas palabras clave** en los textos. Google lo detecta y una página forzada se lee peor.
 - **No cambies las URLs otra vez** sin añadir su redirección en `next.config.ts`.
-- **No borres la página de un proyecto** una vez indexada; si sobra, redirige a `/trabajo`.
+- **No borres una ficha** una vez indexada; si sobra, redirige a la ficha más cercana o a `/soluciones`.
