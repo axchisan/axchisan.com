@@ -13,7 +13,7 @@ export const CONFIG_CANELA: ConfigDemo = {
   niveles: [
     { id: "pagina", etiqueta: "Página", planes: ["presencia", "pagina-profesional"] },
     { id: "citas", etiqueta: "Página + citas", planes: ["citas-en-linea"] },
-    { id: "sistema", etiqueta: "Sistema completo", planes: ["sistema-de-gestion"] },
+    { id: "sistema", etiqueta: "Sistema clínico", planes: ["sistema-de-gestion", "sistema-completo"] },
   ],
   nivelDeRuta: {
     [`${RAIZ}/agendar`]: "citas",

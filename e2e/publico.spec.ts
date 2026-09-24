@@ -175,7 +175,7 @@ test.describe("cotización", () => {
 
   test("envía una cotización solo con WhatsApp", async ({ page }) => {
     await page.goto("/cotizar?negocio=veterinarias")
-    await page.getByText("Entre $ 1.000.000 y $ 3.000.000").click()
+    await page.getByText("Prefiero pagar por mes").click()
     await page.getByLabel("Cuéntanos qué necesitas").fill("Cotización generada por la suite de pruebas end-to-end.")
     await page.getByLabel("Tu nombre").fill("Prueba Automática")
     await page.getByLabel("WhatsApp", { exact: true }).fill("300 000 0000")

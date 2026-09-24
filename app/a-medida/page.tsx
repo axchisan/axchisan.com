@@ -51,7 +51,7 @@ export default function AMedidaPage() {
 
         <PageBand
           titulo="Desarrollo a medida"
-          entradilla="Para empresas con un proyecto que no encaja en un plan del catálogo: integraciones, automatizaciones, aplicaciones y la infraestructura para operarlas. Se cotiza por jornada, con un diagnóstico de $ 450.000 que se descuenta si contratas."
+          entradilla="Para empresas con un proyecto que no encaja en un plan del catálogo: integraciones, automatizaciones, aplicaciones y la infraestructura para operarlas. Se trabaja por etapas de hasta $ 3.000.000, cada una entregada funcionando, con un diagnóstico de $ 150.000 que se descuenta si contratas."
         />
 
         <Body>

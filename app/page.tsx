@@ -6,14 +6,14 @@ import { Band, Body, SectionHead } from "@/components/site/band"
 import { Celular, Navegador } from "@/components/site/dispositivos"
 import { Preguntas } from "@/components/site/preguntas"
 import { Button } from "@/components/ui/button"
-import { PLANES, PRECIO_ENTRADA, pesos, type PlanId } from "@/lib/catalogo/planes"
+import { MENSUAL_ENTRADA, PLANES, PRECIO_ENTRADA, SUSCRIPCIONES, TECHO, pesos, type PlanId } from "@/lib/catalogo/planes"
 import { PREGUNTAS_GENERALES } from "@/lib/catalogo/preguntas"
 import { SECTORES } from "@/lib/catalogo/sectores"
 import { SOLUCIONES, solucion } from "@/lib/catalogo/soluciones"
 import { PROCESO } from "@/lib/servicios"
 import { MENSAJE_WHATSAPP, whatsappUrl } from "@/lib/site"
 
-const DESTACADOS: PlanId[] = ["presencia", "pagina-profesional", "catalogo-whatsapp", "citas-en-linea", "sistema-de-gestion"]
+const DESTACADOS: PlanId[] = ["presencia", "pagina-profesional", "catalogo-whatsapp", "citas-en-linea", "sistema-completo"]
 
 export default function Home() {
   const canela = solucion("veterinarias")!
@@ -59,7 +59,8 @@ export default function Home() {
                 </span>
                 <span className="text-[0.9375rem] leading-snug text-on-band-mid">
                   Tu página con servicios, horario, mapa y WhatsApp, lista en{" "}
-                  {PLANES.presencia.entrega}.
+                  {PLANES.presencia.entrega}. O{" "}
+                  <span className="text-on-band">{pesos(MENSUAL_ENTRADA)} al mes</span>, sin pago inicial.
                 </span>
               </Link>
             </div>
@@ -162,7 +163,7 @@ export default function Home() {
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
             <SectionHead
               titulo="Cuánto cuesta"
-              entradilla="Precios desde, finales y sin IVA. El valor exacto depende de lo que necesites, y te lo damos por escrito antes de empezar."
+              entradilla={`Paga de una vez o por mes. Precios desde, finales y sin IVA; ningún plan pasa de ${pesos(TECHO)}.`}
               accion={
                 <Link href="/planes" className="link text-[0.9375rem] font-medium">
                   Todos los planes y lo que cuesta mantenerlos
@@ -183,6 +184,11 @@ export default function Home() {
                     <p className="text-[1.125rem] text-ink sm:text-right">
                       <span className="text-[0.9375rem] text-mid">desde </span>
                       <span className="font-semibold tabular-nums">{pesos(plan.desde)}</span>
+                      {plan.suscripcion && (
+                        <span className="block text-[0.875rem] text-mid">
+                          o {pesos(SUSCRIPCIONES[plan.suscripcion].mensual)} al mes
+                        </span>
+                      )}
                     </p>
                   </li>
                 )

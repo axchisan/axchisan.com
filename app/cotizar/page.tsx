@@ -5,7 +5,7 @@ import { Footer } from "@/components/site/footer"
 import { Body, PageBand } from "@/components/site/band"
 import { CotizacionForm } from "@/components/contact/cotizacion-form"
 import { Button } from "@/components/ui/button"
-import { PLANES, pesos } from "@/lib/catalogo/planes"
+import { PLANES, SUSCRIPCIONES, pesos } from "@/lib/catalogo/planes"
 import { SECTORES } from "@/lib/catalogo/sectores"
 import { MENSAJE_WHATSAPP, PROFILE, WHATSAPP, whatsappUrl } from "@/lib/site"
 
@@ -20,6 +20,7 @@ const NEGOCIOS = [...SECTORES.map((s) => ({ valor: s.id, texto: s.nombre })), { 
 
 const QUE_NECESITA = [
   ...Object.values(PLANES).map((p) => ({ valor: p.id, texto: `${p.nombre} (desde ${pesos(p.desde)})` })),
+  ...Object.values(SUSCRIPCIONES).map((x) => ({ valor: x.id, texto: `${x.nombre} (${pesos(x.mensual)} al mes)` })),
   { valor: "a-medida", texto: "Un desarrollo a medida" },
 ]
 

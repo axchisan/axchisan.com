@@ -28,21 +28,6 @@ const RAZONES = [
   },
 ]
 
-/** Fechas explícitas: una trayectoria sin fechas no dice nada. */
-const TRAYECTORIA = [
-  {
-    periodo: "2026",
-    titulo: "Desarrollador de software en una empresa de Bogotá",
-    detalle:
-      "Proyectos para clientes con despliegue continuo, automatización de procesos e integración de agentes de IA en el trabajo del equipo.",
-  },
-  {
-    periodo: "2025 — 2026",
-    titulo: "Tecnólogo en Análisis y Desarrollo de Software, SENA",
-    detalle: "Formación técnica y etapa productiva construyendo sistemas para usuarios reales.",
-  },
-]
-
 export default function EmpresaPage() {
   return (
     <>
@@ -78,20 +63,6 @@ export default function EmpresaPage() {
               ve tu cliente, el panel que usa tu equipo, la base de datos y el servidor donde corre, y
               te dejo todo a tu nombre y documentado para que no dependas de mí.
             </p>
-            <ol className="mt-8">
-              {TRAYECTORIA.map((t) => (
-                <li
-                  key={t.titulo}
-                  className="grid gap-1 border-t border-line py-6 first:border-t-0 first:pt-0 sm:grid-cols-[10rem_1fr] sm:gap-8"
-                >
-                  <p className="text-[0.9375rem] text-faint">{t.periodo}</p>
-                  <div>
-                    <h3 className="text-[1.0625rem] font-semibold tracking-[-0.015em] text-ink">{t.titulo}</h3>
-                    <p className="measure mt-1.5 text-[1rem] leading-relaxed text-mid">{t.detalle}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
           </section>
 
           <section aria-labelledby="datos" className="mt-16 border-t border-line pt-12">
