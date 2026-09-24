@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Las demos viven fuera de app/. Se declaran como fuente explícita: con la
+   caché de compilación, una carpeta de demo nueva podía quedar sin escanear y
+   la demo salía en producción sin sus colores (pasó con Peine Fino). */
+@source "../demos";
+
 /* ==========================================================================
    axchisan.com — sistema de diseño
    Ver DESIGN.md para el brief y el razonamiento detrás de cada decisión.
