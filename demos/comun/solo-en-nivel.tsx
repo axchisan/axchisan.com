@@ -1,7 +1,7 @@
 "use client"
 
 import type { ReactNode } from "react"
-import { PLANES, pesos } from "@/lib/catalogo/planes"
+import { PLANES, SUSCRIPCIONES, pesos } from "@/lib/catalogo/planes"
 import { useDemo } from "./contexto"
 
 /**
@@ -32,7 +32,8 @@ export function SoloEnNivel({
       }`}
     >
       <p className="text-[0.9375rem] font-semibold">
-        Esto entra en el plan {plan.nombre}, desde {pesos(plan.desde)}.
+        Esto entra en el plan {plan.nombre}, desde {pesos(plan.desde)}
+        {plan.suscripcion ? ` o ${pesos(SUSCRIPCIONES[plan.suscripcion].mensual)} al mes` : ""}.
       </p>
       <p className="mt-1.5 text-[0.875rem] leading-relaxed text-mid">{plan.resumen}</p>
       <button

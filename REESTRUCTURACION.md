@@ -343,14 +343,14 @@ vacunación, desparasitación, cirugía, laboratorio, peluquería y urgencias co
 Dirección y teléfono marcados como ficticios.
 
 **Selector de plan.** La barra de demo incluye *Ver como: Página · Página + citas · Sistema
-completo*. Cada opción muestra solo lo que incluye ese plan, con su precio desde. Es la
+clínico*. Cada opción muestra solo lo que incluye ese plan, con su precio desde. Es la
 herramienta de venta para un cliente que no sabe qué necesita: lo decide mirando.
 
 | Parte | Ruta | Plan en el que entra | Qué hace |
 |---|---|---|---|
-| **A. Página** | `/demo/canela` | Presencia ($300.000) en versión reducida; Página profesional ($900.000) completa | Portada, servicios con precio de referencia, equipo, horarios y urgencias, paquete de salud para cachorros, preguntas frecuentes, ubicación con mapa, WhatsApp |
-| **B. Citas en línea** | `/demo/canela/agendar` | Citas en línea ($2.500.000) | Servicio → mascota (nueva o reconocida por el teléfono) → día, hora y profesional libres → confirmación con resumen y archivo para agregar al calendario |
-| **C. Panel clínico** | `/demo/canela/panel` | Sistema de gestión ($6.000.000) | Ver abajo |
+| **A. Página** | `/demo/canela` | Presencia ($300.000) en versión reducida; Página profesional ($600.000) completa | Portada, servicios con precio de referencia, equipo, horarios y urgencias, paquete de salud para cachorros, preguntas frecuentes, ubicación con mapa, WhatsApp |
+| **B. Citas en línea** | `/demo/canela/agendar` | Citas en línea ($1.400.000 o $79.900 al mes) | Servicio → mascota (nueva o reconocida por el teléfono) → día, hora y profesional libres → confirmación con resumen y archivo para agregar al calendario |
+| **C. Panel clínico** | `/demo/canela/panel` | Sistema de gestión ($2.400.000 o $129.900 al mes); con pagos y recordatorios automáticos, sistema completo ($3.000.000) | Ver abajo |
 
 **Panel clínico (C):**
 
@@ -371,7 +371,7 @@ con consultas verosímiles. Nada de datos de personas reales.
 facturación, hospitalización, peluquería con su propia agenda.
 
 **Lo que se le dice al cliente con la demo en la mano:** *"Esto es todo lo que podría tener.
-Podemos empezar solo por la página, por $300.000 o $900.000, y crecer después sin rehacer nada."*
+Podemos empezar solo por la página, por $300.000 o $39.900 al mes, y crecer después sin rehacer nada."*
 
 ---
 
@@ -583,7 +583,7 @@ Se ordenan según los datos del embudo de las primeras semanas, no según esta l
 | **D4** | Proyectos | **Ningún proyecto de GitHub** en el sitio. Solo Jabones Mari, como ejemplo de tienda de cosméticos |
 | **D5** | Renombrar rutas | Sí, con redirecciones 308 |
 | **D6** | Agendar llamadas | Pendiente: Cal.com gratuito, o retirar la palabra "agendar". Mientras tanto, se retira |
-| **D7** | Precios | **"Desde", con $300.000 como entrada muy visible.** Modelo completo en [`PRECIOS.md`](PRECIOS.md) |
+| **D7** | Precios | **"Desde", con $300.000 como entrada muy visible, techo de $3.000.000 y suscripción mensual desde $39.900.** Revisado el 24 sep 2026; modelo en [`PRECIOS.md`](PRECIOS.md) |
 | **D8** | Primera demo | **Veterinaria.** Los demás sectores se deciden durante el desarrollo |
 
 ## 9. Riesgos

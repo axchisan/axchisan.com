@@ -11,10 +11,10 @@ type Opcion = { valor: string; texto: string }
 type Errores = Partial<Record<"name" | "contacto" | "email" | "message", string>>
 
 const PRESUPUESTOS = [
-  "Menos de $ 1.000.000",
-  "Entre $ 1.000.000 y $ 3.000.000",
-  "Entre $ 3.000.000 y $ 6.000.000",
-  "Más de $ 6.000.000",
+  "Menos de $ 500.000",
+  "Entre $ 500.000 y $ 1.500.000",
+  "Entre $ 1.500.000 y $ 3.000.000",
+  "Prefiero pagar por mes",
   "Todavía no lo sé",
 ]
 

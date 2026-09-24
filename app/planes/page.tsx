@@ -5,13 +5,26 @@ import { Footer } from "@/components/site/footer"
 import { Band, PageBand } from "@/components/site/band"
 import { Preguntas } from "@/components/site/preguntas"
 import { Button } from "@/components/ui/button"
-import { COSTOS_DESPUES, MANTENIMIENTO, MODULOS, PLANES, PRECIO_ENTRADA, pesos, type PlanId } from "@/lib/catalogo/planes"
+import {
+  COSTOS_DESPUES,
+  EXTRA_SUSCRIPCION,
+  MANTENIMIENTO,
+  MENSUAL_ENTRADA,
+  MODULOS,
+  PERMANENCIA_MESES,
+  PLANES,
+  PRECIO_ENTRADA,
+  SUSCRIPCIONES,
+  TECHO,
+  pesos,
+  type PlanId,
+} from "@/lib/catalogo/planes"
 import { PREGUNTAS_GENERALES } from "@/lib/catalogo/preguntas"
 import { LEGAL_NAME, MENSAJE_WHATSAPP, SITE_URL, whatsappUrl } from "@/lib/site"
 
 export const metadata: Metadata = {
   title: "Planes y precios",
-  description: `Precios de páginas web, tiendas en línea y sistemas en Colombia, desde ${pesos(PRECIO_ENTRADA)}. Qué incluye cada plan, cuánto tarda y cuánto cuesta mantenerlo.`,
+  description: `Precios de páginas web, tiendas en línea y sistemas en Colombia: desde ${pesos(PRECIO_ENTRADA)} en un solo pago o ${pesos(MENSUAL_ENTRADA)} al mes, y ningún plan pasa de ${pesos(TECHO)}.`,
   alternates: { canonical: "/planes" },
 }
 
@@ -29,18 +42,19 @@ const GRUPOS: { titulo: string; entradilla: string; planes: PlanId[] }[] = [
   {
     titulo: "Para organizar tu operación",
     entradilla: "Citas, inventario, historias, pedidos: el sistema de tu negocio.",
-    planes: ["citas-en-linea", "sistema-de-gestion", "app-movil"],
+    planes: ["citas-en-linea", "sistema-de-gestion", "sistema-completo"],
   },
 ]
 
 const CONDICIONES = [
-  ["Forma de pago hasta $ 2.000.000", "50 % para empezar y 50 % al entregar."],
-  ["Forma de pago mayor a $ 2.000.000", "40 % para empezar, 30 % en la entrega intermedia y 30 % al final."],
+  ["Pago único hasta $ 1.000.000", "50 % para empezar y 50 % al entregar."],
+  ["Pago único mayor a $ 1.000.000", "40 % para empezar, 30 % en la entrega intermedia y 30 % al final."],
+  ["Suscripción", `Mes anticipado, sin pago inicial, con permanencia mínima de ${PERMANENCIA_MESES} meses. Si se cancela antes, se paga la mitad de los meses que faltan.`],
   ["Medios de pago", "Transferencia, Nequi o Daviplata."],
   ["Validez de la cotización", "15 días."],
-  ["Ajustes", "Las rondas que incluye cada plan. Las adicionales, a $ 60.000 la hora."],
+  ["Ajustes", "Las rondas que incluye cada plan. Las adicionales, a $ 40.000 la hora."],
   ["Contenido", "Textos, fotos y logo los entregas tú, o se contratan aparte."],
-  ["Propiedad", "Dominio, código y datos quedan a tu nombre cuando terminas de pagar."],
+  ["Propiedad", "Con pago único, dominio, código y datos quedan a tu nombre al terminar de pagar. Con suscripción, el dominio y los datos son tuyos siempre; el código se usa mientras dure, y para quedártelo se abona la mitad de lo pagado."],
   ["IVA", "No se cobra: los precios son finales."],
 ]
 
@@ -69,7 +83,7 @@ export default function PlanesPage() {
       <main id="contenido">
         <PageBand
           titulo="Planes y precios"
-          entradilla="Precios desde, finales y sin IVA. Te decimos el valor exacto por escrito antes de empezar, y lo que cuesta mantenerlo en línea después."
+          entradilla={`Paga de una vez o por mes, como te quede mejor. Precios desde, finales y sin IVA, y ningún plan pasa de ${pesos(TECHO)}.`}
         />
 
         {GRUPOS.map((g, gi) => (
@@ -97,6 +111,14 @@ export default function PlanesPage() {
                         </span>
                       </p>
                       <p className="mt-1 text-[0.9375rem] text-accent-ink">Entrega en {p.entrega}</p>
+                      {p.suscripcion && (
+                        <p className="mt-1 text-[0.9375rem] text-mid">
+                          o{" "}
+                          <a href="#suscripciones" className="link">
+                            {pesos(SUSCRIPCIONES[p.suscripcion].mensual)} al mes
+                          </a>
+                        </p>
+                      )}
                       <p className="mt-4 text-[0.9375rem] leading-relaxed text-mid">{p.resumen}</p>
                       <ul className="mt-5 space-y-2">
                         {p.incluye.map((x) => (
@@ -128,12 +150,50 @@ export default function PlanesPage() {
           </section>
         ))}
 
+        <section id="suscripciones" className="scroll-mt-20 bg-band text-on-band">
+          <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+            <h2 className="text-[1.9375rem]">O paga por mes, sin pago inicial</h2>
+            <p className="mt-3 max-w-[62ch] text-[1.0625rem] leading-relaxed text-on-band-mid">
+              Lo mismo que el pago único, con dominio, alojamiento y soporte ya incluidos. Permanencia
+              mínima de {PERMANENCIA_MESES} meses. Pagos en línea o automatizaciones se suman por{" "}
+              {pesos(EXTRA_SUSCRIPCION)} al mes cada uno.
+            </p>
+            <div className="mt-8 grid gap-6 lg:grid-cols-3">
+              {Object.values(SUSCRIPCIONES).map((x) => (
+                <article key={x.id} className="flex flex-col rounded-[16px] border border-band-line p-6">
+                  <h3 className="text-[1.25rem]">{x.nombre}</h3>
+                  <p className="mt-3">
+                    <span className="text-[1.9375rem] leading-none font-semibold tracking-[-0.03em] tabular-nums">
+                      {pesos(x.mensual)}
+                    </span>
+                    <span className="text-[0.9375rem] text-on-band-mid"> al mes</span>
+                  </p>
+                  <p className="mt-4 text-[0.9375rem] leading-relaxed text-on-band-mid">{x.resumen}</p>
+                  <ul className="mt-5 space-y-2">
+                    {x.incluye.map((i) => (
+                      <li key={i} className="flex gap-2.5 text-[0.9375rem] leading-snug">
+                        <Check className="mt-[3px] h-4 w-4 shrink-0 text-accent" aria-hidden />
+                        {i}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-auto pt-6">
+                    <Button href={`/cotizar?plan=${x.id}`} variant="outline-band" className="w-full">
+                      Quiero pagar por mes
+                    </Button>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section id="despues" className="scroll-mt-20 bg-paper">
           <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-2">
             <div>
-              <h2 className="text-[1.9375rem] text-ink">Lo que cuesta después</h2>
+              <h2 className="text-[1.9375rem] text-ink">Lo que cuesta después de un pago único</h2>
               <p className="mt-3 text-[1.0625rem] leading-relaxed text-mid">
-                Lo pagas directamente al proveedor y queda a tu nombre. Ninguna de estas cuentas pasa por Axchi.
+                Lo pagas directamente al proveedor y queda a tu nombre. Con suscripción, esto ya está incluido.
               </p>
               <dl className="mt-6 divide-y divide-line border-y border-line">
                 {COSTOS_DESPUES.map((c) => (

@@ -1,29 +1,61 @@
 # Precios — cómo se calcula lo que cobra Axchi
 
-> Investigación y modelo del 24 de septiembre de 2026. Las cifras de mercado y de terceros tienen
-> fuente al final. **Revisar cada enero**: cambian el salario mínimo, la UVT y las tarifas de los
-> proveedores, y con ellos este documento.
+> **Revisado el 24 de septiembre de 2026** con precios de entrada al mercado: ningún plan pasa de
+> **$ 3.000.000**, y todo se puede pagar también por **suscripción mensual sin pago inicial**. La
+> primera versión (tarifa de $ 450.000 por jornada, planes hasta $ 8.000.000) queda en el historial
+> de git. **Revisar cada enero**: cambian el salario mínimo, la UVT y las tarifas de los proveedores.
+>
+> Fuente única en código: `lib/catalogo/planes.ts`. Si cambia una cifra aquí, cambia allí.
 
-## 0. La regla que resuelve la duda de "¿esto es mucho?"
+## 0. La decisión y por qué funciona
 
-Un precio no se inventa ni se compara con lo que "parece" caro. Sale de tres números:
+El cliente de Axchi es el negocio pequeño que **no contrata una agencia precisamente porque cobra
+de más**. Compite con el sobrino que hace páginas, con Wix y con los programas por suscripción, no
+con las agencias. Por eso:
 
-```
-precio = jornadas de trabajo × tarifa por jornada × factor de riesgo
-```
+1. **Techo de $ 3.000.000.** Ese es el sistema completo, con pagos en línea, automatizaciones y app
+   instalable. Un proyecto más grande se divide en etapas de hasta ese valor, cada una entregada
+   funcionando.
+2. **Suscripción mensual.** Para quien no tiene el dinero de una vez: sin pago inicial, con dominio,
+   alojamiento y soporte incluidos, y 12 meses de permanencia mínima.
 
-- **Jornadas:** cuánto trabajo real lleva, contado por módulos (sección 3).
-- **Tarifa por jornada:** lo que necesitas cobrar por un día de trabajo para vivir de esto, calculado con tus costos reales (sección 1). No es negociable.
-- **Factor de riesgo:** cuánto de lo pedido es desconocido.
+Estos precios **solo son viables sobre motores ya construidos** (ver `REESTRUCTURACION.md` §4.1). La
+demo de un sector no es solo marketing: es la pieza que después se entrega a cada cliente de ese
+sector en una fracción del tiempo. Un sector sin demo todavía no tiene precio de catálogo: primero
+se construye el motor, y esa inversión se recupera con las ventas siguientes.
 
-Si un cliente dice que es caro, **no se baja la tarifa: se reduce el alcance**. Se quita un
-módulo, no se regala un día. Esa es la única forma de no terminar trabajando a pérdida.
+**La regla que no cambia:** si un cliente dice que es caro, se quita un módulo, no se baja la
+tarifa. Y lo que se cotiza, se cotiza por escrito.
 
 ---
 
-## 1. La tarifa por jornada
+## 1. De dónde salen los precios
 
-### 1.1 Lo que cuesta trabajar como independiente en Colombia (2026)
+Con el motor hecho, cada plan cuesta estas jornadas (8 horas) de trabajo real:
+
+| Plan | Precio | Jornadas con motor | Equivale por jornada |
+|---|---|---|---|
+| Presencia | $ 300.000 | 0,5 | $ 600.000 |
+| Página profesional | $ 600.000 | 1,5 | $ 400.000 |
+| Sitio con panel | $ 900.000 | 2,5 | $ 360.000 |
+| Catálogo con pedidos por WhatsApp | $ 1.200.000 | 3 | $ 400.000 |
+| Citas en línea | $ 1.400.000 | 3 | $ 467.000 |
+| Tienda con pagos | $ 1.800.000 | 4,5 | $ 400.000 |
+| Sistema de gestión | $ 2.400.000 | 6 | $ 400.000 |
+| Sistema completo | $ 3.000.000 | 7 | $ 429.000 |
+
+Todos quedan cerca de **$ 400.000 por jornada**, que es una tarifa sana para un desarrollador en
+Colombia (ver §2). La diferencia con la primera versión no es cobrar menos por día: es **trabajar
+menos días por proyecto** gracias a los motores. Sin motor, las mismas cifras darían menos de
+$ 200.000 por jornada, y ahí sí se estaría trabajando a pérdida.
+
+Para lo que no sale de un motor:
+
+- **Hora de cambios o trabajo suelto:** $ 40.000.
+- **Desarrollo a medida:** por etapas de hasta $ 3.000.000, con un diagnóstico de $ 150.000 que se
+  descuenta si el cliente contrata.
+
+## 2. Lo que cuesta trabajar como independiente en Colombia (2026)
 
 | Concepto | Valor 2026 | Cómo afecta |
 |---|---|---|
@@ -39,38 +71,12 @@ módulo, no se regala un día. Esa es la única forma de no terminar trabajando 
 > y pagas un solo impuesto consolidado. Con un contador conviene evaluarlo cuando pases de 3–4
 > clientes empresa al mes. Este documento no sustituye esa asesoría.
 
-### 1.2 Los días que de verdad se facturan
+### Los días que de verdad se facturan
 
-Un mes tiene ~21 días hábiles, pero **no todos son de construir**. Hay que buscar clientes, hacer
-reuniones y cotizaciones, construir demos, dar soporte a clientes anteriores, facturar y aprender.
-En un estudio de una persona, un **60 %** de días facturables es realista: **12 jornadas al mes**.
-Una jornada son 8 horas.
+Un mes tiene ~21 días hábiles, pero no todos son de construir: hay que buscar clientes, construir
+demos, dar soporte y facturar. Con un 60 % facturable salen **12 jornadas al mes**.
 
-### 1.3 Tres escenarios
-
-| | Conservador | **Recomendado** | Consolidado |
-|---|---|---|---|
-| Tarifa por jornada | $350.000 | **$450.000** | $600.000 |
-| Equivale por hora | $43.750 | **$56.250** | $75.000 |
-| Facturación con 12 jornadas | $4.200.000 | **$5.400.000** | $7.200.000 |
-| Seguridad social | −$508.148 (piso) | **−$626.875** | −$835.834 |
-| Herramientas | −$400.000 | **−$400.000** | −$400.000 |
-| Reserva de renta (3 %) | −$126.000 | **−$162.000** | −$216.000 |
-| 4×1000 | −$16.800 | **−$21.600** | −$28.800 |
-| **Te queda al mes** | **$3.149.052** | **$4.189.525** | **$5.719.366** |
-| En salarios mínimos | 1,8 | **2,4** | 3,3 |
-
-**Recomendación: $450.000 por jornada.** Equivale a $56.250 la hora, en la franja de un
-desarrollador de nivel intermedio en Colombia ($50.000–$80.000/h). No es cara para el mercado y te
-deja un ingreso digno y sostenible. Por debajo de $350.000 trabajas más por menos que un empleo
-con prestaciones. $600.000 es la meta cuando tengas casos que mostrar y demanda estable.
-
-> **Tarifa interna: $450.000 por jornada. Tarifa por hora para trabajos sueltos: $60.000** (se
-> redondea hacia arriba porque un trabajo corto trae el mismo costo de contexto que uno largo).
-
----
-
-## 2. Qué cobra el mercado colombiano (2026)
+## 3. Qué cobra el mercado colombiano (2026)
 
 | Tipo de proyecto | Freelancer / plantilla | Agencia / estudio | Plazo típico |
 |---|---|---|---|
@@ -81,177 +87,151 @@ con prestaciones. $600.000 es la meta cuando tengas casos que mostrar y demanda 
 | Sistema o portal a medida | USD 3.000 – 8.000 (≈ $9,8 – $26 millones) para un MVP | desde $18.000.000, y desde $40.000.000 en agencias grandes | 1–6 meses |
 | Mantenimiento mensual | $150.000 – $600.000 | $250.000 – $900.000 | — |
 | SaaS veterinario (suscripción) | $50.000 – $300.000 al mes | — | — |
+| Agenda de citas por suscripción (AgendaPro, plan más usado) | — | ~$150.000 al mes | — |
+| Tienda por suscripción (Shopify Basic) | — | ~29 USD al mes (≈ $95.000) más aplicaciones | — |
 
-**Dónde se ubica Axchi:** en la parte baja del rango de estudio y alta del rango freelancer. La
-razón para cobrar menos que una agencia no es trabajar más barato, sino que los **motores
-reutilizables** reducen las jornadas. Eso es lo que se explica al cliente: *"no empezamos de cero"*.
-
----
-
-## 3. Cómo estimar un proyecto
-
-### 3.1 Jornadas por módulo
-
-Valores base con motor reutilizable. Sin motor, multiplicar por 1,6.
-
-| Módulo | Jornadas |
-|---|---|
-| Página de una sección desde plantilla | 0,75 |
-| Sección adicional con diseño propio | 0,25 |
-| Diseño visual a medida (identidad del cliente aplicada al sitio) | 1 |
-| Panel para que el cliente edite contenido | 1,5 |
-| Inicio de sesión con roles | 1 |
-| Entidad simple con alta, edición y listado (p. ej. proveedores) | 0,75 |
-| Entidad con relaciones e historial (p. ej. mascota con historia clínica) | 1,5 |
-| Agenda con disponibilidad y reservas | 2 |
-| Carrito y pedido armado a WhatsApp | 1,5 |
-| Pasarela de pagos (Wompi, Bold, Mercado Pago) | 2 |
-| Reportes con gráficas | 1 – 2 |
-| Exportar a Excel | 0,5 |
-| Correos automáticos | 0,5 |
-| WhatsApp automático por API (recordatorios) | 2 |
-| Facturación electrónica vía proveedor autorizado | 3 |
-| Migrar datos desde Excel | 1 |
-| Capacitación y manual | 0,5 |
-| **Pruebas y despliegue** | +12 % del total |
-| **Gestión (reuniones, ajustes, comunicación)** | +10 % del total |
-
-### 3.2 Factor de riesgo
-
-| Situación | Factor |
-|---|---|
-| Ya lo has hecho con el mismo motor | 1,0 |
-| Una integración o tecnología nueva | 1,2 |
-| El cliente no tiene claro qué quiere, o hay un sistema existente que no conoces | 1,5, o mejor: **cobrar un diagnóstico primero** |
-
-### 3.3 Ejemplo: sistema para veterinaria
-
-| Módulo | Jornadas |
-|---|---|
-| Inicio de sesión con roles (recepción, veterinario) | 1 |
-| Propietarios | 0,75 |
-| Mascotas con historia clínica | 1,5 |
-| Consultas y notas clínicas | 1,5 |
-| Vacunas y desparasitaciones con próximas fechas | 1 |
-| Agenda de citas | 2 |
-| Reportes | 1 |
-| Exportar a Excel | 0,5 |
-| Correos de confirmación | 0,5 |
-| Capacitación | 0,5 |
-| **Subtotal** | **10,25** |
-| Pruebas y despliegue (+12 %) | 1,23 |
-| Gestión (+10 %) | 1,03 |
-| **Total** | **12,5 jornadas × $450.000 = $5.625.000** |
-
-Redondeado: **desde $6.000.000**. Se redondea siempre hacia arriba, a múltiplos de $50.000 o de
-$100.000.
+**Dónde se ubica Axchi:** en el rango del freelancer, con la calidad y las pruebas de un estudio.
+Por debajo de las suscripciones conocidas: la suscripción de citas de Axchi cuesta la mitad que la
+de AgendaPro y es el sistema propio del negocio, con su página y su marca.
 
 ---
 
-## 4. Planes públicos
+## 4. Qué significa para tus ingresos
 
-Todos los precios son **desde**: corresponden a la configuración mínima descrita. Son finales,
-sin IVA (ver 1.1).
+**Pagos únicos.** Con un precio promedio de $ 1.200.000 y unas 3,5 jornadas por venta, 12 jornadas
+alcanzan para 3 ventas al mes: **$ 3.600.000 facturados**. Después de seguridad social (piso de
+$ 508.148), herramientas ($ 400.000), reserva de renta y 4×1000, quedan unos **$ 2.570.000 netos**.
 
-| Plan | Desde | Jornadas | Entrega | Incluye | No incluye |
-|---|---|---|---|---|---|
-| **Presencia** | **$300.000** | 0,75 | 3 días hábiles tras recibir el contenido | Página de una sección con plantilla de Axchi adaptada a tus colores: servicios, horario, ubicación con mapa, galería, botón de WhatsApp. SEO básico y publicación. 1 ronda de ajustes | Dominio, textos, fotos, panel, diseño a medida |
-| **Página profesional** | $900.000 | 2 | 1–2 semanas | Diseño propio con tu marca, hasta 8 secciones, formulario que llega a tu correo, analítica, ficha de Google Business, 2 rondas de ajustes | Panel, tienda |
-| **Sitio con panel** | $1.800.000 | 4 | 2–3 semanas | Varias páginas y un panel donde cambias textos, fotos y precios tú mismo | Ventas en línea |
-| **Catálogo con pedidos por WhatsApp** | $2.200.000 | 5 | 2–3 semanas | Productos con variantes, carrito, pedido armado a WhatsApp, panel de productos. Carga de hasta 50 productos. Ejemplo real: Jabones Mari | Cobro en línea |
-| **Citas en línea** | $2.500.000 | 5,5 | 3 semanas | Servicios, profesionales, horarios, reserva desde el celular, panel de agenda, confirmación por correo | Recordatorios automáticos por WhatsApp (módulo aparte) |
-| **Tienda con pagos** | $3.500.000 | 8 | 3–5 semanas | Lo del catálogo más cobro en línea (PSE, Nequi, tarjeta), inventario, estados de pedido, correos al comprador | Comisión de la pasarela |
-| **Sistema de gestión** | $6.000.000 | 13 | 5–7 semanas | Inventario y ventas, clínica, etc.: usuarios con roles, módulos del negocio, reportes, Excel, copias de seguridad, capacitación | Facturación electrónica, migración de datos (módulos aparte) |
-| **App móvil** | $8.000.000 | 18 | 6–10 semanas | App instalable sobre un sistema existente o nuevo | Publicación en tiendas: cuentas de desarrollador a cargo del cliente |
-| **A medida y automatización** | Por jornada | — | Según diagnóstico | Integraciones, automatizaciones, IA | — |
+**Suscripciones.** Son la parte que crece sola. El costo de mantener a un suscriptor en línea es
+casi cero (alojamiento gratuito o de pocos miles de pesos, dominio de $ 5.000 al mes), así que casi
+toda la mensualidad es margen:
 
-### 4.1 El plan de $300.000
+| Suscriptores (promedio $ 70.000) | Ingreso mensual recurrente |
+|---|---|
+| 10 | $ 700.000 |
+| 25 | $ 1.750.000 |
+| 50 | $ 3.500.000 |
 
-Es la **puerta de entrada** y debe verse en todo el sitio: en la portada, en `/planes` y en cada
-ficha. Quien no puede pagar un sistema entra por aquí, y quien entra por aquí es el cliente más
-probable de un plan mayor dentro de seis meses.
+Con 25 suscriptores y tres ventas al mes, el ingreso neto supera los **$ 4.000.000** y ya no depende
+de vender cada mes. Por eso conviene ofrecer la suscripción primero a quien duda por el precio.
 
-Es viable solo porque sale de una plantilla: 0,75 jornadas equivalen a $400.000 por jornada, un
-poco por debajo de la tarifa, y se acepta por su función comercial. Tiene tres límites que no se
-negocian, porque sin ellos da pérdida:
+---
 
-1. **Una ronda de ajustes.** A partir de ahí, $60.000 la hora.
-2. **El contenido lo entrega el cliente** (textos, fotos, logo) antes de empezar.
-3. **La plantilla no se rediseña.** Si quiere diseño propio, es el plan de $900.000.
+## 5. Planes de pago único
 
-### 4.2 Módulos adicionales
+Precios desde, finales y sin IVA.
+
+| Plan | Desde | Entrega | Qué es |
+|---|---|---|---|
+| **Presencia** | **$ 300.000** | 3 días hábiles | Una página con servicios, horario, mapa y WhatsApp, sobre plantilla |
+| Página profesional | $ 600.000 | 1 a 2 semanas | Diseño propio, formulario, analítica, ficha de Google |
+| Sitio con panel | $ 900.000 | 2 semanas | Varias páginas y panel para editar |
+| Catálogo con pedidos por WhatsApp | $ 1.200.000 | 2 a 3 semanas | Productos, carrito y pedido armado por WhatsApp (como Jabones Mari) |
+| Citas en línea | $ 1.400.000 | 2 a 3 semanas | Reserva desde el celular y agenda del día |
+| Tienda con pagos | $ 1.800.000 | 3 a 4 semanas | Catálogo con cobro en línea e inventario |
+| Sistema de gestión | $ 2.400.000 | 4 a 5 semanas | Usuarios, módulos del negocio, reportes, Excel |
+| **Sistema completo** | **$ 3.000.000** | 5 a 6 semanas | El sistema con pagos, automatizaciones y app instalable. **Es el techo** |
+
+El plan de $ 300.000 sigue siendo la puerta de entrada, con sus tres límites: una ronda de
+ajustes, el contenido lo entrega el cliente y la plantilla no se rediseña.
+
+### Módulos adicionales
 
 | Módulo | Precio |
 |---|---|
-| Diagnóstico de un proyecto a medida (se descuenta si contrata) | $450.000 |
-| Recordatorios automáticos por WhatsApp | $900.000 + consumo de mensajes |
-| Pasarela de pagos en un plan que no la trae | $900.000 |
-| Facturación electrónica con proveedor autorizado | $1.350.000 + suscripción del proveedor |
-| Migración de datos desde Excel | desde $450.000 |
-| Carga de productos por encima de los incluidos | $3.000 por producto (con foto y texto entregados) |
-| Textos redactados para el sitio | $300.000 |
-| Segundo idioma | +30 % del plan |
-| Hora de cambios fuera de alcance | $60.000 |
+| Diagnóstico de un proyecto a medida (se descuenta si contrata) | $ 150.000 |
+| Recordatorios automáticos por WhatsApp | $ 400.000 + consumo |
+| Pasarela de pagos en un plan que no la trae | $ 400.000 |
+| Facturación electrónica con proveedor autorizado | $ 600.000 + suscripción del proveedor |
+| Migración de datos desde Excel | desde $ 200.000 |
+| Productos por encima de los incluidos | $ 2.000 cada uno |
+| Textos redactados | $ 150.000 |
+| Segundo idioma | +25 % del plan |
+| Hora de cambios | $ 40.000 |
 
 ---
 
-## 5. Costos para el cliente después de la entrega
+## 6. Suscripciones
 
-Se muestran siempre, en cada ficha y en cada cotización. Esconderlos es lo que genera
-desconfianza cuando llega la primera factura.
+| Suscripción | Por mes | Equivale a | Incluye además |
+|---|---|---|---|
+| Página mensual | **$ 39.900** | Presencia | Dominio, alojamiento, un cambio al mes, soporte |
+| Negocio en línea | $ 79.900 | Catálogo, citas en línea o sitio con panel | Dominio, alojamiento, copias, una hora de cambios, soporte |
+| Sistema mensual | $ 129.900 | Sistema de gestión | Dominio, alojamiento, base de datos, copias, una hora de cambios, soporte prioritario |
+
+Pagos en línea o automatizaciones se suman a cualquier suscripción por **$ 20.000 al mes** cada
+uno, más su consumo.
+
+### Reglas
+
+| Tema | Regla | Por qué |
+|---|---|---|
+| Pago inicial | Ninguno | Es lo que hace atractiva la suscripción |
+| Permanencia mínima | 12 meses | En un año la suscripción cubre la mayor parte de lo que cuesta construir sobre el motor |
+| Si se cancela antes | Se paga el 50 % de las mensualidades que faltan para el año | Protege el trabajo hecho sin castigar al cliente |
+| Cobro | Mes anticipado, por transferencia, Nequi o Daviplata | — |
+| Dominio | Siempre a nombre del cliente | El cliente nunca pierde su dirección |
+| Datos | Del cliente, exportables en cualquier momento | Nadie queda secuestrado |
+| Código | Licencia de uso mientras dure la suscripción | El motor se reutiliza con otros clientes: si alguien se va, el trabajo no se pierde |
+| Pasar a pago único | Se abona el 50 % de lo pagado en mensualidades | Premia al cliente que se queda y quiere ser dueño |
+
+**Para el cliente:** el primer año paga menos que el pago único más el mantenimiento. **Para Axchi:**
+el punto de equilibrio llega entre el mes 12 (página) y el 19 (sistema), y todo lo que sigue es ingreso recurrente
+sobre un producto ya construido.
+
+---
+
+## 7. Después de un pago único
 
 | Concepto | Costo real 2026 | Quién lo paga |
 |---|---|---|
-| Dominio `.co` o `.com` | ~$60.000 al año | El cliente, a su nombre |
-| Hosting de una página sin panel | $0: Cloudflare Pages permite uso comercial en su plan gratuito | — |
-| Hosting de un sistema (servidor + base de datos) | $0 – $90.000 al mes según tráfico. Para un negocio pequeño, normalmente menos de $20.000 | El cliente, en su propia cuenta |
-| Correo con el dominio (`ventas@tunegocio.co`) | $0 con reenvío; ~$25.000 por usuario al mes con Google Workspace | El cliente, opcional |
-| Pasarela de pagos | 2,65 % + $700 + IVA por venta exitosa (Wompi) | El cliente, descontado de cada venta |
-| WhatsApp automático (API) | ~$3 por mensaje de recordatorio; ~$46 por mensaje de promoción; las respuestas a clientes dentro de las 24 h no se cobran | El cliente |
-| Facturación electrónica | Suscripción del proveedor que elija | El cliente |
+| Dominio `.co` o `.com` | ~$ 60.000 al año | El cliente, a su nombre |
+| Página sin panel | $ 0 (Cloudflare Pages permite uso comercial gratis) | — |
+| Sistema con base de datos | $ 0 – $ 90.000 al mes; en un negocio pequeño, casi siempre menos de $ 20.000 | El cliente |
+| Correo con el dominio | $ 0 con reenvío o plan gratuito; ~$ 25.000 por persona al mes con Google Workspace | El cliente, opcional |
+| Pasarela de pagos | 2,65 % + $ 700 + IVA por venta (Wompi) | El cliente |
+| WhatsApp automático | ~$ 3 por recordatorio, ~$ 46 por promoción | El cliente |
 
-### 5.1 Mantenimiento
+### Mantenimiento
 
 | Plan | Mensual | Incluye |
 |---|---|---|
-| **Sin plan** | $0 | Cambios a $60.000 la hora, mínimo 1 hora. Garantía de 30 días sobre fallas en todos los planes |
-| **Esencial** | $90.000 | Renovaciones y copias de seguridad, monitoreo, actualizaciones de seguridad, corrección de fallas y 30 minutos de cambios |
-| **Crecimiento** | $250.000 | Lo del esencial más 3 horas de cambios y un reporte mensual de visitas y contactos |
-
-Los costos de terceros (dominio, hosting, pasarela) no están incluidos en el mantenimiento: son
-del cliente y quedan a su nombre.
+| Sin plan | $ 0 | Cambios a $ 40.000 la hora. Garantía de 30 días sobre fallas |
+| Esencial | $ 40.000 | Renovaciones, copias, monitoreo, seguridad y corrección de fallas |
+| Crecimiento | $ 90.000 | Lo anterior, 2 horas de cambios y reporte mensual |
 
 ---
 
-## 6. Condiciones comerciales
+## 8. Condiciones de pago único
 
 | Tema | Regla |
 |---|---|
-| Forma de pago, hasta $2.000.000 | 50 % para empezar, 50 % contra entrega |
-| Forma de pago, más de $2.000.000 | 40 % para empezar, 30 % en la entrega intermedia, 30 % al entregar |
+| Hasta $ 1.000.000 | 50 % para empezar, 50 % al entregar |
+| Más de $ 1.000.000 | 40 % para empezar, 30 % en la entrega intermedia, 30 % al final |
 | Validez de la cotización | 15 días |
-| Rondas de ajustes | Las del plan. Las adicionales, por hora |
-| Contenido | Lo entrega el cliente. Si tarda más de 15 días, el proyecto se reprograma |
-| Propiedad | El código, el dominio y los datos son del cliente cuando termina de pagar |
-| Retención en la fuente | Si el cliente es empresa y retiene, se indica en la cotización. El precio no cambia |
-| Descuentos | No se descuenta la tarifa. Se reduce el alcance |
+| Ajustes | Los del plan; los adicionales, por hora |
+| Contenido | Lo entrega el cliente; si tarda más de 15 días, el proyecto se reprograma |
+| Propiedad | Código, dominio y datos del cliente cuando termina de pagar |
+| Retención en la fuente | Si el cliente es empresa y retiene, se indica en la cotización; el precio no cambia |
 
 ---
 
-## 7. Cuándo NO conviene lo que vendes (y decirlo te da credibilidad)
+## 9. Cuándo no conviene lo que vendes (y decirlo da credibilidad)
 
-- **Veterinaria que solo necesita historia clínica y agenda interna:** un SaaS de $50.000 – $90.000 al mes puede salirle más barato durante años. Lo propio conviene cuando quiere su marca, su página pública integrada con la agenda, sus datos sin cobro por usuario o un flujo que el SaaS no tiene. Recomendarle el plan *Página profesional* o *Citas en línea*, integrado con el SaaS que use, también es una venta.
-- **Tienda estándar sin nada particular:** Shopify o una tienda de Instagram con catálogo puede bastar al principio. El plan de catálogo gana cuando el cliente quiere su marca y no pagar una comisión por venta a la plataforma.
+- **Veterinaria que solo necesita historia clínica:** un programa por suscripción de $ 50.000 a
+  $ 90.000 al mes puede bastarle. Lo de Axchi gana cuando quiere su página, su marca y la agenda
+  conectadas, o cuando el programa no hace lo que ella necesita.
+- **Tienda estándar sin nada particular:** una tienda de Instagram puede bastar al principio. El
+  catálogo propio gana cuando quiere su marca completa y no pagar comisión por venta.
 
 ---
 
-## 8. Cómo se muestra en el sitio
+## 10. Cómo se muestra en el sitio
 
-- **Portada:** "Desde **$300.000**", con cifra grande y lo que incluye en una línea. Es el dato más visible después de la promesa.
-- **`/planes`:** la tabla de la sección 4 en lenguaje de cliente, con los costos posteriores al lado de cada plan.
-- **Cada ficha:** los 2–3 planes que aplican a ese sector, con precio desde, plazo y costo mensual.
-- **Formato:** `$ 300.000`, sin decimales ni la palabra "COP" en el texto (la moneda se asume en Colombia). En los datos estructurados, `priceCurrency: "COP"`.
-- En el código, **una sola fuente**: `lib/catalogo/planes.ts`. Cambiar un precio es cambiar una línea.
+- **Portada:** "Desde $ 300.000" y, al lado, "o desde $ 39.900 al mes".
+- **`/planes`:** pago único y suscripciones en la misma página, con los costos posteriores al lado.
+- **Cada ficha:** los planes del sector con precio único y su equivalente mensual.
+- **Formato:** `$ 300.000`, sin decimales ni "COP" en el texto; en datos estructurados, `priceCurrency: "COP"`.
 
 ---
 
@@ -269,3 +249,4 @@ del cliente y quedan a su nombre.
 - WhatsApp Business API: [Meta](https://developers.facebook.com/documentation/business-messaging/whatsapp/pricing/?locale=es_LA), [Simla](https://www.simla.com/blog/precios-whatsapp-business-api)
 - Dominios: [MI.COM.CO](https://mi.com.co/precios)
 - TRM de referencia: $3.264,39 el 24 de septiembre de 2026, [CapitalColombia](https://www.capitalcolombia.com/sec-trm_precio_dolar_en_colombia)
+- Suscripciones y mantenimiento: [AgendaPro](https://agendapro.com/co/planes), [BytechHub](https://bytechhub.com/blog/cuanto-cuesta-una-pagina-web-en-colombia-precios-reales-2026/), [Cangrejo Digital: Shopify vs WooCommerce](https://cangrejodigital.com/diseno-web/shopify-vs-woocommerce-colombia/)

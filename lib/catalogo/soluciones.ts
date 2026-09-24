@@ -132,14 +132,14 @@ export const SOLUCIONES: Solucion[] = [
     noIncluye: [
       "Facturación electrónica (módulo aparte, con proveedor autorizado)",
       "Inventario de farmacia y hospitalización",
-      "Recordatorios que salen solos, sin que nadie los envíe (módulo aparte)",
+      "Recordatorios que salen solos, sin que nadie los envíe (vienen en el sistema completo)",
       "Fotografía profesional de la clínica",
     ],
-    planes: ["presencia", "pagina-profesional", "citas-en-linea", "sistema-de-gestion"],
+    planes: ["presencia", "pagina-profesional", "citas-en-linea", "sistema-de-gestion", "sistema-completo"],
     preguntas: [
       {
         p: "¿Puedo empezar solo con la página?",
-        r: "Sí. La página cuesta desde $ 300.000 y se construye de forma que después se le agreguen las citas o el sistema sin rehacer nada.",
+        r: "Sí. La página cuesta desde $ 300.000, o $ 39.900 al mes, y se construye de forma que después se le agreguen las citas o el sistema sin rehacer nada.",
       },
       {
         p: "Ya uso un software veterinario. ¿Tengo que cambiarlo?",
@@ -155,7 +155,7 @@ export const SOLUCIONES: Solucion[] = [
       },
       {
         p: "¿Cuánto tarda?",
-        r: "La página, entre 3 días hábiles y 2 semanas según el plan. Las citas en línea, unas 3 semanas. El sistema completo, de 5 a 7 semanas, con entregas parciales que puedes probar desde la primera.",
+        r: "La página, entre 3 días hábiles y 2 semanas según el plan. Las citas en línea, de 2 a 3 semanas. El sistema, de 4 a 6 semanas, con entregas parciales que puedes probar desde la primera.",
       },
     ],
     tecnico: [

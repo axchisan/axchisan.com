@@ -8,7 +8,7 @@ import { Band } from "@/components/site/band"
 import { Celular, Navegador } from "@/components/site/dispositivos"
 import { Preguntas } from "@/components/site/preguntas"
 import { Button } from "@/components/ui/button"
-import { PLANES, pesos } from "@/lib/catalogo/planes"
+import { PLANES, SUSCRIPCIONES, pesos } from "@/lib/catalogo/planes"
 import { SECTORES } from "@/lib/catalogo/sectores"
 import { SOLUCIONES, solucion } from "@/lib/catalogo/soluciones"
 import { LEGAL_NAME, SITE_URL, whatsappUrl } from "@/lib/site"
@@ -208,7 +208,8 @@ export default async function FichaSolucion({ params }: Params) {
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
             <h2 className="text-[1.9375rem] text-ink sm:text-[2.125rem]">Planes para {s.sector.toLowerCase()}</h2>
             <p className="mt-3 max-w-[60ch] text-[1.0625rem] leading-relaxed text-mid">
-              Puedes empezar por el primero y crecer después sin rehacer nada. Precios desde, finales y sin IVA.
+              Puedes empezar por el primero y crecer después sin rehacer nada. Paga de una vez o por mes,
+              sin pago inicial. Precios desde, finales y sin IVA.
             </p>
             <ul className="mt-8 divide-y divide-line overflow-hidden rounded-[16px] border border-line bg-card">
               {planes.map((p) => (
@@ -223,6 +224,11 @@ export default async function FichaSolucion({ params }: Params) {
                     <p className="text-[1.125rem] text-ink">
                       <span className="text-[0.9375rem] text-mid">desde </span>
                       <span className="font-semibold tabular-nums">{pesos(p.desde)}</span>
+                      {p.suscripcion && (
+                        <span className="block text-[0.875rem] text-mid">
+                          o {pesos(SUSCRIPCIONES[p.suscripcion].mensual)} al mes
+                        </span>
+                      )}
                     </p>
                     <Button href={`/cotizar?negocio=${SECTORES.find((x) => x.solucion === s.slug)?.id ?? ""}&plan=${p.id}`} variant="outline" size="sm">
                       Cotizar este plan

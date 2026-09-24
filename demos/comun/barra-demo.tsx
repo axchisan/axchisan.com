@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useRef, type ReactNode } from "react"
 import { Lightbulb, MessageCircle, SlidersHorizontal, X } from "lucide-react"
 import { LogoMark } from "@/components/site/logo"
-import { PLANES, pesos } from "@/lib/catalogo/planes"
+import { PLANES, SUSCRIPCIONES, pesos } from "@/lib/catalogo/planes"
 import { whatsappUrl } from "@/lib/site"
 import { useDemo } from "./contexto"
 
@@ -98,8 +98,8 @@ export function BarraDemo() {
           </div>
 
           <p className="mt-5 text-[0.8125rem] leading-relaxed text-on-band-mid">
-            Precios desde, finales, sin IVA. Aparte, lo que cuesta mantenerlo en línea: el dominio
-            ronda {pesos(60_000)} al año, y una página sin panel se aloja gratis.
+            Precios desde, finales, sin IVA. Por mes no hay pago inicial y ya incluye dominio,
+            alojamiento y soporte, con permanencia de 12 meses.
           </p>
 
           <a
@@ -187,7 +187,8 @@ function SelectorNivel({ apilado, alElegir }: { apilado?: boolean; alElegir?: ()
                 </span>
                 {planes.map((p) => (
                   <span key={p.id} className="mt-1.5 block text-[0.875rem] leading-relaxed text-on-band-mid">
-                    <span className="text-on-band">{p.nombre}</span>, {pesos(p.desde)}.{" "}
+                    <span className="text-on-band">{p.nombre}</span>, {pesos(p.desde)}
+                    {p.suscripcion ? ` o ${pesos(SUSCRIPCIONES[p.suscripcion].mensual)} al mes` : ""}.{" "}
                     {p.resumen} Entrega en {p.entrega}.
                   </span>
                 ))}

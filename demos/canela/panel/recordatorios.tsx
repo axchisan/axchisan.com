@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react"
 import { Check, MessageCircle, X } from "lucide-react"
 import { Punto } from "@/demos/comun/recorrido"
 import { SoloEnNivel } from "@/demos/comun/solo-en-nivel"
-import { pesos } from "@/lib/catalogo/planes"
+import { PRECIO_RECORDATORIOS, pesos } from "@/lib/catalogo/planes"
 import { RAIZ } from "../config"
 import { marcarRecordada, useClinica } from "../estado"
 import { claveDia, diasEntre, estadoVacuna, textoFecha, type EstadoClinica, type Vacuna } from "../modelo"
@@ -116,7 +116,7 @@ function Lista() {
       <div className="px-4 py-6 sm:px-8">
         <p className="max-w-3xl rounded-[14px] border-2 border-dashed border-cn-collar/25 p-4 text-[0.9375rem] leading-relaxed">
           Aquí cada recordatorio se envía con un toque. Con el módulo de recordatorios automáticos
-          ({pesos(900_000)}), salen solos cada mañana por WhatsApp; cada mensaje cuesta unos $ 3.
+          ({pesos(PRECIO_RECORDATORIOS)}, o incluidos en el sistema completo), salen solos cada mañana por WhatsApp; cada mensaje cuesta unos $ 3.
         </p>
 
         <Punto id="lista">
