@@ -57,7 +57,8 @@ export const SECTORES: Sector[] = [
     id: "salones",
     nombre: "Salones de belleza y barberías",
     icono: Scissors,
-    ejemplo: "Reservas por servicio y profesional",
+    ejemplo: "Reservas por estilista, caja y comisiones",
+    solucion: "salones-y-barberias",
   },
   {
     id: "consultorios",

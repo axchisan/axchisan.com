@@ -335,3 +335,30 @@
 @media (prefers-reduced-motion: reduce) {
   .cn-placa-colgada { animation: none; }
 }
+
+/* Peine Fino, salón y barbería — docs/demos/peine-fino.md */
+@theme inline {
+  --color-pf-cordoban:   #5b1e26;
+  --color-pf-cordoban-2: #6e2630;   /* hover sobre cordobán */
+  --color-pf-laton:      #a8823f;   /* solo detalles: no alcanza contraste como texto sobre claro */
+  --color-pf-laton-claro: #e8c98f;  /* texto de acento sobre cordobán: 7,9:1 */
+  --color-pf-porcelana:  #f7f6f4;
+  --color-pf-tinta:      #221e1f;
+  --color-pf-humo:       #5f585a;
+  --color-pf-niebla:     #d9c3c6;   /* texto secundario sobre cordobán: 7,6:1 */
+  --color-pf-fieltro:    #1e1b1c;
+  --color-pf-linea:      #e4e0dc;
+  --color-pf-exito:      #276d4d;
+  --color-pf-exito-suave: #e3f1ea;
+  --color-pf-alerta:     #8f5808;
+  --color-pf-alerta-suave: #fbf0dc;
+  --font-pf-letrero: var(--font-big-shoulders), ui-sans-serif, system-ui, sans-serif;
+  --font-pf-texto:   var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* El fieltro del tablero: ranuras horizontales finas, como las del tablero
+   real donde se encajan las letras. */
+.pf-fieltro {
+  background-color: #1e1b1c;
+  background-image: repeating-linear-gradient(to bottom, transparent 0 7px, rgb(255 255 255 / 0.045) 7px 8px);
+}

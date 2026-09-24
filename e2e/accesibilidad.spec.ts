@@ -5,6 +5,7 @@ const RUTAS = [
   "/",
   "/soluciones",
   "/soluciones/veterinarias",
+  "/soluciones/salones-y-barberias",
   "/soluciones/tiendas-de-cosmeticos",
   "/planes",
   "/proceso",

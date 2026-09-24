@@ -167,6 +167,111 @@ export const SOLUCIONES: Solucion[] = [
     ],
   },
   {
+    slug: "salones-y-barberias",
+    sector: "Salones y barberías",
+    icono: "salones",
+    titulo: "Reservas en línea, caja y clientes para salones de belleza y barberías",
+    resumen:
+      "Tus clientes reservan con su estilista desde Instagram, la caja cuadra sola con las comisiones de cada quien y sabes qué clientes dejaron de venir.",
+    seo: {
+      title: "Página web y sistema de reservas para salones de belleza y barberías",
+      description:
+        "Reservas en línea por estilista, caja con comisiones, fórmulas de color y clientes que no vuelven. Pruébalo en una demo funcionando. Desde $ 300.000 o $ 39.900 al mes.",
+    },
+    muestra: {
+      tipo: "demo",
+      href: "/demo/peine-fino",
+      nombre: "Peine Fino, salón y barbería",
+      nota: "Salón ficticio con página, reservas de varios servicios y panel de caja y clientes funcionando.",
+    },
+    capturas: {
+      escritorio: cap("/capturas/peine-fino-portada-escritorio.webp", "Portada de la demo de Peine Fino en un computador"),
+      movil: cap("/capturas/peine-fino-portada-movil.webp", "Portada de la demo de Peine Fino en un celular", true),
+    },
+    sintomas: [
+      "La mitad del día se va contestando por WhatsApp «¿tienes hora hoy?».",
+      "Al cerrar, cuadrar la caja y las comisiones es una hora con la calculadora y alguna discusión.",
+      "Clientes fijos dejan de venir y nadie se da cuenta hasta meses después.",
+    ],
+    resultados: [
+      {
+        titulo: "Reservan solos, con su estilista",
+        texto: "Eligen uno o varios servicios, la persona y una hora donde todo cabe. Tú no contestas un mensaje para cuadrar la cita.",
+      },
+      {
+        titulo: "La caja cuadra sola",
+        texto: "Cobro por Nequi, Daviplata, efectivo o tarjeta, con la propina aparte y la comisión de cada profesional calculada.",
+      },
+      {
+        titulo: "Clientes que vuelven",
+        texto: "La lista de quienes no vienen hace más de 45 días se arma sola, ordenada por lo que gastaban, con el mensaje listo.",
+      },
+    ],
+    diaADia: [
+      {
+        titulo: "El cliente reserva",
+        texto: "Desde el enlace de Instagram elige corte y barba, a su barbero y una hora libre. Termina en un minuto.",
+        captura: cap("/capturas/peine-fino-reservar-movil.webp", "Reserva de varios servicios en el celular", true),
+      },
+      {
+        titulo: "El día, silla por silla",
+        texto: "Una columna por profesional: quién está ocupado, quién tiene hueco y a qué hora termina cada uno.",
+        captura: cap("/capturas/peine-fino-hoy-escritorio.webp", "Agenda del día por profesional"),
+      },
+      {
+        titulo: "Se cobra y se reparte",
+        texto: "Al terminar, el servicio pasa a la caja. El cierre del día y las comisiones salen sin hacer cuentas.",
+        captura: cap("/capturas/peine-fino-caja-escritorio.webp", "Caja del día con comisiones"),
+      },
+      {
+        titulo: "Nadie se pierde",
+        texto: "Cada semana aparecen los clientes que dejaron de venir, con un mensaje personal listo para enviar.",
+        captura: cap("/capturas/peine-fino-volver-escritorio.webp", "Lista de clientes que no vuelven"),
+      },
+    ],
+    incluye: [
+      "Página con la carta de servicios, precios, equipo con sus trabajos, horario y mapa",
+      "Reservas en línea de uno o varios servicios, con la persona que elija el cliente",
+      "Agenda del día por profesional, con los estados de cada cita",
+      "Caja con medios de pago, propinas, descuentos y cierre del día",
+      "Comisiones por profesional según su porcentaje",
+      "Ficha de cada cliente con sus visitas y sus fórmulas de color",
+      "Lista de clientes que no vuelven, con el mensaje de WhatsApp listo",
+      "Capacitación y 30 días de garantía sobre fallas",
+    ],
+    noIncluye: [
+      "Pago anticipado de la reserva (viene en el sistema completo)",
+      "Mensajes automáticos sin que nadie los envíe (vienen en el sistema completo)",
+      "Venta de productos con inventario",
+      "Fotografía de los trabajos",
+    ],
+    planes: ["presencia", "pagina-profesional", "citas-en-linea", "sistema-de-gestion", "sistema-completo"],
+    preguntas: [
+      {
+        p: "¿Puedo empezar solo con la página y las reservas?",
+        r: "Sí. Las reservas en línea cuestan desde $ 1.400.000 o $ 79.900 al mes. La caja y los clientes se agregan después, sin rehacer nada.",
+      },
+      {
+        p: "Ya uso una agenda por suscripción. ¿Por qué cambiar?",
+        r: "Quizá no te convenga, y te lo decimos. Lo propio gana cuando quieres tu marca completa, no pagar por cada profesional y que la caja y las comisiones funcionen como en tu salón, no como decidió la aplicación.",
+      },
+      {
+        p: "¿Cómo se calculan las comisiones?",
+        r: "Cada profesional tiene su porcentaje. Se aplica sobre lo que de verdad se cobró, después de descuentos, y la propina le llega completa.",
+      },
+      {
+        p: "¿Mis clientes tienen que instalar algo?",
+        r: "No. Reservan desde el navegador del celular, con el enlace de tu Instagram o de tu perfil de WhatsApp Business.",
+      },
+    ],
+    tecnico: [
+      "Motor de agenda compartido con las demás soluciones de reservas, ya probado",
+      "Next.js con renderizado en servidor para que Google lea la página",
+      "Base de datos PostgreSQL con copias de seguridad automáticas cifradas",
+      "Funciona en computador, tablet y celular; instalable como app",
+    ],
+  },
+  {
     slug: "tiendas-de-cosmeticos",
     sector: "Cosméticos y cuidado personal",
     icono: "cosmeticos",

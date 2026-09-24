@@ -1,9 +1,10 @@
 "use client"
 
 import Link from "next/link"
-import { useRef, useSyncExternalStore, type ReactNode } from "react"
-import { CalendarPlus, MessageCircle, X } from "lucide-react"
+import { useSyncExternalStore, type ReactNode } from "react"
+import { CalendarPlus, MessageCircle } from "lucide-react"
 import { useDemo } from "@/demos/comun/contexto"
+import { WhatsappSimulado } from "@/demos/comun/whatsapp-simulado"
 import { RAIZ } from "./config"
 import { CLINICA, HORARIO, textoHoraDecimal } from "./modelo"
 
@@ -83,60 +84,9 @@ export function PlacaEstado({ className }: { className?: string }) {
 
 // ─── WhatsApp simulado ───────────────────────────────────────────────────
 
-/**
- * El número de la clínica es ficticio: abrir wa.me de verdad podría escribirle
- * a un desconocido. El botón muestra qué pasaría en la página real.
- */
-export function BotonWhatsapp({
-  mensaje,
-  children,
-  className,
-}: {
-  mensaje: string
-  children: ReactNode
-  className?: string
-}) {
-  const dialogo = useRef<HTMLDialogElement>(null)
-  return (
-    <>
-      <button type="button" onClick={() => dialogo.current?.showModal()} className={className}>
-        {children}
-      </button>
-      <dialog
-        ref={dialogo}
-        aria-labelledby="wa-titulo"
-        className="m-auto w-[min(92vw,420px)] rounded-[20px] bg-white p-0 text-cn-collar backdrop:bg-cn-collar/50"
-        onClick={(e) => {
-          if (e.target === e.currentTarget) e.currentTarget.close()
-        }}
-      >
-        <div className="p-6">
-          <div className="flex items-start justify-between gap-3">
-            <h2 id="wa-titulo" className="font-cn-titulo text-[1.25rem] font-bold">
-              Así llega a WhatsApp
-            </h2>
-            <button
-              type="button"
-              onClick={() => dialogo.current?.close()}
-              className="rounded-[8px] p-1 text-cn-pizarra hover:text-cn-collar"
-              aria-label="Cerrar"
-            >
-              <X className="h-5 w-5" aria-hidden />
-            </button>
-          </div>
-          <p className="mt-2 text-[0.9375rem] text-cn-pizarra">
-            En la página real este botón abre el chat de la clínica con el mensaje ya escrito:
-          </p>
-          <div className="mt-4 rounded-[14px] rounded-tr-[4px] bg-[#dcf8c6] p-4 text-[0.9375rem] leading-relaxed text-[#111b21]">
-            {mensaje}
-          </div>
-          <p className="mt-4 text-[0.8125rem] text-cn-pizarra">
-            Aquí no se envía nada: el número de esta clínica de ejemplo es ficticio.
-          </p>
-        </div>
-      </dialog>
-    </>
-  )
+/** El WhatsApp de la clínica, simulado: su número es ficticio. */
+export function BotonWhatsapp(props: { mensaje: string; children: ReactNode; className?: string }) {
+  return <WhatsappSimulado negocio="la clínica" {...props} />
 }
 
 // ─── Acciones principales según el plan ──────────────────────────────────

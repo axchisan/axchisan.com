@@ -31,6 +31,13 @@ const PANEL = async (p: Page) => {
   await p.reload({ waitUntil: "networkidle" })
 }
 
+const SALON = async (p: Page) => {
+  await p.evaluate(() =>
+    localStorage.setItem("axchi-demo:peine-fino:preferencias", JSON.stringify({ nivel: "sistema", recorrido: false })),
+  )
+  await p.reload({ waitUntil: "networkidle" })
+}
+
 const TOMAS: Toma[] = [
   { archivo: "canela-portada-escritorio", url: `${BASE}/demo/canela` },
   { archivo: "canela-portada-movil", url: `${BASE}/demo/canela`, movil: true },
@@ -43,13 +50,29 @@ const TOMAS: Toma[] = [
       await p.getByLabel("Tu celular").fill("300 000 1037")
       await p.getByRole("button", { name: "Luna" }).click()
       await p.getByRole("button", { name: "Continuar" }).click()
-      await p.getByRole("radiogroup", { name: "Hora" }).getByRole("radio").nth(2).click()
+      await p.getByRole("radiogroup", { name: "Hora" }).getByRole("radio").first().click()
       await p.evaluate(() => window.scrollTo(0, 280))
     },
   },
   { archivo: "canela-panel-escritorio", url: `${BASE}/demo/canela/panel`, preparar: PANEL },
   { archivo: "canela-ficha-escritorio", url: `${BASE}/demo/canela/panel/pacientes/m16`, preparar: PANEL },
   { archivo: "canela-recordatorios-escritorio", url: `${BASE}/demo/canela/panel/recordatorios`, preparar: PANEL },
+  { archivo: "peine-fino-portada-escritorio", url: `${BASE}/demo/peine-fino` },
+  { archivo: "peine-fino-portada-movil", url: `${BASE}/demo/peine-fino`, movil: true },
+  {
+    archivo: "peine-fino-reservar-movil",
+    url: `${BASE}/demo/peine-fino/reservar?servicios=corte-hombre,barba`,
+    movil: true,
+    preparar: async (p) => {
+      await p.getByRole("button", { name: "Continuar" }).click()
+      await p.getByRole("button", { name: "Continuar" }).click()
+      await p.getByRole("radiogroup", { name: "Hora" }).getByRole("radio").first().click()
+      await p.evaluate(() => window.scrollTo(0, 260))
+    },
+  },
+  { archivo: "peine-fino-hoy-escritorio", url: `${BASE}/demo/peine-fino/panel`, preparar: SALON },
+  { archivo: "peine-fino-caja-escritorio", url: `${BASE}/demo/peine-fino/panel/caja`, preparar: SALON },
+  { archivo: "peine-fino-volver-escritorio", url: `${BASE}/demo/peine-fino/panel/volver`, preparar: SALON },
   { archivo: "jabones-mari-portada-escritorio", url: "https://jabonesmari.shop" },
   { archivo: "jabones-mari-portada-movil", url: "https://jabonesmari.shop", movil: true },
 ]
@@ -65,13 +88,23 @@ async function main() {
         : { viewport: { width: 1440, height: 900 } },
     )
     const p = await contexto.newPage()
-    await p.goto(t.url, { waitUntil: "networkidle" })
-    await t.preparar?.(p)
-    // La placa se balancea al cargar: se espera a que quede quieta.
-    await p.waitForTimeout(2000)
-    const png = await p.screenshot()
-    await sharp(png).webp({ quality: 80 }).toFile(`${DESTINO}/${t.archivo}.webp`)
-    console.log(`${t.archivo}.webp`)
+    try {
+      await p.goto(t.url, { waitUntil: "networkidle" })
+      await t.preparar?.(p)
+      // Contra un servidor de desarrollo, su indicador no debe salir en la foto.
+      // Va después de preparar: una recarga borraría el estilo.
+      await p.addStyleTag({ content: "nextjs-portal { display: none !important; }" })
+      // La placa se balancea al cargar: se espera a que quede quieta.
+      await p.waitForTimeout(2000)
+      const png = await p.screenshot()
+      await sharp(png).webp({ quality: 80 }).toFile(`${DESTINO}/${t.archivo}.webp`)
+      console.log(`${t.archivo}.webp`)
+    } catch (error) {
+      // Una toma que falla (un sitio externo caído, por ejemplo) no debe dejar
+      // sin actualizar las demás; la captura anterior se conserva.
+      console.error(`No se pudo capturar ${t.archivo}: ${(error as Error).message.split("\n")[0]}`)
+      process.exitCode = 1
+    }
     await contexto.close()
   }
 

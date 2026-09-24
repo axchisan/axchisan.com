@@ -6,6 +6,7 @@
  * tenga siempre citas de hoy y los recordatorios siempre tengan vacunas por
  * vencer. El generador es determinista: dos visitas el mismo día ven lo mismo.
  */
+import { generador } from "@/demos/motores/agenda/tiempo"
 import {
   aFecha,
   claveDia,
@@ -24,24 +25,6 @@ import {
   type Propietario,
   type Vacuna,
 } from "./modelo"
-
-/** Mulberry32: pseudoaleatorio pequeño y reproducible. */
-function generador(semilla: number) {
-  let a = semilla >>> 0
-  const siguiente = () => {
-    a = (a + 0x6d2b79f5) >>> 0
-    let t = a
-    t = Math.imul(t ^ (t >>> 15), t | 1)
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61)
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
-  }
-  return {
-    n: siguiente,
-    entero: (min: number, max: number) => min + Math.floor(siguiente() * (max - min + 1)),
-    uno: <T,>(xs: readonly T[]) => xs[Math.floor(siguiente() * xs.length)],
-    prob: (p: number) => siguiente() < p,
-  }
-}
 
 const NOMBRES = [
   "María Fernanda", "Juan Camilo", "Andrea", "Santiago", "Valentina", "Carlos Andrés",
