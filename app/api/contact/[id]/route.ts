@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
+import type { Prisma } from "@prisma/client"
 import { prisma } from "@/lib/prisma"
 
 export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -13,7 +14,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     const data = await request.json()
     const { action, response } = data
 
-    let updateData: any = {}
+    let updateData: Prisma.ContactMessageUpdateInput = {}
 
     switch (action) {
       case "mark_read":

@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
-import { Trash2, Mail, Check } from "lucide-react"
+import { Trash2, Mail, Check, MessageCircle, X } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -17,13 +17,28 @@ type Message = {
   message: string
   status: string
   createdAt: string | Date
+  telefono?: string | null
+  sector?: string | null
+  necesidad?: string | null
+  presupuesto?: string | null
+  plazo?: string | null
+  origen?: string | null
 }
 
+/** wa.me necesita el número con indicativo: a un celular colombiano de 10 dígitos se le antepone 57. */
+function enlaceWhatsapp(telefono: string, nombre: string) {
+  const digitos = telefono.replace(/\D/g, "")
+  const numero = digitos.length === 10 ? `57${digitos}` : digitos
+  const saludo = `Hola, ${nombre.split(" ")[0]}. Te escribo de Axchi por la cotización que nos enviaste.`
+  return `https://wa.me/${numero}?text=${encodeURIComponent(saludo)}`
+}
+
+/** Los estados siguen una cotización: nueva, en conversación, cerrada o descartada. */
 const STATUS: Record<string, { label: string; variant: "default" | "accent" | "positive" | "warning" }> = {
-  PENDING: { label: "Pendiente", variant: "warning" },
-  IN_PROGRESS: { label: "En curso", variant: "accent" },
-  RESOLVED: { label: "Resuelto", variant: "positive" },
-  REJECTED: { label: "Rechazado", variant: "default" },
+  PENDING: { label: "Nueva", variant: "warning" },
+  IN_PROGRESS: { label: "En conversación", variant: "accent" },
+  RESOLVED: { label: "Cerrada", variant: "positive" },
+  REJECTED: { label: "Descartada", variant: "default" },
 }
 
 export function MessagesClient({ initial }: { initial: Message[] }) {
@@ -84,18 +99,58 @@ export function MessagesClient({ initial }: { initial: Message[] }) {
                   <span className="font-semibold">{m.name}</span>
                   <Badge variant={st.variant}>{st.label}</Badge>
                 </div>
-                <a href={`mailto:${m.email}`} className="text-sm text-accent-ink hover:underline">
-                  {m.email}
-                </a>
+                <div className="flex flex-wrap gap-x-4 text-sm">
+                  {m.telefono && <span className="text-ink">WhatsApp {m.telefono}</span>}
+                  {m.email && (
+                    <a href={`mailto:${m.email}`} className="text-accent-ink hover:underline">
+                      {m.email}
+                    </a>
+                  )}
+                </div>
               </div>
               <span className="text-[0.875rem] text-faint shrink-0">{formatDate(m.createdAt)}</span>
             </div>
             {m.subject && <p className="mt-3 text-sm font-medium text-ink">{m.subject}</p>}
-            <p className="mt-1.5 whitespace-pre-wrap text-[15px] text-mid">{m.message}</p>
+            {(m.sector || m.necesidad || m.presupuesto || m.plazo || m.origen) && (
+              <dl className="mt-3 grid gap-x-6 gap-y-1 text-sm sm:grid-cols-[auto_1fr]">
+                {(
+                  [
+                    ["Negocio", m.sector],
+                    ["Necesita", m.necesidad],
+                    ["Presupuesto", m.presupuesto],
+                    ["Plazo", m.plazo],
+                    ["Llegó desde", m.origen],
+                  ] as const
+                )
+                  .filter(([, v]) => v)
+                  .map(([t, v]) => (
+                    <div key={t} className="contents">
+                      <dt className="text-faint">{t}</dt>
+                      <dd className="text-ink">{v}</dd>
+                    </div>
+                  ))}
+              </dl>
+            )}
+            <p className="mt-3 whitespace-pre-wrap text-[15px] text-mid">{m.message}</p>
             <div className="mt-4 flex flex-wrap gap-2.5">
+              {m.telefono && (
+                <Button href={enlaceWhatsapp(m.telefono, m.name)} size="sm" target="_blank" rel="noreferrer noopener">
+                  <MessageCircle className="h-4 w-4" /> Responder por WhatsApp
+                </Button>
+              )}
+              {m.status === "PENDING" && (
+                <Button variant="outline" size="sm" disabled={busy === m.id} onClick={() => setStatus(m.id, "IN_PROGRESS")}>
+                  <MessageCircle className="h-4 w-4" /> En conversación
+                </Button>
+              )}
               {m.status !== "RESOLVED" && (
                 <Button variant="outline" size="sm" disabled={busy === m.id} onClick={() => setStatus(m.id, "RESOLVED")}>
-                  <Check className="h-4 w-4" /> Resolver
+                  <Check className="h-4 w-4" /> Cerrar
+                </Button>
+              )}
+              {m.status !== "REJECTED" && m.status !== "RESOLVED" && (
+                <Button variant="outline" size="sm" disabled={busy === m.id} onClick={() => setStatus(m.id, "REJECTED")}>
+                  <X className="h-4 w-4" /> Descartar
                 </Button>
               )}
               <Button
