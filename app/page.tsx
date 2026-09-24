@@ -95,7 +95,7 @@ export default function Home() {
             entradilla="Elige el tuyo y mira funcionando lo que tendrías, con lo que cuesta al lado."
           />
 
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {conMuestra.map((sector) => {
               const s = SOLUCIONES.find((x) => x.slug === sector.solucion)!
               const Icono = sector.icono

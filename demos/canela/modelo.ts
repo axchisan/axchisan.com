@@ -6,6 +6,8 @@
  * lo que se guarda es exactamente lo que se ve.
  */
 
+import { aFecha, diasEntre, franjasDelDia as franjasMotor } from "@/demos/motores/agenda/tiempo"
+
 export type Especie = "perro" | "gato"
 
 export type Profesional = {
@@ -241,40 +243,20 @@ export const SERVICIOS: Servicio[] = [
 export const PRECIO_URGENCIA = 120_000
 
 // ─── Fechas ───────────────────────────────────────────────────────────────
+// Vienen del motor de agenda, que comparten todas las demos con reservas.
 
-const dos = (n: number) => String(n).padStart(2, "0")
-
-export function claveDia(d: Date) {
-  return `${d.getFullYear()}-${dos(d.getMonth() + 1)}-${dos(d.getDate())}`
-}
-
-export function claveInstante(d: Date) {
-  return `${claveDia(d)}T${dos(d.getHours())}:${dos(d.getMinutes())}`
-}
-
-/** Interpreta `AAAA-MM-DD` o `AAAA-MM-DDTHH:mm` como hora local. */
-export function aFecha(clave: string) {
-  const [dia, hora = "00:00"] = clave.split("T")
-  const [a, m, d] = dia.split("-").map(Number)
-  const [h, min] = hora.split(":").map(Number)
-  return new Date(a, m - 1, d, h, min)
-}
-
-export function sumarDias(clave: string, dias: number) {
-  const f = aFecha(clave)
-  f.setDate(f.getDate() + dias)
-  return clave.includes("T") ? claveInstante(f) : claveDia(f)
-}
-
-export function sumarMinutos(clave: string, minutos: number) {
-  return claveInstante(new Date(aFecha(clave).getTime() + minutos * 60_000))
-}
-
-export function diasEntre(desde: string, hasta: string) {
-  const a = aFecha(desde.slice(0, 10))
-  const b = aFecha(hasta.slice(0, 10))
-  return Math.round((b.getTime() - a.getTime()) / 86_400_000)
-}
+export {
+  aFecha,
+  claveDia,
+  claveInstante,
+  diasEntre,
+  sumarDias,
+  sumarMinutos,
+  textoDia,
+  textoFecha,
+  textoHora,
+  textoHoraDecimal,
+} from "@/demos/motores/agenda/tiempo"
 
 export function edad(nacimiento: string, hoy = new Date()) {
   const n = aFecha(nacimiento)
@@ -295,44 +277,6 @@ export function estadoVacuna(v: Vacuna, hoy: string): EstadoVacuna {
   return "al-dia"
 }
 
-const fmtDia = new Intl.DateTimeFormat("es-CO", { weekday: "long", day: "numeric", month: "long" })
-
-export function textoDia(clave: string) {
-  const t = fmtDia.format(aFecha(clave))
-  return t.charAt(0).toUpperCase() + t.slice(1)
-}
-
-const MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"]
-
-/** `4 ago 2026`: corta, para tablas y listas. */
-export function textoFecha(clave: string) {
-  const f = aFecha(clave)
-  return `${f.getDate()}\u00a0${MESES[f.getMonth()]}\u00a0${f.getFullYear()}`
-}
-
-/**
- * `8:30 a. m.`: el formato de hora que se usa en Colombia. Con espacios de no
- * separación, para que "p. m." nunca quede sola en la línea siguiente.
- */
-export function textoHora(clave: string) {
-  const f = aFecha(clave)
-  const h = f.getHours()
-  const sufijo = h < 12 ? "a.\u00a0m." : "p.\u00a0m."
-  const h12 = h % 12 === 0 ? 12 : h % 12
-  return `${h12}:${dos(f.getMinutes())}\u00a0${sufijo}`
-}
-
-export function textoHoraDecimal(h: number) {
-  const f = new Date(2000, 0, 1, Math.floor(h), Math.round((h % 1) * 60))
-  return textoHora(claveInstante(f))
-}
-
 export function franjasDelDia(dia: string) {
-  const f = FRANJAS[aFecha(dia).getDay()]
-  if (!f) return []
-  const out: string[] = []
-  for (let h = f.desde; h <= f.hasta; h += 0.5) {
-    out.push(`${dia}T${dos(Math.floor(h))}:${h % 1 ? "30" : "00"}`)
-  }
-  return out
+  return franjasMotor(dia, FRANJAS)
 }

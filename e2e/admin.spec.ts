@@ -10,11 +10,17 @@ const PASSWORD = process.env.ADMIN_PASSWORD!
 const MARCA = "E2E-TEMPORAL"
 
 async function entrar(page: Page) {
-  await page.goto("/auth/signin")
-  await page.locator('input[name="email"], input[type="email"]').fill(EMAIL)
+  // Se espera a que la página termine de hidratarse: si se escribe antes,
+  // React reinicia los campos y el correo queda vacío.
+  await page.goto("/auth/signin", { waitUntil: "networkidle" })
+  const correo = page.locator('input[name="email"], input[type="email"]')
+  await correo.fill(EMAIL)
+  await expect(correo).toHaveValue(EMAIL)
   await page.locator('input[name="password"], input[type="password"]').fill(PASSWORD)
   await page.getByRole("button", { name: /Iniciar sesión/ }).click()
-  await page.waitForURL(/\/admin/, { timeout: 30_000 })
+  // /auth/signin?callbackUrl=/admin también contiene "/admin": hay que
+  // esperar a estar dentro del panel de verdad.
+  await page.waitForURL((url) => url.pathname.startsWith("/admin"), { timeout: 30_000 })
 }
 
 test.describe("panel de administración", () => {

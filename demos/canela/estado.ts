@@ -1,13 +1,13 @@
 "use client"
 
 import { crearAlmacen, useAlmacen } from "@/demos/comun/almacen"
+import { horasLibres as horasLibresMotor, type CitaAgenda } from "@/demos/motores/agenda/disponibilidad"
+import { ahoraConMargen } from "@/demos/motores/agenda/tiempo"
 import {
-  aFecha,
   claveDia,
-  franjasDelDia,
+  FRANJAS,
   PROFESIONALES,
   SERVICIOS,
-  sumarMinutos,
   type Cita,
   type Consulta,
   type EstadoCita,
@@ -46,40 +46,28 @@ export function conArticulo(id: string) {
   return nombre
 }
 
-/** ¿Está libre el profesional durante toda la duración del servicio? */
-export function estaLibre(e: EstadoClinica, profesionalId: string, inicio: string, duracionMin: number) {
-  const fin = sumarMinutos(inicio, duracionMin)
-  return !e.citas.some((c) => {
-    if (c.profesionalId !== profesionalId || c.estado === "no-asistio") return false
-    const cFin = sumarMinutos(c.inicio, servicio(c.servicioId).duracionMin)
-    return c.inicio < fin && inicio < cFin
-  })
+/** Las citas de la clínica en el formato que entiende el motor de agenda. */
+function citasAgenda(e: EstadoClinica): CitaAgenda[] {
+  return e.citas.map((c) => ({
+    profesionalId: c.profesionalId,
+    inicio: c.inicio,
+    duracionMin: servicio(c.servicioId).duracionMin,
+    ocupa: c.estado !== "no-asistio",
+  }))
 }
 
 /** Horas libres de un día para un servicio, con quién puede atender cada una. */
 export function horasLibres(e: EstadoClinica, dia: string, servicioId: string, profesionalId?: string) {
   const s = servicio(servicioId)
-  const diaSemana = aFecha(dia).getDay()
-  const limite = claveLocalAhora()
-  return franjasDelDia(dia)
-    .filter((inicio) => inicio > limite)
-    .map((inicio) => ({
-      inicio,
-      profesionales: s.profesionales.filter(
-        (p) =>
-          (!profesionalId || p === profesionalId) &&
-          profesional(p).dias.includes(diaSemana) &&
-          estaLibre(e, p, inicio, s.duracionMin),
-      ),
-    }))
-    .filter((h) => h.profesionales.length > 0)
-}
-
-function claveLocalAhora() {
-  const d = new Date()
-  // Media hora de margen: nadie agenda para dentro de cinco minutos.
-  d.setMinutes(d.getMinutes() + 30)
-  return `${claveDia(d)}T${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`
+  return horasLibresMotor({
+    citas: citasAgenda(e),
+    profesionales: PROFESIONALES,
+    franjas: FRANJAS,
+    dia,
+    duracionMin: s.duracionMin,
+    candidatos: s.profesionales.filter((p) => !profesionalId || p === profesionalId),
+    desde: ahoraConMargen(),
+  })
 }
 
 export function buscarPorTelefono(e: EstadoClinica, telefono: string) {

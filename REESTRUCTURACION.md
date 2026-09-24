@@ -16,6 +16,7 @@
 | F3 · Sitio comercial | **Hecha** (24 sep 2026): portada, `/soluciones` y fichas, `/planes`, `/a-medida`, `/proceso`, `/empresa`, `/cotizar` con formulario calificado, `/guias`, redirecciones 308 en un salto, sitemap nuevo, WhatsApp flotante en celular. Proyectos de GitHub retirados del sitio público (siguen en el panel) |
 | Correo `@axchisan.com` | **Hecho**: `contacto@axchisan.com` en Zoho Mail, en el sitio y como destino de los avisos. Falta el registro DMARC (`docs/correo-dominio.md`) |
 | F4a · Canela | **Hecha**: portada, reserva en cuatro pasos, panel con Hoy, Agenda, Pacientes, ficha clínica, consulta con fórmula imprimible, Recordatorios y Resumen. 20 pruebas E2E en escritorio y celular, incluida WCAG AA |
+| F4b · Peine Fino | **Hecha**: segunda demo del motor de agenda (`demos/motores/agenda/`, extraído de Canela). Salón y barbería con reserva de varios servicios, agenda por profesional, caja con comisiones, fórmulas de color y clientes que no vuelven. Ficha `/soluciones/salones-y-barberias`. 18 pruebas E2E |
 
 ## 0. En cinco líneas
 

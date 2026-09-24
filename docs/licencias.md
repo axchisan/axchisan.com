@@ -14,3 +14,12 @@ obligatoria. Aun así se acredita al autor en la demo.
 | Canela | Peluquería | Denys Sergushkin | [unsplash.com/photos/ejxFIxygOww](https://unsplash.com/photos/ejxFIxygOww) | `photo-1588626863948-1d7978596f17` |
 | Canela | Gato en consulta | Sueda Güzeldere | [unsplash.com/photos/BATIVPqWwqw](https://unsplash.com/photos/BATIVPqWwqw) | `photo-1733783506192-653df6185a7d` |
 | Canela | Gato atigrado | Borna Bevanda | [unsplash.com/photos/w12NAMymqnk](https://unsplash.com/photos/w12NAMymqnk) | `photo-1515002246390-7bf7e8f87b54` |
+| Peine Fino | Portada y equipo: barba con tijera | Mr Shave | [unsplash.com/photos/4k60yfGy7fU](https://unsplash.com/photos/4k60yfGy7fU) | `photo-1599011176306-4a96f1516d4d` |
+| Peine Fino | Corte con peine y tijera | Gulom Nazarov | [unsplash.com/photos/DrG4V5skbMY](https://unsplash.com/photos/DrG4V5skbMY) | `photo-1657105052497-f996284ffff8` |
+| Peine Fino | Aplicación de color | Ionela Mat | [unsplash.com/photos/koWiggH8fmE](https://unsplash.com/photos/koWiggH8fmE) | `photo-1707720531504-ce087725861a` |
+| Peine Fino | Mechas | Ionela Mat | [unsplash.com/photos/qMjrFNDdjpw](https://unsplash.com/photos/qMjrFNDdjpw) | `photo-1707979577466-2d6109c68a45` |
+| Peine Fino | Ondas con tenaza | Giorgio Trovato | [unsplash.com/photos/wSpkThmoZQc](https://unsplash.com/photos/wSpkThmoZQc) | `photo-1629397685944-7073f5589754` |
+| Peine Fino | Manicure | Stefan Lehner | [unsplash.com/photos/IYa5Dnj9qWE](https://unsplash.com/photos/IYa5Dnj9qWE) | `photo-1659391542239-9648f307c0b1` |
+| Peine Fino | Corte con tijera | Nate Johnston | [unsplash.com/photos/tgPrIYnW3g4](https://unsplash.com/photos/tgPrIYnW3g4) | `photo-1647140655214-e4a2d914971f` |
+| Peine Fino | Interior del salón | Daniel | [unsplash.com/photos/PnDr2j28gXA](https://unsplash.com/photos/PnDr2j28gXA) | `photo-1695527081848-1e46c06e6458` |
+| Peine Fino | Sillas color vino | Guilherme Petri | [unsplash.com/photos/PtOfbGkU3uI](https://unsplash.com/photos/PtOfbGkU3uI) | `photo-1521590832167-7bcbfaa6381f` |
