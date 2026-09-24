@@ -8,9 +8,9 @@ import { Button } from "@/components/ui/button"
 import { getProjects } from "@/lib/data"
 
 export const metadata: Metadata = {
-  title: "Trabajo",
+  title: "Proyectos",
   description:
-    "Sistemas que he construido de punta a punta: automatización de contenido, aplicaciones multiplataforma sobre infraestructura serverless, plataformas institucionales y trabajo para clientes.",
+    "Proyectos de software: automatización, aplicaciones multiplataforma, sistemas institucionales, plataformas educativas e integraciones de IA.",
   alternates: { canonical: "/trabajo" },
 }
 
@@ -25,8 +25,8 @@ export default async function TrabajoPage() {
 
       <main id="contenido">
         <PageBand
-          titulo="Trabajo que se puede abrir y revisar"
-          entradilla="Cada uno de estos sistemas lo llevé del modelo de datos al despliegue. Las cifras salen del proyecto: si no puedo sostener un número, no lo escribo."
+          titulo="Proyectos y casos de estudio"
+          entradilla="Cada caso resume el problema, la solución implementada y las decisiones técnicas relevantes. El código disponible enlaza al repositorio correspondiente."
         />
 
         <Body>
@@ -52,13 +52,13 @@ export default async function TrabajoPage() {
         <Band>
           <div className="py-20 text-center sm:py-24">
             <h2 className="mx-auto max-w-[24ch] text-[1.9375rem] sm:text-[2.4375rem]">
-              ¿Algo de esto se parece a lo que necesitas?
+              ¿Quieres evaluar una colaboración?
             </h2>
             <p className="mx-auto mt-5 max-w-[52ch] text-[1.0625rem] leading-relaxed text-on-band-mid">
-              Cuéntame el problema y te digo cómo lo abordaría, cuánto costaría y cuánto tardaría.
+              Comparte los objetivos y las restricciones del proyecto para definir el enfoque técnico y el siguiente paso.
             </p>
             <div className="mt-9 flex justify-center">
-              <Button href="/contacto#agendar" size="lg">Hablemos de tu proyecto</Button>
+              <Button href="/contacto#agendar" size="lg">Contactar</Button>
             </div>
           </div>
         </Band>

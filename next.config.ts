@@ -11,6 +11,8 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "pub-*.r2.dev", pathname: "/**" },
       { protocol: "https", hostname: "axchisan.com", pathname: "/**" },
       { protocol: "https", hostname: "github.com", pathname: "/**" },
+      // Fotografía de las demos. Licencias en docs/licencias.md.
+      { protocol: "https", hostname: "images.unsplash.com", pathname: "/**" },
     ],
   },
 

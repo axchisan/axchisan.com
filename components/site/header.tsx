@@ -10,10 +10,10 @@ import { Logo } from "./logo"
 
 const RUTAS = [
   { href: "/servicios", label: "Servicios" },
-  { href: "/trabajo", label: "Trabajo" },
+  { href: "/trabajo", label: "Proyectos" },
   { href: "/proceso", label: "Cómo trabajo" },
-  { href: "/blog", label: "Ideas" },
-  { href: "/sobre", label: "Quién está detrás" },
+  { href: "/blog", label: "Publicaciones" },
+  { href: "/sobre", label: "Empresa" },
 ]
 
 /**
@@ -61,10 +61,10 @@ export function Header() {
 
         <div className="hidden items-center gap-2.5 lg:flex">
           <Button href="/contacto" variant="outline-band" size="sm">
-            Escríbeme
+            Contacto
           </Button>
           <Button href="/contacto#agendar" size="sm">
-            Hablemos de tu proyecto
+            Iniciar conversación
           </Button>
         </div>
 
@@ -100,9 +100,9 @@ export function Header() {
             </Link>
           ))}
           <div className="mt-4 flex flex-col gap-2.5">
-            <Button href="/contacto#agendar">Hablemos de tu proyecto</Button>
+            <Button href="/contacto#agendar">Iniciar conversación</Button>
             <Button href="/contacto" variant="outline-band">
-              Escríbeme
+              Contacto
             </Button>
           </div>
         </nav>

@@ -294,3 +294,44 @@
 .enter {
   animation: enter 0.5s var(--ease) both;
 }
+
+/* ==========================================================================
+   Demos. Cada demo tiene su propia identidad; sus fichas llevan prefijo para
+   que nunca se mezclen con las del sitio. Brief de cada una en docs/demos/.
+   ========================================================================== */
+
+/* Canela, clínica veterinaria — docs/demos/canela.md */
+@theme inline {
+  --color-cn-collar:   #1c3552;
+  --color-cn-collar-2: #25446a;   /* hover sobre collar */
+  --color-cn-pelota:   #dce85a;
+  --color-cn-pelota-2: #ccd948;   /* hover sobre pelota */
+  --color-cn-nube:     #f4f6f3;
+  --color-cn-linea:    #dde3e0;
+  --color-cn-pizarra:  #4b5968;
+  --color-cn-niebla:   #b9c4d2;   /* texto secundario sobre collar: 7,1:1 */
+  --color-cn-pino:     #276d4d;   /* 5,3:1 sobre pino-suave */
+  --color-cn-pino-suave:  #e3f1ea;
+  --color-cn-ambar:    #8f5808;   /* 5,2:1 sobre ambar-suave */
+  --color-cn-ambar-suave: #fbf0dc;
+  --color-cn-coral:    #b93a2a;
+  --color-cn-coral-suave: #fbe7e3;
+  --font-cn-titulo: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-cn-texto:  var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* La placa se balancea una vez al cargar, como si la acabaran de colgar. Es
+   el único movimiento que no responde a una acción. */
+@keyframes cn-balanceo {
+  0%   { transform: rotate(-9deg); }
+  35%  { transform: rotate(6deg); }
+  65%  { transform: rotate(-3deg); }
+  100% { transform: rotate(0deg); }
+}
+.cn-placa-colgada {
+  transform-origin: 50% 0;
+  animation: cn-balanceo 1.4s cubic-bezier(0.3, 0, 0.2, 1) 0.2s both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cn-placa-colgada { animation: none; }
+}

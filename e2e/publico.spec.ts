@@ -109,10 +109,10 @@ test.describe("navegación", () => {
 
     const enlaces = [
       { nombre: "Servicios", url: "/servicios" },
-      { nombre: "Trabajo", url: "/trabajo" },
+      { nombre: "Proyectos", url: "/trabajo" },
       { nombre: "Cómo trabajo", url: "/proceso" },
-      { nombre: "Ideas", url: "/blog" },
-      { nombre: "Quién está detrás", url: "/sobre" },
+      { nombre: "Publicaciones", url: "/blog" },
+      { nombre: "Empresa", url: "/sobre" },
     ]
 
     for (const { nombre, url } of enlaces) {
@@ -195,5 +195,18 @@ test.describe("detalle de proyecto", () => {
     await expect(page).toHaveURL(/\/trabajo\/.+/)
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(titulo)
     await expect(page.getByRole("link", { name: "Volver al trabajo" })).toBeVisible()
+  })
+})
+
+test.describe("iconos", () => {
+  // /favicon.ico lo piden a ciegas navegadores, lectores de RSS y rastreadores;
+  // estuvo dando 404 en producción.
+  test("todos los iconos declarados existen", async ({ request }) => {
+    const manifest = await (await request.get("/manifest.webmanifest")).json()
+    const rutas = ["/favicon.ico", "/icon.svg", "/apple-icon.png", "/og.png", ...manifest.icons.map((i: { src: string }) => i.src)]
+    for (const ruta of rutas) {
+      const res = await request.get(ruta)
+      expect(res.status(), ruta).toBe(200)
+    }
   })
 })

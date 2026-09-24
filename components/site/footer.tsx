@@ -1,6 +1,6 @@
 import Link from "next/link"
-import { Calendar, Mail, MessageCircle } from "lucide-react"
-import { PROFILE } from "@/lib/site"
+import { Mail, MessageCircle } from "lucide-react"
+import { PROFILE, WHATSAPP, whatsappUrl } from "@/lib/site"
 import { Logo } from "./logo"
 import { GithubIcon, InstagramIcon, LinkedinIcon } from "./social-icons"
 
@@ -15,7 +15,7 @@ const COLUMNAS = [
     ],
   },
   {
-    titulo: "Trabajo",
+    titulo: "Proyectos",
     enlaces: [
       { href: "/trabajo/tecnobichos", label: "Tecnobichos" },
       { href: "/trabajo/calculadora-de-gastos", label: "Calculadora de Gastos" },
@@ -24,17 +24,15 @@ const COLUMNAS = [
     ],
   },
   {
-    titulo: "Axchi",
+    titulo: "Empresa",
     enlaces: [
-      { href: "/sobre", label: "Quién está detrás" },
+      { href: "/sobre", label: "Sobre Axchi" },
       { href: "/proceso", label: "Cómo trabajo" },
-      { href: "/blog", label: "Ideas" },
+      { href: "/blog", label: "Publicaciones técnicas" },
       { href: "/privacidad", label: "Privacidad" },
     ],
   },
 ]
-
-const WHATSAPP = "573183038190"
 
 export function Footer() {
   return (
@@ -46,8 +44,7 @@ export function Footer() {
               <Logo />
             </span>
             <p className="mt-4 max-w-[34ch] text-[0.9375rem] leading-relaxed">
-              Desarrollo software a medida, automatización e integración de IA para empresas que
-              necesitan que algo funcione, no una demostración.
+              Desarrollo de software, automatización e integración de IA para productos y operaciones digitales.
             </p>
             <div className="mt-5 flex items-center gap-2">
               {[
@@ -88,12 +85,11 @@ export function Footer() {
           ))}
 
           <div>
-            <h2 className="text-[0.9375rem] font-semibold text-on-band">Hablemos</h2>
+            <h2 className="text-[0.9375rem] font-semibold text-on-band">Contacto</h2>
             <ul className="mt-4 space-y-3">
               {[
                 { href: `mailto:${PROFILE.email}`, Icon: Mail, texto: PROFILE.email, externo: false },
-                { href: `https://wa.me/${WHATSAPP}`, Icon: MessageCircle, texto: "+57 318 303 8190", externo: true },
-                { href: "/contacto#agendar", Icon: Calendar, texto: "Agendar una llamada", externo: false },
+                { href: whatsappUrl(), Icon: MessageCircle, texto: WHATSAPP.visible, externo: true },
               ].map(({ href, Icon, texto, externo }) => (
                 <li key={texto}>
                   <a

@@ -7,9 +7,9 @@ import { getProfile, getSkills } from "@/lib/data"
 import { PROFILE } from "@/lib/site"
 
 export const metadata: Metadata = {
-  title: "Quién está detrás",
+  title: "Sobre Axchi",
   description:
-    "Axchi es Duvan Yair Arciniegas, desarrollador de software en Bogotá. Hablas directamente con quien escribe el código: sin capas de gestión y sin equipos que facturar de más.",
+    "Axchi desarrolla aplicaciones, automatizaciones e integraciones de IA desde Bogotá para equipos y productos digitales.",
   alternates: { canonical: "/sobre" },
 }
 
@@ -21,7 +21,7 @@ const TRAYECTORIA = [
     periodo: "2026",
     titulo: "Desarrollador de software · Bogotá",
     detalle:
-      "Un año en una empresa de desarrollo trabajando sobre proyectos con clientes reales: prácticas de DevOps, pipelines de CI/CD, automatización de procesos e integración de agentes de IA en el flujo de trabajo del equipo.",
+      "Experiencia en proyectos para clientes con prácticas de DevOps, pipelines de CI/CD, automatización de procesos e integración de agentes de IA en el flujo de trabajo del equipo.",
   },
   {
     periodo: "2025 — 2026",
@@ -31,9 +31,9 @@ const TRAYECTORIA = [
   },
   {
     periodo: "En paralelo",
-    titulo: "Proyectos propios",
+    titulo: "Proyectos de ingeniería",
     detalle:
-      "Es donde aprendo lo que no enseña un curso: qué cuesta operar una arquitectura, cuándo un servidor sobra y por qué conviene escribir la decisión antes que el código.",
+      "Sistemas desarrollados para profundizar en arquitectura, costos operativos, integración de servicios y decisiones técnicas documentadas.",
   },
 ]
 
@@ -51,21 +51,21 @@ export default async function SobrePage() {
 
       <main id="contenido">
         <PageBand
-          titulo="Quién está detrás"
-          entradilla="Axchi es una sola persona: Duvan Yair Arciniegas. Eso significa que hablas directamente con quien escribe el código, sin capas de gestión — y también que digo que no cuando un encargo me queda grande."
+          titulo="Axchi"
+          entradilla="Estudio de desarrollo de software en Bogotá para aplicaciones, automatizaciones e integraciones que puedan operar, mantenerse y evolucionar."
         />
 
         <Body>
           <section>
-            <h2 className="text-[1.9375rem] text-ink">En una línea</h2>
+            <h2 className="text-[1.9375rem] text-ink">El estudio</h2>
             <p className="measure mt-4 text-[1.0625rem] leading-relaxed text-mid">
               {profile?.bio?.trim() ||
-                "Desarrollador de software en Bogotá. Me interesa el punto donde una decisión técnica se convierte en una consecuencia medible: cuánto cuesta operar un sistema, cuánto tarda en arrancar en frío, qué pasa cuando falla a la mitad."}
+                "Axchi desarrolla soluciones de software con foco en arquitectura, integración, operación y mantenimiento. Cada proyecto se aborda desde el modelo de datos hasta el despliegue y la documentación técnica."}
             </p>
           </section>
 
         <section className="mt-16 border-t border-line pt-12">
-          <h2 className="text-[1.9375rem] text-ink">Recorrido</h2>
+            <h2 className="text-[1.9375rem] text-ink">Fundador y trayectoria</h2>
           <ol className="mt-8">
             {TRAYECTORIA.map((t) => (
               <li
@@ -86,7 +86,7 @@ export default async function SobrePage() {
           <section className="mt-16 border-t border-line pt-12">
             <h2 className="text-[1.9375rem] text-ink">Herramientas</h2>
             <p className="measure mt-3 text-[1.0625rem] text-mid">
-              Lo que he usado en proyectos que terminaron funcionando, agrupado por dónde encaja.
+              Tecnologías utilizadas en proyectos y flujos de trabajo reales, organizadas por área.
             </p>
 
             <dl className="mt-8">
@@ -113,9 +113,10 @@ export default async function SobrePage() {
         )}
 
         <section className="mt-16 border-t border-line pt-12">
-          <h2 className="text-[1.9375rem] text-ink">Dónde encontrarme</h2>
+            <h2 className="text-[1.9375rem] text-ink">Contacto y perfiles</h2>
           <p className="measure mt-3 text-[1.0625rem] text-mid">
-            El código está en GitHub y la trayectoria en LinkedIn. Para lo demás, el correo.
+              Duvan Yair Arciniegas es el fundador y responsable técnico de Axchi.
+              Puedes revisar el código en GitHub, la trayectoria en LinkedIn o escribir directamente.
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <Button href="/contacto">Escríbeme</Button>

@@ -55,7 +55,6 @@ test.describe("panel de administración", () => {
       ["/admin/media", "Media"],
       ["/admin/messages", "Mensajes"],
       ["/admin/profile", "Perfil"],
-      ["/admin/settings", "Ajustes"],
     ] as const
 
     for (const [ruta] of secciones) {

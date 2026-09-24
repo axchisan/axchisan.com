@@ -89,7 +89,7 @@ export default function PrivacidadPage() {
           </p>
           <p>
             Conforme a la Ley 1581 de 2012 de Colombia sobre protección de datos personales, el
-            responsable del tratamiento es {PROFILE.name}, que opera bajo la marca Axchi en {PROFILE.location}.
+            responsable del tratamiento es {PROFILE.name}, con domicilio en {PROFILE.location}.
           </p>
 
           <h2>Cambios</h2>

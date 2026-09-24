@@ -10,8 +10,8 @@ import { AwsClient } from "aws4fetch"
  * servidor solo registra los metadatos.
  *
  * Se usa `aws4fetch` (6 KB) en lugar del SDK de AWS (1,4 MB). Todo lo que hace
- * falta aquí es firmar peticiones con SigV4, y el SDK completo no cabía en el
- * presupuesto de tamaño del Worker.
+ * falta aquí es firmar peticiones con SigV4, y el SDK completo solo añadiría
+ * peso y arranque en frío a cada función.
  */
 
 const ACCOUNT_ID = process.env.R2_ACCOUNT_ID
@@ -113,9 +113,7 @@ const MIME_BY_EXTENSION: Record<string, string> = {
 }
 
 export function extensionOf(filename: string): string {
-  // Sin `path.extname`: el runtime de Workers no necesita cargar el módulo de
-  // Node para esto. Un nombre sin punto, o que empiece por punto, no tiene
-  // extensión.
+  // Un nombre sin punto, o que empiece por punto, no tiene extensión.
   const punto = filename.lastIndexOf(".")
   if (punto <= 0) return ""
   return filename.slice(punto + 1).toLowerCase()
@@ -214,8 +212,8 @@ function etiqueta(xml: string, nombre: string): string | undefined {
  *
  * La API de listado de S3 devuelve XML. Se extrae con expresiones regulares en
  * lugar de añadir un parser: el formato es fijo, los nombres de objeto no
- * contienen `<` porque los genera `buildKey`, y un parser costaría más espacio
- * del que queda en el presupuesto del Worker.
+ * contienen `<` porque los genera `buildKey`, y un parser sería una dependencia
+ * más para un formato que no cambia.
  */
 export async function listObjects(prefix?: string, limit = 1000): Promise<StoredObject[]> {
   const out: StoredObject[] = []

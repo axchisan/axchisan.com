@@ -1,4 +1,5 @@
 import type { SVGProps } from "react"
+import { CARAS, VIEWBOX } from "./logo-geometria"
 
 /**
  * Marca Axchi: una cinta continua que se pliega y forma una A.
@@ -13,35 +14,14 @@ import type { SVGProps } from "react"
  * planos para que la marca sobreviva al tamaño de un favicon.
  */
 
-const CLARO = "#3fc9c2"
-const MEDIO = "#12a5a5"
-const OSCURO = "#0a7676"
+const VB = `${VIEWBOX.x} ${VIEWBOX.y} ${VIEWBOX.w} ${VIEWBOX.h}`
 
 export function LogoMark({ className, ...props }: SVGProps<SVGSVGElement>) {
   return (
-    <svg
-      viewBox="-1 0 140 100"
-      className={className}
-      role="img"
-      aria-label="Axchi"
-      {...props}
-    >
-      {/* Orden de pintado = orden de la cinta: pata derecha al fondo, barra
-          encima, pata izquierda delante. De ahí sale el tejido imposible. */}
-      <polygon points="58.20,0.00 80.50,0.00 124.50,100.00 102.20,100.00" fill={OSCURO} />
-      <polygon points="13.00,52.00 125.70,52.00 138.80,70.00 -0.10,70.00" fill={MEDIO} />
-      <polygon points="58.20,0.00 80.50,0.00 36.50,100.00 14.20,100.00" fill={CLARO} />
-    </svg>
-  )
-}
-
-/** Versión de un solo color, para cuando el fondo no admite las tres caras. */
-export function LogoMarkPlano({ className, ...props }: SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="-1 0 140 100" fill="currentColor" className={className} aria-hidden {...props}>
-      <polygon points="58.20,0.00 80.50,0.00 124.50,100.00 102.20,100.00" />
-      <polygon points="13.00,52.00 125.70,52.00 138.80,70.00 -0.10,70.00" />
-      <polygon points="58.20,0.00 80.50,0.00 36.50,100.00 14.20,100.00" />
+    <svg viewBox={VB} className={className} role="img" aria-label="Axchi" {...props}>
+      {CARAS.map((c) => (
+        <polygon key={c.color} points={c.puntos} fill={c.color} />
+      ))}
     </svg>
   )
 }

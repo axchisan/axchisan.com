@@ -19,12 +19,10 @@ loadEnv({ path: ".env" })
 let prisma: PrismaClient
 
 const BIO =
-  "Desarrollador de software en Bogotá. Me interesa el punto donde una decisión técnica se convierte " +
-  "en una consecuencia medible: cuánto cuesta operar un sistema al mes, cuánto tarda en arrancar en " +
-  "frío, qué pasa cuando falla a la mitad. Trabajo de punta a punta —modelo de datos, API, cliente, " +
-  "despliegue— en Flutter, Spring Boot, Next.js y Python, y escribo la decisión de arquitectura antes " +
-  "que el código. Vengo de un año en una empresa de desarrollo en Bogotá haciendo DevOps, pipelines " +
-  "de CI/CD e integración de agentes de IA sobre proyectos con clientes reales."
+  "Axchi Software Solutions desarrolla aplicaciones web y multiplataforma, automatización de procesos, " +
+  "integraciones de IA e infraestructura. El estudio trabaja sobre el ciclo completo del sistema: modelo " +
+  "de datos, APIs, cliente, pruebas, despliegue y operación. Duvan Yair Arciniegas es su fundador y " +
+  "responsable técnico, con experiencia en DevOps, pipelines de CI/CD y automatización de flujos de trabajo."
 
 /** Categoría → herramientas con las que hay código publicado. */
 const HERRAMIENTAS: Record<string, string[]> = {
@@ -43,35 +41,32 @@ const CAPACIDADES = [
   {
     title: "Aplicaciones web completas",
     description:
-      "Del modelo de datos al despliegue: API, autenticación, panel de administración, pruebas y la " +
-      "factura mensual. Este mismo sitio es un ejemplo — el código está publicado.",
+      "Diseño e implementación de APIs, autenticación, paneles de administración, pruebas y despliegue " +
+      "para productos y operaciones digitales.",
     features: ["Next.js y React", "PostgreSQL con Prisma", "Autenticación", "Pruebas E2E", "SEO técnico"],
     order: 1,
   },
   {
     title: "Aplicaciones multiplataforma",
     description:
-      "Un solo código para web, Android y escritorio con Flutter, con backend propio. Incluye los casos " +
-      "incómodos: modo sin conexión, sincronización entre dispositivos e integración con sistemas que ya " +
-      "están en producción y no se pueden cambiar.",
+      "Aplicaciones en Flutter para web, Android y escritorio, con backend propio, modo sin conexión, " +
+      "sincronización e integración con sistemas existentes.",
     features: ["Flutter", "Modo sin conexión", "Sincronización", "Integración con sistemas existentes"],
     order: 2,
   },
   {
     title: "Automatización de procesos",
     description:
-      "Encontrar dónde una persona está haciendo de traductor entre dos sistemas y quitar ese paso. " +
-      "Orquestación con n8n, integración de APIs y agentes de IA donde aportan, con las máquinas de " +
-      "estado que hacen falta para que un fallo a mitad no deje el proceso roto.",
+      "Orquestación de procesos, integración de APIs y uso acotado de IA para reducir tareas manuales, " +
+      "con trazabilidad, control de estados y recuperación ante fallos.",
     features: ["n8n", "Integración de APIs", "Agentes de IA", "Máquinas de estado"],
     order: 3,
   },
   {
     title: "Infraestructura y costos",
     description:
-      "Elegir arquitectura mirando la factura. Serverless con AWS Lambda, infraestructura como código con " +
-      "Terraform, contenedores y pipelines de CI/CD. Un proyecto mío opera por 0,01 USD al mes, y no por " +
-      "casualidad.",
+      "Arquitecturas serverless, infraestructura como código, contenedores y pipelines de CI/CD con " +
+      "atención a costos, mantenibilidad y operación.",
     features: ["AWS Lambda", "Terraform", "Docker", "GitHub Actions", "Análisis de costos"],
     order: 4,
   },
@@ -82,11 +77,11 @@ async function main() {
 
   await prisma.profile.upsert({
     where: { id: "profile-1" },
-    update: { bio: BIO, title: "Desarrollador de software" },
+    update: { bio: BIO, title: "Fundador y responsable técnico" },
     create: {
       id: "profile-1",
       name: "Duvan Yair Arciniegas",
-      title: "Desarrollador de software",
+      title: "Fundador y responsable técnico",
       bio: BIO,
       email: "axchisan923@gmail.com",
       phone: "3183038190",
