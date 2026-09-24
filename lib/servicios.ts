@@ -2,11 +2,9 @@ import { Bot, Layers, Server, Smartphone } from "lucide-react"
 import type { Servicio } from "@/components/site/service-card"
 
 /**
- * La oferta, escrita para quien decide una contratación.
- *
- * Cada servicio termina en un proyecto real que lo demuestra. Una oferta sin
- * prueba es una promesa; con el caso al lado deja de serlo. Y ninguna cifra
- * aparece aquí si no se puede sostener: todas salen de un repositorio público.
+ * Desarrollo a medida, para empresas con un proyecto que no encaja en un plan
+ * del catálogo. Se muestra en /a-medida; la oferta principal para negocios
+ * está en lib/catalogo.
  */
 export const SERVICIOS: Servicio[] = [
   {
@@ -24,7 +22,6 @@ export const SERVICIOS: Servicio[] = [
       "SEO técnico, sitemap y datos estructurados",
       "Pruebas automatizadas de cada recorrido",
     ],
-    prueba: { texto: "Ver proyectos web", href: "/trabajo" },
   },
   {
     id: "multiplataforma",
@@ -40,7 +37,6 @@ export const SERVICIOS: Servicio[] = [
       "Integración con sistemas existentes",
       "Publicación en tiendas",
     ],
-    prueba: { texto: "Calculadora de Gastos", href: "/trabajo/calculadora-de-gastos" },
   },
   {
     id: "automatizacion",
@@ -56,7 +52,6 @@ export const SERVICIOS: Servicio[] = [
       "Máquinas de estado con reintentos",
       "Un paso de aprobación humana donde hace falta",
     ],
-    prueba: { texto: "Tecnobichos", href: "/trabajo/tecnobichos" },
   },
   {
     id: "infraestructura",
@@ -73,34 +68,33 @@ export const SERVICIOS: Servicio[] = [
       "Copias de seguridad verificadas, no solo programadas",
       "Desglose de costos antes de decidir",
     ],
-    prueba: { texto: "Ver caso de estudio", href: "/trabajo/calculadora-de-gastos" },
   },
 ]
 
-/** Las cuatro etapas de un encargo. Sirve para fijar expectativas antes de empezar. */
+/** Las cuatro etapas de un encargo, contadas desde el lado del cliente. */
 export const PROCESO = [
   {
-    titulo: "Conversación",
+    titulo: "Nos cuentas qué necesitas",
     duracion: "Sin costo",
     detalle:
-      "Revisión inicial del problema, los objetivos, las restricciones y la información técnica disponible.",
+      "Por WhatsApp o en una llamada corta. Si ya viste una demo parecida a lo que buscas, empezamos por ahí.",
   },
   {
-    titulo: "Propuesta con alcance y precio",
-    duracion: "2 a 3 días",
+    titulo: "Recibes la propuesta por escrito",
+    duracion: "1 a 3 días",
     detalle:
-      "Definición documentada de alcance, entregables, estimación y supuestos técnicos antes de iniciar la implementación.",
+      "Qué entra, qué no, cuánto cuesta, cuánto tarda y cuánto cuesta mantenerlo al mes. El precio queda cerrado antes de empezar.",
   },
   {
-    titulo: "Construcción con entregas parciales",
-    duracion: "Según alcance",
+    titulo: "Pruebas los avances",
+    duracion: "Según el plan",
     detalle:
-      "Entregas incrementales en entornos verificables para revisar funcionalidad, resolver dudas y ajustar el alcance de forma controlada.",
+      "Cada entrega queda en un enlace que abres desde el celular. Los ajustes se hacen sobre algo que ya funciona, no sobre un dibujo.",
   },
   {
-    titulo: "Entrega y traspaso",
+    titulo: "Es tuyo y sabes usarlo",
     duracion: "Incluido",
     detalle:
-      "Entrega de código, documentación operativa y acceso a los recursos necesarios para continuar la evolución del sistema.",
+      "Dominio, código y datos a tu nombre, una capacitación para tu equipo y 30 días de garantía sobre cualquier falla.",
   },
 ]

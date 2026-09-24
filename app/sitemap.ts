@@ -1,33 +1,42 @@
 import type { MetadataRoute } from "next"
+import { SOLUCIONES } from "@/lib/catalogo/soluciones"
 import { SITE_URL } from "@/lib/site"
-import { getPublishedBlogSlugs, getPublicProjectRefs } from "@/lib/data"
+import { getPublishedBlogSlugs } from "@/lib/data"
 
 export const dynamic = "force-dynamic"
 
+/**
+ * Solo páginas que venden o informan. Las demos no entran: son negocios
+ * ficticios y llevan noindex.
+ */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const routes = ["", "/servicios", "/proceso", "/trabajo", "/blog", "/sobre", "/contacto", "/privacidad"].map((path) => ({
-    url: `${SITE_URL}${path}`,
+  const prioridad: Record<string, number> = { "": 1, "/soluciones": 0.9, "/planes": 0.9, "/privacidad": 0.2 }
+  const fijas = ["", "/soluciones", "/planes", "/proceso", "/a-medida", "/empresa", "/cotizar", "/guias", "/privacidad"].map(
+    (path) => ({
+      url: `${SITE_URL}${path}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: prioridad[path] ?? 0.7,
+    }),
+  )
+
+  const fichas = SOLUCIONES.map((s) => ({
+    url: `${SITE_URL}/soluciones/${s.slug}`,
     lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: path === "" ? 1 : path === "/privacidad" ? 0.2 : path === "/servicios" ? 0.9 : 0.8,
+    changeFrequency: "monthly" as const,
+    priority: 0.9,
   }))
 
   try {
-    const [posts, projects] = await Promise.all([getPublishedBlogSlugs(), getPublicProjectRefs()])
-    const blog = posts.map((p) => ({
-      url: `${SITE_URL}/blog/${p.slug}`,
+    const posts = await getPublishedBlogSlugs()
+    const guias = posts.map((p) => ({
+      url: `${SITE_URL}/guias/${p.slug}`,
       lastModified: p.updatedAt,
       changeFrequency: "monthly" as const,
-      priority: 0.7,
+      priority: 0.5,
     }))
-    const work = projects.map((p) => ({
-      url: `${SITE_URL}/trabajo/${p.slug ?? p.id}`,
-      lastModified: p.updatedAt,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    }))
-    return [...routes, ...work, ...blog]
+    return [...fijas, ...fichas, ...guias]
   } catch {
-    return routes
+    return [...fijas, ...fichas]
   }
 }

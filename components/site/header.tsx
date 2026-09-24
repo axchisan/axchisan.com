@@ -3,17 +3,18 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
-import { Menu, X } from "lucide-react"
+import { Menu, MessageCircle, X } from "lucide-react"
+import { MENSAJE_WHATSAPP, whatsappUrl } from "@/lib/site"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Logo } from "./logo"
 
 const RUTAS = [
-  { href: "/servicios", label: "Servicios" },
-  { href: "/trabajo", label: "Proyectos" },
-  { href: "/proceso", label: "Cómo trabajo" },
-  { href: "/blog", label: "Publicaciones" },
-  { href: "/sobre", label: "Empresa" },
+  { href: "/soluciones", label: "Soluciones" },
+  { href: "/planes", label: "Planes y precios" },
+  { href: "/proceso", label: "Proceso" },
+  { href: "/a-medida", label: "A medida" },
+  { href: "/empresa", label: "Sobre Axchi" },
 ]
 
 /**
@@ -23,9 +24,10 @@ const RUTAS = [
  */
 export function Header() {
   const pathname = usePathname()
-  const [abierto, setAbierto] = useState(false)
-
-  useEffect(() => setAbierto(false), [pathname])
+  // El menú recuerda en qué ruta se abrió: al navegar deja de coincidir y se
+  // cierra solo, sin un efecto que lo sincronice.
+  const [abiertoEn, setAbiertoEn] = useState<string | null>(null)
+  const abierto = abiertoEn === pathname
 
   useEffect(() => {
     document.body.style.overflow = abierto ? "hidden" : ""
@@ -60,17 +62,18 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-2.5 lg:flex">
-          <Button href="/contacto" variant="outline-band" size="sm">
-            Contacto
+          <Button href={whatsappUrl(MENSAJE_WHATSAPP)} variant="outline-band" size="sm" target="_blank" rel="noreferrer noopener">
+            <MessageCircle className="h-4 w-4" aria-hidden />
+            WhatsApp
           </Button>
-          <Button href="/contacto#agendar" size="sm">
-            Iniciar conversación
+          <Button href="/cotizar" size="sm">
+            Cotizar
           </Button>
         </div>
 
         <button
           type="button"
-          onClick={() => setAbierto((v) => !v)}
+          onClick={() => setAbiertoEn(abierto ? null : pathname)}
           className="flex h-10 w-10 items-center justify-center rounded-[8px] text-on-band-mid transition-colors hover:bg-band-2 hover:text-on-band lg:hidden"
           aria-expanded={abierto}
           aria-controls="menu-movil"
@@ -100,9 +103,10 @@ export function Header() {
             </Link>
           ))}
           <div className="mt-4 flex flex-col gap-2.5">
-            <Button href="/contacto#agendar">Iniciar conversación</Button>
-            <Button href="/contacto" variant="outline-band">
-              Contacto
+            <Button href="/cotizar">Cotizar</Button>
+            <Button href={whatsappUrl(MENSAJE_WHATSAPP)} variant="outline-band" target="_blank" rel="noreferrer noopener">
+              <MessageCircle className="h-4 w-4" aria-hidden />
+              Escribir por WhatsApp
             </Button>
           </div>
         </nav>

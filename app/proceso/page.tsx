@@ -4,38 +4,39 @@ import { Footer } from "@/components/site/footer"
 import { Band, Body, PageBand } from "@/components/site/band"
 import { Button } from "@/components/ui/button"
 import { PROCESO } from "@/lib/servicios"
+import { MENSAJE_WHATSAPP, whatsappUrl } from "@/lib/site"
 
 export const metadata: Metadata = {
-  title: "Cómo trabajo",
+  title: "Proceso",
   description:
-    "Cuatro etapas, alcance y precio cerrados por escrito, entregas parciales que puedes abrir y probar, y traspaso completo al final.",
+    "Cómo se contrata con Axchi: propuesta por escrito con precio cerrado, avances que pruebas desde el celular y todo a tu nombre al final.",
   alternates: { canonical: "/proceso" },
 }
 
 const COMPROMISOS = [
   {
     t: "El precio se cierra antes de empezar",
-    d: "Presupuesto por alcance, no por horas. Si algo se sale de lo acordado, se habla antes de tocarlo, no aparece en la factura.",
+    d: "Se cotiza por alcance, no por horas. Si algo se sale de lo acordado, se habla antes de hacerlo, no aparece en la cuenta.",
   },
   {
     t: "Ves avances desde la primera semana",
-    d: "Cada entrega se despliega en un enlace que puedes abrir. Nadie tiene que fiarse de una barra de progreso.",
+    d: "Cada entrega queda en un enlace que abres desde el celular. No tienes que imaginarte nada.",
   },
   {
-    t: "El código es tuyo desde el primer commit",
-    d: "Trabajo en tu repositorio o te lo transfiero al terminar. Sin dependencias ocultas ni licencias sorpresa.",
+    t: "Todo queda a tu nombre",
+    d: "Dominio, código y datos son tuyos cuando terminas de pagar. Sin licencias sorpresa ni dependencias escondidas.",
   },
   {
-    t: "Te enseño a operarlo",
-    d: "La documentación explica cómo funciona y cómo cambiarlo. El objetivo es que no me necesites para el día a día.",
+    t: "Tu equipo aprende a usarlo",
+    d: "Una capacitación y un manual corto. La idea es que el día a día no dependa de nadie más.",
   },
   {
-    t: "Te digo que no cuando corresponde",
-    d: "Si el problema se resuelve mejor con una herramienta que ya existe, te lo digo aunque signifique no facturar.",
+    t: "Si no te conviene, te lo decimos",
+    d: "Cuando una herramienta que ya existe te resuelve mejor, te la recomendamos aunque eso signifique no cobrarte.",
   },
   {
-    t: "Las copias de seguridad se prueban",
-    d: "Un respaldo que nunca se ha restaurado no es un respaldo. Los pruebo restaurándolos antes de darlos por buenos.",
+    t: "30 días de garantía",
+    d: "Cualquier falla que aparezca en el primer mes después de la entrega se corrige sin costo.",
   },
 ]
 
@@ -46,8 +47,8 @@ export default function ProcesoPage() {
 
       <main id="contenido">
         <PageBand
-          titulo="Cómo trabajo"
-          entradilla="Sin sorpresas de alcance ni de factura. Esto es lo que pasa desde el primer mensaje hasta la entrega."
+          titulo="Cómo se trabaja con Axchi"
+          entradilla="Sin sorpresas en el alcance ni en la cuenta. Esto es lo que pasa desde el primer mensaje hasta que tu página o tu sistema están funcionando."
         />
 
         <Body>
@@ -76,9 +77,9 @@ export default function ProcesoPage() {
 
         <div className="bg-card">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-            <h2 className="text-[1.9375rem] text-ink">Principios de colaboración</h2>
+            <h2 className="text-[1.9375rem] text-ink">Lo que te garantizamos</h2>
             <p className="mt-3 max-w-[58ch] text-[1.0625rem] leading-relaxed text-mid">
-              Criterios que orientan la comunicación, la entrega y el traspaso técnico durante el proyecto.
+              Seis compromisos por escrito. Si alguno no se cumple, tienes con qué reclamarlo.
             </p>
             <ul className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {COMPROMISOS.map((c) => (
@@ -94,13 +95,18 @@ export default function ProcesoPage() {
         <Band>
           <div className="py-20 text-center sm:py-24">
             <h2 className="mx-auto max-w-[22ch] text-[1.9375rem] sm:text-[2.4375rem]">
-              Definamos el siguiente paso
+              Empecemos por una conversación
             </h2>
             <p className="mx-auto mt-5 max-w-[52ch] text-[1.0625rem] leading-relaxed text-on-band-mid">
-              Comparte la necesidad y el contexto disponible para evaluar el alcance técnico inicial.
+              Sin costo y sin compromiso. Sales de ahí sabiendo qué te conviene y cuánto costaría.
             </p>
-            <div className="mt-9 flex justify-center">
-              <Button href="/contacto#agendar" size="lg">Contactar</Button>
+            <div className="mt-9 flex flex-wrap justify-center gap-3">
+              <Button href={whatsappUrl(MENSAJE_WHATSAPP)} size="lg" target="_blank" rel="noreferrer noopener">
+                Escribir por WhatsApp
+              </Button>
+              <Button href="/cotizar" variant="outline-band" size="lg">
+                Llenar el formulario
+              </Button>
             </div>
           </div>
         </Band>

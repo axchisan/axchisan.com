@@ -69,7 +69,7 @@ export async function notifyContactMessage(message: {
 
   const asunto = message.subject?.trim() || "Sin asunto"
   const cuerpo = [
-    `De: ${message.name} <${message.email}>`,
+    `De: ${message.name}${message.email ? ` <${message.email}>` : ""}`,
     `Asunto: ${asunto}`,
     "",
     message.message,
@@ -82,13 +82,13 @@ export async function notifyContactMessage(message: {
       subject: `Contacto web — ${message.name}: ${asunto}`,
       text: cuerpo,
       html: `<div style="font-family:system-ui,sans-serif;line-height:1.6">
-  <p><strong>${escapeHtml(message.name)}</strong> &lt;${escapeHtml(message.email)}&gt;</p>
+  <p><strong>${escapeHtml(message.name)}</strong>${message.email ? ` &lt;${escapeHtml(message.email)}&gt;` : ""}</p>
   <p style="color:#666">${escapeHtml(asunto)}</p>
   <hr style="border:none;border-top:1px solid #ddd">
   <p style="white-space:pre-wrap">${escapeHtml(message.message)}</p>
 </div>`,
       // Responder desde el cliente de correo contesta a quien escribió.
-      replyTo: message.email,
+      ...(message.email ? { replyTo: message.email } : {}),
     })
   } catch (error) {
     console.error("No se pudo enviar el aviso de contacto:", error)

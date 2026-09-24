@@ -17,6 +17,7 @@
     "typecheck": "tsc --noEmit",
     "iconos": "tsx scripts/iconos.ts",
     "og": "tsx scripts/og.ts",
+    "capturas": "tsx scripts/capturas.ts",
     "db:seed:content": "tsx prisma/seed-content.ts && tsx prisma/refresh-portfolio.ts",
     "db:refresh-portfolio": "tsx prisma/refresh-portfolio.ts",
     "test:prepare": "ENV_FILE=.env.test tsx prisma/seed.ts && ENV_FILE=.env.test tsx prisma/seed-content.ts"

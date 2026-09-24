@@ -7,10 +7,10 @@ import { getBlogPosts } from "@/lib/data"
 import { cn, formatDate, toDate } from "@/lib/utils"
 
 export const metadata: Metadata = {
-  title: "Publicaciones técnicas",
+  title: "Guías",
   description:
-    "Notas sobre arquitectura, automatización, infraestructura y decisiones de ingeniería aplicadas a proyectos de software.",
-  alternates: { canonical: "/blog" },
+    "Artículos sobre cómo se construyen y cuánto cuestan las páginas web y los sistemas para negocios.",
+  alternates: { canonical: "/guias" },
 }
 
 export const dynamic = "force-dynamic"
@@ -32,15 +32,15 @@ export default async function BlogPage({
 
       <main id="contenido">
         <PageBand
-          titulo="Publicaciones técnicas"
-          entradilla="Decisiones de arquitectura, automatización e infraestructura explicadas a partir de problemas y sistemas concretos."
+          titulo="Guías"
+          entradilla="Artículos sobre cómo se construyen y cuánto cuestan las páginas y los sistemas que hacemos."
         />
 
         <Body>
           {categories.length > 0 && (
             <nav aria-label="Filtrar por tema" className="mb-8 flex flex-wrap gap-2">
               <Link
-                href="/blog"
+                href="/guias"
                 aria-current={!tag ? "page" : undefined}
                 className={cn(
                   "rounded-[6px] border px-2.5 py-1 text-[0.875rem] transition-colors",
@@ -54,7 +54,7 @@ export default async function BlogPage({
               {categories.map((c) => (
                 <Link
                   key={c}
-                  href={`/blog?tag=${encodeURIComponent(c)}`}
+                  href={`/guias?tag=${encodeURIComponent(c)}`}
                   aria-current={tag === c ? "page" : undefined}
                   className={cn(
                     "rounded-[6px] border px-2.5 py-1 text-[0.875rem] transition-colors",
@@ -74,7 +74,7 @@ export default async function BlogPage({
               {tag ? (
                 <>
                   No hay artículos sobre {tag}.{" "}
-                  <Link href="/blog" className="link">
+                  <Link href="/guias" className="link">
                     Ver todos
                   </Link>
                 </>
@@ -87,7 +87,7 @@ export default async function BlogPage({
               {visibles.map((post) => (
                 <li key={post.slug} className="border-t border-line py-7 first:border-t-0 first:pt-0">
                   <h2 className="text-[1.375rem] font-semibold tracking-[-0.02em]">
-                    <Link href={`/blog/${post.slug}`} className="text-ink transition-colors hover:text-accent-ink">
+                    <Link href={`/guias/${post.slug}`} className="text-ink transition-colors hover:text-accent-ink">
                       {post.title}
                     </Link>
                   </h2>

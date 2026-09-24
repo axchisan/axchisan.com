@@ -11,8 +11,9 @@
 |---|---|
 | F0 · Saneamiento | **Hecha** (24 sep 2026): nombre "Axchi", WhatsApp en una sola constante, documentos obsoletos retirados, hooks y 6 dependencias sin uso eliminados, ajustes muertos del panel retirados, iconos y OG generados desde el logo (`npm run iconos`, `npm run og`), `/favicon.ico` servido. Pendiente: 13 errores de lint anteriores a esta fase (`any` en rutas de API y `setState` en efectos), se corrigen al tocar esos archivos |
 | Precios | **Hecho**: modelo completo en `PRECIOS.md`; fuente única en `lib/catalogo/planes.ts` |
-| F1 · Documentos | Brief de Canela hecho (`docs/demos/canela.md`), licencias en `docs/licencias.md`. Pendiente: `DESIGN.md`, `MARCA.md`, guía de voz, `README.md`, `SEO.md` |
-| F2 · Infraestructura | Parcial: almacén en el navegador, selector de nivel, recorrido guiado, barra de demo y bloqueo por plan (`demos/comun/`). Pendiente: fichas `/soluciones`, catálogo, script de capturas, analítica del embudo, migración del formulario |
+| F1 · Documentos | **Hecha**: `DESIGN.md` y `MARCA.md` reescritos, guía de voz en `DESIGN.md`, brief de Canela, licencias, `README.md`. Pendiente: `SEO.md` parte 5 (consultas por sector) |
+| F2 · Infraestructura | **Casi hecha**: demos comunes (`demos/comun/`), catálogo en código (`lib/catalogo/`), plantilla de ficha, capturas reales (`npm run capturas`). Pendiente: analítica del embudo y campos propios de la cotización en la base (hoy van dentro del mensaje) |
+| F3 · Sitio comercial | **Hecha** (24 sep 2026): portada, `/soluciones` y fichas, `/planes`, `/a-medida`, `/proceso`, `/empresa`, `/cotizar` con formulario calificado, `/guias`, redirecciones 308 en un salto, sitemap nuevo, WhatsApp flotante en celular. Proyectos de GitHub retirados del sitio público (siguen en el panel) |
 | F4a · Canela | **Hecha**: portada, reserva en cuatro pasos, panel con Hoy, Agenda, Pacientes, ficha clínica, consulta con fórmula imprimible, Recordatorios y Resumen. 20 pruebas E2E en escritorio y celular, incluida WCAG AA |
 
 ## 0. En cinco líneas
@@ -578,7 +579,7 @@ Se ordenan según los datos del embudo de las primeras semanas, no según esta l
 |---|---|---|
 | **D1** | Hosting | **Se mantiene Vercel Hobby.** Riesgo aceptado (1.5); el paso a Pro no exige cambios de código |
 | **D2** | Nombre público | **Axchi.** "Axchi Software Solutions" solo en legales y datos estructurados |
-| **D3** | Voz | Marca en tercera persona ("En Axchi…"); primera persona solo en `/empresa`. Sin "nuestro equipo" |
+| **D3** | Voz | La marca habla como empresa ("te respondemos"); primera persona del singular solo en `/empresa`. Sin "nuestro equipo" |
 | **D4** | Proyectos | **Ningún proyecto de GitHub** en el sitio. Solo Jabones Mari, como ejemplo de tienda de cosméticos |
 | **D5** | Renombrar rutas | Sí, con redirecciones 308 |
 | **D6** | Agendar llamadas | Pendiente: Cal.com gratuito, o retirar la palabra "agendar". Mientras tanto, se retira |

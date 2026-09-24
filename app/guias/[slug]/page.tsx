@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title: post.title,
     description: post.excerpt ?? undefined,
-    alternates: { canonical: `/blog/${slug}` },
+    alternates: { canonical: `/guias/${slug}` },
     openGraph: {
       title: post.title,
       description: post.excerpt ?? undefined,
@@ -58,7 +58,7 @@ export default async function BlogPostPage({ params }: Params) {
               datePublished: publicado.toISOString(),
               dateModified: toDate(post.updatedAt).toISOString(),
               author: { "@type": "Person", name: PROFILE.name, url: SITE_URL },
-              mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
+              mainEntityOfPage: `${SITE_URL}/guias/${post.slug}`,
             }),
           }}
         />
@@ -67,10 +67,10 @@ export default async function BlogPostPage({ params }: Params) {
           <div className="enter py-12 sm:py-16">
             <nav aria-label="Migas">
               <Link
-                href="/blog"
+                href="/guias"
                 className="text-[0.9375rem] text-on-band-mid transition-colors hover:text-accent"
               >
-                Volver a publicaciones
+                Volver a las guías
               </Link>
             </nav>
             <h1 className="mt-6 max-w-[24ch] text-[2.125rem] leading-[1.1] sm:text-[2.75rem]">
@@ -85,7 +85,7 @@ export default async function BlogPostPage({ params }: Params) {
               {post.tags.map((t) => (
                 <li key={t}>
                   <Link
-                    href={`/blog?tag=${encodeURIComponent(t)}`}
+                    href={`/guias?tag=${encodeURIComponent(t)}`}
                     className="rounded-[5px] border border-band-line bg-band-2 px-2 py-0.5 text-[0.875rem] text-on-band-mid transition-colors hover:text-accent"
                   >
                     {t}
@@ -108,9 +108,9 @@ export default async function BlogPostPage({ params }: Params) {
 
         <section className="measure mt-16 border-t border-line pt-8">
           <p className="text-[1.0625rem] text-mid">
-            ¿Preguntas sobre algo de esto?{" "}
-            <Link href="/contacto" className="link">
-              Escríbeme
+            ¿Quieres algo así para tu negocio?{" "}
+            <Link href="/cotizar" className="link">
+              Cotiza aquí
             </Link>
             .
           </p>

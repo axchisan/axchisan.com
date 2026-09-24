@@ -8,13 +8,13 @@ import { SERVICIOS } from "@/lib/servicios"
 import { PROFILE, SITE_NAME, SITE_URL } from "@/lib/site"
 
 export const metadata: Metadata = {
-  title: "Servicios",
+  title: "Desarrollo de software a medida",
   description:
-    "Desarrollo de aplicaciones web y multiplataforma, automatización con IA e infraestructura serverless para empresas. Alcance y precio cerrados antes de empezar.",
-  alternates: { canonical: "/servicios" },
+    "Aplicaciones web y multiplataforma, automatización de procesos con IA e infraestructura en la nube para empresas en Colombia. Precio por jornada y alcance cerrado antes de empezar.",
+  alternates: { canonical: "/a-medida" },
 }
 
-export default function ServiciosPage() {
+export default function AMedidaPage() {
   return (
     <>
       <Header />
@@ -35,7 +35,7 @@ export default function ServiciosPage() {
                   name: s.titulo,
                   description: s.descripcion,
                   serviceType: s.gancho,
-                  url: `${SITE_URL}/servicios#${s.id}`,
+                  url: `${SITE_URL}/a-medida#${s.id}`,
                   areaServed: [{ "@type": "Country", name: "Colombia" }, "Remoto"],
                   provider: {
                     "@type": "ProfessionalService",
@@ -50,8 +50,8 @@ export default function ServiciosPage() {
         />
 
         <PageBand
-          titulo="Capacidades de desarrollo"
-          entradilla="Áreas en las que puedo asumir la implementación técnica: arquitectura, desarrollo, integración, pruebas y despliegue según las necesidades de cada proyecto."
+          titulo="Desarrollo a medida"
+          entradilla="Para empresas con un proyecto que no encaja en un plan del catálogo: integraciones, automatizaciones, aplicaciones y la infraestructura para operarlas. Se cotiza por jornada, con un diagnóstico de $ 450.000 que se descuenta si contratas."
         />
 
         <Body>
@@ -64,23 +64,23 @@ export default function ServiciosPage() {
 
         <div className="bg-card">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-            <h2 className="text-[1.9375rem] text-ink">Alcance de trabajo</h2>
+            <h2 className="text-[1.9375rem] text-ink">Lo que no hacemos</h2>
             <p className="mt-3 max-w-[58ch] text-[1.0625rem] leading-relaxed text-mid">
-              Definir qué tipo de proyectos encajan permite evaluar una colaboración con claridad desde el inicio.
+              Decirlo desde el principio ahorra una reunión a los dos.
             </p>
             <ul className="mt-8 grid gap-4 md:grid-cols-3">
               {[
                 {
-                  t: "Implementaciones estándar de comercio electrónico",
-                  d: "Para una tienda sin requisitos técnicos particulares, una plataforma especializada suele ser la alternativa más eficiente.",
+                  t: "Construir desde cero lo que ya existe",
+                  d: "Si una herramienta o un plan del catálogo te resuelve, te lo recomendamos antes que cobrarte un desarrollo.",
                 },
                 {
-                  t: "Identidad visual y branding",
-                  d: "El alcance se centra en producto e interfaces. La identidad de marca requiere una especialidad de diseño distinta.",
+                  t: "Logos y manuales de marca",
+                  d: "Diseñamos interfaces, no identidades. Para tu logo te recomendamos a alguien de esa disciplina.",
                 },
                 {
-                  t: "Mantenimiento sin acceso técnico verificable",
-                  d: "Para evaluar un sistema existente se requiere acceso al repositorio, dependencias y una forma de reproducir el entorno.",
+                  t: "Mantener código que no podemos revisar",
+                  d: "Para cotizar sobre un sistema existente necesitamos el código y una forma de ejecutarlo. Sin eso, cualquier precio sería inventado.",
                 },
               ].map((x) => (
                 <li key={x.t} className="rounded-[16px] border border-line bg-paper p-6">
@@ -95,14 +95,14 @@ export default function ServiciosPage() {
         <Band>
           <div className="py-20 text-center sm:py-24">
             <h2 className="mx-auto max-w-[22ch] text-[1.9375rem] sm:text-[2.4375rem]">
-              ¿El alcance coincide con tu necesidad?
+              ¿Tienes un proyecto así?
             </h2>
             <p className="mx-auto mt-5 max-w-[52ch] text-[1.0625rem] leading-relaxed text-on-band-mid">
-              Con el contexto adecuado puedo evaluar viabilidad, alcance técnico y próximos pasos.
+              Cuéntanos qué hace hoy tu equipo a mano, con qué sistemas trabaja y qué quiere lograr.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Button href="/contacto#agendar" size="lg">Contactar</Button>
-              <Button href="/trabajo" variant="outline-band" size="lg">Ver proyectos</Button>
+              <Button href="/cotizar?plan=a-medida" size="lg">Cotizar</Button>
+              <Button href="/planes" variant="outline-band" size="lg">Ver planes</Button>
             </div>
           </div>
         </Band>

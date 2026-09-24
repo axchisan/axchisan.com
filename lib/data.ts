@@ -11,52 +11,6 @@ import { prisma } from "@/lib/prisma"
 
 const REVALIDATE = 300
 
-export const getProjects = unstable_cache(
-  async () => {
-    try {
-      return await prisma.project.findMany({
-        where: { status: "COMPLETED" },
-        include: {
-          files: { orderBy: { order: "asc" } },
-          _count: { select: { likes: true, comments: true, favorites: true } },
-        },
-        orderBy: [{ featured: "desc" }, { order: "asc" }, { createdAt: "desc" }],
-      })
-    } catch (error) {
-      console.error("getProjects error:", error)
-      return []
-    }
-  },
-  ["projects-list"],
-  { revalidate: REVALIDATE, tags: ["projects"] },
-)
-
-/**
- * Busca por slug y, si no lo encuentra, por id.
- *
- * Las URLs son `/trabajo/tecnobichos`, pero los identificadores antiguos
- * siguieron circulando en el sitemap y en enlaces compartidos: mantenerlos
- * vivos cuesta una consulta y evita romperlos.
- */
-export const getProjectBySlugOrId = unstable_cache(
-  async (slugOrId: string) => {
-    try {
-      return await prisma.project.findFirst({
-        where: { OR: [{ slug: slugOrId }, { id: slugOrId }] },
-        include: {
-          files: { orderBy: { order: "asc" } },
-          _count: { select: { likes: true, comments: true, favorites: true } },
-        },
-      })
-    } catch (error) {
-      console.error("getProjectBySlugOrId error:", error)
-      return null
-    }
-  },
-  ["project-by-slug-or-id"],
-  { revalidate: REVALIDATE, tags: ["projects"] },
-)
-
 export const getBlogPosts = unstable_cache(
   async () => {
     try {
@@ -130,43 +84,6 @@ export const getPublishedBlogSlugs = unstable_cache(
   { revalidate: REVALIDATE, tags: ["blog"] },
 )
 
-export const getPublicProjectRefs = unstable_cache(
-  async () => prisma.project.findMany({ where: { status: "COMPLETED" }, select: { id: true, slug: true, updatedAt: true } }),
-  ["project-ids"],
-  { revalidate: REVALIDATE, tags: ["projects"] },
-)
-
-/** Servicios activos, ordenados. */
-export const getServices = unstable_cache(
-  async () => {
-    try {
-      return await prisma.service.findMany({
-        where: { isActive: true },
-        orderBy: { order: "asc" },
-      })
-    } catch (error) {
-      console.error("getServices error:", error)
-      return []
-    }
-  },
-  ["services-list"],
-  { revalidate: REVALIDATE, tags: ["services"] },
-)
-
-/** Perfil del founder (único registro). */
-export const getProfile = unstable_cache(
-  async () => {
-    try {
-      return await prisma.profile.findFirst()
-    } catch (error) {
-      console.error("getProfile error:", error)
-      return null
-    }
-  },
-  ["profile"],
-  { revalidate: REVALIDATE, tags: ["profile"] },
-)
-
 /**
  * Serie de vistas por día (últimos N días) para sparklines del admin.
  * Rellena días sin datos con 0 para una serie continua. No cacheado (admin).
@@ -206,16 +123,3 @@ export async function getViewsAnalytics(days = 30) {
   }
 }
 
-/** Skills agrupadas por categoría (para /sobre). */
-export const getSkills = unstable_cache(
-  async () => {
-    try {
-      return await prisma.skill.findMany({ orderBy: [{ category: "asc" }, { order: "asc" }] })
-    } catch (error) {
-      console.error("getSkills error:", error)
-      return []
-    }
-  },
-  ["skills-list"],
-  { revalidate: REVALIDATE, tags: ["skills"] },
-)
