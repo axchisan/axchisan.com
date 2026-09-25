@@ -23,6 +23,24 @@ obligatoria. Aun así se acredita al autor en la demo.
 | Peine Fino | Corte con tijera | Nate Johnston | [unsplash.com/photos/tgPrIYnW3g4](https://unsplash.com/photos/tgPrIYnW3g4) | `photo-1647140655214-e4a2d914971f` |
 | Peine Fino | Interior del salón | Daniel | [unsplash.com/photos/PnDr2j28gXA](https://unsplash.com/photos/PnDr2j28gXA) | `photo-1695527081848-1e46c06e6458` |
 | Peine Fino | Sillas color vino | Guilherme Petri | [unsplash.com/photos/PtOfbGkU3uI](https://unsplash.com/photos/PtOfbGkU3uI) | `photo-1521590832167-7bcbfaa6381f` |
+| Fogón 45 | Portada y punta de anca: carne en la parrilla | Matt Connor | [unsplash.com/photos/9Qs_9n2oSJo](https://unsplash.com/photos/9Qs_9n2oSJo) | `photo-1614119068601-483274e9dcb7` |
+| Fogón 45 | Bandeja 45 | WILLIAN REIS | [unsplash.com/photos/9MVNGosobLU](https://unsplash.com/photos/9MVNGosobLU) | `photo-1723693407562-bb4fcae76797` |
+| Fogón 45 | Churrasco | CHUTTERSNAP | [unsplash.com/photos/IRqbTtMfh8A](https://unsplash.com/photos/IRqbTtMfh8A) | `photo-1624234763734-c9629a2777c1` |
+| Fogón 45 | Chicharrón | Zion C | [unsplash.com/photos/ypLK2aLvF1Q](https://unsplash.com/photos/ypLK2aLvF1Q) | `photo-1785735011447-9942c0ba0b13` |
+| Fogón 45 | Mojarra frita | lalo Hernandez | [unsplash.com/photos/nOpn-ScYv6A](https://unsplash.com/photos/nOpn-ScYv6A) | `photo-1548704087-b11dab0fbec0` |
+| Fogón 45 | Picada para dos | Alfredo Burgos | [unsplash.com/photos/95KZ2fOy3-E](https://unsplash.com/photos/95KZ2fOy3-E) | `photo-1702827496392-abe9bcadcd07` |
+| Fogón 45 | Empanadas | Anton | [unsplash.com/photos/kJ6myhO23PI](https://unsplash.com/photos/kJ6myhO23PI) | `photo-1624128082323-beb6b8b508db` |
+| Fogón 45 | Arepas con hogao | Alexandra Tran | [unsplash.com/photos/OyQLPk4qbDo](https://unsplash.com/photos/OyQLPk4qbDo) | `photo-1644753787071-8933b5daed2d` |
+| Fogón 45 | Papas criollas | Maggi Paraguay | [unsplash.com/photos/TPa2oXseaTw](https://unsplash.com/photos/TPa2oXseaTw) | `photo-1721942893905-3de47ae22b88` |
+| Fogón 45 | Mazorca asada | Tim Mossholder | [unsplash.com/photos/rVXAUFywlWQ](https://unsplash.com/photos/rVXAUFywlWQ) | `photo-1653886764100-60e01f57bd1d` |
+| Fogón 45 | Ajiaco | Keesha's Kitchen | [unsplash.com/photos/7ax3l4quF-M](https://unsplash.com/photos/7ax3l4quF-M) | `photo-1665593998976-d957f2827fe7` |
+| Fogón 45 | Limonada | Laura Chouette | [unsplash.com/photos/TecD-1MTMiE](https://unsplash.com/photos/TecD-1MTMiE) | `photo-1623084921164-4a8c5c37a912` |
+| Fogón 45 | Jugos naturales | Jugoslocos | [unsplash.com/photos/i8JfQDc4Ha8](https://unsplash.com/photos/i8JfQDc4Ha8) | `photo-1622597467821-df79dcb4f94d` |
+| Fogón 45 | Cerveza artesanal | Josh Olalde | [unsplash.com/photos/Qlt7AQ8BWI0](https://unsplash.com/photos/Qlt7AQ8BWI0) | `photo-1632173517757-1e87c79de596` |
+| Fogón 45 | Chocolate santafereño | Melody Zimmerman | [unsplash.com/photos/7GkyzWeM0eg](https://unsplash.com/photos/7GkyzWeM0eg) | `photo-1702165639524-252a1c1b1ab5` |
+| Fogón 45 | Flan de caramelo | Jay | [unsplash.com/photos/qjf9_9HRHXg](https://unsplash.com/photos/qjf9_9HRHXg) | `photo-1752245055475-8b7c3b4756ac` |
+| Fogón 45 | Arepas en la parrilla | Leila Issa | [unsplash.com/photos/4C_k18o_tnk](https://unsplash.com/photos/4C_k18o_tnk) | `photo-1587603366933-aa6947174c65` |
+| Fogón 45 | Salón del restaurante | Glenov Brankovic | [unsplash.com/photos/e4B5AvA7Jqo](https://unsplash.com/photos/e4B5AvA7Jqo) | `photo-1667388969250-1c7220bf3f37` |
 
 ## Imágenes y video generados con IA
 

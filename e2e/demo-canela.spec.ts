@@ -124,6 +124,12 @@ test.describe("demo Canela", () => {
   })
 
   test("restablecer devuelve la demo a su estado inicial", async ({ page }) => {
+    // Hace falta una cita por llegar: de noche o en domingo no queda ninguna.
+    // Se fija el reloj a las 10 de la mañana de un día hábil.
+    const manana = new Date()
+    if (manana.getDay() === 0) manana.setDate(manana.getDate() + 1)
+    manana.setHours(10, 0, 0, 0)
+    await page.clock.install({ time: manana })
     await entrarAlPanel(page)
     const enConsulta = page.locator("dt", { hasText: "En consulta" }).locator("xpath=following-sibling::dd")
     const antes = await enConsulta.innerText()

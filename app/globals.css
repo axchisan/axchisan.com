@@ -367,3 +367,35 @@
   background-color: #1e1b1c;
   background-image: repeating-linear-gradient(to bottom, transparent 0 7px, rgb(255 255 255 / 0.045) 7px 8px);
 }
+
+/* Fogón 45, cocina colombiana — docs/demos/fogon-45.md
+   Peltre: el blanco frío de las ollas y platos esmaltados, con su borde azul. */
+@theme inline {
+  --color-fg-peltre:    #f3f5f6;
+  --color-fg-cobalto:   #1f3f8f;   /* 8,9:1 sobre peltre */
+  --color-fg-cobalto-2: #2b4fa6;   /* hover sobre cobalto */
+  --color-fg-tizne:     #1a1c20;
+  --color-fg-ceniza:    #565d68;   /* texto secundario: 6,1:1 sobre peltre */
+  --color-fg-aji:       #b0261c;   /* picante y agotado: 6,1:1 sobre peltre */
+  --color-fg-aji-suave: #fbe7e4;
+  --color-fg-maiz:      #f2c14e;   /* acento sobre cobalto: 5,8:1 */
+  --color-fg-niebla:    #c6d1ea;   /* texto secundario sobre cobalto: 6,3:1 */
+  --color-fg-linea:     #dde2e7;
+  --color-fg-exito:     #276d4d;
+  --color-fg-exito-suave: #e3f1ea;
+  --color-fg-alerta:    #8f5808;
+  --color-fg-alerta-suave: #fbf0dc;
+  --font-fg-letrero: var(--font-alfa-slab), ui-serif, Georgia, serif;
+  --font-fg-texto:   var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* El plato de peltre: la foto en círculo con el borde azul del esmalte y un
+   filo blanco entre los dos. */
+.fg-plato {
+  border-radius: 9999px;
+  overflow: hidden;
+  box-shadow: 0 0 0 3px #fff, 0 0 0 7px var(--color-fg-cobalto), 0 14px 24px -14px rgb(26 28 32 / 0.55);
+}
+@media print {
+  .fg-sin-imprimir { display: none !important; }
+}
