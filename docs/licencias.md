@@ -43,6 +43,23 @@ obligatoria. Aun así se acredita al autor en la demo.
 | Fogón 45 | Salón del restaurante | Glenov Brankovic | [unsplash.com/photos/e4B5AvA7Jqo](https://unsplash.com/photos/e4B5AvA7Jqo) | `photo-1667388969250-1c7220bf3f37` |
 | Doble Rosca | Portada: estantería de ferretería | Artem Korolev | [unsplash.com/photos/UHXBNCK7Hu4](https://unsplash.com/photos/UHXBNCK7Hu4) | `photo-1765744893064-dce3184289ef` |
 | Doble Rosca | Pared de herramientas | Darien Attridge | [unsplash.com/photos/ciY4tc7539I](https://unsplash.com/photos/ciY4tc7539I) | `photo-1759200165738-6366977a73c6` |
+| Linaza | Camisa manga corta, gris jaspe | tian dayong | [unsplash.com/photos/maHb1ki_X3o](https://unsplash.com/photos/maHb1ki_X3o) | `photo-1693443688057-85f57b872a3c` |
+| Linaza | Camisa manga corta, crudo | tian dayong | [unsplash.com/photos/lziP7ZPtghg](https://unsplash.com/photos/lziP7ZPtghg) | `photo-1713881676551-b16f22ce4719` |
+| Linaza | Camisa manga corta, azul noche | tian dayong | [unsplash.com/photos/8UsQoiJLNNQ](https://unsplash.com/photos/8UsQoiJLNNQ) | `photo-1713881649391-a1c8ddaf83cd` |
+| Linaza | Camisa cuello nerú | tian dayong | [unsplash.com/photos/S4f4apZd-hA](https://unsplash.com/photos/S4f4apZd-hA) | `photo-1713881587420-113c1c43e28a` |
+| Linaza | Camisa a rayas | tian dayong | [unsplash.com/photos/SI7Hmk8MXQU](https://unsplash.com/photos/SI7Hmk8MXQU) | `photo-1713881842156-3d9ef36418cc` |
+| Linaza | Pantalón tobillero, mostaza | engin akyurt | [unsplash.com/photos/Em18LEpabs4](https://unsplash.com/photos/Em18LEpabs4) | `photo-1789110520143-9f54f069b43f` |
+| Linaza | Pantalón tobillero, rosa palo | engin akyurt | [unsplash.com/photos/NvPnm0uvvkE](https://unsplash.com/photos/NvPnm0uvvkE) | `photo-1789110520406-ebee1a8b4f23` |
+| Linaza | Pantalón tobillero, menta | engin akyurt | [unsplash.com/photos/3WDPbgyV1ec](https://unsplash.com/photos/3WDPbgyV1ec) | `photo-1789110520410-4fce7246f844` |
+| Linaza | Pantalón recto | engin akyurt | [unsplash.com/photos/rTG-AwMj08o](https://unsplash.com/photos/rTG-AwMj08o) | `photo-1789110854331-6d3cabfef781` |
+| Linaza | Vestido con lazo, blanco | engin akyurt | [unsplash.com/photos/qSA-x_pTHqQ](https://unsplash.com/photos/qSA-x_pTHqQ) | `photo-1789110520302-3df8ce0410f0` |
+| Linaza | Vestido con lazo, terracota | engin akyurt | [unsplash.com/photos/6_LidIGnJqU](https://unsplash.com/photos/6_LidIGnJqU) | `photo-1789110853872-f416085557fa` |
+| Linaza | Vestido de tiras | engin akyurt | [unsplash.com/photos/UbrPTBBxaE8](https://unsplash.com/photos/UbrPTBBxaE8) | `photo-1789110519607-6176d668fb72` |
+| Linaza | Vestido recto | Reistor | [unsplash.com/photos/dziVRZYOFpI](https://unsplash.com/photos/dziVRZYOFpI) | `photo-1747396206869-75ea57b325ce` |
+| Linaza | Camiseta de algodón | Avtar Singh | [unsplash.com/photos/8ACmRoleM24](https://unsplash.com/photos/8ACmRoleM24) | `photo-1778671394516-8270eac13c42` |
+| Linaza | Blazer de lino | Robert Richman | [unsplash.com/photos/cYRsB4liZPs](https://unsplash.com/photos/cYRsB4liZPs) | `photo-1740710748146-a15d840d6f40` |
+| Linaza | Portada: camisa blanca frente al mar | Margo Evardson | [unsplash.com/photos/5ObmjcAoXOI](https://unsplash.com/photos/5ObmjcAoXOI) | `photo-1776633734216-26b0dbcf61d1` |
+| Linaza | El taller: telas de lino | Svitlana | [unsplash.com/photos/ASB-wPXJFGE](https://unsplash.com/photos/ASB-wPXJFGE) | `photo-1596433904747-e8b061219a71` |
 
 ## Imágenes y video generados con IA
 

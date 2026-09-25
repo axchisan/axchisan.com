@@ -272,6 +272,109 @@ export const SOLUCIONES: Solucion[] = [
     ],
   },
   {
+    slug: "tiendas-de-ropa",
+    sector: "Tiendas de ropa",
+    icono: "ropa",
+    titulo: "Tienda en línea para marcas de ropa, con tallas, colores y pagos",
+    resumen:
+      "Tu colección con cada talla y color en su inventario, guía de tallas, envío por ciudad y pago con PSE, Nequi o tarjeta. La prenda se aparta sola cuando entra el pago.",
+    seo: {
+      title: "Tienda en línea para marcas de ropa en Colombia, con PSE y Nequi",
+      description:
+        "Tienda de ropa con tallas y colores por inventario, guía de tallas, envío por ciudad y pagos con PSE, Nequi o tarjeta. Pruébala en una demo funcionando. Desde $ 1.200.000.",
+    },
+    muestra: {
+      tipo: "demo",
+      href: "/demo/linaza",
+      nombre: "Linaza, lino y algodón",
+      nota: "Marca ficticia de ropa con colección, tallas por color, bolsa, pago simulado y panel de pedidos e inventario por talla.",
+    },
+    capturas: {
+      escritorio: cap("/capturas/linaza-portada-escritorio.webp", "Portada de la demo de Linaza en un computador"),
+      movil: cap("/capturas/linaza-producto-movil.webp", "Prenda con colores y tallas en un celular", true),
+    },
+    sintomas: [
+      "Vendes por Instagram y cada venta son veinte mensajes: precio, talla, color, envío, datos para pagar.",
+      "Alguien paga una talla que ya se había vendido y toca devolverle la plata.",
+      "Las fotos están en historias que desaparecen y la colección no se puede ver completa.",
+    ],
+    resultados: [
+      {
+        titulo: "Cada talla con su inventario",
+        texto: "Si el pantalón mostaza se acabó en XS, la página lo muestra tachado. Nadie paga lo que no hay.",
+      },
+      {
+        titulo: "Pagos que llegan antes de despachar",
+        texto: "PSE, Nequi o tarjeta en una pasarela segura. Cuando se aprueba, la prenda se aparta y el pedido aparece en tu panel.",
+      },
+      {
+        titulo: "Menos devoluciones",
+        texto: "Guía de tallas en centímetros, la talla que usa la modelo y el costo de envío a su ciudad antes de pagar.",
+      },
+    ],
+    diaADia: [
+      {
+        titulo: "La clienta elige",
+        texto: "Desde el enlace de Instagram ve la prenda, cambia el color y elige su talla. Si queda una sola, se lo avisa.",
+        captura: cap("/capturas/linaza-producto-movil.webp", "Prenda con colores y tallas en el celular", true),
+      },
+      {
+        titulo: "Paga y queda confirmado",
+        texto: "Pone su ciudad, ve el costo del envío y paga con PSE, Nequi o tarjeta. Le llega la confirmación por correo.",
+        captura: cap("/capturas/linaza-bolsa-escritorio.webp", "Bolsa con envío por ciudad y medios de pago"),
+      },
+      {
+        titulo: "Tú despachas",
+        texto: "El pedido aparece pagado en tu panel. Lo marcas empacado, luego enviado con la guía, y la clienta se entera sin que le escribas.",
+        captura: cap("/capturas/linaza-pedidos-escritorio.webp", "Panel de pedidos con sus estados"),
+      },
+      {
+        titulo: "Llega producción",
+        texto: "Sumas las unidades por color y talla en una tabla, y la página las muestra de inmediato.",
+        captura: cap("/capturas/linaza-inventario-escritorio.webp", "Inventario por color y talla"),
+      },
+    ],
+    incluye: [
+      "Colección con filtros por tipo de prenda y talla",
+      "Ficha de cada prenda con colores, tallas con inventario y guía de tallas",
+      "Bolsa con envío por ciudad y envío gratis desde el monto que definas",
+      "Pago con PSE, Nequi o tarjeta en una pasarela colombiana (tienda con pagos)",
+      "Panel de pedidos con estados y número de guía, e inventario por color y talla",
+      "Carga de hasta 50 prendas y capacitación",
+    ],
+    noIncluye: [
+      "Comisión de la pasarela de pagos, que se descuenta de cada venta",
+      "Fotografía de producto",
+      "Conexión automática con la transportadora (se cotiza aparte)",
+      "Facturación electrónica (módulo aparte)",
+    ],
+    planes: ["catalogo-whatsapp", "tienda-con-pagos", "sistema-completo"],
+    preguntas: [
+      {
+        p: "¿Puedo empezar vendiendo por WhatsApp y después cobrar en línea?",
+        r: "Sí. El catálogo con pedidos por WhatsApp cuesta desde $ 1.200.000 y la tienda con pagos se activa después sobre la misma colección.",
+      },
+      {
+        p: "¿Cuánto cobra la pasarela de pagos?",
+        r: "Depende de la pasarela y del medio de pago; en Colombia suele estar alrededor del 3 % más un valor fijo por transacción. Te ayudamos a elegir y a abrir la cuenta a tu nombre.",
+      },
+      {
+        p: "¿Por qué no Shopify?",
+        r: "Puede servirte, y te lo decimos si es así. Lo propio gana cuando no quieres pagar una mensualidad en dólares ni comisiones extra, y quieres PSE y Nequi sin complementos.",
+      },
+      {
+        p: "¿Cómo manejo los cambios de talla?",
+        r: "El pedido se marca como cambio en el panel y la talla devuelta vuelve al inventario. Las condiciones de cambio las defines tú y se muestran en cada prenda.",
+      },
+    ],
+    tecnico: [
+      "Motor de catálogo propio: variantes por color y talla con inventario, bolsa y envío por ciudad",
+      "Pasarela de pagos colombiana con confirmación automática del pago",
+      "Next.js con renderizado en servidor para que Google lea cada prenda",
+      "Imágenes optimizadas para que la colección cargue rápido en el celular",
+    ],
+  },
+  {
     slug: "inventario-y-ventas",
     sector: "Comercio y distribución",
     icono: "inventario",

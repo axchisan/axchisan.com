@@ -54,6 +54,7 @@ export const SECTORES: Sector[] = [
     nombre: "Tiendas de ropa",
     icono: Shirt,
     ejemplo: "Colecciones con tallas y colores, carrito y pagos",
+    solucion: "tiendas-de-ropa",
   },
   {
     id: "salones",
