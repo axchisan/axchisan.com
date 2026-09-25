@@ -272,6 +272,109 @@ export const SOLUCIONES: Solucion[] = [
     ],
   },
   {
+    slug: "inventario-y-ventas",
+    sector: "Comercio y distribución",
+    icono: "inventario",
+    titulo: "Sistema de inventario, caja y ventas para ferreterías y comercios",
+    resumen:
+      "Cada venta descuenta del inventario, sabes qué se está acabando antes de que se acabe y el pedido al proveedor se arma solo. Tus clientes ven en la página si hay y te mandan la lista por WhatsApp.",
+    seo: {
+      title: "Sistema de inventario y punto de venta para ferreterías y comercios",
+      description:
+        "Caja, inventario con kardex, entradas de mercancía, alertas de stock bajo, reportes a Excel y catálogo con existencias para ferreterías, misceláneas y distribuidoras. Pruébalo en una demo funcionando.",
+    },
+    muestra: {
+      tipo: "demo",
+      href: "/demo/doble-rosca",
+      nombre: "Ferretería Doble Rosca",
+      nota: "Ferretería ficticia con catálogo público, caja, inventario, entradas, reportes y pedido sugerido a proveedores, con tres semanas de ventas.",
+    },
+    capturas: {
+      escritorio: cap("/capturas/doble-rosca-caja-escritorio.webp", "Caja de la demo de Doble Rosca en un computador"),
+      movil: cap("/capturas/doble-rosca-portada-movil.webp", "Catálogo de la demo de Doble Rosca en un celular", true),
+    },
+    sintomas: [
+      "El inventario está en un cuaderno o en un Excel que nadie actualiza, y te enteras de que algo se acabó cuando un cliente lo pide.",
+      "Al final del día la caja no cuadra y no hay forma de saber dónde se fue la diferencia.",
+      "Medio día se va contestando por WhatsApp «¿tienen tal cosa?» y «¿cuánto vale?».",
+    ],
+    resultados: [
+      {
+        titulo: "El inventario cuadra solo",
+        texto: "Cada venta y cada entrada de mercancía mueven las existencias. El kardex de cada producto muestra de dónde salió cada unidad.",
+      },
+      {
+        titulo: "Pides antes de quedarte sin nada",
+        texto: "Cada producto tiene su mínimo. Lo que baja de ahí aparece en amarillo y el pedido al proveedor se arma con las cantidades sugeridas.",
+      },
+      {
+        titulo: "Sabes cuánto ganas",
+        texto: "Ventas, utilidad y margen por producto y por categoría, del día o del mes, y todo se descarga para el contador en Excel.",
+      },
+    ],
+    diaADia: [
+      {
+        titulo: "El cliente pregunta sin escribir",
+        texto: "En la página busca el producto, ve el precio y si hay. Arma su lista y la manda por WhatsApp.",
+        captura: cap("/capturas/doble-rosca-portada-movil.webp", "Catálogo con existencias en el celular", true),
+      },
+      {
+        titulo: "Se vende en la caja",
+        texto: "Se busca por nombre o código, se cobra en efectivo con el cambio calculado o por Nequi, y el inventario baja en ese momento.",
+        captura: cap("/capturas/doble-rosca-caja-escritorio.webp", "Caja con la venta actual y el cambio"),
+      },
+      {
+        titulo: "Se ve lo que se acaba",
+        texto: "La cinta de cada producto muestra lo que queda frente al mínimo. Lo que está por reponer aparece primero.",
+        captura: cap("/capturas/doble-rosca-inventario-escritorio.webp", "Inventario con existencias frente al mínimo"),
+      },
+      {
+        titulo: "Se cierra el mes",
+        texto: "Ventas por día, por categoría y por medio de pago, con la utilidad. Un botón lo descarga para Excel.",
+        captura: cap("/capturas/doble-rosca-reportes-escritorio.webp", "Reportes de ventas y utilidad"),
+      },
+    ],
+    incluye: [
+      "Catálogo público con precios y existencias, y lista de pedido por WhatsApp",
+      "Caja con búsqueda por nombre o código, descuentos, cambio y recibo",
+      "Inventario con mínimos, kardex por producto y ajustes por conteo físico",
+      "Entradas de mercancía por proveedor y factura",
+      "Reportes de ventas, utilidad y medios de pago, con descarga para Excel",
+      "Carga inicial de tus productos desde tu Excel",
+      "Capacitación y 30 días de garantía sobre fallas",
+    ],
+    noIncluye: [
+      "Facturación electrónica ante la DIAN (módulo aparte, con un proveedor autorizado)",
+      "Lector de código de barras e impresora de recibos (se compran aparte; el sistema funciona con los comunes)",
+      "Contabilidad completa: se entrega la información para el contador",
+    ],
+    planes: ["catalogo-whatsapp", "sistema-de-gestion", "sistema-completo"],
+    preguntas: [
+      {
+        p: "Tengo más de mil productos. ¿Hay que cargarlos a mano?",
+        r: "No. Se cargan desde el Excel que ya tengas, con código, nombre, costo, precio y existencias. Si no tienes uno, te damos la plantilla.",
+      },
+      {
+        p: "¿Funciona con lector de código de barras?",
+        r: "Sí. Los lectores USB comunes escriben el código en la búsqueda de la caja y el producto se agrega solo.",
+      },
+      {
+        p: "¿Sirve si tengo dos locales?",
+        r: "Sí, con inventario separado por local y los reportes juntos. Se cotiza según cuántos sean.",
+      },
+      {
+        p: "¿Y la factura electrónica?",
+        r: "Se conecta con un proveedor autorizado por la DIAN como módulo aparte. El sistema ya tiene la información de cada venta lista para enviarla.",
+      },
+    ],
+    tecnico: [
+      "Motor de gestión propio: existencias calculadas desde los movimientos, kardex y reportes",
+      "Base de datos PostgreSQL con copias de seguridad automáticas cifradas",
+      "Exportación a CSV que Excel abre en español, con tildes y coma decimal",
+      "Funciona en computador, tablet y celular; instalable como app",
+    ],
+  },
+  {
     slug: "restaurantes",
     sector: "Restaurantes y cafeterías",
     icono: "restaurantes",

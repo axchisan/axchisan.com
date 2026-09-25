@@ -41,6 +41,8 @@ obligatoria. Aun así se acredita al autor en la demo.
 | Fogón 45 | Flan de caramelo | Jay | [unsplash.com/photos/qjf9_9HRHXg](https://unsplash.com/photos/qjf9_9HRHXg) | `photo-1752245055475-8b7c3b4756ac` |
 | Fogón 45 | Arepas en la parrilla | Leila Issa | [unsplash.com/photos/4C_k18o_tnk](https://unsplash.com/photos/4C_k18o_tnk) | `photo-1587603366933-aa6947174c65` |
 | Fogón 45 | Salón del restaurante | Glenov Brankovic | [unsplash.com/photos/e4B5AvA7Jqo](https://unsplash.com/photos/e4B5AvA7Jqo) | `photo-1667388969250-1c7220bf3f37` |
+| Doble Rosca | Portada: estantería de ferretería | Artem Korolev | [unsplash.com/photos/UHXBNCK7Hu4](https://unsplash.com/photos/UHXBNCK7Hu4) | `photo-1765744893064-dce3184289ef` |
+| Doble Rosca | Pared de herramientas | Darien Attridge | [unsplash.com/photos/ciY4tc7539I](https://unsplash.com/photos/ciY4tc7539I) | `photo-1759200165738-6366977a73c6` |
 
 ## Imágenes y video generados con IA
 

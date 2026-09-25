@@ -399,3 +399,32 @@
 @media print {
   .fg-sin-imprimir { display: none !important; }
 }
+
+/* Ferretería Doble Rosca — docs/demos/doble-rosca.md
+   Verde de fachada de ferretería de barrio, zinc galvanizado y el amarillo de
+   la cinta métrica. */
+@theme inline {
+  --color-dr-zinc:     #eef1f3;
+  --color-dr-verde:    #1d5b3c;   /* 7,1:1 sobre zinc; blanco encima 8,0:1 */
+  --color-dr-verde-2:  #24704a;   /* hover sobre verde */
+  --color-dr-verde-claro: #c8e0d2; /* texto secundario sobre verde: 5,8:1 */
+  --color-dr-tinta:    #16181b;
+  --color-dr-acero:    #5a6470;   /* texto secundario: 5,3:1 sobre zinc */
+  --color-dr-cinta:    #f4c21a;   /* solo con tinta encima: 10,7:1 */
+  --color-dr-linea:    #d9dee3;
+  --color-dr-rojo:     #b42318;
+  --color-dr-rojo-suave: #fdeceb;
+  --color-dr-exito:    #276d4d;
+  --color-dr-exito-suave: #e3f1ea;
+  --color-dr-alerta:   #8f5808;
+  --color-dr-alerta-suave: #fbf0dc;
+  --font-dr: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Los títulos van en Archivo ensanchada: la letra de los avisos de fachada. */
+.dr-ancha { font-stretch: 125%; }
+
+/* La cinta métrica: marcas cada 10 % sobre la barra de existencias. */
+.dr-cinta-marcas {
+  background-image: repeating-linear-gradient(to right, rgb(22 24 27 / 0.35) 0 1px, transparent 1px 10%);
+}
