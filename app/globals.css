@@ -515,3 +515,24 @@
   --color-nm-alerta-suave: #fbf0dc;
   --font-nm: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
 }
+
+/* Tanda, panadería y café — docs/demos/tanda.md
+   Blanco, amarillo mantequilla en bloques, cacao para el texto y fresa como
+   acento. Nada de crema con terracota. */
+@theme inline {
+  --color-ta-blanco:    #ffffff;
+  --color-ta-mantequilla: #f6d365; /* solo con cacao encima: 11,2:1 */
+  --color-ta-mantequilla-suave: #fdf3cf;
+  --color-ta-cacao:     #2b1d14;
+  --color-ta-cacao-2:   #4a3527;
+  --color-ta-miga:      #6b5a4c;  /* texto secundario: 6,6:1 sobre blanco */
+  --color-ta-fresa:     #b8235a;  /* 6,1:1 sobre blanco */
+  --color-ta-fresa-suave: #fbe7ee;
+  --color-ta-linea:     #eee4d4;
+  --color-ta-exito:     #276d4d;
+  --color-ta-exito-suave: #e3f1ea;
+  --color-ta-alerta:    #8f5808;
+  --color-ta-alerta-suave: #fbf0dc;
+  --font-ta-titulo: var(--font-gluten), ui-rounded, system-ui, sans-serif;
+  --font-ta-texto:  var(--font-nunito-sans), ui-sans-serif, system-ui, sans-serif;
+}

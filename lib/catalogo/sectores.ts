@@ -1,5 +1,6 @@
 import {
   BedDouble,
+  Croissant,
   Boxes,
   Building2,
   Dumbbell,
@@ -69,6 +70,13 @@ export const SECTORES: Sector[] = [
     icono: BedDouble,
     ejemplo: "Página que recorre el lugar como un video y reservas por WhatsApp",
     solucion: "hoteles-y-turismo",
+  },
+  {
+    id: "panaderias",
+    nombre: "Panaderías y cafeterías",
+    icono: Croissant,
+    ejemplo: "Horneadas del día, pedidos y tortas por encargo",
+    solucion: "panaderias-y-cafeterias",
   },
   {
     id: "consultorios",

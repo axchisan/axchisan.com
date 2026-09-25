@@ -21,6 +21,8 @@ type Toma = {
   archivo: string
   url: string
   movil?: boolean
+  /** Hora fija del reloj del navegador (`HH:mm`), para demos que dependen de la hora. */
+  reloj?: string
   /** Acciones antes de la foto: llenar un formulario, entrar al panel… */
   preparar?: (p: Page) => Promise<void>
 }
@@ -204,6 +206,11 @@ const TOMAS: Toma[] = [
   { archivo: "nomenclatura-ficha-escritorio", url: `${BASE}/demo/nomenclatura/inmuebles/envigado-cocina` },
   { archivo: "nomenclatura-interesados-escritorio", url: `${BASE}/demo/nomenclatura/panel/interesados` },
   { archivo: "nomenclatura-panel-escritorio", url: `${BASE}/demo/nomenclatura/panel` },
+  { archivo: "tanda-portada-movil", url: `${BASE}/demo/tanda`, movil: true, reloj: "10:20" },
+  { archivo: "tanda-horneadas-escritorio", url: `${BASE}/demo/tanda#horneadas`, reloj: "10:20", preparar: async (p) => { await p.evaluate(() => document.querySelector("#horneadas")?.scrollIntoView()) } },
+  { archivo: "tanda-vitrina-escritorio", url: `${BASE}/demo/tanda#vitrina`, reloj: "10:20", preparar: async (p) => { await p.evaluate(() => document.querySelector("#vitrina")?.scrollIntoView()) } },
+  { archivo: "tanda-torta-escritorio", url: `${BASE}/demo/tanda/encargos`, reloj: "10:20" },
+  { archivo: "tanda-produccion-escritorio", url: `${BASE}/demo/tanda/panel/produccion`, reloj: "10:20" },
   { archivo: "orilla-portada-escritorio", url: `${BASE}/demo/orilla`, preparar: ORILLA(0.15, "#llegada") },
   { archivo: "orilla-portada-movil", url: `${BASE}/demo/orilla`, movil: true, preparar: ORILLA(0.15, "#llegada") },
   { archivo: "orilla-piscina-escritorio", url: `${BASE}/demo/orilla`, preparar: ORILLA(0.5, "#piscina") },
@@ -223,6 +230,11 @@ async function main() {
         : { viewport: { width: 1440, height: 900 } },
     )
     const p = await contexto.newPage()
+    if (t.reloj) {
+      const d = new Date()
+      d.setHours(Number(t.reloj.slice(0, 2)), Number(t.reloj.slice(3, 5)), 0, 0)
+      await p.clock.install({ time: d })
+    }
     try {
       // La demo cinematográfica carga fotogramas sin parar: nunca queda en reposo.
       await p.goto(t.url, { waitUntil: t.url.includes("/orilla") ? "load" : "networkidle" })
