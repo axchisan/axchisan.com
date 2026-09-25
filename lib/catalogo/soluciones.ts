@@ -272,6 +272,103 @@ export const SOLUCIONES: Solucion[] = [
     ],
   },
   {
+    slug: "panaderias-y-cafeterias",
+    sector: "Panaderías y cafeterías",
+    icono: "panaderias",
+    titulo: "Página con horneadas del día, pedidos y tortas por encargo para panaderías",
+    resumen:
+      "Tus clientes saben a qué hora sale el pan caliente y cuánto queda, piden para recoger o a domicilio y encargan la torta del cumpleaños con el precio a la vista y el anticipo.",
+    seo: {
+      title: "Página web y pedidos en línea para panaderías y cafeterías",
+      description:
+        "Vitrina con horneadas y disponibilidad del día, pedidos para recoger o a domicilio, tortas por encargo con anticipo y plan de producción para panaderías en Colombia. Pruébalo en una demo.",
+    },
+    muestra: {
+      tipo: "demo",
+      href: "/demo/tanda",
+      nombre: "Tanda, panadería y café",
+      nota: "Panadería ficticia en Bucaramanga con horneadas del día, vitrina con lo que queda, pedidos, tortas por encargo y panel de producción.",
+    },
+    capturas: {
+      escritorio: cap("/capturas/tanda-horneadas-escritorio.webp", "Horneadas del día de la demo de Tanda"),
+      movil: cap("/capturas/tanda-portada-movil.webp", "Portada de la demo de Tanda en un celular", true),
+    },
+    sintomas: [
+      "Todo el día preguntan por WhatsApp «¿ya salió el pandebono?» y «¿todavía hay?».",
+      "Los encargos de tortas se anotan en un cuaderno y alguno se olvida o se hace del sabor equivocado.",
+      "El pedido para recoger llega cuando el pan ya se acabó.",
+    ],
+    resultados: [
+      {
+        titulo: "Pan caliente a la hora",
+        texto: "La página dice cuándo sale cada horneada y cuánto queda de la última. Cuando se acaba, dice a qué hora vuelve.",
+      },
+      {
+        titulo: "Encargos completos y con anticipo",
+        texto: "Tamaño, sabor, relleno, cubierta, mensaje y fecha, con el precio calculado. Se confirman cuando llega el anticipo.",
+      },
+      {
+        titulo: "La producción del día, clara",
+        texto: "Cada tanda con lo que hay que hornear, los pedidos que la esperan y los bizcochos de las tortas de mañana.",
+      },
+    ],
+    diaADia: [
+      {
+        titulo: "El cliente mira la vitrina",
+        texto: "Ve qué acaba de salir, cuánto queda y a qué hora sale lo que se acabó. Pide para recoger o a domicilio.",
+        captura: cap("/capturas/tanda-vitrina-escritorio.webp", "Vitrina con lo que queda de cada producto"),
+      },
+      {
+        titulo: "Encarga la torta",
+        texto: "La arma eligiendo cada parte y ve el precio mientras tanto. Queda con fecha y el anticipo pendiente.",
+        captura: cap("/capturas/tanda-torta-escritorio.webp", "Armado de una torta por encargo con su precio"),
+      },
+      {
+        titulo: "La cocina hornea",
+        texto: "El plan del día por tandas, que el panadero va marcando, y los bizcochos que hay que dejar listos para mañana.",
+        captura: cap("/capturas/tanda-produccion-escritorio.webp", "Plan de producción del día por tandas"),
+      },
+    ],
+    incluye: [
+      "Página con las horneadas del día y la vitrina con precios",
+      "Disponibilidad de cada producto según la horneada",
+      "Pedidos para recoger a una hora o a domicilio por barrio, que llegan por WhatsApp",
+      "Tortas por encargo con precio calculado, fecha y anticipo (sistema)",
+      "Plan de producción por tandas y encargos del día siguiente (sistema)",
+      "Capacitación y 30 días de garantía sobre fallas",
+    ],
+    noIncluye: [
+      "Punto de venta del mostrador con inventario de insumos (se cotiza como el sistema de Doble Rosca)",
+      "Conexión con Rappi o iFood",
+      "Fotografía de los productos",
+    ],
+    planes: ["pagina-profesional", "catalogo-whatsapp", "sistema-de-gestion", "sistema-completo"],
+    preguntas: [
+      {
+        p: "¿Cómo sabe la página cuánto queda?",
+        r: "En la demo se estima con la hora de la horneada. En tu panadería, el mostrador descuenta cada venta y la página muestra lo que de verdad hay.",
+      },
+      {
+        p: "¿Sirve para una cafetería sin horno propio?",
+        r: "Sí. Sin horneadas, la carta funciona como la de un restaurante: pedidos para recoger, a domicilio o en la mesa con QR.",
+      },
+      {
+        p: "¿Puedo cobrar el anticipo de las tortas en línea?",
+        r: "Con el sistema completo, el cliente paga el anticipo con Nequi o PSE al encargar y el encargo se confirma solo.",
+      },
+      {
+        p: "¿Mis clientes tienen que instalar algo?",
+        r: "No. Entran desde el enlace de Instagram o de Google Maps.",
+      },
+    ],
+    tecnico: [
+      "Motor de pedidos compartido con la demo de restaurante, ya probado",
+      "Disponibilidad calculada desde las horneadas del día",
+      "Base de datos PostgreSQL con copias de seguridad automáticas cifradas",
+      "Funciona en computador, tablet y celular; instalable como app",
+    ],
+  },
+  {
     slug: "inmobiliarias",
     sector: "Inmobiliarias",
     icono: "inmobiliarias",

@@ -24,6 +24,7 @@
 | F6a · Molar 116 | **Hecha**: primera de la ola 2. Consultorio odontológico sobre el motor de agenda, con odontograma interactivo (FDI, cinco caras), plan de tratamiento y presupuesto automáticos, abonos y cartera. Ficha `/soluciones/consultorios-odontologicos`. 14 pruebas E2E |
 | F6b · Palanca | **Hecha**: gimnasio sobre un motor nuevo de clases con cupo (`demos/motores/clases/`): horario semanal, reservas con lista de espera, clase gratis, asistencia con tiquetera, membresías con vencimiento y renovación, ocupación por horario. Ficha `/soluciones/gimnasios-y-estudios`. 16 pruebas E2E |
 | F6c · Nomenclatura | **Hecha**: primera demo del motor de listados (`demos/motores/listados/`). Inmobiliaria con buscador, filtros en el enlace, mapa esquemático, ficha con simulador de crédito o costos de arriendo, visitas en la agenda del asesor, y panel de inmuebles, interesados y visitas. Ficha `/soluciones/inmobiliarias`. 14 pruebas E2E |
+| F6d · Tanda | **Hecha**: segunda demo del motor de pedidos. Panadería con horneadas del día y disponibilidad calculada desde ellas, pedidos para recoger o a domicilio, tortas por encargo con anticipo y plan de producción. Ficha `/soluciones/panaderias-y-cafeterias` (sector nuevo). 12 pruebas E2E |
 
 ## 0. En cinco líneas
 

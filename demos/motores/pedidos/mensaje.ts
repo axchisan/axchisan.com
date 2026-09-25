@@ -16,8 +16,10 @@ export function mensajePedido(negocio: string, p: Pedido) {
     p.canal === "mesa"
       ? `Mesa ${p.mesa}`
       : p.canal === "recoger"
-        ? `Para recoger ${p.hora ? `a las ${textoHora(p.hora)}` : "lo antes posible"}`
-        : `Domicilio a ${p.direccion?.direccion}, ${p.direccion?.barrio}${p.direccion?.indicaciones ? ` (${p.direccion.indicaciones})` : ""}`
+        ? p.hora
+          ? `a las ${textoHora(p.hora)}`
+          : "lo antes posible"
+        : `${p.direccion?.direccion}, ${p.direccion?.barrio}${p.direccion?.indicaciones ? ` (${p.direccion.indicaciones})` : ""}`
 
   const pago =
     p.pago === "efectivo" && p.pagaCon ? `${PAGO.efectivo}, paga con ${pesos(p.pagaCon)}` : PAGO[p.pago]
@@ -27,7 +29,8 @@ export function mensajePedido(negocio: string, p: Pedido) {
     "",
     ...lineas,
     "",
-    `${CANAL[p.canal]}: ${entrega}.`,
+    // Una hora ya termina en punto ("3:00 p. m."): no se le agrega otro.
+    `${CANAL[p.canal]}: ${entrega}${entrega.endsWith(".") ? "" : "."}`,
     p.domicilio ? `Subtotal ${pesos(subtotal(p))} y domicilio ${pesos(p.domicilio)}.` : "",
     `Total ${pesos(total(p))}. Pago: ${pago}.`,
   ]

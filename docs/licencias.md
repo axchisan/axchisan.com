@@ -81,6 +81,21 @@ obligatoria. Aun así se acredita al autor en la demo.
 | Nomenclatura | Cocina moderna | Irena Oze | [unsplash.com/photos/xLEQEF3cC1s](https://unsplash.com/photos/xLEQEF3cC1s) | `photo-1781249144275-c04daed37031` |
 | Nomenclatura | Casa campestre | Datingjungle | [unsplash.com/photos/chO9nH4iAKc](https://unsplash.com/photos/chO9nH4iAKc) | `photo-1613498248726-8922766cebdb` |
 | Nomenclatura | Comedor | Zac Gudakov | [unsplash.com/photos/pJClFZuRc3c](https://unsplash.com/photos/pJClFZuRc3c) | `photo-1629042306548-afec37a5e46b` |
+| Tanda | Pandebono | rodolfo allen_ | [unsplash.com/photos/mOedSrS6qS0](https://unsplash.com/photos/mOedSrS6qS0) | `photo-1559141680-d0bd7bc5af84` |
+| Tanda | Pan francés | Sergio Arze | [unsplash.com/photos/cWXibBbXx44](https://unsplash.com/photos/cWXibBbXx44) | `photo-1568471173242-461f0a730452` |
+| Tanda | Masa madre | Monika Grabkowska | [unsplash.com/photos/mha2dvydACg](https://unsplash.com/photos/mha2dvydACg) | `photo-1616841888027-89693dec0827` |
+| Tanda | Pan de leche | César Guel | [unsplash.com/photos/OLdmSwK94Sw](https://unsplash.com/photos/OLdmSwK94Sw) | `photo-1609889132680-4e2ea2befbef` |
+| Tanda | Croissant | personalgraphic.com | [unsplash.com/photos/VzUE5RtCuBA](https://unsplash.com/photos/VzUE5RtCuBA) | `photo-1691480162735-9b91238080f6` |
+| Tanda | Pastel de guayaba | Geri Chapple | [unsplash.com/photos/fXdoHjQ2Pyg](https://unsplash.com/photos/fXdoHjQ2Pyg) | `photo-1608582037152-adefa9decb70` |
+| Tanda | Mantecadas | Taylor Grote | [unsplash.com/photos/LqkFX2Km1a0](https://unsplash.com/photos/LqkFX2Km1a0) | `photo-1499889808931-317a0255c0e9` |
+| Tanda | Torta de naranja | Rasmus Gundorff Sæderup | [unsplash.com/photos/r_2o5F_1wEs](https://unsplash.com/photos/r_2o5F_1wEs) | `photo-1590055619179-a07394301525` |
+| Tanda | Milhoja | Cody Chan | [unsplash.com/photos/BhK9JdaBTvk](https://unsplash.com/photos/BhK9JdaBTvk) | `photo-1622941367239-8acd68fa946d` |
+| Tanda | Tinto | tabitha turner | [unsplash.com/photos/3n3mPoGko8g](https://unsplash.com/photos/3n3mPoGko8g) | `photo-1593443320739-77f74939d0da` |
+| Tanda | Capuchino | Phil Desforges | [unsplash.com/photos/Nw8wbiDE3gU](https://unsplash.com/photos/Nw8wbiDE3gU) | `photo-1559001724-fbad036dbc9e` |
+| Tanda | Torta de chocolate | Karly Jones | [unsplash.com/photos/z-Lvc04qYaQ](https://unsplash.com/photos/z-Lvc04qYaQ) | `photo-1555050338-0abc773f7978` |
+| Tanda | Torta con fresas | Tuva Mathilde Løland | [unsplash.com/photos/4rfVL3NNGrA](https://unsplash.com/photos/4rfVL3NNGrA) | `photo-1559553156-2e97137af16f` |
+| Tanda | Torta con naranja | Joe Dumas | [unsplash.com/photos/JNb_3Ork0Rc](https://unsplash.com/photos/JNb_3Ork0Rc) | `photo-1772064871914-00305a3053d2` |
+| Tanda | Portada: panadero en el horno | DDP | [unsplash.com/photos/CceG6jpl19M](https://unsplash.com/photos/CceG6jpl19M) | `photo-1560427183-4efd29c38997` |
 
 ## Imágenes y video generados con IA
 

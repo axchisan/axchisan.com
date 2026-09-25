@@ -100,7 +100,7 @@ export function HorarioPalanca() {
                         </button>
                       ) : (
                         <BotonWhatsappPalanca
-                          mensaje={`Hola, Palanca. Quiero reservar la clase de ${t.nombre.toLowerCase()} del ${textoDia(s.inicio.slice(0, 10)).toLowerCase()} a las ${textoHora(s.inicio)}.`}
+                          mensaje={`Hola, Palanca. Quiero reservar la clase de ${t.nombre.toLowerCase()} del ${textoDia(s.inicio.slice(0, 10)).toLowerCase()} a las ${textoHora(s.inicio)}`}
                           className="h-10 w-36 rounded-[4px] border-2 border-pa-hierro text-[0.9375rem] font-bold hover:bg-pa-hierro hover:text-white"
                         >
                           Reservar
