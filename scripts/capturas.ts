@@ -92,6 +92,32 @@ const TOMAS: Toma[] = [
   { archivo: "peine-fino-hoy-escritorio", url: `${BASE}/demo/peine-fino/panel`, preparar: SALON },
   { archivo: "peine-fino-caja-escritorio", url: `${BASE}/demo/peine-fino/panel/caja`, preparar: SALON },
   { archivo: "peine-fino-volver-escritorio", url: `${BASE}/demo/peine-fino/panel/volver`, preparar: SALON },
+  { archivo: "fogon-45-portada-escritorio", url: `${BASE}/demo/fogon-45` },
+  { archivo: "fogon-45-portada-movil", url: `${BASE}/demo/fogon-45`, movil: true },
+  {
+    archivo: "fogon-45-mesa-movil",
+    url: `${BASE}/demo/fogon-45?mesa=7`,
+    movil: true,
+    preparar: async (p) => {
+      await p.getByRole("button", { name: "Agregar Bandeja 45" }).click()
+      await p.getByRole("button", { name: /Agregar por/ }).click()
+      await p.evaluate(() => document.querySelector("#carta")?.scrollIntoView())
+      await p.waitForTimeout(3800)
+    },
+  },
+  { archivo: "fogon-45-cocina-escritorio", url: `${BASE}/demo/fogon-45/panel/cocina` },
+  {
+    archivo: "fogon-45-seguimiento-movil",
+    url: `${BASE}/demo/fogon-45/panel`,
+    movil: true,
+    preparar: async (p) => {
+      // Un domicilio que va en camino: el seguimiento se ve con casi todo hecho.
+      const fila = p.locator("li").filter({ hasText: "En camino" }).filter({ hasText: "Domicilio" }).first()
+      const numero = (await fila.locator("p").first().textContent())?.replace(/\D/g, "")
+      await p.goto(`${BASE}/demo/fogon-45/pedido/p${numero}`, { waitUntil: "networkidle" })
+    },
+  },
+  { archivo: "fogon-45-carta-escritorio", url: `${BASE}/demo/fogon-45/panel/carta` },
   { archivo: "orilla-portada-escritorio", url: `${BASE}/demo/orilla`, preparar: ORILLA(0.15, "#llegada") },
   { archivo: "orilla-portada-movil", url: `${BASE}/demo/orilla`, movil: true, preparar: ORILLA(0.15, "#llegada") },
   { archivo: "orilla-piscina-escritorio", url: `${BASE}/demo/orilla`, preparar: ORILLA(0.5, "#piscina") },

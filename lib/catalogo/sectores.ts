@@ -47,6 +47,7 @@ export const SECTORES: Sector[] = [
     nombre: "Restaurantes y cafeterías",
     icono: UtensilsCrossed,
     ejemplo: "Carta digital con QR, pedidos y reservas",
+    solucion: "restaurantes",
   },
   {
     id: "ropa",

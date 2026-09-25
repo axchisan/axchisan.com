@@ -53,7 +53,7 @@ export function WhatsappSimulado({
           <p className="mt-2 text-[0.9375rem] text-mid">
             En la página real este botón abre el chat de {negocio} con el mensaje ya escrito:
           </p>
-          <div className="mt-4 rounded-[14px] rounded-tr-[4px] bg-[#dcf8c6] p-4 text-[0.9375rem] leading-relaxed text-[#111b21]">
+          <div tabIndex={0} className="mt-4 max-h-[50vh] overflow-y-auto rounded-[14px] rounded-tr-[4px] bg-[#dcf8c6] p-4 text-[0.9375rem] leading-relaxed whitespace-pre-line text-[#111b21]">
             {mensaje}
           </div>
           <p className="mt-4 text-[0.8125rem] text-mid">

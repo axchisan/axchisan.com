@@ -272,6 +272,110 @@ export const SOLUCIONES: Solucion[] = [
     ],
   },
   {
+    slug: "restaurantes",
+    sector: "Restaurantes y cafeterías",
+    icono: "restaurantes",
+    titulo: "Carta digital con QR, pedidos y pantalla de cocina para restaurantes",
+    resumen:
+      "Tus clientes ven la carta con fotos, piden desde la mesa, para recoger o a domicilio, y el pedido llega completo a la cocina. Lo que se acaba se marca como agotado en un toque.",
+    seo: {
+      title: "Carta digital con QR y sistema de pedidos para restaurantes",
+      description:
+        "Carta con QR por mesa, pedidos a domicilio y para recoger, reservas y pantalla de cocina para restaurantes en Colombia. Pruébalo en una demo funcionando. Desde $ 600.000.",
+    },
+    muestra: {
+      tipo: "demo",
+      href: "/demo/fogon-45",
+      nombre: "Fogón 45, cocina colombiana",
+      nota: "Restaurante ficticio con carta, pedidos con seguimiento, reservas y panel con cocina, carta editable y ventas del día.",
+    },
+    capturas: {
+      escritorio: cap("/capturas/fogon-45-portada-escritorio.webp", "Portada de la demo de Fogón 45 en un computador"),
+      movil: cap("/capturas/fogon-45-portada-movil.webp", "Portada de la demo de Fogón 45 en un celular", true),
+    },
+    sintomas: [
+      "Los pedidos llegan por WhatsApp mezclados con todo lo demás, y a veces uno se pierde.",
+      "La carta está en un PDF que nadie abre, y cambiar un precio es volver a imprimirla.",
+      "En la hora del almuerzo nadie alcanza a contestar el teléfono para reservas.",
+    ],
+    resultados: [
+      {
+        titulo: "Piden sin esperar al mesero",
+        texto: "Cada mesa tiene su QR. El cliente ve la carta con fotos, elige el término de la carne y el pedido llega a la cocina con el número de la mesa.",
+      },
+      {
+        titulo: "Domicilios que llegan completos",
+        texto: "Barrio con su costo, dirección, cómo paga y con cuánto. Nadie tiene que devolver la llamada para preguntar lo que faltó.",
+      },
+      {
+        titulo: "La cocina en una pantalla",
+        texto: "Una tablet reemplaza las comandas de papel: cada pedido con sus notas y los minutos que lleva esperando.",
+      },
+    ],
+    diaADia: [
+      {
+        titulo: "El cliente escanea y pide",
+        texto: "Desde la mesa, o desde su casa con el enlace de Instagram. Elige, ajusta y envía; no necesita instalar nada.",
+        captura: cap("/capturas/fogon-45-mesa-movil.webp", "Carta abierta desde el QR de la mesa 7 en un celular", true),
+      },
+      {
+        titulo: "La cocina lo recibe",
+        texto: "El pedido aparece en la pantalla de la cocina con las notas resaltadas. Un toque lo pasa a preparación y otro a listo.",
+        captura: cap("/capturas/fogon-45-cocina-escritorio.webp", "Pantalla de la cocina con pedidos nuevos, en preparación y listos"),
+      },
+      {
+        titulo: "El cliente sabe cómo va",
+        texto: "Ve su pedido avanzar sin escribir para preguntar. El restaurante también lo recibe completo por WhatsApp.",
+        captura: cap("/capturas/fogon-45-seguimiento-movil.webp", "Seguimiento del pedido en el celular del cliente", true),
+      },
+      {
+        titulo: "La carta, siempre al día",
+        texto: "Se acabó la mojarra: se marca como agotada y deja de ofrecerse al instante. Los precios se cambian igual de fácil.",
+        captura: cap("/capturas/fogon-45-carta-escritorio.webp", "Panel para cambiar precios y marcar platos agotados"),
+      },
+    ],
+    incluye: [
+      "Página con la carta por categorías, fotos, precios y opciones de cada plato",
+      "Un código QR por mesa, listo para imprimir",
+      "Pedidos a la mesa, para recoger y a domicilio con costo por barrio",
+      "Pago con Nequi, Daviplata, efectivo con cambio o datáfono",
+      "Seguimiento del pedido para el cliente y copia por WhatsApp para el restaurante",
+      "Panel de pedidos, pantalla de cocina, reservas con cupos y ventas del día",
+      "Capacitación y 30 días de garantía sobre fallas",
+    ],
+    noIncluye: [
+      "Cobro en línea con PSE o tarjeta (viene en el sistema completo)",
+      "Conexión con Rappi o iFood",
+      "Facturación electrónica (módulo aparte)",
+      "Fotografía de los platos",
+    ],
+    planes: ["pagina-profesional", "sitio-con-panel", "catalogo-whatsapp", "sistema-de-gestion", "sistema-completo"],
+    preguntas: [
+      {
+        p: "¿Puedo empezar solo con la carta digital?",
+        r: "Sí. La carta con QR y un panel para cambiar precios y agotados cuesta desde $ 900.000. Los pedidos y la cocina se agregan después, sobre la misma carta.",
+      },
+      {
+        p: "Ya vendo por Rappi. ¿Para qué quiero pedidos propios?",
+        r: "Para los clientes que ya te conocen. Cada pedido que llega directo es uno por el que no pagas la comisión de la aplicación, y el cliente queda en tu lista.",
+      },
+      {
+        p: "¿Qué necesito en la cocina?",
+        r: "Una tablet o un computador con navegador. Si prefieres papel, cada pedido también se puede imprimir.",
+      },
+      {
+        p: "¿Mis clientes tienen que instalar algo?",
+        r: "No. Escanean el QR con la cámara del celular o abren el enlace desde Instagram o Google Maps.",
+      },
+    ],
+    tecnico: [
+      "Motor de pedidos propio: carta con opciones, carrito, estados del pedido y mensaje a WhatsApp",
+      "Next.js con renderizado en servidor para que Google lea la carta",
+      "Base de datos PostgreSQL con copias de seguridad automáticas cifradas",
+      "Funciona en computador, tablet y celular; instalable como app",
+    ],
+  },
+  {
     slug: "hoteles-y-turismo",
     sector: "Hoteles y turismo",
     icono: "hoteles",
