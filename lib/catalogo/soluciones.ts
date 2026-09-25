@@ -272,6 +272,104 @@ export const SOLUCIONES: Solucion[] = [
     ],
   },
   {
+    slug: "hoteles-y-turismo",
+    sector: "Hoteles y turismo",
+    icono: "hoteles",
+    titulo: "Páginas cinematográficas para hoteles, alojamientos y proyectos turísticos",
+    resumen:
+      "Una página que se recorre como un video: al bajar, la cámara llega por el mar, pasa por la piscina y entra a la habitación. Quien la ve siente el lugar antes de escribirte.",
+    seo: {
+      title: "Página web para hoteles con video que avanza con el scroll",
+      description:
+        "Páginas cinematográficas para hoteles, glampings y proyectos inmobiliarios: el recorrido avanza al bajar, con habitaciones, precios y reservas por WhatsApp. Míralo funcionando.",
+    },
+    muestra: {
+      tipo: "demo",
+      href: "/demo/orilla",
+      nombre: "Orilla, hotel frente al mar",
+      nota: "Hotel ficticio con tres escenas que avanzan con el scroll, habitaciones con precio y reserva por WhatsApp.",
+    },
+    capturas: {
+      escritorio: cap("/capturas/orilla-portada-escritorio.webp", "Portada de la demo de Orilla en un computador"),
+      movil: cap("/capturas/orilla-portada-movil.webp", "Portada de la demo de Orilla en un celular", true),
+    },
+    sintomas: [
+      "Las fotos del hotel son buenas, pero en la página se ven iguales a las de cualquier otro.",
+      "Casi todas las reservas pasan por plataformas que se quedan con una comisión alta de cada noche.",
+      "Quien pregunta por WhatsApp no sabe qué habitación pedir ni cuánto cuesta.",
+    ],
+    resultados: [
+      {
+        titulo: "Se recorre antes de llegar",
+        texto: "Cada escena avanza al ritmo del dedo o de la rueda del mouse: la llegada, la piscina, la habitación. Nadie se salta el recorrido, porque el recorrido es la página.",
+      },
+      {
+        titulo: "Reservas directas, sin comisión",
+        texto: "Las habitaciones van con su precio y el botón abre WhatsApp con el mensaje escrito. La conversación empieza donde tiene que empezar.",
+      },
+      {
+        titulo: "Carga rápida también en el celular",
+        texto: "El celular recibe una versión más liviana de cada escena, y quien tiene activado el ahorro de datos ve fotos fijas. Nadie espera una pantalla en blanco.",
+      },
+    ],
+    diaADia: [
+      {
+        titulo: "La llegada",
+        texto: "La portada no es una foto: es el camino hasta la puerta. El título y el contador del video acompañan cada paso.",
+        captura: cap("/capturas/orilla-portada-escritorio.webp", "Primera escena: la llegada al hotel por la bahía"),
+      },
+      {
+        titulo: "El lugar, escena por escena",
+        texto: "Cada espacio que vendes tiene su propia escena: la piscina, el restaurante, la suite. Se hacen con video de dron, con un recorrido grabado o generadas a partir de tus fotos.",
+        captura: cap("/capturas/orilla-piscina-escritorio.webp", "Segunda escena: el jardín y la piscina"),
+      },
+      {
+        titulo: "Del recorrido a la reserva",
+        texto: "Al terminar las escenas vienen las habitaciones con precio por noche, las experiencias y cómo llegar. El último botón abre WhatsApp.",
+        captura: cap("/capturas/orilla-habitaciones-escritorio.webp", "Lista de habitaciones con precio por noche"),
+      },
+    ],
+    incluye: [
+      "Hasta tres escenas que avanzan con el scroll, preparadas para computador y celular",
+      "Preparación del video: corte, color y conversión a fotogramas livianos",
+      "Habitaciones o unidades con fotos, descripción y precio",
+      "Galería, experiencias, cómo llegar y políticas de la estadía",
+      "Botón de reserva que abre WhatsApp con el mensaje escrito",
+      "Versión fija para quien tiene activado el ahorro de datos o reduce las animaciones",
+      "Posicionamiento básico en Google y 30 días de garantía sobre fallas",
+    ],
+    noIncluye: [
+      "Grabación con dron o fotografía profesional (se coordina con un tercero y se cotiza aparte)",
+      "Motor de reservas con disponibilidad por fecha y pago en línea (se cotiza como sistema)",
+      "Conexión con Booking o Airbnb",
+    ],
+    planes: ["pagina-profesional", "pagina-cinematografica", "sistema-de-gestion"],
+    preguntas: [
+      {
+        p: "¿De dónde sale el video?",
+        r: "De un video tuyo, grabado con dron o con el celular en un estabilizador, o generado con inteligencia artificial a partir de tus fotos, como en esta demo. Lo revisamos antes de cotizar para decirte si sirve.",
+      },
+      {
+        p: "¿Sirve para algo distinto de un hotel?",
+        r: "Sí. Funciona para cualquier lugar que se venda por cómo se ve: glampings, fincas, restaurantes, proyectos de vivienda y salas de venta de inmobiliarias.",
+      },
+      {
+        p: "¿No es muy pesada para el celular?",
+        r: "El celular recibe fotogramas más pequeños y los primeros llegan en segundos; el resto carga mientras la persona baja. En esta demo, las tres escenas completas suman unos 14 MB en el celular, y quien tiene activado el ahorro de datos no descarga ninguna.",
+      },
+      {
+        p: "¿Puedo tener la página cinematográfica en una página normal que ya tengo?",
+        r: "Sí. La portada cinematográfica también se vende sola, como módulo de $ 600.000 sobre una página que ya hayamos hecho.",
+      },
+    ],
+    tecnico: [
+      "Motor de escenas propio: pinta en canvas el fotograma que corresponde al scroll, sin reproducir video",
+      "Fotogramas WebP servidos desde almacenamiento sin costo de salida, con caché de un año",
+      "Carga de grueso a fino: la escena responde con pocos fotogramas y gana fluidez mientras llegan los demás",
+      "Respeta la preferencia de reducir movimiento y el ahorro de datos del celular",
+    ],
+  },
+  {
     slug: "tiendas-de-cosmeticos",
     sector: "Cosméticos y cuidado personal",
     icono: "cosmeticos",

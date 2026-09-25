@@ -38,6 +38,7 @@ Con el motor hecho, cada plan cuesta estas jornadas (8 horas) de trabajo real:
 | Presencia | $ 300.000 | 0,5 | $ 600.000 |
 | Página profesional | $ 600.000 | 1,5 | $ 400.000 |
 | Sitio con panel | $ 900.000 | 2,5 | $ 360.000 |
+| Página cinematográfica | $ 1.800.000 | 4 (más ~USD 20 de créditos de video) | $ 450.000 |
 | Catálogo con pedidos por WhatsApp | $ 1.200.000 | 3 | $ 400.000 |
 | Citas en línea | $ 1.400.000 | 3 | $ 467.000 |
 | Tienda con pagos | $ 1.800.000 | 4,5 | $ 400.000 |
@@ -126,6 +127,7 @@ Precios desde, finales y sin IVA.
 | **Presencia** | **$ 300.000** | 3 días hábiles | Una página con servicios, horario, mapa y WhatsApp, sobre plantilla |
 | Página profesional | $ 600.000 | 1 a 2 semanas | Diseño propio, formulario, analítica, ficha de Google |
 | Sitio con panel | $ 900.000 | 2 semanas | Varias páginas y panel para editar |
+| Página cinematográfica | $ 1.800.000 | 2 a 3 semanas | Recorrido en video que avanza con el scroll, creado con IA desde fotos del lugar. Para hoteles, turismo, proyectos de vivienda (como la demo de Orilla) |
 | Catálogo con pedidos por WhatsApp | $ 1.200.000 | 2 a 3 semanas | Productos, carrito y pedido armado por WhatsApp (como Jabones Mari) |
 | Citas en línea | $ 1.400.000 | 2 a 3 semanas | Reserva desde el celular y agenda del día |
 | Tienda con pagos | $ 1.800.000 | 3 a 4 semanas | Catálogo con cobro en línea e inventario |
@@ -140,6 +142,7 @@ ajustes, el contenido lo entrega el cliente y la plantilla no se rediseña.
 | Módulo | Precio |
 |---|---|
 | Diagnóstico de un proyecto a medida (se descuenta si contrata) | $ 150.000 |
+| Portada cinematográfica (una escena de video con el scroll) | $ 600.000 |
 | Recordatorios automáticos por WhatsApp | $ 400.000 + consumo |
 | Pasarela de pagos en un plan que no la trae | $ 400.000 |
 | Facturación electrónica con proveedor autorizado | $ 600.000 + suscripción del proveedor |

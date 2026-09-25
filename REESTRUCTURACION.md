@@ -17,6 +17,7 @@
 | Correo `@axchisan.com` | **Hecho**: `contacto@axchisan.com` en Zoho Mail, en el sitio y como destino de los avisos. Falta el registro DMARC (`docs/correo-dominio.md`) |
 | F4a · Canela | **Hecha**: portada, reserva en cuatro pasos, panel con Hoy, Agenda, Pacientes, ficha clínica, consulta con fórmula imprimible, Recordatorios y Resumen. 20 pruebas E2E en escritorio y celular, incluida WCAG AA |
 | F4b · Peine Fino | **Hecha**: segunda demo del motor de agenda (`demos/motores/agenda/`, extraído de Canela). Salón y barbería con reserva de varios servicios, agenda por profesional, caja con comisiones, fórmulas de color y clientes que no vuelven. Ficha `/soluciones/salones-y-barberias`. 18 pruebas E2E |
+| F4c · Orilla | **Hecha**: primera demo del motor cinematográfico (`demos/motores/cinematico/`), nacida de las pruebas de PaginasScroll. Hotel frente al mar con tres escenas que avanzan con el scroll, fotogramas en R2. Crea el plan **Página cinematográfica** ($ 1.800.000) y el módulo **Portada cinematográfica** ($ 600.000). Ficha `/soluciones/hoteles-y-turismo`. 12 pruebas E2E |
 
 ## 0. En cinco líneas
 

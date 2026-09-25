@@ -1,4 +1,5 @@
 import {
+  BedDouble,
   Boxes,
   Building2,
   Dumbbell,
@@ -59,6 +60,13 @@ export const SECTORES: Sector[] = [
     icono: Scissors,
     ejemplo: "Reservas por estilista, caja y comisiones",
     solucion: "salones-y-barberias",
+  },
+  {
+    id: "hoteles",
+    nombre: "Hoteles y turismo",
+    icono: BedDouble,
+    ejemplo: "Página que recorre el lugar como un video y reservas por WhatsApp",
+    solucion: "hoteles-y-turismo",
   },
   {
     id: "consultorios",

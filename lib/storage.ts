@@ -215,6 +215,14 @@ function etiqueta(xml: string, nombre: string): string | undefined {
  * contienen `<` porque los genera `buildKey`, y un parser sería una dependencia
  * más para un formato que no cambia.
  */
+/**
+ * Carpetas del bucket que no son archivos del panel: los fotogramas de las
+ * demos cinematográficas son más de mil por demo. Se saltan dentro del listado
+ * y no cuentan contra el límite: S3 lista en orden alfabético y `demos/` va
+ * antes que `files/` e `images/`, así que ocuparía todo el cupo.
+ */
+const OCULTAS_EN_PANEL = ["demos/"]
+
 export async function listObjects(prefix?: string, limit = 1000): Promise<StoredObject[]> {
   const out: StoredObject[] = []
   let token: string | undefined
@@ -233,6 +241,7 @@ export async function listObjects(prefix?: string, limit = 1000): Promise<Stored
     for (const bloque of xml.match(/<Contents>[\s\S]*?<\/Contents>/g) ?? []) {
       const key = etiqueta(bloque, "Key")
       if (!key || key.endsWith("/")) continue
+      if (!prefix && OCULTAS_EN_PANEL.some((o) => key.startsWith(o))) continue
       const name = key.split("/").pop() ?? key
       out.push({
         key,

@@ -22,6 +22,7 @@ export type PlanId =
   | "presencia"
   | "pagina-profesional"
   | "sitio-con-panel"
+  | "pagina-cinematografica"
   | "catalogo-whatsapp"
   | "citas-en-linea"
   | "tienda-con-pagos"
@@ -86,6 +87,21 @@ export const PLANES: Record<PlanId, Plan> = {
     incluye: ["Varias páginas", "Panel para cambiar textos, fotos y precios tú mismo", "Todo lo de la página profesional"],
     noIncluye: ["Ventas en línea"],
     suscripcion: "negocio-mensual",
+  },
+  "pagina-cinematografica": {
+    id: "pagina-cinematografica",
+    nombre: "Página cinematográfica",
+    desde: 1_800_000,
+    entrega: "2 a 3 semanas",
+    resumen: "Un recorrido en video por tu lugar que avanza con el scroll, creado con IA a partir de tus fotos.",
+    incluye: [
+      "Tres escenas de video que avanzan con el scroll, en computador y celular",
+      "Creadas con IA a partir de fotos reales de tu lugar",
+      "Secciones de habitaciones, experiencias, galería y contacto",
+      "Botón de reservas por WhatsApp",
+      "Versión fija para quien navega con ahorro de datos",
+    ],
+    noIncluye: ["Motor de reservas con disponibilidad (plan Citas en línea)", "Grabación con dron: se genera con IA"],
   },
   "catalogo-whatsapp": {
     id: "catalogo-whatsapp",
@@ -226,6 +242,7 @@ export const PRECIO_RECORDATORIOS = 400_000
 /** Módulos que se suman a cualquier plan de pago único. Razones en PRECIOS.md. */
 export const MODULOS: { nombre: string; precio: string }[] = [
   { nombre: "Diagnóstico de un proyecto a medida (se descuenta si contratas)", precio: "$ 150.000" },
+  { nombre: "Portada cinematográfica: una escena de video que avanza con el scroll", precio: "$ 600.000" },
   { nombre: "Recordatorios automáticos por WhatsApp", precio: `${pesos(PRECIO_RECORDATORIOS)} más el consumo de mensajes` },
   { nombre: "Pasarela de pagos en un plan que no la trae", precio: "$ 400.000" },
   { nombre: "Facturación electrónica con proveedor autorizado", precio: "$ 600.000 más la suscripción del proveedor" },

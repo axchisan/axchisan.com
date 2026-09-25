@@ -32,7 +32,7 @@ const GRUPOS: { titulo: string; entradilla: string; planes: PlanId[] }[] = [
   {
     titulo: "Para que te encuentren",
     entradilla: "Tu negocio en Google y en el celular de tus clientes.",
-    planes: ["presencia", "pagina-profesional", "sitio-con-panel"],
+    planes: ["presencia", "pagina-profesional", "sitio-con-panel", "pagina-cinematografica"],
   },
   {
     titulo: "Para vender",
@@ -91,7 +91,7 @@ export default function PlanesPage() {
             <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-16">
               <h2 className="text-[1.9375rem] text-ink">{g.titulo}</h2>
               <p className="mt-2 text-[1.0625rem] text-mid">{g.entradilla}</p>
-              <div className="mt-8 grid gap-6 lg:grid-cols-3">
+              <div className={`mt-8 grid gap-6 ${g.planes.length === 4 ? "md:grid-cols-2 xl:grid-cols-4" : "lg:grid-cols-3"}`}>
                 {g.planes.map((id) => {
                   const p = PLANES[id]
                   const entrada = id === "presencia"
