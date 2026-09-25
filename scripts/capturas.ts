@@ -118,6 +118,28 @@ const TOMAS: Toma[] = [
     },
   },
   { archivo: "fogon-45-carta-escritorio", url: `${BASE}/demo/fogon-45/panel/carta` },
+  {
+    archivo: "doble-rosca-portada-movil",
+    url: `${BASE}/demo/doble-rosca`,
+    movil: true,
+    preparar: async (p) => {
+      await p.getByRole("searchbox").fill("tornillo")
+      await p.getByRole("searchbox").evaluate((el) => window.scrollTo(0, el.getBoundingClientRect().top + scrollY - 70))
+    },
+  },
+  {
+    archivo: "doble-rosca-caja-escritorio",
+    url: `${BASE}/demo/doble-rosca/panel`,
+    preparar: async (p) => {
+      for (const t of ["cemento", "arena", "varilla"]) {
+        await p.getByPlaceholder(/Nombre o código/).fill(t)
+        await p.keyboard.press("Enter")
+      }
+      await p.getByRole("button", { name: /^\$ 200\.000$/ }).click().catch(() => {})
+    },
+  },
+  { archivo: "doble-rosca-inventario-escritorio", url: `${BASE}/demo/doble-rosca/panel/inventario` },
+  { archivo: "doble-rosca-reportes-escritorio", url: `${BASE}/demo/doble-rosca/panel/reportes` },
   { archivo: "orilla-portada-escritorio", url: `${BASE}/demo/orilla`, preparar: ORILLA(0.15, "#llegada") },
   { archivo: "orilla-portada-movil", url: `${BASE}/demo/orilla`, movil: true, preparar: ORILLA(0.15, "#llegada") },
   { archivo: "orilla-piscina-escritorio", url: `${BASE}/demo/orilla`, preparar: ORILLA(0.5, "#piscina") },

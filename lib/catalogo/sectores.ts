@@ -80,6 +80,7 @@ export const SECTORES: Sector[] = [
     nombre: "Comercio y distribución",
     icono: Boxes,
     ejemplo: "Inventario, ventas y reportes",
+    solucion: "inventario-y-ventas",
   },
   {
     id: "gimnasios",
