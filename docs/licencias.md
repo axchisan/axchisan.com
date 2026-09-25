@@ -60,6 +60,8 @@ obligatoria. Aun así se acredita al autor en la demo.
 | Linaza | Blazer de lino | Robert Richman | [unsplash.com/photos/cYRsB4liZPs](https://unsplash.com/photos/cYRsB4liZPs) | `photo-1740710748146-a15d840d6f40` |
 | Linaza | Portada: camisa blanca frente al mar | Margo Evardson | [unsplash.com/photos/5ObmjcAoXOI](https://unsplash.com/photos/5ObmjcAoXOI) | `photo-1776633734216-26b0dbcf61d1` |
 | Linaza | El taller: telas de lino | Svitlana | [unsplash.com/photos/ASB-wPXJFGE](https://unsplash.com/photos/ASB-wPXJFGE) | `photo-1596433904747-e8b061219a71` |
+| Palanca | Portada: levantamiento con entrenador | Vitaly Gariev | [unsplash.com/photos/rD0poLlu57M](https://unsplash.com/photos/rD0poLlu57M) | `photo-1758875569256-f37c438cac65` |
+| Palanca | Coaches: técnica con kettlebell | maxhome fitness | [unsplash.com/photos/wSUlQl8HPYc](https://unsplash.com/photos/wSUlQl8HPYc) | `photo-1648542036561-e1d66a5ae2b1` |
 
 ## Imágenes y video generados con IA
 

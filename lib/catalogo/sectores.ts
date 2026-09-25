@@ -88,7 +88,8 @@ export const SECTORES: Sector[] = [
     id: "gimnasios",
     nombre: "Gimnasios",
     icono: Dumbbell,
-    ejemplo: "Planes, clases y control de membresías",
+    ejemplo: "Clases con cupo, reservas y control de membresías",
+    solucion: "gimnasios-y-estudios",
   },
   {
     id: "inmobiliarias",

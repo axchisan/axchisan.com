@@ -469,3 +469,29 @@
   --color-mo-alerta-suave: #fbf0dc;
   --font-mo: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
 }
+
+/* Palanca, entrenamiento funcional — docs/demos/palanca.md
+   Tiza y hierro; los tipos de clase llevan los colores de los discos
+   olímpicos (rojo 25 kg, azul 20, amarillo 15, verde 10). */
+@theme inline {
+  --color-pa-tiza:    #f1f2f1;
+  --color-pa-hierro:  #151617;
+  --color-pa-gris:    #5b6066;   /* texto secundario: 5,7:1 sobre tiza */
+  --color-pa-niebla:  #c9cdd1;   /* texto secundario sobre hierro: 11:1 */
+  --color-pa-linea:   #dcdfe0;
+  --color-pa-rojo:    #c41f1f;   /* marca: 5,9:1 sobre blanco */
+  --color-pa-rojo-2:  #a81a1a;   /* hover; blanco encima 7,4:1 */
+  --color-pa-rojo-suave: #fbe9e9;
+  --color-pa-azul:    #1d4ed8;
+  --color-pa-amarillo: #f5c518;  /* solo con hierro encima */
+  --color-pa-verde:   #15803d;
+  --color-pa-exito:   #276d4d;
+  --color-pa-exito-suave: #e3f1ea;
+  --color-pa-alerta:  #8f5808;
+  --color-pa-alerta-suave: #fbf0dc;
+  --font-pa-titulo: var(--font-anybody), ui-sans-serif, system-ui, sans-serif;
+  --font-pa-texto:  var(--font-public-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Títulos de Anybody ensanchada: la letra de las camisetas de competencia. */
+.pa-ancha { font-stretch: 130%; }
