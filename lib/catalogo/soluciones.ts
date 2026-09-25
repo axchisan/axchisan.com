@@ -272,6 +272,110 @@ export const SOLUCIONES: Solucion[] = [
     ],
   },
   {
+    slug: "consultorios-odontologicos",
+    sector: "Consultorios odontológicos",
+    icono: "consultorios",
+    titulo: "Citas en línea, odontograma y presupuestos para consultorios odontológicos",
+    resumen:
+      "Tus pacientes agendan según el motivo y con quien lo atiende. En la consulta marcas el odontograma en la pantalla, el presupuesto sale solo y cada abono queda registrado.",
+    seo: {
+      title: "Software para consultorio odontológico: citas, odontograma y presupuestos",
+      description:
+        "Citas en línea por motivo y odontólogo, odontograma digital, plan de tratamiento con presupuesto automático, abonos y cartera para consultorios odontológicos. Pruébalo en una demo funcionando.",
+    },
+    muestra: {
+      tipo: "demo",
+      href: "/demo/molar-116",
+      nombre: "Molar 116, odontología",
+      nota: "Consultorio ficticio con página, citas en línea, agenda por odontólogo, odontograma interactivo, presupuesto con abonos y cartera.",
+    },
+    capturas: {
+      escritorio: cap("/capturas/molar-116-odontograma-escritorio.webp", "Odontograma y plan de tratamiento de la demo de Molar 116"),
+      movil: cap("/capturas/molar-116-portada-movil.webp", "Portada de la demo de Molar 116 en un celular", true),
+    },
+    sintomas: [
+      "La recepción se va en contestar «¿cuánto vale una limpieza?» y en cuadrar citas por teléfono.",
+      "Los presupuestos se hacen a mano y cada paciente pregunta varias veces cuánto le falta por pagar.",
+      "Los odontogramas en papel se llenan de tachones y no se encuentran cuando el paciente vuelve.",
+    ],
+    resultados: [
+      {
+        titulo: "Cada cita con su tiempo",
+        texto: "Una valoración aparta media hora y una endodoncia hora y media, con el especialista que la hace y los días que atiende.",
+      },
+      {
+        titulo: "Del odontograma al presupuesto",
+        texto: "Lo que marcas en rojo se vuelve un procedimiento con su precio. Cuando lo haces, pasa a azul y el presupuesto se actualiza.",
+      },
+      {
+        titulo: "La cartera, al día",
+        texto: "Cada abono queda en la ficha del paciente y en una lista de saldos por cobrar, con el recordatorio listo para WhatsApp.",
+      },
+    ],
+    diaADia: [
+      {
+        titulo: "El paciente agenda",
+        texto: "Elige el motivo, ve el precio y la duración, y toma una hora libre del odontólogo que lo atiende. Con dolor, las primeras horas del día.",
+        captura: cap("/capturas/molar-116-agendar-movil.webp", "Agendar cita en el celular", true),
+      },
+      {
+        titulo: "La recepción ve el día",
+        texto: "Una columna por odontólogo, con el motivo de cada cita. Se marca quién llegó y quién no vino.",
+        captura: cap("/capturas/molar-116-agenda-escritorio.webp", "Agenda del día por odontólogo"),
+      },
+      {
+        titulo: "En la consulta",
+        texto: "Se marca en el odontograma lo que se encuentra. El plan de tratamiento y el presupuesto se arman solos.",
+        captura: cap("/capturas/molar-116-odontograma-escritorio.webp", "Odontograma con plan de tratamiento y presupuesto"),
+      },
+      {
+        titulo: "Los abonos",
+        texto: "El paciente aprueba el presupuesto y abona en cada cita. La cartera muestra quién debe y cuánto.",
+        captura: cap("/capturas/molar-116-cartera-escritorio.webp", "Saldos por cobrar con recordatorio"),
+      },
+    ],
+    incluye: [
+      "Página con tratamientos, precios de referencia, equipo con registro y horario",
+      "Citas en línea por motivo, con la duración y el odontólogo que corresponde",
+      "Agenda del día por odontólogo con los estados de cada cita",
+      "Ficha del paciente con odontograma interactivo, alergias y notas",
+      "Plan de tratamiento y presupuesto automáticos, imprimibles",
+      "Abonos, saldos y lista de cartera con recordatorio por WhatsApp",
+      "Capacitación y 30 días de garantía sobre fallas",
+    ],
+    noIncluye: [
+      "Historia clínica completa con RIPS y firma electrónica (módulo aparte)",
+      "Facturación electrónica ante la DIAN (módulo aparte)",
+      "Conexión con EPS o prepagadas",
+      "Recordatorios automáticos sin intervención (vienen en el sistema completo)",
+    ],
+    planes: ["pagina-profesional", "citas-en-linea", "sistema-de-gestion", "sistema-completo"],
+    preguntas: [
+      {
+        p: "¿Sirve para un consultorio médico o de otra especialidad?",
+        r: "Sí. La agenda por motivo y profesional es la misma; el módulo propio cambia: en lugar del odontograma, la ficha que usa tu especialidad.",
+      },
+      {
+        p: "¿Los precios del presupuesto los defino yo?",
+        r: "Sí. Cada procedimiento tiene su valor en el panel, y si un caso es distinto se ajusta en el presupuesto de ese paciente.",
+      },
+      {
+        p: "¿Cumple con la historia clínica que exige la norma?",
+        r: "La demo muestra la ficha y el odontograma. La historia clínica completa, con los campos y la custodia que exige la norma, se construye como módulo según tu caso.",
+      },
+      {
+        p: "¿Mis pacientes tienen que crear una cuenta?",
+        r: "No. Agendan con su documento: si ya son pacientes, el sistema los reconoce y no les vuelve a pedir datos.",
+      },
+    ],
+    tecnico: [
+      "Motor de agenda compartido con las demás soluciones de citas, ya probado",
+      "Odontograma con numeración FDI y cinco caras por diente",
+      "Base de datos PostgreSQL con copias de seguridad automáticas cifradas",
+      "Funciona en computador, tablet y celular; instalable como app",
+    ],
+  },
+  {
     slug: "tiendas-de-ropa",
     sector: "Tiendas de ropa",
     icono: "ropa",

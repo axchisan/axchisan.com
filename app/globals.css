@@ -446,3 +446,26 @@
   --color-li-alerta-suave: #fbf0dc;
   --font-li: var(--font-familjen), ui-sans-serif, system-ui, sans-serif;
 }
+
+/* Molar 116, odontología — docs/demos/molar-116.md
+   Violeta de marca; rojo y azul reservados para el odontograma: rojo es lo que
+   hay que hacer, azul lo que ya se hizo, como en la historia clínica en papel. */
+@theme inline {
+  --color-mo-fondo:   #f7f6fb;
+  --color-mo-tinta:   #1a1830;
+  --color-mo-violeta: #5143b8;   /* 6,9:1 sobre fondo; blanco encima 7,4:1 */
+  --color-mo-violeta-2: #6152c9; /* hover; blanco encima 5,9:1 */
+  --color-mo-lila:    #eeebfb;
+  --color-mo-lila-claro: #cfc9f5; /* acento sobre tinta: 11:1 */
+  --color-mo-gris:    #5e5c70;   /* texto secundario: 6,0:1 sobre fondo */
+  --color-mo-linea:   #e4e2ec;
+  --color-mo-rojo:    #c3312a;   /* por hacer: 5,5:1 sobre blanco */
+  --color-mo-rojo-suave: #fdecea;
+  --color-mo-azul:    #2656c9;   /* hecho: 6,5:1 sobre blanco */
+  --color-mo-azul-suave: #e7eefb;
+  --color-mo-exito:   #276d4d;
+  --color-mo-exito-suave: #e3f1ea;
+  --color-mo-alerta:  #8f5808;
+  --color-mo-alerta-suave: #fbf0dc;
+  --font-mo: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
+}
