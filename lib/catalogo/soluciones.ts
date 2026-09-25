@@ -272,6 +272,108 @@ export const SOLUCIONES: Solucion[] = [
     ],
   },
   {
+    slug: "gimnasios-y-estudios",
+    sector: "Gimnasios y estudios",
+    icono: "gimnasios",
+    titulo: "Reservas de clases con cupo y control de membresías para gimnasios y estudios",
+    resumen:
+      "Tus socios reservan su puesto en cada clase desde el celular, con lista de espera cuando se llena. Sabes quién está por vencer, quién vino y qué horarios se llenan.",
+    seo: {
+      title: "Software para gimnasios: reservas de clases, cupos y membresías",
+      description:
+        "Horario de clases con cupos, reservas con lista de espera, primera clase gratis, asistencia, membresías con vencimiento y ocupación por horario para gimnasios, boxes y estudios de yoga. Pruébalo en una demo.",
+    },
+    muestra: {
+      tipo: "demo",
+      href: "/demo/palanca",
+      nombre: "Palanca, entrenamiento funcional",
+      nota: "Gimnasio ficticio en Cali con horario semanal, reservas con cupo y lista de espera, socios con membresías y resumen de ocupación.",
+    },
+    capturas: {
+      escritorio: cap("/capturas/palanca-horario-escritorio.webp", "Horario de clases con cupos de la demo de Palanca"),
+      movil: cap("/capturas/palanca-portada-movil.webp", "Portada de la demo de Palanca en un celular", true),
+    },
+    sintomas: [
+      "Las clases de la noche se llenan de más y las del mediodía quedan vacías, y nadie sabe cuántos van a llegar.",
+      "Las reservas llegan por un grupo de WhatsApp y alguien tiene que llevar la lista a mano.",
+      "Te enteras de que una mensualidad venció cuando el socio ya dejó de venir.",
+    ],
+    resultados: [
+      {
+        titulo: "Cada clase con su cupo",
+        texto: "El socio ve cuántos puestos quedan y reserva con su documento. Si está llena, entra a la lista de espera y sube solo cuando alguien cancela.",
+      },
+      {
+        titulo: "Membresías que no se escapan",
+        texto: "Los que vencen esta semana aparecen primero, con el mensaje de renovación listo. La tiquetera descuenta sola cada asistencia.",
+      },
+      {
+        titulo: "Horarios que se llenan",
+        texto: "La ocupación por día y hora muestra dónde abrir otra clase y cuál conviene mover.",
+      },
+    ],
+    diaADia: [
+      {
+        titulo: "El socio reserva",
+        texto: "Elige el día, ve los cupos y reserva con su documento. La primera clase de un nuevo cliente se reserva igual, gratis.",
+        captura: cap("/capturas/palanca-horario-escritorio.webp", "Horario con cupos y lista de espera"),
+      },
+      {
+        titulo: "El coach toma asistencia",
+        texto: "Desde el celular, al empezar la clase: quién vino y quién no. En la tiquetera se descuenta la clase.",
+        captura: cap("/capturas/palanca-clases-escritorio.webp", "Clases de hoy con la lista de cada una"),
+      },
+      {
+        titulo: "Recepción renueva",
+        texto: "La lista de por vencer, con un mensaje listo para cada uno. Renovar antes de tiempo suma los días desde el vencimiento.",
+        captura: cap("/capturas/palanca-socios-escritorio.webp", "Socios por renovar"),
+      },
+      {
+        titulo: "Decides con datos",
+        texto: "Ingresos del mes, asistencias, cuántos reservan y no vienen y qué horarios se llenan.",
+        captura: cap("/capturas/palanca-resumen-escritorio.webp", "Ocupación por horario"),
+      },
+    ],
+    incluye: [
+      "Página con clases, horario semanal, planes y coaches",
+      "Reservas con cupo, lista de espera y cancelación hasta dos horas antes",
+      "Primera clase gratis para clientes nuevos",
+      "Asistencia por clase desde el celular del coach",
+      "Socios con membresía, tiquetera, vencimientos y renovaciones",
+      "Resumen de ingresos, asistencia y ocupación por horario",
+      "Capacitación y 30 días de garantía sobre fallas",
+    ],
+    noIncluye: [
+      "Torniquete o control de acceso físico (se integra aparte)",
+      "Cobro automático recurrente con tarjeta (viene en el sistema completo)",
+      "Planes de entrenamiento individuales por socio",
+    ],
+    planes: ["pagina-profesional", "citas-en-linea", "sistema-de-gestion", "sistema-completo"],
+    preguntas: [
+      {
+        p: "¿Sirve para un estudio de yoga, pilates o baile?",
+        r: "Sí. Es el mismo motor de clases con cupo; cambian los tipos de clase, los planes y la piel de la página.",
+      },
+      {
+        p: "¿Qué pasa si alguien reserva y no viene?",
+        r: "Queda registrado. Puedes ver cuántas faltas tiene cada socio y, si quieres, limitar las reservas de quien falta mucho.",
+      },
+      {
+        p: "¿Los socios tienen que instalar una app?",
+        r: "No. Reservan desde el navegador con su documento. Si quieres, la página se instala en el celular como una app.",
+      },
+      {
+        p: "¿Se puede cobrar la mensualidad automáticamente?",
+        r: "Sí, con el sistema completo: el cobro recurrente con tarjeta y los avisos de vencimiento automáticos por WhatsApp.",
+      },
+    ],
+    tecnico: [
+      "Motor de clases propio: horario semanal, cupos, lista de espera y membresías",
+      "Base de datos PostgreSQL con copias de seguridad automáticas cifradas",
+      "Funciona en computador, tablet y celular; instalable como app",
+    ],
+  },
+  {
     slug: "consultorios-odontologicos",
     sector: "Consultorios odontológicos",
     icono: "consultorios",

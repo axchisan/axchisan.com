@@ -186,6 +186,19 @@ const TOMAS: Toma[] = [
     },
   },
   { archivo: "molar-116-cartera-escritorio", url: `${BASE}/demo/molar-116/panel/cartera` },
+  { archivo: "palanca-portada-movil", url: `${BASE}/demo/palanca`, movil: true },
+  {
+    archivo: "palanca-horario-escritorio",
+    url: `${BASE}/demo/palanca`,
+    preparar: async (p) => {
+      // Un día hábil completo, con la clase de la noche llena.
+      await p.getByRole("radiogroup", { name: "Día" }).getByRole("radio").nth(await p.evaluate(() => (new Date().getDay() === 5 ? 3 : new Date().getDay() === 6 ? 2 : 1))).click()
+      await p.evaluate(() => document.querySelector("#horario")?.scrollIntoView())
+    },
+  },
+  { archivo: "palanca-clases-escritorio", url: `${BASE}/demo/palanca/panel` },
+  { archivo: "palanca-socios-escritorio", url: `${BASE}/demo/palanca/panel/socios` },
+  { archivo: "palanca-resumen-escritorio", url: `${BASE}/demo/palanca/panel/resumen` },
   { archivo: "orilla-portada-escritorio", url: `${BASE}/demo/orilla`, preparar: ORILLA(0.15, "#llegada") },
   { archivo: "orilla-portada-movil", url: `${BASE}/demo/orilla`, movil: true, preparar: ORILLA(0.15, "#llegada") },
   { archivo: "orilla-piscina-escritorio", url: `${BASE}/demo/orilla`, preparar: ORILLA(0.5, "#piscina") },
