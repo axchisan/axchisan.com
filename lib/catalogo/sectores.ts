@@ -96,6 +96,7 @@ export const SECTORES: Sector[] = [
     nombre: "Inmobiliarias",
     icono: Building2,
     ejemplo: "Inmuebles con filtros, mapa y solicitud de visita",
+    solucion: "inmobiliarias",
   },
   {
     id: "profesionales",

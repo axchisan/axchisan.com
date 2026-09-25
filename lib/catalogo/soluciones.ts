@@ -272,6 +272,108 @@ export const SOLUCIONES: Solucion[] = [
     ],
   },
   {
+    slug: "inmobiliarias",
+    sector: "Inmobiliarias",
+    icono: "inmobiliarias",
+    titulo: "Página de inmuebles con filtros, mapa y visitas agendadas para inmobiliarias",
+    resumen:
+      "Tus inmuebles con todos sus datos, filtros que se comparten por WhatsApp y un simulador de crédito. El cliente agenda la visita en la hora libre del asesor, y cada interesado queda registrado.",
+    seo: {
+      title: "Página web para inmobiliarias con filtros, mapa y agenda de visitas",
+      description:
+        "Página de inmuebles en venta y arriendo con filtros, mapa, simulador de crédito, visitas agendadas en línea y panel de interesados para inmobiliarias en Colombia. Pruébala en una demo.",
+    },
+    muestra: {
+      tipo: "demo",
+      href: "/demo/nomenclatura",
+      nombre: "Nomenclatura, finca raíz",
+      nota: "Inmobiliaria ficticia en Medellín con 12 inmuebles, filtros, mapa, ficha con simulador, visitas en línea y panel de inmuebles, interesados y visitas.",
+    },
+    capturas: {
+      escritorio: cap("/capturas/nomenclatura-listado-escritorio.webp", "Listado de inmuebles con filtros y mapa de la demo de Nomenclatura"),
+      movil: cap("/capturas/nomenclatura-portada-movil.webp", "Portada de la demo de Nomenclatura en un celular", true),
+    },
+    sintomas: [
+      "Los inmuebles están solo en los portales, pagando por cada publicación, y el cliente no sabe que la inmobiliaria existe.",
+      "Media conversación por WhatsApp se va en preguntar el área, el estrato y la administración.",
+      "Los interesados llegan por tres canales y se pierden entre los mensajes de los asesores.",
+    ],
+    resultados: [
+      {
+        titulo: "Tus inmuebles, en tu página",
+        texto: "Con fotos, área, estrato, administración y todo lo que se pregunta. Se cambian desde el panel el mismo día que baja el precio.",
+      },
+      {
+        titulo: "Visitas sin ir y venir de mensajes",
+        texto: "El cliente elige una hora libre del asesor de la zona. Llega sabiendo, por el simulador, si el crédito le alcanza.",
+      },
+      {
+        titulo: "Ningún interesado sin respuesta",
+        texto: "Los que llegan por la página, por WhatsApp y por los portales, en una lista: nuevo, contactado, visita, oferta.",
+      },
+    ],
+    diaADia: [
+      {
+        titulo: "El cliente busca",
+        texto: "Comprar o arrendar, zona, alcobas y tope. La búsqueda queda en el enlace, para mandarla por WhatsApp.",
+        captura: cap("/capturas/nomenclatura-listado-escritorio.webp", "Listado con filtros y mapa"),
+      },
+      {
+        titulo: "Mira la ficha y agenda",
+        texto: "Todos los datos, el simulador de crédito y las horas libres del asesor para la visita.",
+        captura: cap("/capturas/nomenclatura-ficha-escritorio.webp", "Ficha de inmueble con visita en línea"),
+      },
+      {
+        titulo: "El asesor hace seguimiento",
+        texto: "Cada interesado con su etapa, su mensaje y un botón para escribirle por WhatsApp.",
+        captura: cap("/capturas/nomenclatura-interesados-escritorio.webp", "Interesados por etapa"),
+      },
+      {
+        titulo: "La oficina actualiza",
+        texto: "Bajó el precio, se reservó, se arrendó: se cambia en el panel y la página lo muestra al instante.",
+        captura: cap("/capturas/nomenclatura-panel-escritorio.webp", "Panel de inmuebles con precio y estado"),
+      },
+    ],
+    incluye: [
+      "Página con buscador, listado con filtros y orden, y mapa por zonas",
+      "Ficha de cada inmueble con galería, datos completos y simulador de crédito",
+      "Formulario de interés o visita agendada en la agenda del asesor",
+      "Panel para cambiar precios, estado y destacados",
+      "Interesados por etapa y agenda de visitas por asesor (sistema)",
+      "Carga inicial de tus inmuebles y capacitación",
+    ],
+    noIncluye: [
+      "Publicación automática en los portales (se cotiza según el portal)",
+      "Fotografía y video de los inmuebles",
+      "Administración de arriendos, contratos y pagos de canon (módulo aparte)",
+    ],
+    planes: ["pagina-profesional", "sitio-con-panel", "sistema-de-gestion", "sistema-completo"],
+    preguntas: [
+      {
+        p: "¿Puedo subir los inmuebles yo mismo?",
+        r: "Sí, desde el sitio con panel: fotos, datos y precio. En la demo el panel cambia precio, estado y destacados para mostrar cómo se refleja en la página.",
+      },
+      {
+        p: "¿Se conecta con Finca Raíz o Metrocuadrado?",
+        r: "Se puede exportar a los portales que lo permiten. Se cotiza aparte según el portal, porque cada uno tiene su formato.",
+      },
+      {
+        p: "¿Por qué el mapa no es de Google?",
+        r: "Porque no queremos mostrar la dirección exacta antes de la visita, y un mapa propio no tiene costo por uso. Si prefieres Google Maps, se cambia.",
+      },
+      {
+        p: "¿Sirve para un constructor que vende sobre planos?",
+        r: "Sí. Cada unidad del proyecto es una ficha con su piso, área y precio, y se agrega una sala de ventas con la página cinematográfica si quieres el recorrido en video.",
+      },
+    ],
+    tecnico: [
+      "Motor de listados propio: filtros en la dirección, orden y simulador de crédito",
+      "Visitas sobre el motor de agenda, con la disponibilidad de cada asesor",
+      "Next.js con renderizado en servidor para que Google lea cada inmueble",
+      "Imágenes optimizadas para que el listado cargue rápido en el celular",
+    ],
+  },
+  {
     slug: "gimnasios-y-estudios",
     sector: "Gimnasios y estudios",
     icono: "gimnasios",

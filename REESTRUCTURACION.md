@@ -23,6 +23,7 @@
 | F4f · Linaza | **Hecha**: primera demo del motor de catálogo (`demos/motores/catalogo/`), en lugar de la "Trama" del plan: el nombre era demasiado común para asegurar que no existiera. Marca de ropa de lino con colección filtrable por talla, prenda con colores y tallas con inventario, guía de tallas, bolsa con envío por ciudad, pago simulado con PSE, Nequi o tarjeta, y panel de pedidos e inventario por talla. Ficha `/soluciones/tiendas-de-ropa`. 14 pruebas E2E. Con esto queda completa la ola 1 |
 | F6a · Molar 116 | **Hecha**: primera de la ola 2. Consultorio odontológico sobre el motor de agenda, con odontograma interactivo (FDI, cinco caras), plan de tratamiento y presupuesto automáticos, abonos y cartera. Ficha `/soluciones/consultorios-odontologicos`. 14 pruebas E2E |
 | F6b · Palanca | **Hecha**: gimnasio sobre un motor nuevo de clases con cupo (`demos/motores/clases/`): horario semanal, reservas con lista de espera, clase gratis, asistencia con tiquetera, membresías con vencimiento y renovación, ocupación por horario. Ficha `/soluciones/gimnasios-y-estudios`. 16 pruebas E2E |
+| F6c · Nomenclatura | **Hecha**: primera demo del motor de listados (`demos/motores/listados/`). Inmobiliaria con buscador, filtros en el enlace, mapa esquemático, ficha con simulador de crédito o costos de arriendo, visitas en la agenda del asesor, y panel de inmuebles, interesados y visitas. Ficha `/soluciones/inmobiliarias`. 14 pruebas E2E |
 
 ## 0. En cinco líneas
 

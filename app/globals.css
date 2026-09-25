@@ -495,3 +495,23 @@
 
 /* Títulos de Anybody ensanchada: la letra de las camisetas de competencia. */
 .pa-ancha { font-stretch: 130%; }
+
+/* Nomenclatura, finca raíz — docs/demos/nomenclatura.md
+   Azul petróleo de marca; el ladrillo de los edificios de Medellín solo en
+   los pines del mapa y en lo nuevo. */
+@theme inline {
+  --color-nm-fondo:   #f3f4f4;
+  --color-nm-tinta:   #16202a;
+  --color-nm-petroleo: #1f5763;  /* 7,3:1 sobre fondo; blanco encima 8,1:1 */
+  --color-nm-petroleo-2: #276b79; /* hover; blanco encima 6,1:1 */
+  --color-nm-agua:    #b9d3d8;   /* acento sobre tinta: 10,5:1 */
+  --color-nm-agua-suave: #e6eff1;
+  --color-nm-ladrillo: #9e3f22;  /* 6,6:1 sobre blanco */
+  --color-nm-gris:    #58626b;   /* 5,7:1 sobre fondo */
+  --color-nm-linea:   #dde1e3;
+  --color-nm-exito:   #276d4d;
+  --color-nm-exito-suave: #e3f1ea;
+  --color-nm-alerta:  #8f5808;
+  --color-nm-alerta-suave: #fbf0dc;
+  --font-nm: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+}

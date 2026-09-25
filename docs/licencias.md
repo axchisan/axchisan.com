@@ -62,6 +62,25 @@ obligatoria. Aun así se acredita al autor en la demo.
 | Linaza | El taller: telas de lino | Svitlana | [unsplash.com/photos/ASB-wPXJFGE](https://unsplash.com/photos/ASB-wPXJFGE) | `photo-1596433904747-e8b061219a71` |
 | Palanca | Portada: levantamiento con entrenador | Vitaly Gariev | [unsplash.com/photos/rD0poLlu57M](https://unsplash.com/photos/rD0poLlu57M) | `photo-1758875569256-f37c438cac65` |
 | Palanca | Coaches: técnica con kettlebell | maxhome fitness | [unsplash.com/photos/wSUlQl8HPYc](https://unsplash.com/photos/wSUlQl8HPYc) | `photo-1648542036561-e1d66a5ae2b1` |
+| Nomenclatura | Portada: edificio de ladrillo | Sergio Aguirre | [unsplash.com/photos/hSNIg-WZmfs](https://unsplash.com/photos/hSNIg-WZmfs) | `photo-1785970841472-ac4d3a690c13` |
+| Nomenclatura | Sala con balcón | Danilo Rios | [unsplash.com/photos/AgK_XAqSbfk](https://unsplash.com/photos/AgK_XAqSbfk) | `photo-1665249934445-1de680641f50` |
+| Nomenclatura | Cocina y fotos de interiores | Point3D Commercial Imaging Ltd. | [unsplash.com/photos/tUFogT8Mn8U](https://unsplash.com/photos/tUFogT8Mn8U) | `photo-1630699293875-e56c25151c4b` |
+| Nomenclatura | Sala con ventanal | Huy Nguyen | [unsplash.com/photos/QGxBeUDkeWk](https://unsplash.com/photos/QGxBeUDkeWk) | `photo-1612419299101-6c294dc2901d` |
+| Nomenclatura | Alcoba | Francesca Tosolini | [unsplash.com/photos/Sh22mtTd2GA](https://unsplash.com/photos/Sh22mtTd2GA) | `photo-1560448075-57d0285fc59b` |
+| Nomenclatura | Sala blanca | ian dooley | [unsplash.com/photos/_-JR5TxKNSo](https://unsplash.com/photos/_-JR5TxKNSo) | `photo-1501876725168-00c445821c9e` |
+| Nomenclatura | Cocina con isla | Raphael (Ajani Kamali Akio) | [unsplash.com/photos/ImHGMkJ_Mvg](https://unsplash.com/photos/ImHGMkJ_Mvg) | `photo-1759691337957-ebc9ed54dc44` |
+| Nomenclatura | Sala con sofá azul | Jarek Ceborski | [unsplash.com/photos/jn7uVeCdf6U](https://unsplash.com/photos/jn7uVeCdf6U) | `photo-1493809842364-78817add7ffb` |
+| Nomenclatura | Sala abierta amoblada | Melrose By The Lake | [unsplash.com/photos/43vHzsfrmxk](https://unsplash.com/photos/43vHzsfrmxk) | `photo-1741764014072-68953e93cd48` |
+| Nomenclatura | Loft | Nathan Van Egmond | [unsplash.com/photos/9LMRQdVv7hw](https://unsplash.com/photos/9LMRQdVv7hw) | `photo-1536376072261-38c75010e6c9` |
+| Nomenclatura | Sala de televisión | Grant | [unsplash.com/photos/N90LM3A5AZQ](https://unsplash.com/photos/N90LM3A5AZQ) | `photo-1529408632839-a54952c491e5` |
+| Nomenclatura | Apartaestudio e interior | Julia | [unsplash.com/photos/ABohRftG_Os](https://unsplash.com/photos/ABohRftG_Os) | `photo-1585128792103-0b591f96512e` |
+| Nomenclatura | Alcoba junto a la ventana | Andrew Kayani | [unsplash.com/photos/7wEy-0AHgeQ](https://unsplash.com/photos/7wEy-0AHgeQ) | `photo-1649068559107-e5d936141e44` |
+| Nomenclatura | Sala con sofá verde | Evan Wise | [unsplash.com/photos/jZkFVycn3FQ](https://unsplash.com/photos/jZkFVycn3FQ) | `photo-1661796428215-04fc2830aae6` |
+| Nomenclatura | Alcoba amplia | Aquilion Property | [unsplash.com/photos/qbhF5gOzhVU](https://unsplash.com/photos/qbhF5gOzhVU) | `photo-1702014861736-d62834317c5e` |
+| Nomenclatura | Fachada de edificio nuevo | Patrick Tomasso | [unsplash.com/photos/lSvdsYjnssg](https://unsplash.com/photos/lSvdsYjnssg) | `photo-1501688639626-9804fb1ad475` |
+| Nomenclatura | Cocina moderna | Irena Oze | [unsplash.com/photos/xLEQEF3cC1s](https://unsplash.com/photos/xLEQEF3cC1s) | `photo-1781249144275-c04daed37031` |
+| Nomenclatura | Casa campestre | Datingjungle | [unsplash.com/photos/chO9nH4iAKc](https://unsplash.com/photos/chO9nH4iAKc) | `photo-1613498248726-8922766cebdb` |
+| Nomenclatura | Comedor | Zac Gudakov | [unsplash.com/photos/pJClFZuRc3c](https://unsplash.com/photos/pJClFZuRc3c) | `photo-1629042306548-afec37a5e46b` |
 
 ## Imágenes y video generados con IA
 
