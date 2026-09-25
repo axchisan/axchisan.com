@@ -1,0 +1,138 @@
+/*
+ * Orilla, resort frente a la bahía — demo de página cinematográfica.
+ * Portado de las pruebas de PaginasScroll. Todo queda bajo `.orilla` para no
+ * tocar el resto del sitio. La barra de Axchi ocupa 3rem arriba: la navegación
+ * y los escenarios sticky empiezan debajo.
+ */
+.orilla {
+  --o-tinta: #111414;
+  --o-papel: #f7f5f0;
+  --o-arena: #e8dfd0;
+  --o-teca: #7a5c3f;     /* texto sobre papel: 5,6:1 */
+  --o-mar: #2bb3b1;
+  --o-musgo: #16312f;
+  --o-atardecer: #f0c38e;
+  --o-suave: rgba(247, 245, 240, 0.82);
+  --o-barra: 3rem;
+  background: var(--o-tinta);
+  color: var(--o-papel);
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.orilla a { color: inherit; text-decoration: none; }
+.orilla .titulo { font-family: var(--font-inter-tight), system-ui, sans-serif; font-weight: 300; }
+
+/* Cargador */
+.orilla .cargador {
+  position: fixed; inset: var(--o-barra) 0 0; z-index: 30;
+  display: grid; place-content: center; gap: 18px; justify-items: center;
+  background: var(--o-tinta); transition: opacity .9s ease, visibility .9s;
+}
+.orilla .cargador.listo { opacity: 0; visibility: hidden; }
+.orilla .cargador__marca { font-family: var(--font-inter-tight), system-ui, sans-serif; font-weight: 300; letter-spacing: .4em; font-size: 22px; }
+.orilla .cargador__linea { width: 120px; height: 1px; background: rgba(243,239,230,.2); overflow: hidden; position: relative; }
+.orilla .cargador__linea::after { content: ""; position: absolute; inset: 0; background: var(--o-atardecer); animation: o-carga 1.2s ease-in-out infinite; }
+@keyframes o-carga { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+
+/* Navegación */
+.orilla .nav {
+  position: fixed; top: var(--o-barra); left: 0; right: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  padding: 18px clamp(16px, 4vw, 48px);
+  background: linear-gradient(to bottom, rgba(14,18,16,.6), transparent);
+  transition: color .3s, background .3s;
+}
+.orilla .nav--clara { color: var(--o-tinta); background: rgba(243,239,230,.96); box-shadow: 0 1px 0 rgba(20,20,20,.08); }
+/* Los enlaces del menú no dejan el título debajo de la barra fija. */
+.orilla .lista { scroll-margin-top: calc(var(--o-barra) + 80px); }
+.orilla .nav__logo { font-family: var(--font-inter-tight), system-ui, sans-serif; font-weight: 300; letter-spacing: .42em; font-size: 15px; }
+.orilla .nav__enlaces { display: flex; gap: 28px; font-size: 14px; }
+.orilla .nav__enlaces a { opacity: .85; }
+.orilla .nav__enlaces a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
+.orilla .nav__cta { font-size: 14px; border: 1px solid currentColor; padding: 9px 16px; transition: background .25s, color .25s; }
+.orilla .nav__cta:hover { background: var(--o-papel); color: var(--o-tinta); }
+.orilla .nav--clara .nav__cta:hover { background: var(--o-tinta); color: var(--o-papel); }
+
+/* Actos */
+.orilla .acto { height: 400vh; position: relative; }
+.orilla .acto--largo { height: 500vh; }
+/* El póster queda siempre detrás del canvas: mientras llegan los fotogramas se
+   ve la escena quieta, nunca un cuadro negro. */
+.orilla .acto__escena { position: sticky; top: var(--o-barra); height: calc(100vh - var(--o-barra)); height: calc(100svh - var(--o-barra)); overflow: hidden; background: var(--poster) center / cover no-repeat, var(--o-tinta); }
+.orilla .acto__escena canvas { width: 100%; height: 100%; display: block; }
+.orilla .acto__sombra {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgba(14,18,16,.8) 0%, rgba(14,18,16,.1) 45%, transparent 70%), linear-gradient(to right, rgba(14,18,16,.4), transparent 50%);
+}
+.orilla .acto__texto { position: absolute; left: clamp(16px, 5vw, 64px); bottom: clamp(40px, 9vh, 96px); max-width: 580px; }
+.orilla .acto__nombre { font-size: 14px; color: var(--o-atardecer); }
+.orilla .acto__texto h2 { font-size: clamp(38px, 5.2vw, 74px); line-height: 1; letter-spacing: -0.02em; margin: 10px 0 16px; }
+.orilla .acto__texto p { color: var(--o-suave); font-size: 16px; line-height: 1.6; max-width: 36ch; }
+/* Un solo movimiento: el texto de cada acto entra cuando empieza su escena. */
+.orilla .acto__texto > * { opacity: 0; transform: translateY(24px); transition: opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1); }
+.orilla .acto.copy-in .acto__texto > * { opacity: 1; transform: none; }
+.orilla .acto.copy-in .acto__texto > :nth-child(2) { transition-delay: .08s; }
+.orilla .acto.copy-in .acto__texto > :nth-child(3) { transition-delay: .16s; }
+.orilla .acto__meta { position: absolute; right: clamp(16px, 5vw, 64px); bottom: clamp(40px, 9vh, 96px); display: grid; gap: 10px; justify-items: end; font-size: 12px; font-variant-numeric: tabular-nums; color: var(--o-suave); }
+.orilla .acto__barra { width: 140px; height: 1px; background: rgba(243,239,230,.25); overflow: hidden; }
+.orilla .acto__barra i { display: block; height: 100%; background: var(--o-papel); transform: scaleX(0); transform-origin: left; }
+
+/* Sin movimiento o con ahorro de datos: póster fijo, sin descargar fotogramas */
+.orilla.no-scrub .acto { height: calc(100vh - var(--o-barra)); }
+.orilla.no-scrub .acto__escena { background: var(--poster) center / cover no-repeat; }
+.orilla.no-scrub .acto__escena canvas { display: none; }
+.orilla.no-scrub .acto__texto > * { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .orilla .acto__texto > * { transition: none; }
+}
+
+/* Secciones normales */
+.orilla .frase { padding: clamp(96px, 16vh, 180px) clamp(16px, 8vw, 120px); background: var(--o-papel); color: var(--o-tinta); }
+.orilla .frase h2 { font-size: clamp(36px, 6vw, 88px); line-height: 1.02; max-width: 16ch; }
+.orilla .frase p { max-width: 46ch; margin-top: 28px; font-size: 17px; line-height: 1.6; color: rgba(17,20,20,.72); }
+
+.orilla .galeria { margin-top: -1px; background: var(--o-papel); display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: 1fr 1fr; gap: 12px; padding: 0 clamp(16px, 8vw, 120px) clamp(96px, 14vh, 160px); height: min(80vh, 760px); }
+.orilla .galeria figure { overflow: hidden; position: relative; }
+.orilla .galeria .g1 { grid-row: span 2; }
+
+.orilla .lista { margin-top: -1px; background: var(--o-papel); color: var(--o-tinta); padding: 0 clamp(16px, 8vw, 120px) clamp(96px, 14vh, 160px); }
+.orilla .lista__cabeza { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; padding-bottom: 28px; border-bottom: 1px solid rgba(14,18,16,.2); }
+.orilla .lista__cabeza h2 { font-size: clamp(32px, 4vw, 56px); }
+.orilla .lista__cabeza p { max-width: 38ch; color: rgba(14,18,16,.72); font-size: 15px; }
+.orilla .lista ol { list-style: none; margin: 0; padding: 0; }
+.orilla .lista li { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: baseline; padding: 28px 0; border-bottom: 1px solid rgba(14,18,16,.14); }
+.orilla .lista h3 { font-size: clamp(24px, 2.4vw, 32px); }
+.orilla .lista li p { color: rgba(14,18,16,.72); font-size: 15px; margin-top: 6px; }
+.orilla .lista .precio { font-size: 15px; color: var(--o-teca); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.orilla .experiencias { background: var(--o-musgo); padding: clamp(96px, 14vh, 160px) clamp(16px, 8vw, 120px); }
+.orilla .experiencias > h2 { font-size: clamp(32px, 4vw, 56px); }
+.orilla .experiencias__rejilla { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 40px; }
+.orilla .experiencias article { border-top: 1px solid rgba(247,245,240,.25); padding-top: 24px; }
+.orilla .experiencias .hora { font-size: 14px; color: var(--o-atardecer); font-variant-numeric: tabular-nums; }
+.orilla .experiencias h3 { font-size: clamp(24px, 2.4vw, 34px); margin: 14px 0 10px; }
+.orilla .experiencias p { color: var(--o-suave); font-size: 15px; line-height: 1.6; }
+
+.orilla .llegar { background: var(--o-tinta); padding: clamp(80px, 12vh, 140px) clamp(16px, 8vw, 120px); display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.orilla .llegar h3 { font-size: 22px; }
+.orilla .llegar p { color: var(--o-suave); font-size: 15px; line-height: 1.6; margin-top: 8px; }
+
+.orilla .reservar { background: var(--o-arena); color: var(--o-tinta); text-align: center; padding: clamp(96px, 16vh, 180px) 16px; }
+.orilla .reservar h2 { font-size: clamp(40px, 6vw, 92px); }
+.orilla .boton { display: inline-flex; align-items: center; gap: 8px; margin-top: 28px; padding: 16px 28px; background: var(--o-tinta); color: var(--o-papel); font-size: 15px; }
+.orilla .nota { margin-top: 28px; font-size: 14px; color: rgba(14,18,16,.72); }
+
+.orilla .pie { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding: 28px clamp(16px, 4vw, 48px); font-size: 14px; color: var(--o-suave); }
+
+@media (max-width: 768px) {
+  .orilla .nav__enlaces { display: none; }
+  .orilla .acto { height: 300vh; }
+  .orilla .acto--largo { height: 375vh; }
+  .orilla .acto__meta { left: 16px; right: auto; bottom: 28px; justify-items: start; }
+  .orilla .acto__texto { bottom: 72px; right: 16px; }
+  .orilla .galeria { grid-template-columns: 1fr; grid-template-rows: auto; height: auto; }
+  .orilla .galeria .g1 { grid-row: auto; }
+  .orilla .galeria figure { aspect-ratio: 16 / 10; }
+  .orilla .experiencias__rejilla, .orilla .llegar { grid-template-columns: 1fr; gap: 28px; }
+  .orilla .lista li { grid-template-columns: 1fr; gap: 6px; }
+}

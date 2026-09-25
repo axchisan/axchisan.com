@@ -23,3 +23,13 @@ obligatoria. Aun así se acredita al autor en la demo.
 | Peine Fino | Corte con tijera | Nate Johnston | [unsplash.com/photos/tgPrIYnW3g4](https://unsplash.com/photos/tgPrIYnW3g4) | `photo-1647140655214-e4a2d914971f` |
 | Peine Fino | Interior del salón | Daniel | [unsplash.com/photos/PnDr2j28gXA](https://unsplash.com/photos/PnDr2j28gXA) | `photo-1695527081848-1e46c06e6458` |
 | Peine Fino | Sillas color vino | Guilherme Petri | [unsplash.com/photos/PtOfbGkU3uI](https://unsplash.com/photos/PtOfbGkU3uI) | `photo-1521590832167-7bcbfaa6381f` |
+
+## Imágenes y video generados con IA
+
+| Demo | Uso | Herramienta | Dónde vive |
+|---|---|---|---|
+| Orilla | Fotogramas de las tres escenas, pósters y galería | Imágenes con Gemini (Nano Banana Pro), video con Veo 3.1 en Google Flow | R2, `demos/orilla/` |
+
+No son de terceros: los generó Duvan con esas herramientas, cuyas condiciones permiten el uso
+comercial de lo generado. La demo lo dice al pie ("Imágenes y video generados con IA") para que nadie
+lo tome por un hotel real. Los originales y el proceso están en `~/Documents/Dev/PaginasScroll/`.

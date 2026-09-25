@@ -3,6 +3,7 @@
  *
  *   npm run capturas                          # contra producción
  *   npm run capturas -- http://localhost:3000 # contra un servidor local
+ *   npm run capturas -- http://localhost:3000 orilla # solo las tomas que contienen "orilla"
  *
  * Las fichas solo muestran capturas de demos reales, nunca maquetas: si una
  * demo cambia, se vuelve a correr este script y las fichas quedan al día.
@@ -13,6 +14,7 @@ import { chromium, type Page } from "@playwright/test"
 import sharp from "sharp"
 
 const BASE = (process.argv[2] ?? "https://axchisan.com").replace(/\/$/, "")
+const FILTRO = process.argv[3] ?? ""
 const DESTINO = "public/capturas"
 
 type Toma = {
@@ -36,6 +38,23 @@ const SALON = async (p: Page) => {
     localStorage.setItem("axchi-demo:peine-fino:preferencias", JSON.stringify({ nivel: "sistema", recorrido: false })),
   )
   await p.reload({ waitUntil: "networkidle" })
+}
+
+/**
+ * La demo cinematográfica: se baja hasta una fracción de una escena (o de la
+ * página, sin selector) y se espera a que lleguen los fotogramas finos.
+ */
+const ORILLA = (fraccion: number, selector?: string, margen = 48) => async (p: Page) => {
+  await p.evaluate(
+    ([f, sel, m]) => {
+      const el = sel ? document.querySelector<HTMLElement>(sel as string) : null
+      const arriba = el ? el.getBoundingClientRect().top + scrollY - (m as number) : 0
+      const recorrido = el ? Math.max(0, el.offsetHeight - innerHeight) : document.documentElement.scrollHeight
+      window.scrollTo(0, arriba + recorrido * (f as number))
+    },
+    [fraccion, selector ?? null, margen],
+  )
+  await p.waitForTimeout(5000)
 }
 
 const TOMAS: Toma[] = [
@@ -73,6 +92,10 @@ const TOMAS: Toma[] = [
   { archivo: "peine-fino-hoy-escritorio", url: `${BASE}/demo/peine-fino/panel`, preparar: SALON },
   { archivo: "peine-fino-caja-escritorio", url: `${BASE}/demo/peine-fino/panel/caja`, preparar: SALON },
   { archivo: "peine-fino-volver-escritorio", url: `${BASE}/demo/peine-fino/panel/volver`, preparar: SALON },
+  { archivo: "orilla-portada-escritorio", url: `${BASE}/demo/orilla`, preparar: ORILLA(0.15, "#llegada") },
+  { archivo: "orilla-portada-movil", url: `${BASE}/demo/orilla`, movil: true, preparar: ORILLA(0.15, "#llegada") },
+  { archivo: "orilla-piscina-escritorio", url: `${BASE}/demo/orilla`, preparar: ORILLA(0.5, "#piscina") },
+  { archivo: "orilla-habitaciones-escritorio", url: `${BASE}/demo/orilla`, preparar: ORILLA(0, "#habitaciones", 130) },
   { archivo: "jabones-mari-portada-escritorio", url: "https://jabonesmari.shop" },
   { archivo: "jabones-mari-portada-movil", url: "https://jabonesmari.shop", movil: true },
 ]
@@ -81,7 +104,7 @@ async function main() {
   mkdirSync(DESTINO, { recursive: true })
   const navegador = await chromium.launch()
 
-  for (const t of TOMAS) {
+  for (const t of TOMAS.filter((t) => t.archivo.includes(FILTRO))) {
     const contexto = await navegador.newContext(
       t.movil
         ? { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true }
@@ -89,7 +112,8 @@ async function main() {
     )
     const p = await contexto.newPage()
     try {
-      await p.goto(t.url, { waitUntil: "networkidle" })
+      // La demo cinematográfica carga fotogramas sin parar: nunca queda en reposo.
+      await p.goto(t.url, { waitUntil: t.url.includes("/orilla") ? "load" : "networkidle" })
       await t.preparar?.(p)
       // Contra un servidor de desarrollo, su indicador no debe salir en la foto.
       // Va después de preparar: una recarga borraría el estilo.
