@@ -428,3 +428,21 @@
 .dr-cinta-marcas {
   background-image: repeating-linear-gradient(to right, rgb(22 24 27 / 0.35) 0 1px, transparent 1px 10%);
 }
+
+/* Linaza, lino y algodón — docs/demos/linaza.md
+   Blanco, tinta y el azul de la flor del lino como único acento. */
+@theme inline {
+  --color-li-blanco:  #ffffff;
+  --color-li-niebla:  #f1f2f4;
+  --color-li-tinta:   #1b1d22;
+  --color-li-gris:    #61646b;   /* texto secundario: 5,9:1 sobre blanco */
+  --color-li-linea:   #e3e5e8;
+  --color-li-azul:    #3552b8;   /* flor de lino: 6,9:1 sobre blanco */
+  --color-li-azul-claro: #b8c7f2; /* acento sobre tinta: 10,0:1 */
+  --color-li-rojo:    #b42318;
+  --color-li-exito:   #276d4d;
+  --color-li-exito-suave: #e3f1ea;
+  --color-li-alerta:  #8f5808;
+  --color-li-alerta-suave: #fbf0dc;
+  --font-li: var(--font-familjen), ui-sans-serif, system-ui, sans-serif;
+}

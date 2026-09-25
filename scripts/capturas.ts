@@ -140,6 +140,30 @@ const TOMAS: Toma[] = [
   },
   { archivo: "doble-rosca-inventario-escritorio", url: `${BASE}/demo/doble-rosca/panel/inventario` },
   { archivo: "doble-rosca-reportes-escritorio", url: `${BASE}/demo/doble-rosca/panel/reportes` },
+  { archivo: "linaza-portada-escritorio", url: `${BASE}/demo/linaza` },
+  {
+    archivo: "linaza-producto-movil",
+    url: `${BASE}/demo/linaza/producto/vestido-lazo`,
+    movil: true,
+    preparar: async (p) => {
+      await p.locator("label").filter({ has: p.getByRole("radio", { name: "Terracota" }) }).click()
+      await p.locator("label", { hasText: /^L/ }).click()
+      await p.evaluate(() => window.scrollTo(0, 430))
+    },
+  },
+  {
+    archivo: "linaza-bolsa-escritorio",
+    url: `${BASE}/demo/linaza/producto/pantalon-tobillero`,
+    preparar: async (p) => {
+      await p.locator("label", { hasText: /^S$/ }).click()
+      await p.getByRole("button", { name: "Agregar a la bolsa" }).click()
+      await p.goto(`${BASE}/demo/linaza/bolsa`, { waitUntil: "networkidle" })
+      await p.getByLabel("Ciudad").selectOption("bogota")
+      await p.getByLabel("Nombre completo").fill("Catalina Restrepo")
+    },
+  },
+  { archivo: "linaza-pedidos-escritorio", url: `${BASE}/demo/linaza/panel` },
+  { archivo: "linaza-inventario-escritorio", url: `${BASE}/demo/linaza/panel/inventario` },
   { archivo: "orilla-portada-escritorio", url: `${BASE}/demo/orilla`, preparar: ORILLA(0.15, "#llegada") },
   { archivo: "orilla-portada-movil", url: `${BASE}/demo/orilla`, movil: true, preparar: ORILLA(0.15, "#llegada") },
   { archivo: "orilla-piscina-escritorio", url: `${BASE}/demo/orilla`, preparar: ORILLA(0.5, "#piscina") },
