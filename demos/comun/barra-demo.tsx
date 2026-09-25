@@ -29,15 +29,15 @@ export function BarraDemo() {
             <LogoMark className="h-[16px] w-[22px]" />
             <span className="text-[0.875rem] font-semibold">Axchi</span>
           </Link>
-          <p className="hidden truncate text-[0.8125rem] text-on-band-mid md:block">
+          <p className="hidden truncate text-[0.8125rem] text-on-band-mid md:block xl:hidden 2xl:block">
             Demostración con un negocio ficticio
           </p>
 
-          <div className="ml-auto hidden lg:block">
+          <div className="ml-auto hidden xl:block">
             <SelectorNivel />
           </div>
 
-          <div className="ml-auto flex items-center gap-1.5 lg:ml-3">
+          <div className="ml-auto flex items-center gap-1.5 xl:ml-3">
             <BotonBarra
               onClick={() => alternarRecorrido()}
               pressed={recorrido}
@@ -49,14 +49,14 @@ export function BarraDemo() {
               onClick={() => dialogo.current?.showModal()}
               icono={<SlidersHorizontal className="h-4 w-4" aria-hidden />}
             >
-              <span className="lg:hidden">Planes</span>
-              <span className="hidden lg:inline">Planes y precios</span>
+              <span className="xl:hidden">Planes</span>
+              <span className="hidden xl:inline">Planes y precios</span>
             </BotonBarra>
             <a
               href={whatsappUrl(mensaje)}
               target="_blank"
               rel="noreferrer noopener"
-              className="hidden h-8 items-center gap-1.5 rounded-[8px] bg-accent px-3 text-[0.8125rem] font-semibold text-on-accent transition-colors hover:bg-accent-hover hover:text-on-band sm:inline-flex"
+              className="hidden h-8 items-center gap-1.5 rounded-[8px] bg-accent px-3 whitespace-nowrap text-[0.8125rem] font-semibold text-on-accent transition-colors hover:bg-accent-hover hover:text-on-band sm:inline-flex"
             >
               <MessageCircle className="h-4 w-4" aria-hidden />
               Quiero una así
@@ -133,7 +133,7 @@ function BotonBarra({
       type="button"
       onClick={onClick}
       aria-pressed={pressed}
-      className={`inline-flex h-8 items-center gap-1.5 rounded-[8px] px-2.5 text-[0.8125rem] font-medium transition-colors ${
+      className={`inline-flex h-8 items-center gap-1.5 rounded-[8px] px-2.5 text-[0.8125rem] font-medium whitespace-nowrap transition-colors ${
         pressed ? "bg-on-band text-band" : "text-on-band hover:bg-band-2"
       }`}
     >
@@ -172,7 +172,7 @@ function SelectorNivel({ apilado, alElegir }: { apilado?: boolean; alElegir?: ()
                 ? `rounded-[12px] border p-4 text-left transition-colors ${
                     activo ? "border-accent bg-band-2" : "border-band-line hover:border-on-band-mid"
                   }`
-                : `rounded-[7px] px-3 py-1 text-[0.8125rem] font-medium transition-colors ${
+                : `rounded-[7px] px-3 py-1 text-[0.8125rem] font-medium whitespace-nowrap transition-colors ${
                     activo ? "bg-on-band text-band" : "text-on-band-mid hover:text-on-band"
                   }`
             }
