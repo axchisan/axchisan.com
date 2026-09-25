@@ -12,6 +12,7 @@ const RUTAS = [
   "/soluciones/tiendas-de-ropa",
   "/soluciones/consultorios-odontologicos",
   "/soluciones/gimnasios-y-estudios",
+  "/soluciones/inmobiliarias",
   "/soluciones/tiendas-de-cosmeticos",
   "/planes",
   "/proceso",
