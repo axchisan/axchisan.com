@@ -74,7 +74,8 @@ export const SECTORES: Sector[] = [
     id: "consultorios",
     nombre: "Consultorios",
     icono: Stethoscope,
-    ejemplo: "Agenda de pacientes y recordatorios",
+    ejemplo: "Citas en línea, odontograma y presupuestos con abonos",
+    solucion: "consultorios-odontologicos",
   },
   {
     id: "inventario",

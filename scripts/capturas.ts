@@ -164,6 +164,28 @@ const TOMAS: Toma[] = [
   },
   { archivo: "linaza-pedidos-escritorio", url: `${BASE}/demo/linaza/panel` },
   { archivo: "linaza-inventario-escritorio", url: `${BASE}/demo/linaza/panel/inventario` },
+  { archivo: "molar-116-portada-movil", url: `${BASE}/demo/molar-116`, movil: true },
+  {
+    archivo: "molar-116-agendar-movil",
+    url: `${BASE}/demo/molar-116/agendar?motivo=valoracion`,
+    movil: true,
+    preparar: async (p) => {
+      await p.getByRole("button", { name: "Continuar" }).click()
+      await p.getByRole("radiogroup", { name: "Hora" }).getByRole("radio").first().click()
+      await p.evaluate(() => window.scrollTo(0, 250))
+    },
+  },
+  { archivo: "molar-116-agenda-escritorio", url: `${BASE}/demo/molar-116/panel` },
+  {
+    archivo: "molar-116-odontograma-escritorio",
+    url: `${BASE}/demo/molar-116/panel/pacientes`,
+    preparar: async (p) => {
+      await p.locator("a", { hasText: "Por hacer" }).first().click()
+      await p.waitForURL(/pacientes\/p/)
+      await p.waitForLoadState("networkidle")
+    },
+  },
+  { archivo: "molar-116-cartera-escritorio", url: `${BASE}/demo/molar-116/panel/cartera` },
   { archivo: "orilla-portada-escritorio", url: `${BASE}/demo/orilla`, preparar: ORILLA(0.15, "#llegada") },
   { archivo: "orilla-portada-movil", url: `${BASE}/demo/orilla`, movil: true, preparar: ORILLA(0.15, "#llegada") },
   { archivo: "orilla-piscina-escritorio", url: `${BASE}/demo/orilla`, preparar: ORILLA(0.5, "#piscina") },
