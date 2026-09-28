@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next"
 import localFont from "next/font/local"
 import { Toaster } from "sonner"
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Medicion } from "@/components/medicion"
 import "./globals.css"
 import { PRECIO_ENTRADA, pesos } from "@/lib/catalogo/planes"
@@ -135,6 +137,9 @@ export default function RootLayout({
         />
         {children}
         <Medicion />
+        {/* Sin cookies. Se activan en el panel de Vercel: ver SEO.md, parte 6. */}
+        <Analytics />
+        <SpeedInsights />
         <Toaster
           position="bottom-right"
           toastOptions={{
