@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { imagenDeFicha, metadatos } from "@/lib/metadatos"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Check, ExternalLink, MessageCircle, MonitorPlay, Minus } from "lucide-react"
@@ -22,11 +23,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const s = solucion((await params).slug)
   if (!s) return {}
-  return {
-    title: s.seo.title,
-    description: s.seo.description,
-    alternates: { canonical: `/soluciones/${s.slug}` },
-  }
+  return metadatos({
+    titulo: s.seo.title,
+    descripcion: s.seo.description,
+    ruta: `/soluciones/${s.slug}`,
+    imagen: imagenDeFicha(s.slug),
+    alt: `${s.sector}: ${s.titulo}`,
+  })
 }
 
 export default async function FichaSolucion({ params }: Params) {

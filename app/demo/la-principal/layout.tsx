@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { tarjetaDeDemo } from "@/lib/metadatos"
 import { Archivo } from "next/font/google"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
@@ -14,6 +15,7 @@ const archivo = Archivo({
 })
 
 export const metadata: Metadata = {
+  ...tarjetaDeDemo("/demo/la-principal"),
   title: { default: "Ferretería La Principal (demo)", template: "%s · La Principal (demo)" },
   description:
     "Demostración de Axchi: catálogo con existencias, pedidos por WhatsApp, caja, inventario con kardex, entradas de mercancía, reportes a Excel y pedido sugerido a proveedores para una ferretería ficticia.",

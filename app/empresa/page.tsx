@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { metadatos } from "@/lib/metadatos"
 import { MessageCircle } from "lucide-react"
 import { Header } from "@/components/site/header"
 import { Footer } from "@/components/site/footer"
@@ -6,12 +7,12 @@ import { Band, Body, PageBand } from "@/components/site/band"
 import { Button } from "@/components/ui/button"
 import { LEGAL_NAME, MENSAJE_WHATSAPP, PROFILE, WHATSAPP, whatsappUrl } from "@/lib/site"
 
-export const metadata: Metadata = {
-  title: "Sobre Axchi",
-  description:
+export const metadata: Metadata = metadatos({
+  titulo: "Sobre Axchi",
+  descripcion:
     "Axchi es un estudio de software de una persona en Bogotá. Hablas directamente con quien construye tu página, tu tienda o tu sistema.",
-  alternates: { canonical: "/empresa" },
-}
+  ruta: "/empresa",
+})
 
 const RAZONES = [
   {

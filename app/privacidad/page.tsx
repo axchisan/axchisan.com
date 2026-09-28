@@ -1,15 +1,16 @@
 import type { Metadata } from "next"
+import { metadatos } from "@/lib/metadatos"
 import { Header } from "@/components/site/header"
 import { Body, PageBand } from "@/components/site/band"
 import { Footer } from "@/components/site/footer"
 import { LEGAL_NAME, PROFILE } from "@/lib/site"
 
-export const metadata: Metadata = {
-  title: "Privacidad",
-  description:
+export const metadata: Metadata = metadatos({
+  titulo: "Privacidad",
+  descripcion:
     "Qué datos recoge axchisan.com, para qué se usan y cómo ejercer tus derechos sobre ellos.",
-  alternates: { canonical: "/privacidad" },
-}
+  ruta: "/privacidad",
+})
 
 const ACTUALIZADO = "24 de septiembre de 2026"
 

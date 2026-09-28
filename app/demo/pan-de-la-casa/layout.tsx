@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { tarjetaDeDemo } from "@/lib/metadatos"
 import { Gluten, Nunito_Sans } from "next/font/google"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
@@ -10,6 +11,7 @@ const gluten = Gluten({ variable: "--font-gluten", subsets: ["latin"], display: 
 const nunito = Nunito_Sans({ variable: "--font-nunito-sans", subsets: ["latin"], display: "swap" })
 
 export const metadata: Metadata = {
+  ...tarjetaDeDemo("/demo/pan-de-la-casa"),
   title: { default: "Pan de la Casa, panadería y café (demo)", template: "%s · Pan de la Casa (demo)" },
   description:
     "Demostración de Axchi: vitrina con horneadas y disponibilidad en vivo, pedidos para recoger o a domicilio, encargos de tortas con anticipo y plan de producción para una panadería ficticia en Bucaramanga.",

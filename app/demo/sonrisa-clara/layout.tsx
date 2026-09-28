@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { tarjetaDeDemo } from "@/lib/metadatos"
 import { Onest } from "next/font/google"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
@@ -9,6 +10,7 @@ import { CONFIG_SONRISA_CLARA } from "@/demos/sonrisa-clara/config"
 const onest = Onest({ variable: "--font-onest", subsets: ["latin"], display: "swap" })
 
 export const metadata: Metadata = {
+  ...tarjetaDeDemo("/demo/sonrisa-clara"),
   title: { default: "Sonrisa Clara, odontología (demo)", template: "%s · Sonrisa Clara (demo)" },
   description:
     "Demostración de Axchi: página, citas en línea por motivo y odontólogo, odontograma interactivo, plan de tratamiento con presupuesto y abonos para un consultorio odontológico ficticio.",

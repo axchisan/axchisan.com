@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       description: post.excerpt ?? undefined,
       type: "article",
       publishedTime: toDate(post.publishedAt ?? post.createdAt).toISOString(),
-      images: post.coverImage ? [post.coverImage] : undefined,
+      images: [post.coverImage ?? "/og.png"],
     },
   }
 }

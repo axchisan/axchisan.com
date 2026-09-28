@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { tarjetaDeDemo } from "@/lib/metadatos"
 import { Alfa_Slab_One, Figtree } from "next/font/google"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
@@ -20,6 +21,7 @@ const figtree = Figtree({
 })
 
 export const metadata: Metadata = {
+  ...tarjetaDeDemo("/demo/sabor-de-casa"),
   title: { default: "Sabor de Casa, cocina colombiana (demo)", template: "%s · Sabor de Casa (demo)" },
   description:
     "Demostración de Axchi: carta digital con QR, pedidos a la mesa, para recoger y a domicilio, reservas y panel de cocina para un restaurante ficticio en Bogotá.",

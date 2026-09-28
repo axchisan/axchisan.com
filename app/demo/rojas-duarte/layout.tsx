@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { tarjetaDeDemo } from "@/lib/metadatos"
 import { Instrument_Sans, Newsreader } from "next/font/google"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
@@ -10,6 +11,7 @@ const newsreader = Newsreader({ variable: "--font-newsreader", subsets: ["latin"
 const instrument = Instrument_Sans({ variable: "--font-instrument-sans", subsets: ["latin"], display: "swap" })
 
 export const metadata: Metadata = {
+  ...tarjetaDeDemo("/demo/rojas-duarte"),
   title: { default: "Rojas & Duarte, abogados y contadores (demo)", template: "%s · Rojas & Duarte (demo)" },
   description:
     "Demostración de Axchi: página de una firma ficticia de abogados y contadores en Bogotá, con páginas por área, calculadora de liquidación laboral, verificador de declaración de renta y formulario de consulta.",

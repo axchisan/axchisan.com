@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { tarjetaDeDemo } from "@/lib/metadatos"
 import { Schibsted_Grotesk } from "next/font/google"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
@@ -9,6 +10,7 @@ import { CONFIG_TU_CASA } from "@/demos/tu-casa/config"
 const schibsted = Schibsted_Grotesk({ variable: "--font-schibsted", subsets: ["latin"], display: "swap" })
 
 export const metadata: Metadata = {
+  ...tarjetaDeDemo("/demo/tu-casa"),
   title: { default: "Tu Casa Inmobiliaria (demo)", template: "%s · Tu Casa Inmobiliaria (demo)" },
   description:
     "Demostración de Axchi: inmuebles con filtros y mapa, ficha con simulador de crédito, visitas agendadas en línea y panel de inmuebles, interesados y visitas para una inmobiliaria ficticia en Medellín.",

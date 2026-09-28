@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { metadatos } from "@/lib/metadatos"
 import { MessageCircle } from "lucide-react"
 import { Header } from "@/components/site/header"
 import { Footer } from "@/components/site/footer"
@@ -9,12 +10,12 @@ import { PLANES, SUSCRIPCIONES, pesos } from "@/lib/catalogo/planes"
 import { SECTORES } from "@/lib/catalogo/sectores"
 import { MENSAJE_WHATSAPP, PROFILE, WHATSAPP, whatsappUrl } from "@/lib/site"
 
-export const metadata: Metadata = {
-  title: "Cotizar",
-  description:
+export const metadata: Metadata = metadatos({
+  titulo: "Cotizar",
+  descripcion:
     "Cuéntanos qué necesita tu negocio y te respondemos el mismo día hábil con lo que te conviene y cuánto costaría. Por WhatsApp o por formulario.",
-  alternates: { canonical: "/cotizar" },
-}
+  ruta: "/cotizar",
+})
 
 const NEGOCIOS = [...SECTORES.map((s) => ({ valor: s.id, texto: s.nombre })), { valor: "otro", texto: "Otro tipo de negocio" }]
 

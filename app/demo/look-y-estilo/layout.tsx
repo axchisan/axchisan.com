@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { tarjetaDeDemo } from "@/lib/metadatos"
 import { Big_Shoulders, Hanken_Grotesk } from "next/font/google"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
@@ -20,6 +21,7 @@ const hanken = Hanken_Grotesk({
 })
 
 export const metadata: Metadata = {
+  ...tarjetaDeDemo("/demo/look-y-estilo"),
   title: { default: "Look & Estilo, salón y barbería (demo)", template: "%s · Look & Estilo (demo)" },
   description:
     "Demostración de Axchi: página, reservas en línea y sistema de caja y clientes para un salón y barbería ficticio en Bogotá.",

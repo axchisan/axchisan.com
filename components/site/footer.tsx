@@ -6,18 +6,16 @@ import { LEGAL_NAME, MENSAJE_WHATSAPP, PROFILE, WHATSAPP, whatsappUrl } from "@/
 import { Logo } from "./logo"
 import { GithubIcon, InstagramIcon, LinkedinIcon } from "./social-icons"
 
+// Los sectores crecen con cada demo: van en una franja propia, en columnas,
+// para que el pie crezca a lo ancho y no hacia abajo.
+const SECTORES = [...SOLUCIONES].sort((a, b) => a.sector.localeCompare(b.sector, "es"))
+
 const COLUMNAS = [
-  {
-    titulo: "Soluciones",
-    enlaces: [
-      ...SOLUCIONES.map((x) => ({ href: `/soluciones/${x.slug}`, label: x.sector })),
-      { href: "/soluciones", label: "Todas las soluciones" },
-      { href: "/a-medida", label: "Desarrollo a medida" },
-    ],
-  },
   {
     titulo: "Contratar",
     enlaces: [
+      { href: "/soluciones", label: "Todas las soluciones" },
+      { href: "/a-medida", label: "Desarrollo a medida" },
       { href: "/planes", label: "Planes y precios" },
       { href: "/proceso", label: "Proceso" },
       { href: "/cotizar", label: "Cotizar" },
@@ -35,9 +33,9 @@ const COLUMNAS = [
 export function Footer() {
   return (
     <footer className="bg-band text-on-band-mid">
-      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.3fr_repeat(3,0.85fr)_1.45fr] lg:gap-10">
-          <div>
+      <div className="mx-auto max-w-6xl px-5 pt-16 pb-12 sm:px-8">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-[1.3fr_repeat(2,0.85fr)_1.25fr] lg:gap-10">
+          <div className="col-span-2 md:col-span-1">
             <span className="text-on-band">
               <Logo />
             </span>
@@ -82,7 +80,7 @@ export function Footer() {
             </nav>
           ))}
 
-          <div>
+          <div className="col-span-2 md:col-span-1">
             <h2 className="text-[0.9375rem] font-semibold text-on-band">Contacto</h2>
             <ul className="mt-4 space-y-3">
               {[
@@ -106,6 +104,21 @@ export function Footer() {
           </div>
         </div>
       </div>
+
+      <nav aria-label="Soluciones por sector" className="border-t border-band-line">
+        <div className="mx-auto max-w-6xl px-5 py-10 sm:px-8">
+          <h2 className="text-[0.9375rem] font-semibold text-on-band">Soluciones por sector</h2>
+          <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2.5 md:grid-cols-3 lg:grid-cols-4">
+            {SECTORES.map((x) => (
+              <li key={x.slug}>
+                <Link href={`/soluciones/${x.slug}`} className="text-[0.9375rem] transition-colors hover:text-accent">
+                  {x.sector}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
 
       <div className="border-t border-band-line">
         <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-6 text-[0.875rem] sm:flex-row sm:items-center sm:justify-between sm:px-8">

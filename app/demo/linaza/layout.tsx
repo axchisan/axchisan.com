@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { tarjetaDeDemo } from "@/lib/metadatos"
 import { Familjen_Grotesk } from "next/font/google"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
@@ -13,6 +14,7 @@ const familjen = Familjen_Grotesk({
 })
 
 export const metadata: Metadata = {
+  ...tarjetaDeDemo("/demo/linaza"),
   title: { default: "Linaza, lino y algodón (demo)", template: "%s · Linaza (demo)" },
   description:
     "Demostración de Axchi: tienda en línea de ropa con tallas y colores, guía de tallas, bolsa, envío por ciudad, pago con PSE, Nequi o tarjeta, y panel de pedidos e inventario por talla.",
