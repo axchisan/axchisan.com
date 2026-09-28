@@ -1,15 +1,15 @@
 import type { Metadata } from "next"
 import { tarjetaDeDemo } from "@/lib/metadatos"
-import { Familjen_Grotesk } from "next/font/google"
+import localFont from "next/font/local"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
 import { PanelRecorrido } from "@/demos/comun/recorrido"
 import { CONFIG_LINAZA } from "@/demos/linaza/config"
 
 // Una sola familia. Razones en docs/demos/linaza.md.
-const familjen = Familjen_Grotesk({
+const familjen = localFont({
+  src: [{ path: "../../fuentes/familjen-grotesk.woff2", weight: "400 700", style: "normal" }],
   variable: "--font-familjen",
-  subsets: ["latin"],
   display: "swap",
 })
 

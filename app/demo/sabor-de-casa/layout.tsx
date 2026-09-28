@@ -1,22 +1,21 @@
 import type { Metadata } from "next"
 import { tarjetaDeDemo } from "@/lib/metadatos"
-import { Alfa_Slab_One, Figtree } from "next/font/google"
+import localFont from "next/font/local"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
 import { PanelRecorrido } from "@/demos/comun/recorrido"
 import { CONFIG_SABOR_DE_CASA } from "@/demos/sabor-de-casa/config"
 
 // Tipografías de Sabor de Casa, no del sitio. Razones en docs/demos/sabor-de-casa.md.
-const alfaSlab = Alfa_Slab_One({
+const alfaSlab = localFont({
+  src: [{ path: "../../fuentes/alfa-slab-one.woff2", weight: "400", style: "normal" }],
   variable: "--font-alfa-slab",
-  weight: "400",
-  subsets: ["latin"],
   display: "swap",
 })
 
-const figtree = Figtree({
+const figtree = localFont({
+  src: [{ path: "../../fuentes/figtree.woff2", weight: "300 900", style: "normal" }],
   variable: "--font-figtree",
-  subsets: ["latin"],
   display: "swap",
 })
 

@@ -1,17 +1,17 @@
 import type { Metadata } from "next"
 import { tarjetaDeDemo } from "@/lib/metadatos"
-import { Archivo } from "next/font/google"
+import localFont from "next/font/local"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
 import { PanelRecorrido } from "@/demos/comun/recorrido"
 import { CONFIG_LA_PRINCIPAL } from "@/demos/la-principal/config"
 
 // Una sola familia, con dos anchos. Razones en docs/demos/la-principal.md.
-const archivo = Archivo({
+const archivo = localFont({
+  src: [{ path: "../../fuentes/archivo.woff2", weight: "100 900", style: "normal" }],
   variable: "--font-archivo",
-  subsets: ["latin"],
-  axes: ["wdth"],
   display: "swap",
+  declarations: [{ prop: "font-stretch", value: "62% 125%" }],
 })
 
 export const metadata: Metadata = {

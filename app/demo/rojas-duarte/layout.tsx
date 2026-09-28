@@ -1,14 +1,26 @@
 import type { Metadata } from "next"
 import { tarjetaDeDemo } from "@/lib/metadatos"
-import { Instrument_Sans, Newsreader } from "next/font/google"
+import localFont from "next/font/local"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
 import { PanelRecorrido } from "@/demos/comun/recorrido"
 import { CONFIG_ROJAS_DUARTE } from "@/demos/rojas-duarte/config"
 
 // Serif para los títulos y una sans sobria para el texto. Razones en docs/demos/rojas-duarte.md.
-const newsreader = Newsreader({ variable: "--font-newsreader", subsets: ["latin"], style: ["normal", "italic"], display: "swap" })
-const instrument = Instrument_Sans({ variable: "--font-instrument-sans", subsets: ["latin"], display: "swap" })
+const newsreader = localFont({
+  src: [
+    { path: "../../fuentes/newsreader-italica.woff2", weight: "200 800", style: "italic" },
+    { path: "../../fuentes/newsreader.woff2", weight: "200 800", style: "normal" },
+  ],
+  variable: "--font-newsreader",
+  display: "swap",
+})
+const instrument = localFont({
+  src: [{ path: "../../fuentes/instrument-sans.woff2", weight: "400 700", style: "normal" }],
+  variable: "--font-instrument-sans",
+  display: "swap",
+  declarations: [{ prop: "font-stretch", value: "100%" }],
+})
 
 export const metadata: Metadata = {
   ...tarjetaDeDemo("/demo/rojas-duarte"),
