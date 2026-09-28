@@ -2,164 +2,124 @@
  * Motor de páginas cinematográficas: un video que avanza con el scroll.
  *
  * Cada `<section data-scrub>` es un acto: una sección alta con un escenario
- * sticky y un `<canvas>`. Según cuánto se haya recorrido la sección, el canvas
- * pinta el fotograma que corresponde. Portado de las pruebas de PaginasScroll.
+ * sticky y un `<video>`. Según cuánto se haya recorrido la sección, el video
+ * salta al instante que corresponde.
+ *
+ * Por qué video y no una secuencia de imágenes (la primera versión): cientos
+ * de WebP pesaban 53 MB en escritorio, llegaban de a poco (a los 5 s había uno
+ * de cada 16 y el video avanzaba a saltos) y el navegador los decodificaba en
+ * el hilo principal. Un MP4 con un fotograma clave cada 6 pesa menos de la
+ * mitad, se decodifica por hardware y salta de un instante a otro en 4 a 7 ms
+ * en Chrome y en Safari (medido). Detalle y comandos en
+ * docs/demos/brisas-del-mar.md.
  *
  * Atributos de cada acto:
- *   data-frames / data-frames-m   fotogramas de escritorio y de celular
- *   data-path / data-path-m       carpeta de cada versión (0001.webp, 0002.webp…)
- *   data-duration                 segundos del clip, para el contador 00:03 / 00:08
+ *   data-video / data-video-m   MP4 de escritorio (1920×1080) y de celular (vertical, 608×1080)
+ *   data-duration               segundos del clip, para el contador 00:03 / 00:08
+ *
+ * El video se descarga entero y se sirve desde memoria (blob): así cada salto
+ * es local, sin pedir rangos a la red, que es lo que hace fluido el scrub en
+ * Safari. Mientras llega se ve el póster, que pone el CSS.
  *
  * Sin animación (`prefers-reduced-motion` o ahorro de datos) no se descarga
- * ningún fotograma: queda el póster fijo, que pone el CSS.
+ * ningún video: queda el póster fijo.
  */
 
 const pad = (n: number) => String(n).padStart(2, "0")
 const reloj = (s: number) => `${pad(Math.floor(s / 60))}:${pad(Math.floor(s % 60))}`
 
+/**
+ * Inercia del video respecto al scroll, en segundos. Suaviza la rueda del
+ * mouse, que avanza a saltos, y es igual a 60 Hz que a 120 Hz porque depende
+ * del tiempo transcurrido, no de los cuadros.
+ */
+const INERCIA = 0.08
+
 class Acto {
   seccion: HTMLElement
-  canvas: HTMLCanvasElement
-  ctx: CanvasRenderingContext2D
-  total: number
-  ruta: string
+  video: HTMLVideoElement
+  src: string
   duracion: number
   tiempoEl: HTMLElement | null
   barraEl: HTMLElement | null
-  fotogramas: (HTMLImageElement | undefined)[]
-  actual = -1
-  objetivo = 0
-  arriba = 0
-  recorrido = 1
-  alto = 1
-  ultimoTiempo = ""
-  eraVisible: boolean | undefined
+  listo = false
   cancelado = false
-  /** Fotogramas ya pedidos, para que las fases de carga no se repitan. */
-  pedidos = new Set<number>()
+  url = ""
+  /** Instante al que apunta el scroll y el que se muestra, suavizado. */
+  objetivo = 0
+  actual = 0
+  progreso = 0
+  visible = false
+  ultimoTiempo = ""
 
-  constructor(seccion: HTMLElement, private movil: boolean, private anchoMaximo: number) {
+  constructor(seccion: HTMLElement, movil: boolean) {
     this.seccion = seccion
-    this.canvas = seccion.querySelector("canvas")!
-    this.ctx = this.canvas.getContext("2d")!
-    this.total = Number(movil ? seccion.dataset.framesM : seccion.dataset.frames)
-    this.ruta = (movil ? seccion.dataset.pathM : seccion.dataset.path) ?? ""
+    this.video = seccion.querySelector("video")!
+    this.src = (movil ? seccion.dataset.videoM : seccion.dataset.video) ?? ""
     this.duracion = Number(seccion.dataset.duration) || 0
     this.tiempoEl = seccion.querySelector("[data-time]")
     this.barraEl = seccion.querySelector("[data-bar]")
-    this.fotogramas = new Array(this.total)
-    this.medir()
   }
 
-  url(i: number) {
-    return `${this.ruta}${String(i + 1).padStart(4, "0")}.webp`
-  }
-
-  /**
-   * Carga de grueso a fino: con `pasos = [16]`, uno de cada 16 fotogramas; con
-   * `[8, 4, 2, 1]`, el resto. El scrub funciona casi al instante y gana
-   * fluidez mientras carga.
-   */
-  cargar(pasos: number[], alTenerLoMinimo?: () => void) {
-    const orden: number[] = []
-    for (const paso of pasos) {
-      for (let i = 0; i < this.total; i += paso) {
-        if (!this.pedidos.has(i)) {
-          this.pedidos.add(i)
-          orden.push(i)
-        }
+  async cargar() {
+    for (let intento = 1; intento <= 3 && !this.cancelado; intento++) {
+      try {
+        const res = await fetch(this.src)
+        if (!res.ok) throw new Error(String(res.status))
+        const blob = await res.blob()
+        if (this.cancelado) return
+        this.url = URL.createObjectURL(blob)
+        const v = this.video
+        await new Promise<void>((listo) => {
+          v.addEventListener("loadeddata", () => listo(), { once: true })
+          v.src = this.url
+          v.load()
+        })
+        // Safari no pinta el primer fotograma de un video que nunca se
+        // reprodujo: un play/pause silencioso lo despierta.
+        await v.play().catch(() => {})
+        v.pause()
+        v.currentTime = this.actual
+        this.listo = true
+        this.seccion.classList.add("video-listo")
+        return
+      } catch {
+        // Redes móviles: dos reintentos y después se queda el póster.
+        await new Promise((r) => setTimeout(r, 1200 * intento))
       }
     }
-    const grueso = Math.min(orden.length, Math.ceil(this.total / 16))
-    const intentos = new Map<number, number>()
-    let cargados = 0
-    let siguiente = 0
-    let activos = 0
-    return new Promise<void>((resolver) => {
-      const bombear = () => {
-        if (this.cancelado) return resolver()
-        if (siguiente >= orden.length && activos === 0) return resolver()
-        while (activos < 6 && siguiente < orden.length) {
-          const i = orden[siguiente++]
-          const img = new Image()
-          img.decoding = "async"
-          activos++
-          img.onload = () => {
-            activos--
-            this.fotogramas[i] = img
-            if (++cargados === grueso) alTenerLoMinimo?.()
-            if (this.actual < 0 || i === this.objetivo) this.pintar(this.objetivo, true)
-            bombear()
-          }
-          img.onerror = () => {
-            activos--
-            // Hasta dos reintentos al final de la cola: redes móviles.
-            const n = (intentos.get(i) ?? 0) + 1
-            intentos.set(i, n)
-            if (n <= 2) orden.push(i)
-            else if (++cargados === grueso) alTenerLoMinimo?.()
-            bombear()
-          }
-          img.src = this.url(i)
-        }
-      }
-      bombear()
-    })
   }
 
-  /** Si el fotograma exacto no ha llegado, el cargado más cercano. */
-  cercano(i: number) {
-    for (let d = 0; d < this.total; d++) {
-      if (this.fotogramas[i - d]) return i - d
-      if (this.fotogramas[i + d]) return i + d
-    }
-    return -1
-  }
-
-  /**
-   * El canvas nunca tiene más píxeles que la foto: pintar a resolución Retina
-   * una imagen de 1600 px solo gasta GPU sin ganar nitidez.
-   */
+  /** Lee la posición del scroll. Barato: se llama en cada cuadro. */
   medir() {
-    const cw = this.canvas.clientWidth
-    const ch = this.canvas.clientHeight
-    const dpr = Math.min(devicePixelRatio || 1, 2, this.anchoMaximo / Math.max(cw, 1))
-    this.canvas.width = Math.round(cw * dpr)
-    this.canvas.height = Math.round(ch * dpr)
-    this.arriba = this.seccion.getBoundingClientRect().top + scrollY
-    this.recorrido = Math.max(1, this.seccion.offsetHeight - innerHeight)
-    this.alto = this.seccion.offsetHeight
-    this.pintar(Math.max(this.actual, 0), true)
+    const r = this.seccion.getBoundingClientRect()
+    this.visible = r.top < innerHeight && r.bottom > 0
+    this.progreso = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - innerHeight)))
+    this.objetivo = this.progreso * Math.max(0, this.duracion - 0.05)
   }
 
-  /** Pinta como `object-fit: cover`. */
-  pintar(i: number, forzar = false) {
-    this.objetivo = i
-    const k = this.cercano(i)
-    if (k < 0 || (k === this.actual && !forzar)) return
-    const img = this.fotogramas[k]!
-    const { width: cw, height: ch } = this.canvas
-    const s = Math.max(cw / img.naturalWidth, ch / img.naturalHeight)
-    const w = img.naturalWidth * s
-    const h = img.naturalHeight * s
-    this.ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h)
-    this.actual = k
-  }
-
-  actualizar(y: number) {
-    const arriba = this.arriba - y
-    const visible = arriba < innerHeight && arriba + this.alto > 0
-    if (!visible && this.eraVisible === false) return
-    this.eraVisible = visible
-    const p = Math.min(1, Math.max(0, -arriba / this.recorrido))
-    this.seccion.classList.toggle("copy-in", p > 0.03 && p < 0.9)
-    this.pintar(Math.round(p * (this.total - 1)))
-    const tiempo = `${reloj(p * this.duracion)} / ${reloj(this.duracion)}`
+  cuadro(dt: number) {
+    this.medir()
+    if (!this.visible) return
+    const k = 1 - Math.exp(-dt / INERCIA)
+    this.actual += (this.objetivo - this.actual) * k
+    this.seccion.classList.toggle("copy-in", this.progreso > 0.03 && this.progreso < 0.9)
+    // Un salto a la vez: si el anterior no ha terminado, se espera al
+    // siguiente cuadro con el instante ya actualizado. Pedir saltos encima de
+    // otros es lo que traba el scrub en los navegadores.
+    const v = this.video
+    if (this.listo && !v.seeking && Math.abs(v.currentTime - this.actual) > 1 / 48) v.currentTime = this.actual
+    const tiempo = `${reloj(this.progreso * this.duracion)} / ${reloj(this.duracion)}`
     if (this.tiempoEl && tiempo !== this.ultimoTiempo) {
       this.tiempoEl.textContent = tiempo
       this.ultimoTiempo = tiempo
     }
-    if (this.barraEl) this.barraEl.style.transform = `scaleX(${p.toFixed(3)})`
+    if (this.barraEl) this.barraEl.style.transform = `scaleX(${this.progreso.toFixed(3)})`
+  }
+
+  liberar() {
+    this.cancelado = true
+    if (this.url) URL.revokeObjectURL(this.url)
   }
 }
 
@@ -177,47 +137,55 @@ export function iniciarScrub(raiz: HTMLElement, opciones: { alEstarListo?: () =>
     return () => raiz.classList.remove("no-scrub")
   }
 
-  const actos = [...raiz.querySelectorAll<HTMLElement>("[data-scrub]")].map((s) => new Acto(s, movil, movil ? 1100 : 1920))
-  let pendiente = false
-  const alDesplazar = () => {
-    if (pendiente) return
-    pendiente = true
-    requestAnimationFrame(() => {
-      const y = scrollY
-      actos.forEach((a) => a.actualizar(y))
-      pendiente = false
-    })
-  }
-  const alCambiarTamano = () => {
-    actos.forEach((a) => a.medir())
-    alDesplazar()
-  }
+  const actos = [...raiz.querySelectorAll<HTMLElement>("[data-scrub]")].map((s) => new Acto(s, movil))
 
-  addEventListener("scroll", alDesplazar, { passive: true })
-  addEventListener("resize", alCambiarTamano)
-  addEventListener("load", alCambiarTamano)
-  // Las fuentes pueden cambiar la altura de la página: se vuelve a medir.
-  void document.fonts?.ready.then(alCambiarTamano)
+  // El bucle corre solo mientras algún acto está en pantalla o acomodándose.
+  let anterior = performance.now()
+  let pedido = 0
+  const bucle = (ahora: number) => {
+    const dt = Math.min(0.1, (ahora - anterior) / 1000)
+    anterior = ahora
+    actos.forEach((a) => a.cuadro(dt))
+    const enMovimiento = actos.some((a) => a.visible && Math.abs(a.objetivo - a.actual) > 0.002)
+    pedido = enMovimiento ? requestAnimationFrame(bucle) : 0
+  }
+  const despertar = () => {
+    if (pedido) return
+    anterior = performance.now()
+    pedido = requestAnimationFrame(bucle)
+  }
+  addEventListener("scroll", despertar, { passive: true })
+  addEventListener("resize", despertar)
 
-  // Primero la versión gruesa de todos los actos, para que quien baja rápido
-  // encuentre movimiento en cualquiera; después el detalle, en orden. El
-  // detalle espera al evento `load`: cada `Image` pendiente retrasa ese evento,
-  // y cientos de fotogramas lo aplazarían para toda la página.
+  // El cargador se va con el primer video o a los 2,5 s, lo que pase primero:
+  // en una conexión lenta se ve el póster en vez de una pantalla de espera.
+  let avisado = false
+  const avisar = () => {
+    if (avisado) return
+    avisado = true
+    opciones.alEstarListo?.()
+  }
+  const espera = setTimeout(avisar, 2500)
+
+  // Los videos se piden en orden, después del evento `load`, para no
+  // competir con la página.
   void (async () => {
-    const [primero, ...resto] = actos
-    if (primero) await primero.cargar([16], opciones.alEstarListo)
-    else opciones.alEstarListo?.()
-    for (const a of resto) await a.cargar([16])
     if (document.readyState !== "complete") await new Promise((r) => addEventListener("load", r, { once: true }))
-    for (const a of actos) await a.cargar([8, 4, 2, 1])
+    for (const [i, a] of actos.entries()) {
+      await a.cargar()
+      if (i === 0) avisar()
+      despertar()
+    }
+    avisar()
   })()
 
-  alDesplazar()
+  despertar()
 
   return () => {
-    actos.forEach((a) => (a.cancelado = true))
-    removeEventListener("scroll", alDesplazar)
-    removeEventListener("resize", alCambiarTamano)
-    removeEventListener("load", alCambiarTamano)
+    clearTimeout(espera)
+    cancelAnimationFrame(pedido)
+    actos.forEach((a) => a.liberar())
+    removeEventListener("scroll", despertar)
+    removeEventListener("resize", despertar)
   }
 }

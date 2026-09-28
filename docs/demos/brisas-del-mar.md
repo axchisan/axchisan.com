@@ -20,18 +20,40 @@ Nació de las pruebas de `~/Documents/Dev/PaginasScroll/hotel-orilla`.
 
 ## Cómo funciona
 
-- Cada `<section data-scrub>` es un acto: una sección alta con un escenario sticky y un canvas. El
-  motor pinta el fotograma que corresponde a lo recorrido. No hay `<video>`: el scroll hacia atrás
-  y hacia adelante es exacto y no depende del códec.
-- Fotogramas WebP en R2 (`demos/orilla/frames/actoN/`, 1600 px a 24 fps; `frames-m/`, 900 px a
-  15 fps para celular). Se suben con `npx tsx scripts/subir-cinematico.ts <origen> <slug>`. El panel
-  de medios oculta la carpeta `demos/` para que sus miles de archivos no llenen el listado.
-- Carga en dos fases: primero uno de cada 16 fotogramas de todos los actos (la escena ya responde
-  en cualquier punto), y después del evento `load` el detalle. Cada `Image` pendiente retrasa `load`,
-  así que el detalle no puede empezar antes.
-- Mientras llegan los fotogramas, el póster de cada acto queda detrás del canvas: nunca se ve un
-  cuadro negro.
-- Con `prefers-reduced-motion` o ahorro de datos no se descarga ningún fotograma: quedan los pósters.
+- Cada `<section data-scrub>` es un acto: una sección alta con un escenario sticky y un `<video>`.
+  El motor (`demos/motores/cinematico/scrub.ts`) lleva el video al instante que corresponde a lo
+  recorrido, con una inercia de 0,08 s que suaviza la rueda del mouse.
+- Un MP4 por acto y por pantalla, en R2 (`demos/orilla/video/`): `actoN-d.mp4` de 1920×1080 para
+  escritorio y `actoN-m.mp4` vertical de 608×1080 para celular, recortado del centro de la toma
+  original. Se generan con `scripts/codificar-cinematico.sh` y se suben con
+  `npx tsx scripts/subir-cinematico.ts <origen> <slug>`.
+- Lo que hace posible el scrub es la codificación: un fotograma clave cada 6 (`-g 6`), sin
+  fotogramas B y sin audio. Saltar a cualquier instante decodifica como mucho 5 fotogramas.
+- El video se descarga entero con `fetch` y se reproduce desde memoria (blob). Así cada salto es
+  local; con `src` directo, Safari vuelve a pedir rangos a la red y el scrub se traba. Por eso el
+  bucket tiene una regla CORS de solo lectura (GET y HEAD) para axchisan.com y los puertos locales.
+- Los videos se piden en orden después del evento `load`. Mientras llegan se ve el póster (el
+  primer fotograma de cada video, horizontal o vertical según la pantalla) y el video aparece con
+  un fundido.
+- Con `prefers-reduced-motion` o ahorro de datos no se descarga ningún video: quedan los pósters.
+
+### Por qué se cambió la secuencia de imágenes (28 sep 2026)
+
+La primera versión pintaba en un canvas 627 fotogramas WebP de 1600 px. Medido en producción:
+
+| | Secuencia de imágenes | Video |
+|---|---|---|
+| Descarga en escritorio | 53 MB en 627 archivos | 22 MB en 3 archivos |
+| Descarga en celular | 18 MB | 7,9 MB |
+| Resolución | 1600 px estirados a 1920; en celular, el centro de la toma ampliado | 1920 nativo; vertical nativo en celular |
+| A los 5 s de abrir | 1 de cada 16 fotogramas: el video avanza a saltos | la primera escena completa (conexión rápida) |
+| Salto a un instante | decodificación de WebP en el hilo principal | 4 a 7 ms, decodificado por hardware (Chrome y Safari) |
+
+La sensación de "lag" era sobre todo la carga: quien bajaba antes de que llegaran los fotogramas
+veía la escena saltar en pasos de dos tercios de segundo.
+
+Pendiente: los fotogramas viejos (`demos/orilla/frames/`, `frames-m/`) siguen en R2 sin uso. Se
+pueden borrar cuando se confirme la versión nueva en celulares reales.
 
 ## Decisiones de diseño
 
