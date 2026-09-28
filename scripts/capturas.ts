@@ -215,6 +215,38 @@ const TOMAS: Toma[] = [
   { archivo: "brisas-del-mar-portada-movil", url: `${BASE}/demo/brisas-del-mar`, movil: true, preparar: BRISAS_DEL_MAR(0.15, "#llegada") },
   { archivo: "brisas-del-mar-piscina-escritorio", url: `${BASE}/demo/brisas-del-mar`, preparar: BRISAS_DEL_MAR(0.5, "#piscina") },
   { archivo: "brisas-del-mar-habitaciones-escritorio", url: `${BASE}/demo/brisas-del-mar`, preparar: BRISAS_DEL_MAR(0, "#habitaciones", 130) },
+  { archivo: "rojas-duarte-portada-escritorio", url: `${BASE}/demo/rojas-duarte`, reloj: "10:00" },
+  { archivo: "rojas-duarte-portada-movil", url: `${BASE}/demo/rojas-duarte`, movil: true, reloj: "10:00" },
+  { archivo: "rojas-duarte-area-escritorio", url: `${BASE}/demo/rojas-duarte/areas/laboral`, reloj: "10:00" },
+  {
+    archivo: "rojas-duarte-liquidacion-escritorio",
+    url: `${BASE}/demo/rojas-duarte/herramientas/liquidacion`,
+    reloj: "10:00",
+    preparar: async (p) => {
+      await p.getByLabel("Salario mensual").fill("2500000")
+      await p.getByLabel("Fecha de ingreso").fill("2023-03-15")
+      await p.getByLabel("Fecha de retiro").fill("2026-09-30")
+      await p.getByText("Me despidieron sin justa causa").click()
+      await p.getByRole("button", { name: "Calcular la liquidación" }).click()
+      await p.evaluate(() => window.scrollTo(0, 250))
+    },
+  },
+  {
+    archivo: "rojas-duarte-consulta-escritorio",
+    url: `${BASE}/demo/rojas-duarte/consulta?area=familia`,
+    reloj: "10:00",
+    preparar: async (p) => {
+      await p.getByLabel("Su caso").fill("Mi esposo y yo queremos divorciarnos de mutuo acuerdo. Tenemos un apartamento y dos hijos menores.")
+      await p.getByLabel("Nombre y apellido").fill("Paula Andrea Gómez")
+      await p.getByRole("textbox", { name: "Celular" }).fill("310 555 1234")
+      await p.getByLabel("Correo").fill("paula@correo.com")
+      await p.getByRole("radio", { name: "Por videollamada" }).check()
+      await p.getByLabel(/Autorizo/).check()
+      await p.getByRole("button", { name: "Enviar la consulta" }).click()
+      await p.waitForTimeout(300)
+      await p.evaluate(() => window.scrollTo(0, 260))
+    },
+  },
   { archivo: "jabones-mari-portada-escritorio", url: "https://jabonesmari.shop" },
   { archivo: "jabones-mari-portada-movil", url: "https://jabonesmari.shop", movil: true },
 ]

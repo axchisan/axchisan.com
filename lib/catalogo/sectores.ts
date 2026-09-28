@@ -111,6 +111,7 @@ export const SECTORES: Sector[] = [
     nombre: "Abogados y contadores",
     icono: Scale,
     ejemplo: "Página de servicios que genera confianza y contactos",
+    solucion: "abogados-y-contadores",
   },
 ]
 

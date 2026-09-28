@@ -25,6 +25,7 @@
 | F6b · Titán Gym | **Hecha**: gimnasio sobre un motor nuevo de clases con cupo (`demos/motores/clases/`): horario semanal, reservas con lista de espera, clase gratis, asistencia con tiquetera, membresías con vencimiento y renovación, ocupación por horario. Ficha `/soluciones/gimnasios-y-estudios`. 16 pruebas E2E |
 | F6c · Tu Casa Inmobiliaria | **Hecha**: primera demo del motor de listados (`demos/motores/listados/`). Inmobiliaria con buscador, filtros en el enlace, mapa esquemático, ficha con simulador de crédito o costos de arriendo, visitas en la agenda del asesor, y panel de inmuebles, interesados y visitas. Ficha `/soluciones/inmobiliarias`. 14 pruebas E2E |
 | F6d · Pan de la Casa | **Hecha**: segunda demo del motor de pedidos. Panadería con horneadas del día y disponibilidad calculada desde ellas, pedidos para recoger o a domicilio, tortas por encargo con anticipo y plan de producción. Ficha `/soluciones/panaderias-y-cafeterias` (sector nuevo). 12 pruebas E2E |
+| F6e · Rojas & Duarte | **Hecha**: abogados y contadores, primera demo del motor de presencia (`demos/motores/presencia/`: validación de formularios con formatos colombianos, radicado, horario con «abierto ahora»). Nivel navegable: página por área con documentos y honorarios de referencia, calculadora de liquidación laboral y verificador de renta con las cifras de 2026, formulario de consulta con el correo que recibe la firma. Ficha `/soluciones/abogados-y-contadores`. 18 pruebas E2E. De la ola 2 queda la app de fidelización |
 
 ## 0. En cinco líneas
 
