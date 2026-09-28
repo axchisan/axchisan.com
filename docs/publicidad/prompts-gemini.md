@@ -4,11 +4,12 @@ Generado por `npx tsx scripts/publicidad.ts`: no se edita a mano.
 
 ## Cómo se usa
 
-1. Abre [gemini.google.com](https://gemini.google.com) con el modelo de imágenes (Nano Banana Pro). Un **chat nuevo por pieza**, para que no mezcle una con otra.
-2. Sube los archivos de **Adjunta**, que están en `docs/publicidad/adjuntos/`.
-3. Copia el prompt completo y envíalo. Si el texto sale con un error, responde: `Corrige solo el texto: debe decir exactamente «…». No cambies nada más.`
-4. Descarga la imagen y guárdala en `docs/publicidad/generadas/` con el nombre de **Guardar como** (basta el código: `V03.png`).
-5. Las que dicen **Lleva QR** salen con un cuadro blanco vacío: avísame y les pego el QR de su sector (`npx tsx scripts/pegar-qr.ts`). Quedan en `docs/publicidad/listas/`.
+1. Abre [gemini.google.com](https://gemini.google.com) y un **chat nuevo por pieza**, para que no mezcle una con otra.
+2. En la caja de texto, toca **Herramientas** y activa **Crear imágenes** (el ícono del banano). Sin eso, Gemini puede responder con código en lugar de una imagen.
+3. Sube los archivos de **Adjunta**, que están en `docs/publicidad/adjuntos/`.
+4. Copia el prompt completo y envíalo. Si responde con código, contesta `No quiero código. Genera la imagen.` Si el texto sale con un error: `Corrige solo el texto: debe decir exactamente «…». No cambies nada más.`
+5. Descarga la imagen y guárdala en `docs/publicidad/generadas/` con el nombre de **Guardar como** (basta el código: `V03.png`).
+6. Las que dicen **Lleva QR** salen con un cuadro blanco vacío: avísame y les pego el QR de su sector (`npx tsx scripts/pegar-qr.ts`). Quedan en `docs/publicidad/listas/`.
 
 Ninguna pieza muestra precios: todas llevan a la web a averiguarlo.
 
@@ -32,6 +33,7 @@ Para Instagram, Facebook y estados de WhatsApp. No llevan QR: en Instagram se le
 En Instagram, agrega el sticker de enlace con `https://axchisan.com/?utm_source=instagram&utm_campaign=historia`.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una historia vertical 9:16 (1080 x 1920 px) para Instagram y estados de WhatsApp.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -43,6 +45,7 @@ Titular grande en blanco, arriba de los celulares: "Prueba la página de tu nego
 Debajo de los celulares, en gris claro: "Hay una demo funcionando para cada tipo de negocio".
 Abajo, un botón redondeado verde azulado #0ea5a5 con texto oscuro: "Mírala en axchisan.com".
 Deja vacía la franja inferior de 250 px.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### H02 · Historia: ¿cuánto cuesta una página?
@@ -54,6 +57,7 @@ Deja vacía la franja inferior de 250 px.
 Sticker de enlace: `https://axchisan.com/planes?utm_source=instagram&utm_campaign=cuanto-cuesta`.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una historia vertical 9:16 (1080 x 1920 px) para Instagram y estados de WhatsApp.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -61,6 +65,7 @@ Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos se
 Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
 Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
 Composición: pieza clara, fondo #f3f6f9 y texto #0f1720. Arriba, el logo adjunto "logo-claro". En el centro, en letra grande y semibold: "¿Cuánto cuesta una página web para tu negocio?". Debajo, en gris: "Menos de lo que crees, y la pruebas antes de pagar." Más abajo, una flecha simple hacia abajo en verde azulado #0ea5a5, separada del texto. Abajo: "Averígualo en axchisan.com". Sin personas ni celulares. Mucho espacio en blanco.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### H03 · Historia: Veterinarias
@@ -72,6 +77,7 @@ Composición: pieza clara, fondo #f3f6f9 y texto #0f1720. Arriba, el logo adjunt
 Sticker de enlace: `https://axchisan.com/soluciones/veterinarias?utm_source=instagram&utm_campaign=veterinarias`.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una historia vertical 9:16 (1080 x 1920 px) para Instagram y estados de WhatsApp.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -83,6 +89,7 @@ Titular en blanco, arriba del celular: "Citas, vacunas y recordatorios, sin cuad
 Línea en gris claro: "Así se vería la página de tu veterinaria. Es una demo real: tócala."
 Abajo, un botón redondeado verde azulado #0ea5a5 con texto oscuro: "Pruébala en axchisan.com".
 Deja vacía la franja inferior de 250 px.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### H04 · Historia: Peluquerías y barberías
@@ -94,6 +101,7 @@ Deja vacía la franja inferior de 250 px.
 Sticker de enlace: `https://axchisan.com/soluciones/salones-y-barberias?utm_source=instagram&utm_campaign=salones-y-barberias`.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una historia vertical 9:16 (1080 x 1920 px) para Instagram y estados de WhatsApp.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -105,6 +113,7 @@ Titular en blanco, arriba del celular: "Que te reserven a las 11 de la noche, si
 Línea en gris claro: "Así se vería la página de tu peluquería. Es una demo real: tócala."
 Abajo, un botón redondeado verde azulado #0ea5a5 con texto oscuro: "Pruébala en axchisan.com".
 Deja vacía la franja inferior de 250 px.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### H05 · Historia: Panaderías
@@ -116,6 +125,7 @@ Deja vacía la franja inferior de 250 px.
 Sticker de enlace: `https://axchisan.com/soluciones/panaderias-y-cafeterias?utm_source=instagram&utm_campaign=panaderias-y-cafeterias`.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una historia vertical 9:16 (1080 x 1920 px) para Instagram y estados de WhatsApp.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -127,6 +137,7 @@ Titular en blanco, arriba del celular: "Que sepan a qué hora sale el pan calien
 Línea en gris claro: "Así se vería la página de tu panadería. Es una demo real: tócala."
 Abajo, un botón redondeado verde azulado #0ea5a5 con texto oscuro: "Pruébala en axchisan.com".
 Deja vacía la franja inferior de 250 px.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### H06 · Historia: Abogados y contadores
@@ -138,6 +149,7 @@ Deja vacía la franja inferior de 250 px.
 Sticker de enlace: `https://axchisan.com/soluciones/abogados-y-contadores?utm_source=instagram&utm_campaign=abogados-y-contadores`.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una historia vertical 9:16 (1080 x 1920 px) para Instagram y estados de WhatsApp.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -149,6 +161,7 @@ Titular en blanco, arriba del celular: "Clientes que llegan con los documentos l
 Línea en gris claro: "Así se vería la página de tu oficina. Es una demo real: tócala."
 Abajo, un botón redondeado verde azulado #0ea5a5 con texto oscuro: "Pruébala en axchisan.com".
 Deja vacía la franja inferior de 250 px.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### H07 · Historia: Programa de puntos
@@ -160,6 +173,7 @@ Deja vacía la franja inferior de 250 px.
 Sticker de enlace: `https://axchisan.com/soluciones/programa-de-puntos?utm_source=instagram&utm_campaign=programa-de-puntos`.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una historia vertical 9:16 (1080 x 1920 px) para Instagram y estados de WhatsApp.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -171,6 +185,7 @@ Titular en blanco, arriba del celular: "Que tus clientes vuelvan por el café gr
 Línea en gris claro: "Así se vería la página de tu negocio. Es una demo real: tócala."
 Abajo, un botón redondeado verde azulado #0ea5a5 con texto oscuro: "Pruébala en axchisan.com".
 Deja vacía la franja inferior de 250 px.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### H08 · Historia: Inmobiliarias
@@ -182,6 +197,7 @@ Deja vacía la franja inferior de 250 px.
 Sticker de enlace: `https://axchisan.com/soluciones/inmobiliarias?utm_source=instagram&utm_campaign=inmobiliarias`.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una historia vertical 9:16 (1080 x 1920 px) para Instagram y estados de WhatsApp.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -193,6 +209,7 @@ Titular en blanco, arriba del celular: "Tus inmuebles con mapa, filtros y visita
 Línea en gris claro: "Así se vería la página de tu inmobiliaria. Es una demo real: tócala."
 Abajo, un botón redondeado verde azulado #0ea5a5 con texto oscuro: "Pruébala en axchisan.com".
 Deja vacía la franja inferior de 250 px.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### H09 · Historia: Gimnasios
@@ -204,6 +221,7 @@ Deja vacía la franja inferior de 250 px.
 Sticker de enlace: `https://axchisan.com/soluciones/gimnasios-y-estudios?utm_source=instagram&utm_campaign=gimnasios-y-estudios`.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una historia vertical 9:16 (1080 x 1920 px) para Instagram y estados de WhatsApp.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -215,6 +233,7 @@ Titular en blanco, arriba del celular: "Clases con cupo y membresías que avisan
 Línea en gris claro: "Así se vería la página de tu gimnasio. Es una demo real: tócala."
 Abajo, un botón redondeado verde azulado #0ea5a5 con texto oscuro: "Pruébala en axchisan.com".
 Deja vacía la franja inferior de 250 px.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### H10 · Historia: Consultorios
@@ -226,6 +245,7 @@ Deja vacía la franja inferior de 250 px.
 Sticker de enlace: `https://axchisan.com/soluciones/consultorios-odontologicos?utm_source=instagram&utm_campaign=consultorios-odontologicos`.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una historia vertical 9:16 (1080 x 1920 px) para Instagram y estados de WhatsApp.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -237,6 +257,7 @@ Titular en blanco, arriba del celular: "Tus pacientes agendan solos desde el cel
 Línea en gris claro: "Así se vería la página de tu consultorio. Es una demo real: tócala."
 Abajo, un botón redondeado verde azulado #0ea5a5 con texto oscuro: "Pruébala en axchisan.com".
 Deja vacía la franja inferior de 250 px.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### H11 · Historia: Tiendas de ropa
@@ -248,6 +269,7 @@ Deja vacía la franja inferior de 250 px.
 Sticker de enlace: `https://axchisan.com/soluciones/tiendas-de-ropa?utm_source=instagram&utm_campaign=tiendas-de-ropa`.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una historia vertical 9:16 (1080 x 1920 px) para Instagram y estados de WhatsApp.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -259,6 +281,7 @@ Titular en blanco, arriba del celular: "Vende tallas y colores con PSE y Nequi".
 Línea en gris claro: "Así se vería la página de tu tienda de ropa. Es una demo real: tócala."
 Abajo, un botón redondeado verde azulado #0ea5a5 con texto oscuro: "Pruébala en axchisan.com".
 Deja vacía la franja inferior de 250 px.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### H12 · Historia: Ferreterías y comercios
@@ -270,6 +293,7 @@ Deja vacía la franja inferior de 250 px.
 Sticker de enlace: `https://axchisan.com/soluciones/inventario-y-ventas?utm_source=instagram&utm_campaign=inventario-y-ventas`.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una historia vertical 9:16 (1080 x 1920 px) para Instagram y estados de WhatsApp.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -281,6 +305,7 @@ Titular en blanco, arriba del celular: "¿Cuánto te queda en bodega? Míralo en
 Línea en gris claro: "Así se vería la página de tu negocio. Es una demo real: tócala."
 Abajo, un botón redondeado verde azulado #0ea5a5 con texto oscuro: "Pruébala en axchisan.com".
 Deja vacía la franja inferior de 250 px.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### H13 · Historia: Restaurantes
@@ -292,6 +317,7 @@ Deja vacía la franja inferior de 250 px.
 Sticker de enlace: `https://axchisan.com/soluciones/restaurantes?utm_source=instagram&utm_campaign=restaurantes`.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una historia vertical 9:16 (1080 x 1920 px) para Instagram y estados de WhatsApp.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -303,6 +329,7 @@ Titular en blanco, arriba del celular: "¿Tus pedidos llegan por WhatsApp y se p
 Línea en gris claro: "Así se vería la página de tu restaurante. Es una demo real: tócala."
 Abajo, un botón redondeado verde azulado #0ea5a5 con texto oscuro: "Pruébala en axchisan.com".
 Deja vacía la franja inferior de 250 px.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### H14 · Historia: Hoteles
@@ -314,6 +341,7 @@ Deja vacía la franja inferior de 250 px.
 Sticker de enlace: `https://axchisan.com/soluciones/hoteles-y-turismo?utm_source=instagram&utm_campaign=hoteles-y-turismo`.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una historia vertical 9:16 (1080 x 1920 px) para Instagram y estados de WhatsApp.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -325,6 +353,7 @@ Titular en blanco, arriba del celular: "Que recorran tu hotel antes de reservar"
 Línea en gris claro: "Así se vería la página de tu hotel. Es una demo real: tócala."
 Abajo, un botón redondeado verde azulado #0ea5a5 con texto oscuro: "Pruébala en axchisan.com".
 Deja vacía la franja inferior de 250 px.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### H15 · Historia: Cosméticos
@@ -336,6 +365,7 @@ Deja vacía la franja inferior de 250 px.
 Sticker de enlace: `https://axchisan.com/soluciones/tiendas-de-cosmeticos?utm_source=instagram&utm_campaign=tiendas-de-cosmeticos`.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una historia vertical 9:16 (1080 x 1920 px) para Instagram y estados de WhatsApp.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -347,6 +377,7 @@ Titular en blanco, arriba del celular: "Tu tienda de cosméticos, vendiendo por 
 Línea en gris claro: "Así se vería la página de tu tienda. Es una demo real: tócala."
 Abajo, un botón redondeado verde azulado #0ea5a5 con texto oscuro: "Pruébala en axchisan.com".
 Deja vacía la franja inferior de 250 px.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ## Publicaciones
@@ -360,6 +391,7 @@ Para el feed de Instagram y Facebook. P02 a P07 son un carrusel: se publican jun
 **Guardar como:** `P01.png`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una publicación vertical 4:5 (1080 x 1350 px) para Instagram y Facebook, dividida en dos mitades.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -370,6 +402,7 @@ Mitad superior, en tonos grises apagados: un cuaderno de citas lleno de tachones
 Mitad inferior, fondo casi negro #0b0f14: un computador portátil con la captura adjunta "veterinarias-computador" en la pantalla. Texto pequeño: "Con tu página".
 Sobre la línea que divide las mitades, una franja oscura con el titular en blanco: "Tu negocio, ordenado desde el celular".
 Abajo a la derecha, el logo. Abajo a la izquierda, en gris claro: "Mira cómo funciona en axchisan.com".
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### P02 · Carrusel 1 de 6: portada
@@ -379,6 +412,7 @@ Abajo a la derecha, el logo. Abajo a la izquierda, en gris claro: "Mira cómo fu
 **Guardar como:** `P02.png`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una imagen vertical 4:5 (1080 x 1350 px), portada de un carrusel de Instagram.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -386,6 +420,7 @@ Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos se
 Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
 Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
 Fondo casi negro #0b0f14. Titular grande en blanco, alineado a la izquierda y a media altura: "¿Página, tienda o sistema? Qué necesita tu negocio". Abajo a la izquierda, en gris claro: "Desliza". Abajo a la derecha, el logo pequeño. Mucho espacio vacío.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### P03 · Carrusel 2 de 6: si te buscan en google
@@ -395,6 +430,7 @@ Fondo casi negro #0b0f14. Titular grande en blanco, alineado a la izquierda y a 
 **Guardar como:** `P03.png`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una imagen vertical 4:5 (1080 x 1350 px), diapositiva de un carrusel de Instagram.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -402,6 +438,7 @@ Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos se
 Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
 Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
 Fondo casi negro #0b0f14. Arriba a la izquierda, en verde azulado #0ea5a5 y grande, el número "1". Debajo, titular en blanco: "Si te buscan en Google". Debajo, en gris claro: "Una página con tus servicios, horario y WhatsApp.". En la mitad inferior, un computador portátil con la captura adjunta "abogados-y-contadores-computador" en la pantalla. Abajo a la derecha, el logo pequeño.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### P04 · Carrusel 3 de 6: si vendes productos
@@ -411,6 +448,7 @@ Fondo casi negro #0b0f14. Arriba a la izquierda, en verde azulado #0ea5a5 y gran
 **Guardar como:** `P04.png`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una imagen vertical 4:5 (1080 x 1350 px), diapositiva de un carrusel de Instagram.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -418,6 +456,7 @@ Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos se
 Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
 Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
 Fondo casi negro #0b0f14. Arriba a la izquierda, en verde azulado #0ea5a5 y grande, el número "2". Debajo, titular en blanco: "Si vendes productos". Debajo, en gris claro: "Una tienda con carrito y pagos con PSE y Nequi.". En la mitad inferior, un computador portátil con la captura adjunta "tiendas-de-ropa-computador" en la pantalla. Abajo a la derecha, el logo pequeño.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### P05 · Carrusel 4 de 6: si das citas
@@ -427,6 +466,7 @@ Fondo casi negro #0b0f14. Arriba a la izquierda, en verde azulado #0ea5a5 y gran
 **Guardar como:** `P05.png`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una imagen vertical 4:5 (1080 x 1350 px), diapositiva de un carrusel de Instagram.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -434,6 +474,7 @@ Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos se
 Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
 Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
 Fondo casi negro #0b0f14. Arriba a la izquierda, en verde azulado #0ea5a5 y grande, el número "3". Debajo, titular en blanco: "Si das citas". Debajo, en gris claro: "Reservas en línea y la agenda del día en tu celular.". En la mitad inferior, un computador portátil con la captura adjunta "veterinarias-computador" en la pantalla. Abajo a la derecha, el logo pequeño.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### P06 · Carrusel 5 de 6: si llevas inventario
@@ -443,6 +484,7 @@ Fondo casi negro #0b0f14. Arriba a la izquierda, en verde azulado #0ea5a5 y gran
 **Guardar como:** `P06.png`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una imagen vertical 4:5 (1080 x 1350 px), diapositiva de un carrusel de Instagram.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -450,6 +492,7 @@ Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos se
 Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
 Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
 Fondo casi negro #0b0f14. Arriba a la izquierda, en verde azulado #0ea5a5 y grande, el número "4". Debajo, titular en blanco: "Si llevas inventario". Debajo, en gris claro: "Existencias, caja y reportes para Excel.". En la mitad inferior, un computador portátil con la captura adjunta "inventario-y-ventas-computador" en la pantalla. Abajo a la derecha, el logo pequeño.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### P07 · Carrusel 6 de 6: cierre
@@ -459,6 +502,7 @@ Fondo casi negro #0b0f14. Arriba a la izquierda, en verde azulado #0ea5a5 y gran
 **Guardar como:** `P07.png`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una imagen vertical 4:5 (1080 x 1350 px), última diapositiva de un carrusel de Instagram.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -466,6 +510,7 @@ Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos se
 Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
 Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
 Fondo casi negro #0b0f14. Centrado: el logo, debajo el titular en blanco "Prueba la demo de tu negocio" y en verde azulado #0ea5a5 "axchisan.com". Mucho espacio vacío.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### P08 · Imagen cuadrada para compartir por WhatsApp
@@ -475,6 +520,7 @@ Fondo casi negro #0b0f14. Centrado: el logo, debajo el titular en blanco "Prueba
 **Guardar como:** `P08.png`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una imagen cuadrada 1:1 (1080 x 1080 px) para compartir por WhatsApp.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -482,6 +528,7 @@ Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos se
 Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
 Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
 Fondo casi negro #0b0f14. Centrado: el logo, debajo el titular en blanco "Páginas web, tiendas y sistemas para tu negocio" y una línea en gris claro "Pruébalos funcionando antes de contratar". Abajo, en verde azulado #0ea5a5: "axchisan.com". A los lados, dos celulares recortados por el borde de la imagen, con las capturas adjuntas en la pantalla.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ## Portada
@@ -495,6 +542,7 @@ Para el Perfil de Google, Facebook y LinkedIn.
 **Guardar como:** `G01.png`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una portada horizontal 16:9 (1920 x 1080 px).
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -502,6 +550,7 @@ Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos se
 Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
 Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
 Fondo casi negro #0b0f14. A la derecha, un computador portátil con la captura adjunta "restaurantes-computador" y un celular con "veterinarias-celular". A la izquierda, con márgenes amplios: el logo y debajo, en blanco, "Páginas web, tiendas y sistemas para negocios en Colombia". Todo el texto dentro del 60 % central de la imagen: en el celular se recortan los bordes.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ## Volantes
@@ -516,6 +565,7 @@ Media carta para imprimir. V02 es el reverso de todos. Llevan QR.
 **Lleva QR:** `volante-general`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -528,6 +578,7 @@ En el centro, un computador portátil y dos celulares con las capturas adjuntas 
 Tres líneas cortas, cada una con un pequeño punto verde azulado #0ea5a5 al inicio: "Pruébala funcionando antes de contratar", "Todo queda a tu nombre", "Te atendemos por WhatsApp".
 Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
 Abajo a la izquierda, junto al cuadrado: "Escanea y mira la demo de tu negocio" y debajo "axchisan.com".
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### V02 · Volante, reverso (sirve para todos)
@@ -537,6 +588,7 @@ Abajo a la izquierda, junto al cuadrado: "Escanea y mira la demo de tu negocio" 
 **Guardar como:** `V02.png`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea el reverso de un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -547,6 +599,7 @@ Pieza clara: fondo #f3f6f9 hasta los bordes, texto #0f1720, márgenes internos a
 Titular: "¿Qué tipo de negocio tienes?".
 Una cuadrícula de 12 recuadros iguales, cada uno con un ícono lineal simple en verde azulado #0ea5a5 y su nombre debajo: Restaurante, Veterinaria, Peluquería, Consultorio, Ferretería, Tienda de ropa, Inmobiliaria, Gimnasio, Panadería, Abogados, Hotel, Café.
 Abajo: "Para cada uno hay una demo funcionando en axchisan.com. Averigua cuánto cuesta la tuya en la web." Y en una línea aparte: "WhatsApp +57 318 303 8190".
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### V03 · Volante: Veterinarias
@@ -557,6 +610,7 @@ Abajo: "Para cada uno hay una demo funcionando en axchisan.com. Averigua cuánto
 **Lleva QR:** `volante-veterinarias`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -569,6 +623,7 @@ En el centro, un celular y un computador portátil con las capturas adjuntas "ve
 Debajo: "Mira cómo se vería la página de tu veterinaria. Es una demo real: tócala desde tu celular."
 Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
 Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### V04 · Volante: Peluquerías y barberías
@@ -579,6 +634,7 @@ Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
 **Lleva QR:** `volante-salones-y-barberias`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -591,6 +647,7 @@ En el centro, un celular y un computador portátil con las capturas adjuntas "sa
 Debajo: "Mira cómo se vería la página de tu peluquería. Es una demo real: tócala desde tu celular."
 Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
 Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### V05 · Volante: Panaderías
@@ -601,6 +658,7 @@ Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
 **Lleva QR:** `volante-panaderias-y-cafeterias`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -613,6 +671,7 @@ En el centro, un celular y un computador portátil con las capturas adjuntas "pa
 Debajo: "Mira cómo se vería la página de tu panadería. Es una demo real: tócala desde tu celular."
 Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
 Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### V06 · Volante: Abogados y contadores
@@ -623,6 +682,7 @@ Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
 **Lleva QR:** `volante-abogados-y-contadores`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -635,6 +695,7 @@ En el centro, un celular y un computador portátil con las capturas adjuntas "ab
 Debajo: "Mira cómo se vería la página de tu oficina. Es una demo real: tócala desde tu celular."
 Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
 Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### V07 · Volante: Programa de puntos
@@ -645,6 +706,7 @@ Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
 **Lleva QR:** `volante-programa-de-puntos`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -657,6 +719,7 @@ En el centro, un celular y un computador portátil con las capturas adjuntas "pr
 Debajo: "Mira cómo se vería la página de tu negocio. Es una demo real: tócala desde tu celular."
 Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
 Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### V08 · Volante: Inmobiliarias
@@ -667,6 +730,7 @@ Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
 **Lleva QR:** `volante-inmobiliarias`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -679,6 +743,7 @@ En el centro, un celular y un computador portátil con las capturas adjuntas "in
 Debajo: "Mira cómo se vería la página de tu inmobiliaria. Es una demo real: tócala desde tu celular."
 Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
 Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### V09 · Volante: Gimnasios
@@ -689,6 +754,7 @@ Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
 **Lleva QR:** `volante-gimnasios-y-estudios`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -701,6 +767,7 @@ En el centro, un celular y un computador portátil con las capturas adjuntas "gi
 Debajo: "Mira cómo se vería la página de tu gimnasio. Es una demo real: tócala desde tu celular."
 Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
 Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### V10 · Volante: Consultorios
@@ -711,6 +778,7 @@ Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
 **Lleva QR:** `volante-consultorios-odontologicos`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -723,6 +791,7 @@ En el centro, un celular y un computador portátil con las capturas adjuntas "co
 Debajo: "Mira cómo se vería la página de tu consultorio. Es una demo real: tócala desde tu celular."
 Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
 Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### V11 · Volante: Tiendas de ropa
@@ -733,6 +802,7 @@ Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
 **Lleva QR:** `volante-tiendas-de-ropa`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -745,6 +815,7 @@ En el centro, un celular y un computador portátil con las capturas adjuntas "ti
 Debajo: "Mira cómo se vería la página de tu tienda de ropa. Es una demo real: tócala desde tu celular."
 Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
 Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### V12 · Volante: Ferreterías y comercios
@@ -755,6 +826,7 @@ Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
 **Lleva QR:** `volante-inventario-y-ventas`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -767,6 +839,7 @@ En el centro, un celular y un computador portátil con las capturas adjuntas "in
 Debajo: "Mira cómo se vería la página de tu negocio. Es una demo real: tócala desde tu celular."
 Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
 Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### V13 · Volante: Restaurantes
@@ -777,6 +850,7 @@ Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
 **Lleva QR:** `volante-restaurantes`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -789,6 +863,7 @@ En el centro, un celular y un computador portátil con las capturas adjuntas "re
 Debajo: "Mira cómo se vería la página de tu restaurante. Es una demo real: tócala desde tu celular."
 Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
 Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### V14 · Volante: Hoteles
@@ -799,6 +874,7 @@ Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
 **Lleva QR:** `volante-hoteles-y-turismo`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -811,6 +887,7 @@ En el centro, un celular y un computador portátil con las capturas adjuntas "ho
 Debajo: "Mira cómo se vería la página de tu hotel. Es una demo real: tócala desde tu celular."
 Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
 Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### V15 · Volante: Cosméticos
@@ -821,6 +898,7 @@ Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
 **Lleva QR:** `volante-tiendas-de-cosmeticos`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -833,6 +911,7 @@ En el centro, un celular y un computador portátil con las capturas adjuntas "ti
 Debajo: "Mira cómo se vería la página de tu tienda. Es una demo real: tócala desde tu celular."
 Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
 Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ## Tarjetas
@@ -846,6 +925,7 @@ Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
 **Guardar como:** `T01.png`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea la cara de una tarjeta de presentación horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -853,6 +933,7 @@ Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos se
 Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
 Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
 Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios. Centrado: el logo grande. Debajo, en gris claro y letra pequeña: "Páginas web, tiendas y sistemas para tu negocio". Nada más.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### T02 · Tarjeta de presentación, reverso con tus datos
@@ -863,6 +944,7 @@ Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios. Centrado:
 **Lleva QR:** `tarjeta-general`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea el reverso de una tarjeta de presentación horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -873,6 +955,7 @@ Pieza clara: fondo #f3f6f9 hasta los bordes, texto #0f1720, márgenes internos a
 A la izquierda, en cuatro líneas: "Duvan Yair Arciniegas", "Axchi" en verde azulado #0b7c7c, "WhatsApp +57 318 303 8190", "contacto@axchisan.com".
 A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Del alto de las cuatro líneas de texto.
 Debajo del cuadrado, en letra pequeña: "Mira las demos".
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### T03 · Tarjeta para dejar en: Veterinarias
@@ -885,6 +968,7 @@ Debajo del cuadrado, en letra pequeña: "Mira las demos".
 Reverso: la T02.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -895,6 +979,7 @@ Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
 A la izquierda, en blanco y semibold, en dos o tres líneas: "Citas, vacunas y recordatorios, sin cuaderno". Debajo, en gris claro y pequeño: "Mira la demo de tu veterinaria en axchisan.com".
 A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
 Abajo a la izquierda, el logo pequeño.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### T04 · Tarjeta para dejar en: Peluquerías y barberías
@@ -907,6 +992,7 @@ Abajo a la izquierda, el logo pequeño.
 Reverso: la T02.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -917,6 +1003,7 @@ Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
 A la izquierda, en blanco y semibold, en dos o tres líneas: "Que te reserven a las 11 de la noche, sin contestar". Debajo, en gris claro y pequeño: "Mira la demo de tu peluquería en axchisan.com".
 A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
 Abajo a la izquierda, el logo pequeño.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### T05 · Tarjeta para dejar en: Panaderías
@@ -929,6 +1016,7 @@ Abajo a la izquierda, el logo pequeño.
 Reverso: la T02.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -939,6 +1027,7 @@ Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
 A la izquierda, en blanco y semibold, en dos o tres líneas: "Que sepan a qué hora sale el pan caliente". Debajo, en gris claro y pequeño: "Mira la demo de tu panadería en axchisan.com".
 A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
 Abajo a la izquierda, el logo pequeño.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### T06 · Tarjeta para dejar en: Abogados y contadores
@@ -951,6 +1040,7 @@ Abajo a la izquierda, el logo pequeño.
 Reverso: la T02.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -961,6 +1051,7 @@ Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
 A la izquierda, en blanco y semibold, en dos o tres líneas: "Clientes que llegan con los documentos listos". Debajo, en gris claro y pequeño: "Mira la demo de tu oficina en axchisan.com".
 A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
 Abajo a la izquierda, el logo pequeño.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### T07 · Tarjeta para dejar en: Programa de puntos
@@ -973,6 +1064,7 @@ Abajo a la izquierda, el logo pequeño.
 Reverso: la T02.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -983,6 +1075,7 @@ Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
 A la izquierda, en blanco y semibold, en dos o tres líneas: "Que tus clientes vuelvan por el café gratis". Debajo, en gris claro y pequeño: "Mira la demo de tu negocio en axchisan.com".
 A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
 Abajo a la izquierda, el logo pequeño.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### T08 · Tarjeta para dejar en: Inmobiliarias
@@ -995,6 +1088,7 @@ Abajo a la izquierda, el logo pequeño.
 Reverso: la T02.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -1005,6 +1099,7 @@ Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
 A la izquierda, en blanco y semibold, en dos o tres líneas: "Tus inmuebles con mapa, filtros y visitas agendadas". Debajo, en gris claro y pequeño: "Mira la demo de tu inmobiliaria en axchisan.com".
 A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
 Abajo a la izquierda, el logo pequeño.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### T09 · Tarjeta para dejar en: Gimnasios
@@ -1017,6 +1112,7 @@ Abajo a la izquierda, el logo pequeño.
 Reverso: la T02.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -1027,6 +1123,7 @@ Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
 A la izquierda, en blanco y semibold, en dos o tres líneas: "Clases con cupo y membresías que avisan antes de vencer". Debajo, en gris claro y pequeño: "Mira la demo de tu gimnasio en axchisan.com".
 A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
 Abajo a la izquierda, el logo pequeño.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### T10 · Tarjeta para dejar en: Consultorios
@@ -1039,6 +1136,7 @@ Abajo a la izquierda, el logo pequeño.
 Reverso: la T02.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -1049,6 +1147,7 @@ Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
 A la izquierda, en blanco y semibold, en dos o tres líneas: "Tus pacientes agendan solos desde el celular". Debajo, en gris claro y pequeño: "Mira la demo de tu consultorio en axchisan.com".
 A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
 Abajo a la izquierda, el logo pequeño.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### T11 · Tarjeta para dejar en: Tiendas de ropa
@@ -1061,6 +1160,7 @@ Abajo a la izquierda, el logo pequeño.
 Reverso: la T02.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -1071,6 +1171,7 @@ Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
 A la izquierda, en blanco y semibold, en dos o tres líneas: "Vende tallas y colores con PSE y Nequi". Debajo, en gris claro y pequeño: "Mira la demo de tu tienda de ropa en axchisan.com".
 A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
 Abajo a la izquierda, el logo pequeño.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### T12 · Tarjeta para dejar en: Ferreterías y comercios
@@ -1083,6 +1184,7 @@ Abajo a la izquierda, el logo pequeño.
 Reverso: la T02.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -1093,6 +1195,7 @@ Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
 A la izquierda, en blanco y semibold, en dos o tres líneas: "¿Cuánto te queda en bodega? Míralo en un segundo". Debajo, en gris claro y pequeño: "Mira la demo de tu negocio en axchisan.com".
 A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
 Abajo a la izquierda, el logo pequeño.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### T13 · Tarjeta para dejar en: Restaurantes
@@ -1105,6 +1208,7 @@ Abajo a la izquierda, el logo pequeño.
 Reverso: la T02.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -1115,6 +1219,7 @@ Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
 A la izquierda, en blanco y semibold, en dos o tres líneas: "¿Tus pedidos llegan por WhatsApp y se pierden?". Debajo, en gris claro y pequeño: "Mira la demo de tu restaurante en axchisan.com".
 A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
 Abajo a la izquierda, el logo pequeño.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### T14 · Tarjeta para dejar en: Hoteles
@@ -1127,6 +1232,7 @@ Abajo a la izquierda, el logo pequeño.
 Reverso: la T02.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -1137,6 +1243,7 @@ Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
 A la izquierda, en blanco y semibold, en dos o tres líneas: "Que recorran tu hotel antes de reservar". Debajo, en gris claro y pequeño: "Mira la demo de tu hotel en axchisan.com".
 A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
 Abajo a la izquierda, el logo pequeño.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### T15 · Tarjeta para dejar en: Cosméticos
@@ -1149,6 +1256,7 @@ Abajo a la izquierda, el logo pequeño.
 Reverso: la T02.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
 Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -1159,6 +1267,7 @@ Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
 A la izquierda, en blanco y semibold, en dos o tres líneas: "Tu tienda de cosméticos, vendiendo por internet". Debajo, en gris claro y pequeño: "Mira la demo de tu tienda en axchisan.com".
 A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
 Abajo a la izquierda, el logo pequeño.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ## Fotos de la oficina
@@ -1176,12 +1285,14 @@ Son imágenes generadas: úsalas en redes, en la web y en publicaciones. Para la
 Genera varias y quédate con la mejor. **Guárdala también como `docs/publicidad/adjuntos/oficina-base.png`**: es la referencia de todas las demás fotos de la oficina.
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Fotografía realista de estilo editorial minimalista, como tomada con cámara profesional; no parece render 3D ni ilustración.
 Escena: un escritorio blanco mate, de líneas simples, contra una pared blanca cálida y lisa. Luz natural suave que entra por una ventana a la izquierda, sombras suaves.
 Sobre el escritorio, siempre los mismos tres objetos y nada más: en el centro, un MacBook Air de 13 pulgadas color medianoche (azul muy oscuro, casi negro), abierto; a la derecha, una planta pequeña, un pothos de hojas verdes en una maceta de cerámica blanca mate; a la izquierda, una taza de café de cerámica blanca sin logo.
 Sin cables, papeles, marcas, logos, textos en la pared ni objetos extra. Paleta: blancos, grises cálidos, el verde de la planta y el azul medianoche del computador.
 En la pantalla del MacBook se ve la captura adjunta "pantalla-axchisan", nítida y sin reflejos fuertes.
 Cámara a la altura del escritorio, ligeramente de frente, el computador un poco a la derecha del centro. Profundidad de campo suave. Formato horizontal 3:2, máxima resolución.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### O02 · Oficina desde arriba
@@ -1191,12 +1302,14 @@ Cámara a la altura del escritorio, ligeramente de frente, el computador un poco
 **Guardar como:** `O02.png`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Usa la foto adjunta "oficina-base" como referencia exacta: el mismo escritorio, la misma pared, el mismo MacBook Air medianoche, la misma planta, la misma taza y la misma luz. Que parezca otra foto de la misma sesión.
 Fotografía realista de estilo editorial minimalista, como tomada con cámara profesional; no parece render 3D ni ilustración.
 Escena: un escritorio blanco mate, de líneas simples, contra una pared blanca cálida y lisa. Luz natural suave que entra por una ventana a la izquierda, sombras suaves.
 Sobre el escritorio, siempre los mismos tres objetos y nada más: en el centro, un MacBook Air de 13 pulgadas color medianoche (azul muy oscuro, casi negro), abierto; a la derecha, una planta pequeña, un pothos de hojas verdes en una maceta de cerámica blanca mate; a la izquierda, una taza de café de cerámica blanca sin logo.
 Sin cables, papeles, marcas, logos, textos en la pared ni objetos extra. Paleta: blancos, grises cálidos, el verde de la planta y el azul medianoche del computador.
 Cambia solo el ángulo: vista cenital, desde arriba, con el MacBook abierto en el centro y la planta y la taza a los lados, con aire alrededor. En la pantalla se ve la captura adjunta "restaurantes-computador". Formato cuadrado 1:1, máxima resolución.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### O03 · Primer plano de la pantalla
@@ -1206,12 +1319,14 @@ Cambia solo el ángulo: vista cenital, desde arriba, con el MacBook abierto en e
 **Guardar como:** `O03.png`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Usa la foto adjunta "oficina-base" como referencia exacta: el mismo escritorio, la misma pared, el mismo MacBook Air medianoche, la misma planta, la misma taza y la misma luz. Que parezca otra foto de la misma sesión.
 Fotografía realista de estilo editorial minimalista, como tomada con cámara profesional; no parece render 3D ni ilustración.
 Escena: un escritorio blanco mate, de líneas simples, contra una pared blanca cálida y lisa. Luz natural suave que entra por una ventana a la izquierda, sombras suaves.
 Sobre el escritorio, siempre los mismos tres objetos y nada más: en el centro, un MacBook Air de 13 pulgadas color medianoche (azul muy oscuro, casi negro), abierto; a la derecha, una planta pequeña, un pothos de hojas verdes en una maceta de cerámica blanca mate; a la izquierda, una taza de café de cerámica blanca sin logo.
 Sin cables, papeles, marcas, logos, textos en la pared ni objetos extra. Paleta: blancos, grises cálidos, el verde de la planta y el azul medianoche del computador.
 Cambia solo el encuadre: primer plano del MacBook, con la pantalla ocupando buena parte de la imagen y la hoja de la planta desenfocada en primer plano a la derecha. En la pantalla, la captura adjunta "programa-de-puntos-computador", nítida. Formato vertical 4:5, máxima resolución.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### O04 · Oficina para historias, con espacio para texto
@@ -1221,12 +1336,14 @@ Cambia solo el encuadre: primer plano del MacBook, con la pantalla ocupando buen
 **Guardar como:** `O04.png`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Usa la foto adjunta "oficina-base" como referencia exacta: el mismo escritorio, la misma pared, el mismo MacBook Air medianoche, la misma planta, la misma taza y la misma luz. Que parezca otra foto de la misma sesión.
 Fotografía realista de estilo editorial minimalista, como tomada con cámara profesional; no parece render 3D ni ilustración.
 Escena: un escritorio blanco mate, de líneas simples, contra una pared blanca cálida y lisa. Luz natural suave que entra por una ventana a la izquierda, sombras suaves.
 Sobre el escritorio, siempre los mismos tres objetos y nada más: en el centro, un MacBook Air de 13 pulgadas color medianoche (azul muy oscuro, casi negro), abierto; a la derecha, una planta pequeña, un pothos de hojas verdes en una maceta de cerámica blanca mate; a la izquierda, una taza de café de cerámica blanca sin logo.
 Sin cables, papeles, marcas, logos, textos en la pared ni objetos extra. Paleta: blancos, grises cálidos, el verde de la planta y el azul medianoche del computador.
 Cambia solo el formato: vertical 9:16. El escritorio ocupa el tercio inferior; los dos tercios superiores son pared blanca lisa y vacía, para poner texto encima después. En la pantalla, la captura adjunta "pantalla-axchisan". Máxima resolución.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### O05 · Programando
@@ -1236,12 +1353,14 @@ Cambia solo el formato: vertical 9:16. El escritorio ocupa el tercio inferior; l
 **Guardar como:** `O05.png`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Usa la foto adjunta "oficina-base" como referencia exacta: el mismo escritorio, la misma pared, el mismo MacBook Air medianoche, la misma planta, la misma taza y la misma luz. Que parezca otra foto de la misma sesión.
 Fotografía realista de estilo editorial minimalista, como tomada con cámara profesional; no parece render 3D ni ilustración.
 Escena: un escritorio blanco mate, de líneas simples, contra una pared blanca cálida y lisa. Luz natural suave que entra por una ventana a la izquierda, sombras suaves.
 Sobre el escritorio, siempre los mismos tres objetos y nada más: en el centro, un MacBook Air de 13 pulgadas color medianoche (azul muy oscuro, casi negro), abierto; a la derecha, una planta pequeña, un pothos de hojas verdes en una maceta de cerámica blanca mate; a la izquierda, una taza de café de cerámica blanca sin logo.
 Sin cables, papeles, marcas, logos, textos en la pared ni objetos extra. Paleta: blancos, grises cálidos, el verde de la planta y el azul medianoche del computador.
 Cambia solo la pantalla: un editor de código de tema oscuro con líneas de código de colores suaves, bien ordenadas; que no se lean palabras concretas. Mismo encuadre de la foto base. Formato horizontal 3:2, máxima resolución.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### O06 · El Mac y un celular con una demo
@@ -1251,12 +1370,14 @@ Cambia solo la pantalla: un editor de código de tema oscuro con líneas de cód
 **Guardar como:** `O06.png`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Usa la foto adjunta "oficina-base" como referencia exacta: el mismo escritorio, la misma pared, el mismo MacBook Air medianoche, la misma planta, la misma taza y la misma luz. Que parezca otra foto de la misma sesión.
 Fotografía realista de estilo editorial minimalista, como tomada con cámara profesional; no parece render 3D ni ilustración.
 Escena: un escritorio blanco mate, de líneas simples, contra una pared blanca cálida y lisa. Luz natural suave que entra por una ventana a la izquierda, sombras suaves.
 Sobre el escritorio, siempre los mismos tres objetos y nada más: en el centro, un MacBook Air de 13 pulgadas color medianoche (azul muy oscuro, casi negro), abierto; a la derecha, una planta pequeña, un pothos de hojas verdes en una maceta de cerámica blanca mate; a la izquierda, una taza de café de cerámica blanca sin logo.
 Sin cables, papeles, marcas, logos, textos en la pared ni objetos extra. Paleta: blancos, grises cálidos, el verde de la planta y el azul medianoche del computador.
 Agrega solo un objeto: un celular negro sin marca, acostado sobre el escritorio frente al MacBook, con la captura adjunta "salones-y-barberias-celular" en su pantalla. En el MacBook, la captura "salones-y-barberias-computador". Formato vertical 4:5, máxima resolución.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### O07 · Panorámica para portadas, con espacio a la izquierda
@@ -1266,12 +1387,14 @@ Agrega solo un objeto: un celular negro sin marca, acostado sobre el escritorio 
 **Guardar como:** `O07.png`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Usa la foto adjunta "oficina-base" como referencia exacta: el mismo escritorio, la misma pared, el mismo MacBook Air medianoche, la misma planta, la misma taza y la misma luz. Que parezca otra foto de la misma sesión.
 Fotografía realista de estilo editorial minimalista, como tomada con cámara profesional; no parece render 3D ni ilustración.
 Escena: un escritorio blanco mate, de líneas simples, contra una pared blanca cálida y lisa. Luz natural suave que entra por una ventana a la izquierda, sombras suaves.
 Sobre el escritorio, siempre los mismos tres objetos y nada más: en el centro, un MacBook Air de 13 pulgadas color medianoche (azul muy oscuro, casi negro), abierto; a la derecha, una planta pequeña, un pothos de hojas verdes en una maceta de cerámica blanca mate; a la izquierda, una taza de café de cerámica blanca sin logo.
 Sin cables, papeles, marcas, logos, textos en la pared ni objetos extra. Paleta: blancos, grises cálidos, el verde de la planta y el azul medianoche del computador.
 Cambia solo el formato: panorámica 16:9. El escritorio con el MacBook, la planta y la taza queda en el tercio derecho; los dos tercios izquierdos son pared blanca lisa y vacía, para poner texto encima. En la pantalla, la captura adjunta "pantalla-axchisan". Máxima resolución.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### O08 · La misma oficina al atardecer
@@ -1281,12 +1404,14 @@ Cambia solo el formato: panorámica 16:9. El escritorio con el MacBook, la plant
 **Guardar como:** `O08.png`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Usa la foto adjunta "oficina-base" como referencia exacta: el mismo escritorio, la misma pared, el mismo MacBook Air medianoche, la misma planta, la misma taza y la misma luz. Que parezca otra foto de la misma sesión.
 Fotografía realista de estilo editorial minimalista, como tomada con cámara profesional; no parece render 3D ni ilustración.
 Escena: un escritorio blanco mate, de líneas simples, contra una pared blanca cálida y lisa. Luz natural suave que entra por una ventana a la izquierda, sombras suaves.
 Sobre el escritorio, siempre los mismos tres objetos y nada más: en el centro, un MacBook Air de 13 pulgadas color medianoche (azul muy oscuro, casi negro), abierto; a la derecha, una planta pequeña, un pothos de hojas verdes en una maceta de cerámica blanca mate; a la izquierda, una taza de café de cerámica blanca sin logo.
 Sin cables, papeles, marcas, logos, textos en la pared ni objetos extra. Paleta: blancos, grises cálidos, el verde de la planta y el azul medianoche del computador.
 Cambia solo la luz: atardecer, luz cálida y dorada entrando por la ventana, sombras un poco más largas. En la pantalla, la captura adjunta "hoteles-y-turismo-computador". Mismo encuadre de la foto base. Formato horizontal 3:2, máxima resolución.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### O09 · Manos en el teclado
@@ -1296,12 +1421,14 @@ Cambia solo la luz: atardecer, luz cálida y dorada entrando por la ventana, som
 **Guardar como:** `O09.png`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Usa la foto adjunta "oficina-base" como referencia exacta: el mismo escritorio, la misma pared, el mismo MacBook Air medianoche, la misma planta, la misma taza y la misma luz. Que parezca otra foto de la misma sesión.
 Fotografía realista de estilo editorial minimalista, como tomada con cámara profesional; no parece render 3D ni ilustración.
 Escena: un escritorio blanco mate, de líneas simples, contra una pared blanca cálida y lisa. Luz natural suave que entra por una ventana a la izquierda, sombras suaves.
 Sobre el escritorio, siempre los mismos tres objetos y nada más: en el centro, un MacBook Air de 13 pulgadas color medianoche (azul muy oscuro, casi negro), abierto; a la derecha, una planta pequeña, un pothos de hojas verdes en una maceta de cerámica blanca mate; a la izquierda, una taza de café de cerámica blanca sin logo.
 Sin cables, papeles, marcas, logos, textos en la pared ni objetos extra. Paleta: blancos, grises cálidos, el verde de la planta y el azul medianoche del computador.
 Agrega solo unas manos escribiendo en el teclado del MacBook, vistas de cerca desde un lado, sin que se vea la cara ni el cuerpo; mangas de un suéter gris claro. En la pantalla, la captura adjunta "inventario-y-ventas-computador". Formato vertical 4:5, máxima resolución.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ### O10 · Detalle de la planta y la taza
@@ -1311,12 +1438,14 @@ Agrega solo unas manos escribiendo en el teclado del MacBook, vistas de cerca de
 **Guardar como:** `O10.png`
 
 ```text
+Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
 Usa la foto adjunta "oficina-base" como referencia exacta: el mismo escritorio, la misma pared, el mismo MacBook Air medianoche, la misma planta, la misma taza y la misma luz. Que parezca otra foto de la misma sesión.
 Fotografía realista de estilo editorial minimalista, como tomada con cámara profesional; no parece render 3D ni ilustración.
 Escena: un escritorio blanco mate, de líneas simples, contra una pared blanca cálida y lisa. Luz natural suave que entra por una ventana a la izquierda, sombras suaves.
 Sobre el escritorio, siempre los mismos tres objetos y nada más: en el centro, un MacBook Air de 13 pulgadas color medianoche (azul muy oscuro, casi negro), abierto; a la derecha, una planta pequeña, un pothos de hojas verdes en una maceta de cerámica blanca mate; a la izquierda, una taza de café de cerámica blanca sin logo.
 Sin cables, papeles, marcas, logos, textos en la pared ni objetos extra. Paleta: blancos, grises cálidos, el verde de la planta y el azul medianoche del computador.
 Cambia solo el encuadre: detalle de la planta y la taza en primer plano, nítidas, con el MacBook desenfocado al fondo. Formato cuadrado 1:1, máxima resolución.
+Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
 ## Imprimir

@@ -43,6 +43,14 @@ Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos se
 Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
 Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.`
 
+/**
+ * Con medidas en px y colores en hexadecimal, Gemini a veces lo toma como un
+ * encargo de diseño web y responde con HTML. Cada prompt abre y cierra
+ * pidiendo una imagen.
+ */
+const INICIO = "Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones."
+const CIERRE = "Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código."
+
 const QR = `un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después`
 
 type Pieza = { id: string; titulo: string; adjuntos: string[]; formato: string; prompt: string; qr?: string; guia?: string }
@@ -440,11 +448,12 @@ Generado por \`npx tsx scripts/publicidad.ts\`: no se edita a mano.
 
 ## Cómo se usa
 
-1. Abre [gemini.google.com](https://gemini.google.com) con el modelo de imágenes (Nano Banana Pro). Un **chat nuevo por pieza**, para que no mezcle una con otra.
-2. Sube los archivos de **Adjunta**, que están en \`docs/publicidad/adjuntos/\`.
-3. Copia el prompt completo y envíalo. Si el texto sale con un error, responde: \`Corrige solo el texto: debe decir exactamente «…». No cambies nada más.\`
-4. Descarga la imagen y guárdala en \`docs/publicidad/generadas/\` con el nombre de **Guardar como** (basta el código: \`V03.png\`).
-5. Las que dicen **Lleva QR** salen con un cuadro blanco vacío: avísame y les pego el QR de su sector (\`npx tsx scripts/pegar-qr.ts\`). Quedan en \`docs/publicidad/listas/\`.
+1. Abre [gemini.google.com](https://gemini.google.com) y un **chat nuevo por pieza**, para que no mezcle una con otra.
+2. En la caja de texto, toca **Herramientas** y activa **Crear imágenes** (el ícono del banano). Sin eso, Gemini puede responder con código en lugar de una imagen.
+3. Sube los archivos de **Adjunta**, que están en \`docs/publicidad/adjuntos/\`.
+4. Copia el prompt completo y envíalo. Si responde con código, contesta \`No quiero código. Genera la imagen.\` Si el texto sale con un error: \`Corrige solo el texto: debe decir exactamente «…». No cambies nada más.\`
+5. Descarga la imagen y guárdala en \`docs/publicidad/generadas/\` con el nombre de **Guardar como** (basta el código: \`V03.png\`).
+6. Las que dicen **Lleva QR** salen con un cuadro blanco vacío: avísame y les pego el QR de su sector (\`npx tsx scripts/pegar-qr.ts\`). Quedan en \`docs/publicidad/listas/\`.
 
 Ninguna pieza muestra precios: todas llevan a la web a averiguarlo.
 
@@ -458,7 +467,7 @@ ${indice}
       md += `**Formato:** ${p.formato}  \n`
       md += `**Guardar como:** \`${p.id}.png\`${p.qr ? `  \n**Lleva QR:** \`${p.qr}\`` : ""}\n`
       if (p.guia) md += `\n${p.guia}\n`
-      md += `\n\`\`\`text\n${p.prompt}\n\`\`\`\n`
+      md += `\n\`\`\`text\n${INICIO}\n${p.prompt}\n${CIERRE}\n\`\`\`\n`
     }
   }
   md += `
