@@ -115,6 +115,23 @@ export default async function AdminDashboard() {
         </section>
       </div>
 
+      <section aria-labelledby="origenes" className="mt-4 rounded-[12px] border border-line bg-card p-5">
+        <h2 id="origenes" className="text-[1rem] font-semibold">Visitas por publicidad</h2>
+        <p className="mt-1 text-sm text-mid">Las que llegaron por el QR de una tarjeta o un volante, o por el Perfil de Google.</p>
+        {embudo.origenes.length === 0 ? (
+          <p className="mt-3 text-sm text-mid">Todavía ninguna.</p>
+        ) : (
+          <ul className="mt-3 divide-y divide-line text-sm">
+            {embudo.origenes.map((o) => (
+              <li key={o.origen} className="flex justify-between py-2">
+                <span>{o.origen}</span>
+                <span className="tabular-nums">{o.visitas}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
       <div className="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-4">
         {cards.map((c) => {
           const Icon = c.icon

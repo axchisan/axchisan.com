@@ -68,9 +68,10 @@ export async function getEmbudo(days = 30) {
     serie: Array(days).fill(0) as number[],
     paginas: [] as { ruta: string; visitas: number; whatsapp: number }[],
     demos: [] as { demo: string; aperturas: number }[],
+    origenes: [] as { origen: string; visitas: number }[],
   }
   try {
-    const [porEvento, eventos, cotizaciones, demos] = await Promise.all([
+    const [porEvento, eventos, cotizaciones, demos, origenes] = await Promise.all([
       prisma.siteAnalytics.groupBy({ by: ["evento"], where: { createdAt: { gte: since } }, _count: { _all: true } }),
       prisma.siteAnalytics.findMany({
         where: { createdAt: { gte: since }, evento: { in: ["visita", "whatsapp"] } },
@@ -80,6 +81,12 @@ export async function getEmbudo(days = 30) {
       prisma.siteAnalytics.groupBy({
         by: ["detalle"],
         where: { createdAt: { gte: since }, evento: "demo" },
+        _count: { _all: true },
+      }),
+      // Visitas que llegaron por una pieza de publicidad (utm_source).
+      prisma.siteAnalytics.groupBy({
+        by: ["detalle"],
+        where: { createdAt: { gte: since }, evento: "visita", detalle: { not: null } },
         _count: { _all: true },
       }),
     ])
@@ -119,6 +126,9 @@ export async function getEmbudo(days = 30) {
       demos: demos
         .map((d) => ({ demo: d.detalle ?? "sin nombre", aperturas: d._count._all }))
         .sort((a, b) => b.aperturas - a.aperturas),
+      origenes: origenes
+        .map((o) => ({ origen: o.detalle ?? "", visitas: o._count._all }))
+        .sort((a, b) => b.visitas - a.visitas),
     }
   } catch (error) {
     console.error("getEmbudo error:", error)
