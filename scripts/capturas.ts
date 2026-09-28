@@ -247,6 +247,20 @@ const TOMAS: Toma[] = [
       await p.evaluate(() => window.scrollTo(0, 260))
     },
   },
+  { archivo: "cafe-del-barrio-app-escritorio", url: `${BASE}/demo/cafe-del-barrio` },
+  { archivo: "cafe-del-barrio-app-movil", url: `${BASE}/demo/cafe-del-barrio`, movil: true },
+  {
+    archivo: "cafe-del-barrio-caja-escritorio",
+    url: `${BASE}/demo/cafe-del-barrio/caja`,
+    preparar: async (p) => {
+      await p.getByLabel("Código de la app o celular").fill("2718")
+      await p.getByRole("button", { name: "Buscar cliente" }).click()
+      await p.getByRole("button", { name: /^Capuchino/ }).click()
+      await p.getByRole("button", { name: /^Pandebono/ }).click()
+    },
+  },
+  { archivo: "cafe-del-barrio-panel-escritorio", url: `${BASE}/demo/cafe-del-barrio/panel` },
+  { archivo: "cafe-del-barrio-campanas-escritorio", url: `${BASE}/demo/cafe-del-barrio/panel/campanas` },
   { archivo: "jabones-mari-portada-escritorio", url: "https://jabonesmari.shop" },
   { archivo: "jabones-mari-portada-movil", url: "https://jabonesmari.shop", movil: true },
 ]

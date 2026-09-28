@@ -9,6 +9,7 @@ Generados con `npx tsx scripts/qr-publicidad.ts`. PNG de 1200 px para imprimir h
 | `tarjeta-salones-y-barberias.png` | https://axchisan.com/soluciones/salones-y-barberias?utm_source=tarjeta&utm_campaign=salones-y-barberias |
 | `tarjeta-panaderias-y-cafeterias.png` | https://axchisan.com/soluciones/panaderias-y-cafeterias?utm_source=tarjeta&utm_campaign=panaderias-y-cafeterias |
 | `tarjeta-abogados-y-contadores.png` | https://axchisan.com/soluciones/abogados-y-contadores?utm_source=tarjeta&utm_campaign=abogados-y-contadores |
+| `tarjeta-programa-de-puntos.png` | https://axchisan.com/soluciones/programa-de-puntos?utm_source=tarjeta&utm_campaign=programa-de-puntos |
 | `tarjeta-inmobiliarias.png` | https://axchisan.com/soluciones/inmobiliarias?utm_source=tarjeta&utm_campaign=inmobiliarias |
 | `tarjeta-gimnasios-y-estudios.png` | https://axchisan.com/soluciones/gimnasios-y-estudios?utm_source=tarjeta&utm_campaign=gimnasios-y-estudios |
 | `tarjeta-consultorios-odontologicos.png` | https://axchisan.com/soluciones/consultorios-odontologicos?utm_source=tarjeta&utm_campaign=consultorios-odontologicos |
@@ -22,6 +23,7 @@ Generados con `npx tsx scripts/qr-publicidad.ts`. PNG de 1200 px para imprimir h
 | `volante-salones-y-barberias.png` | https://axchisan.com/soluciones/salones-y-barberias?utm_source=volante&utm_campaign=salones-y-barberias |
 | `volante-panaderias-y-cafeterias.png` | https://axchisan.com/soluciones/panaderias-y-cafeterias?utm_source=volante&utm_campaign=panaderias-y-cafeterias |
 | `volante-abogados-y-contadores.png` | https://axchisan.com/soluciones/abogados-y-contadores?utm_source=volante&utm_campaign=abogados-y-contadores |
+| `volante-programa-de-puntos.png` | https://axchisan.com/soluciones/programa-de-puntos?utm_source=volante&utm_campaign=programa-de-puntos |
 | `volante-inmobiliarias.png` | https://axchisan.com/soluciones/inmobiliarias?utm_source=volante&utm_campaign=inmobiliarias |
 | `volante-gimnasios-y-estudios.png` | https://axchisan.com/soluciones/gimnasios-y-estudios?utm_source=volante&utm_campaign=gimnasios-y-estudios |
 | `volante-consultorios-odontologicos.png` | https://axchisan.com/soluciones/consultorios-odontologicos?utm_source=volante&utm_campaign=consultorios-odontologicos |
