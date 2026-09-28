@@ -16,15 +16,15 @@
 | F3 · Sitio comercial | **Hecha** (24 sep 2026): portada, `/soluciones` y fichas, `/planes`, `/a-medida`, `/proceso`, `/empresa`, `/cotizar` con formulario calificado, `/guias`, redirecciones 308 en un salto, sitemap nuevo, WhatsApp flotante en celular. Proyectos de GitHub retirados del sitio público (siguen en el panel) |
 | Correo `@axchisan.com` | **Hecho**: `contacto@axchisan.com` en Zoho Mail, en el sitio y como destino de los avisos. Falta el registro DMARC (`docs/correo-dominio.md`) |
 | F4a · Canela | **Hecha**: portada, reserva en cuatro pasos, panel con Hoy, Agenda, Pacientes, ficha clínica, consulta con fórmula imprimible, Recordatorios y Resumen. 20 pruebas E2E en escritorio y celular, incluida WCAG AA |
-| F4b · Peine Fino | **Hecha**: segunda demo del motor de agenda (`demos/motores/agenda/`, extraído de Canela). Salón y barbería con reserva de varios servicios, agenda por profesional, caja con comisiones, fórmulas de color y clientes que no vuelven. Ficha `/soluciones/salones-y-barberias`. 18 pruebas E2E |
-| F4c · Orilla | **Hecha**: primera demo del motor cinematográfico (`demos/motores/cinematico/`), nacida de las pruebas de PaginasScroll. Hotel frente al mar con tres escenas que avanzan con el scroll, fotogramas en R2. Crea el plan **Página cinematográfica** ($ 1.800.000) y el módulo **Portada cinematográfica** ($ 600.000). Ficha `/soluciones/hoteles-y-turismo`. 12 pruebas E2E |
-| F4d · Fogón 45 | **Hecha**: primera demo del motor de pedidos (`demos/motores/pedidos/`). Restaurante con carta y QR por mesa, carrito con opciones, pedido a la mesa, para recoger o a domicilio con seguimiento, reservas con cupos, y panel con pedidos, cocina, carta editable, QR imprimibles y ventas del día. Ficha `/soluciones/restaurantes`. 16 pruebas E2E |
-| F4e · Doble Rosca | **Hecha**: primera demo del motor de gestión (`demos/motores/gestion/`). Ferretería con catálogo público con existencias y lista por WhatsApp, caja con cambio y recibo, inventario con mínimos y kardex, conteo físico, entradas por factura, reportes con utilidad y descarga para Excel, y pedido sugerido a proveedores con avisos. Ficha `/soluciones/inventario-y-ventas`. 18 pruebas E2E |
+| F4b · Look & Estilo | **Hecha**: segunda demo del motor de agenda (`demos/motores/agenda/`, extraído de Canela). Salón y barbería con reserva de varios servicios, agenda por profesional, caja con comisiones, fórmulas de color y clientes que no vuelven. Ficha `/soluciones/salones-y-barberias`. 18 pruebas E2E |
+| F4c · Brisas del Mar | **Hecha**: primera demo del motor cinematográfico (`demos/motores/cinematico/`), nacida de las pruebas de PaginasScroll. Hotel frente al mar con tres escenas que avanzan con el scroll, fotogramas en R2. Crea el plan **Página cinematográfica** ($ 1.800.000) y el módulo **Portada cinematográfica** ($ 600.000). Ficha `/soluciones/hoteles-y-turismo`. 12 pruebas E2E |
+| F4d · Sabor de Casa | **Hecha**: primera demo del motor de pedidos (`demos/motores/pedidos/`). Restaurante con carta y QR por mesa, carrito con opciones, pedido a la mesa, para recoger o a domicilio con seguimiento, reservas con cupos, y panel con pedidos, cocina, carta editable, QR imprimibles y ventas del día. Ficha `/soluciones/restaurantes`. 16 pruebas E2E |
+| F4e · La Principal | **Hecha**: primera demo del motor de gestión (`demos/motores/gestion/`). Ferretería con catálogo público con existencias y lista por WhatsApp, caja con cambio y recibo, inventario con mínimos y kardex, conteo físico, entradas por factura, reportes con utilidad y descarga para Excel, y pedido sugerido a proveedores con avisos. Ficha `/soluciones/inventario-y-ventas`. 18 pruebas E2E |
 | F4f · Linaza | **Hecha**: primera demo del motor de catálogo (`demos/motores/catalogo/`), en lugar de la "Trama" del plan: el nombre era demasiado común para asegurar que no existiera. Marca de ropa de lino con colección filtrable por talla, prenda con colores y tallas con inventario, guía de tallas, bolsa con envío por ciudad, pago simulado con PSE, Nequi o tarjeta, y panel de pedidos e inventario por talla. Ficha `/soluciones/tiendas-de-ropa`. 14 pruebas E2E. Con esto queda completa la ola 1 |
-| F6a · Molar 116 | **Hecha**: primera de la ola 2. Consultorio odontológico sobre el motor de agenda, con odontograma interactivo (FDI, cinco caras), plan de tratamiento y presupuesto automáticos, abonos y cartera. Ficha `/soluciones/consultorios-odontologicos`. 14 pruebas E2E |
-| F6b · Palanca | **Hecha**: gimnasio sobre un motor nuevo de clases con cupo (`demos/motores/clases/`): horario semanal, reservas con lista de espera, clase gratis, asistencia con tiquetera, membresías con vencimiento y renovación, ocupación por horario. Ficha `/soluciones/gimnasios-y-estudios`. 16 pruebas E2E |
-| F6c · Nomenclatura | **Hecha**: primera demo del motor de listados (`demos/motores/listados/`). Inmobiliaria con buscador, filtros en el enlace, mapa esquemático, ficha con simulador de crédito o costos de arriendo, visitas en la agenda del asesor, y panel de inmuebles, interesados y visitas. Ficha `/soluciones/inmobiliarias`. 14 pruebas E2E |
-| F6d · Tanda | **Hecha**: segunda demo del motor de pedidos. Panadería con horneadas del día y disponibilidad calculada desde ellas, pedidos para recoger o a domicilio, tortas por encargo con anticipo y plan de producción. Ficha `/soluciones/panaderias-y-cafeterias` (sector nuevo). 12 pruebas E2E |
+| F6a · Sonrisa Clara | **Hecha**: primera de la ola 2. Consultorio odontológico sobre el motor de agenda, con odontograma interactivo (FDI, cinco caras), plan de tratamiento y presupuesto automáticos, abonos y cartera. Ficha `/soluciones/consultorios-odontologicos`. 14 pruebas E2E |
+| F6b · Titán Gym | **Hecha**: gimnasio sobre un motor nuevo de clases con cupo (`demos/motores/clases/`): horario semanal, reservas con lista de espera, clase gratis, asistencia con tiquetera, membresías con vencimiento y renovación, ocupación por horario. Ficha `/soluciones/gimnasios-y-estudios`. 16 pruebas E2E |
+| F6c · Tu Casa Inmobiliaria | **Hecha**: primera demo del motor de listados (`demos/motores/listados/`). Inmobiliaria con buscador, filtros en el enlace, mapa esquemático, ficha con simulador de crédito o costos de arriendo, visitas en la agenda del asesor, y panel de inmuebles, interesados y visitas. Ficha `/soluciones/inmobiliarias`. 14 pruebas E2E |
+| F6d · Pan de la Casa | **Hecha**: segunda demo del motor de pedidos. Panadería con horneadas del día y disponibilidad calculada desde ellas, pedidos para recoger o a domicilio, tortas por encargo con anticipo y plan de producción. Ficha `/soluciones/panaderias-y-cafeterias` (sector nuevo). 12 pruebas E2E |
 
 ## 0. En cinco líneas
 
@@ -280,7 +280,7 @@ un negocio real con ese nombre en Colombia (búsqueda en Google Maps y en el RUE
 
 | # | Sector | Negocio ficticio | Motor | Nivel | Qué se puede hacer |
 |---|---|---|---|---|---|
-| 1 | Restaurante | *Fogón 45* | Pedidos | Sistema | Carta, pedido a WhatsApp, reservas, QR de mesa, panel de cocina |
+| 1 | Restaurante | *Sabor de Casa* | Pedidos | Sistema | Carta, pedido a WhatsApp, reservas, QR de mesa, panel de cocina |
 | 2 | Tienda de ropa | *Trama* | Catálogo | Funcional | Colecciones, filtros por talla y color, guía de tallas, carrito, checkout simulado con PSE/Nequi |
 | 3 | Cosméticos | **Jabones Mari** (real, `jabonesmari.shop`) | Catálogo | En producción | Ya existe: se enlaza y se documenta en su ficha, no se reconstruye |
 | 4 | Salón de belleza y barbería | *Navaja & Tijera* | Agenda | Funcional | Servicios con duración y precio, elegir profesional y hora, confirmación |
@@ -562,7 +562,7 @@ Por motor, para que el segundo sector de cada motor salga casi gratis:
 
 1. Motor **Agenda** → Navaja & Tijera (reutiliza lo de Canela).
 2. Motor **Gestión** → Inventario y ventas (reutiliza lo de Canela).
-3. Motor **Pedidos** → Fogón 45.
+3. Motor **Pedidos** → Sabor de Casa.
 4. Motor **Catálogo** → Trama; Jabones Mari ya cubre cosméticos.
 
 **Cierre:** las demos cumplen los criterios de 4.7 y sus fichas están publicadas.

@@ -127,7 +127,7 @@ Precios desde, finales y sin IVA.
 | **Presencia** | **$ 300.000** | 3 días hábiles | Una página con servicios, horario, mapa y WhatsApp, sobre plantilla |
 | Página profesional | $ 600.000 | 1 a 2 semanas | Diseño propio, formulario, analítica, ficha de Google |
 | Sitio con panel | $ 900.000 | 2 semanas | Varias páginas y panel para editar |
-| Página cinematográfica | $ 1.800.000 | 2 a 3 semanas | Recorrido en video que avanza con el scroll, creado con IA desde fotos del lugar. Para hoteles, turismo, proyectos de vivienda (como la demo de Orilla) |
+| Página cinematográfica | $ 1.800.000 | 2 a 3 semanas | Recorrido en video que avanza con el scroll, creado con IA desde fotos del lugar. Para hoteles, turismo, proyectos de vivienda (como la demo de Brisas del Mar) |
 | Catálogo con pedidos por WhatsApp | $ 1.200.000 | 2 a 3 semanas | Productos, carrito y pedido armado por WhatsApp (como Jabones Mari) |
 | Citas en línea | $ 1.400.000 | 2 a 3 semanas | Reserva desde el celular y agenda del día |
 | Tienda con pagos | $ 1.800.000 | 3 a 4 semanas | Catálogo con cobro en línea e inventario |

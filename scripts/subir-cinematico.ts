@@ -12,7 +12,7 @@
  *
  * Los fotogramas se suben tal cual: ya vienen comprimidos, y recomprimirlos
  * ahorraba entre 1 y 2 % a cambio de una segunda pérdida de calidad (medido
- * con la demo de Orilla). Los pósters pasan de JPG a WebP. Todo se sirve desde
+ * con la demo de Brisas del Mar). Los pósters pasan de JPG a WebP. Todo se sirve desde
  * R2 (sin cobro de salida) con caché de un año: un fotograma publicado nunca
  * cambia; si cambia el video, cambia el slug.
  */

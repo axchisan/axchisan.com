@@ -28,6 +28,18 @@ const nextConfig: NextConfig = {
     // Cada ruta vieja apunta directo a su destino final: una cadena de
     // redirecciones pierde posicionamiento en cada salto.
     return [
+      // Demos renombradas en septiembre de 2026: los enlaces ya compartidos siguen sirviendo.
+      ...[
+        ["peine-fino", "look-y-estilo"],
+        ["orilla", "brisas-del-mar"],
+        ["fogon-45", "sabor-de-casa"],
+        ["doble-rosca", "la-principal"],
+        ["molar-116", "sonrisa-clara"],
+        ["palanca", "titan-gym"],
+        ["nomenclatura", "tu-casa"],
+        ["tanda", "pan-de-la-casa"],
+      ].map(([viejo, nuevo]) => ({ source: `/demo/${viejo}/:ruta*`, destination: `/demo/${nuevo}/:ruta*`, permanent: true })),
+
       // Reestructuración comercial (septiembre de 2026).
       { source: "/servicios", destination: "/planes", permanent: true },
       { source: "/trabajo", destination: "/soluciones", permanent: true },

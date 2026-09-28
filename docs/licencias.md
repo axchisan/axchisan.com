@@ -14,35 +14,35 @@ obligatoria. Aun así se acredita al autor en la demo.
 | Canela | Peluquería | Denys Sergushkin | [unsplash.com/photos/ejxFIxygOww](https://unsplash.com/photos/ejxFIxygOww) | `photo-1588626863948-1d7978596f17` |
 | Canela | Gato en consulta | Sueda Güzeldere | [unsplash.com/photos/BATIVPqWwqw](https://unsplash.com/photos/BATIVPqWwqw) | `photo-1733783506192-653df6185a7d` |
 | Canela | Gato atigrado | Borna Bevanda | [unsplash.com/photos/w12NAMymqnk](https://unsplash.com/photos/w12NAMymqnk) | `photo-1515002246390-7bf7e8f87b54` |
-| Peine Fino | Portada y equipo: barba con tijera | Mr Shave | [unsplash.com/photos/4k60yfGy7fU](https://unsplash.com/photos/4k60yfGy7fU) | `photo-1599011176306-4a96f1516d4d` |
-| Peine Fino | Corte con peine y tijera | Gulom Nazarov | [unsplash.com/photos/DrG4V5skbMY](https://unsplash.com/photos/DrG4V5skbMY) | `photo-1657105052497-f996284ffff8` |
-| Peine Fino | Aplicación de color | Ionela Mat | [unsplash.com/photos/koWiggH8fmE](https://unsplash.com/photos/koWiggH8fmE) | `photo-1707720531504-ce087725861a` |
-| Peine Fino | Mechas | Ionela Mat | [unsplash.com/photos/qMjrFNDdjpw](https://unsplash.com/photos/qMjrFNDdjpw) | `photo-1707979577466-2d6109c68a45` |
-| Peine Fino | Ondas con tenaza | Giorgio Trovato | [unsplash.com/photos/wSpkThmoZQc](https://unsplash.com/photos/wSpkThmoZQc) | `photo-1629397685944-7073f5589754` |
-| Peine Fino | Manicure | Stefan Lehner | [unsplash.com/photos/IYa5Dnj9qWE](https://unsplash.com/photos/IYa5Dnj9qWE) | `photo-1659391542239-9648f307c0b1` |
-| Peine Fino | Corte con tijera | Nate Johnston | [unsplash.com/photos/tgPrIYnW3g4](https://unsplash.com/photos/tgPrIYnW3g4) | `photo-1647140655214-e4a2d914971f` |
-| Peine Fino | Interior del salón | Daniel | [unsplash.com/photos/PnDr2j28gXA](https://unsplash.com/photos/PnDr2j28gXA) | `photo-1695527081848-1e46c06e6458` |
-| Peine Fino | Sillas color vino | Guilherme Petri | [unsplash.com/photos/PtOfbGkU3uI](https://unsplash.com/photos/PtOfbGkU3uI) | `photo-1521590832167-7bcbfaa6381f` |
-| Fogón 45 | Portada y punta de anca: carne en la parrilla | Matt Connor | [unsplash.com/photos/9Qs_9n2oSJo](https://unsplash.com/photos/9Qs_9n2oSJo) | `photo-1614119068601-483274e9dcb7` |
-| Fogón 45 | Bandeja 45 | WILLIAN REIS | [unsplash.com/photos/9MVNGosobLU](https://unsplash.com/photos/9MVNGosobLU) | `photo-1723693407562-bb4fcae76797` |
-| Fogón 45 | Churrasco | CHUTTERSNAP | [unsplash.com/photos/IRqbTtMfh8A](https://unsplash.com/photos/IRqbTtMfh8A) | `photo-1624234763734-c9629a2777c1` |
-| Fogón 45 | Chicharrón | Zion C | [unsplash.com/photos/ypLK2aLvF1Q](https://unsplash.com/photos/ypLK2aLvF1Q) | `photo-1785735011447-9942c0ba0b13` |
-| Fogón 45 | Mojarra frita | lalo Hernandez | [unsplash.com/photos/nOpn-ScYv6A](https://unsplash.com/photos/nOpn-ScYv6A) | `photo-1548704087-b11dab0fbec0` |
-| Fogón 45 | Picada para dos | Alfredo Burgos | [unsplash.com/photos/95KZ2fOy3-E](https://unsplash.com/photos/95KZ2fOy3-E) | `photo-1702827496392-abe9bcadcd07` |
-| Fogón 45 | Empanadas | Anton | [unsplash.com/photos/kJ6myhO23PI](https://unsplash.com/photos/kJ6myhO23PI) | `photo-1624128082323-beb6b8b508db` |
-| Fogón 45 | Arepas con hogao | Alexandra Tran | [unsplash.com/photos/OyQLPk4qbDo](https://unsplash.com/photos/OyQLPk4qbDo) | `photo-1644753787071-8933b5daed2d` |
-| Fogón 45 | Papas criollas | Maggi Paraguay | [unsplash.com/photos/TPa2oXseaTw](https://unsplash.com/photos/TPa2oXseaTw) | `photo-1721942893905-3de47ae22b88` |
-| Fogón 45 | Mazorca asada | Tim Mossholder | [unsplash.com/photos/rVXAUFywlWQ](https://unsplash.com/photos/rVXAUFywlWQ) | `photo-1653886764100-60e01f57bd1d` |
-| Fogón 45 | Ajiaco | Keesha's Kitchen | [unsplash.com/photos/7ax3l4quF-M](https://unsplash.com/photos/7ax3l4quF-M) | `photo-1665593998976-d957f2827fe7` |
-| Fogón 45 | Limonada | Laura Chouette | [unsplash.com/photos/TecD-1MTMiE](https://unsplash.com/photos/TecD-1MTMiE) | `photo-1623084921164-4a8c5c37a912` |
-| Fogón 45 | Jugos naturales | Jugoslocos | [unsplash.com/photos/i8JfQDc4Ha8](https://unsplash.com/photos/i8JfQDc4Ha8) | `photo-1622597467821-df79dcb4f94d` |
-| Fogón 45 | Cerveza artesanal | Josh Olalde | [unsplash.com/photos/Qlt7AQ8BWI0](https://unsplash.com/photos/Qlt7AQ8BWI0) | `photo-1632173517757-1e87c79de596` |
-| Fogón 45 | Chocolate santafereño | Melody Zimmerman | [unsplash.com/photos/7GkyzWeM0eg](https://unsplash.com/photos/7GkyzWeM0eg) | `photo-1702165639524-252a1c1b1ab5` |
-| Fogón 45 | Flan de caramelo | Jay | [unsplash.com/photos/qjf9_9HRHXg](https://unsplash.com/photos/qjf9_9HRHXg) | `photo-1752245055475-8b7c3b4756ac` |
-| Fogón 45 | Arepas en la parrilla | Leila Issa | [unsplash.com/photos/4C_k18o_tnk](https://unsplash.com/photos/4C_k18o_tnk) | `photo-1587603366933-aa6947174c65` |
-| Fogón 45 | Salón del restaurante | Glenov Brankovic | [unsplash.com/photos/e4B5AvA7Jqo](https://unsplash.com/photos/e4B5AvA7Jqo) | `photo-1667388969250-1c7220bf3f37` |
-| Doble Rosca | Portada: estantería de ferretería | Artem Korolev | [unsplash.com/photos/UHXBNCK7Hu4](https://unsplash.com/photos/UHXBNCK7Hu4) | `photo-1765744893064-dce3184289ef` |
-| Doble Rosca | Pared de herramientas | Darien Attridge | [unsplash.com/photos/ciY4tc7539I](https://unsplash.com/photos/ciY4tc7539I) | `photo-1759200165738-6366977a73c6` |
+| Look & Estilo | Portada y equipo: barba con tijera | Mr Shave | [unsplash.com/photos/4k60yfGy7fU](https://unsplash.com/photos/4k60yfGy7fU) | `photo-1599011176306-4a96f1516d4d` |
+| Look & Estilo | Corte con peine y tijera | Gulom Nazarov | [unsplash.com/photos/DrG4V5skbMY](https://unsplash.com/photos/DrG4V5skbMY) | `photo-1657105052497-f996284ffff8` |
+| Look & Estilo | Aplicación de color | Ionela Mat | [unsplash.com/photos/koWiggH8fmE](https://unsplash.com/photos/koWiggH8fmE) | `photo-1707720531504-ce087725861a` |
+| Look & Estilo | Mechas | Ionela Mat | [unsplash.com/photos/qMjrFNDdjpw](https://unsplash.com/photos/qMjrFNDdjpw) | `photo-1707979577466-2d6109c68a45` |
+| Look & Estilo | Ondas con tenaza | Giorgio Trovato | [unsplash.com/photos/wSpkThmoZQc](https://unsplash.com/photos/wSpkThmoZQc) | `photo-1629397685944-7073f5589754` |
+| Look & Estilo | Manicure | Stefan Lehner | [unsplash.com/photos/IYa5Dnj9qWE](https://unsplash.com/photos/IYa5Dnj9qWE) | `photo-1659391542239-9648f307c0b1` |
+| Look & Estilo | Corte con tijera | Nate Johnston | [unsplash.com/photos/tgPrIYnW3g4](https://unsplash.com/photos/tgPrIYnW3g4) | `photo-1647140655214-e4a2d914971f` |
+| Look & Estilo | Interior del salón | Daniel | [unsplash.com/photos/PnDr2j28gXA](https://unsplash.com/photos/PnDr2j28gXA) | `photo-1695527081848-1e46c06e6458` |
+| Look & Estilo | Sillas color vino | Guilherme Petri | [unsplash.com/photos/PtOfbGkU3uI](https://unsplash.com/photos/PtOfbGkU3uI) | `photo-1521590832167-7bcbfaa6381f` |
+| Sabor de Casa | Portada y punta de anca: carne en la parrilla | Matt Connor | [unsplash.com/photos/9Qs_9n2oSJo](https://unsplash.com/photos/9Qs_9n2oSJo) | `photo-1614119068601-483274e9dcb7` |
+| Sabor de Casa | Bandeja 45 | WILLIAN REIS | [unsplash.com/photos/9MVNGosobLU](https://unsplash.com/photos/9MVNGosobLU) | `photo-1723693407562-bb4fcae76797` |
+| Sabor de Casa | Churrasco | CHUTTERSNAP | [unsplash.com/photos/IRqbTtMfh8A](https://unsplash.com/photos/IRqbTtMfh8A) | `photo-1624234763734-c9629a2777c1` |
+| Sabor de Casa | Chicharrón | Zion C | [unsplash.com/photos/ypLK2aLvF1Q](https://unsplash.com/photos/ypLK2aLvF1Q) | `photo-1785735011447-9942c0ba0b13` |
+| Sabor de Casa | Mojarra frita | lalo Hernandez | [unsplash.com/photos/nOpn-ScYv6A](https://unsplash.com/photos/nOpn-ScYv6A) | `photo-1548704087-b11dab0fbec0` |
+| Sabor de Casa | Picada para dos | Alfredo Burgos | [unsplash.com/photos/95KZ2fOy3-E](https://unsplash.com/photos/95KZ2fOy3-E) | `photo-1702827496392-abe9bcadcd07` |
+| Sabor de Casa | Empanadas | Anton | [unsplash.com/photos/kJ6myhO23PI](https://unsplash.com/photos/kJ6myhO23PI) | `photo-1624128082323-beb6b8b508db` |
+| Sabor de Casa | Arepas con hogao | Alexandra Tran | [unsplash.com/photos/OyQLPk4qbDo](https://unsplash.com/photos/OyQLPk4qbDo) | `photo-1644753787071-8933b5daed2d` |
+| Sabor de Casa | Papas criollas | Maggi Paraguay | [unsplash.com/photos/TPa2oXseaTw](https://unsplash.com/photos/TPa2oXseaTw) | `photo-1721942893905-3de47ae22b88` |
+| Sabor de Casa | Mazorca asada | Tim Mossholder | [unsplash.com/photos/rVXAUFywlWQ](https://unsplash.com/photos/rVXAUFywlWQ) | `photo-1653886764100-60e01f57bd1d` |
+| Sabor de Casa | Ajiaco | Keesha's Kitchen | [unsplash.com/photos/7ax3l4quF-M](https://unsplash.com/photos/7ax3l4quF-M) | `photo-1665593998976-d957f2827fe7` |
+| Sabor de Casa | Limonada | Laura Chouette | [unsplash.com/photos/TecD-1MTMiE](https://unsplash.com/photos/TecD-1MTMiE) | `photo-1623084921164-4a8c5c37a912` |
+| Sabor de Casa | Jugos naturales | Jugoslocos | [unsplash.com/photos/i8JfQDc4Ha8](https://unsplash.com/photos/i8JfQDc4Ha8) | `photo-1622597467821-df79dcb4f94d` |
+| Sabor de Casa | Cerveza artesanal | Josh Olalde | [unsplash.com/photos/Qlt7AQ8BWI0](https://unsplash.com/photos/Qlt7AQ8BWI0) | `photo-1632173517757-1e87c79de596` |
+| Sabor de Casa | Chocolate santafereño | Melody Zimmerman | [unsplash.com/photos/7GkyzWeM0eg](https://unsplash.com/photos/7GkyzWeM0eg) | `photo-1702165639524-252a1c1b1ab5` |
+| Sabor de Casa | Flan de caramelo | Jay | [unsplash.com/photos/qjf9_9HRHXg](https://unsplash.com/photos/qjf9_9HRHXg) | `photo-1752245055475-8b7c3b4756ac` |
+| Sabor de Casa | Arepas en la parrilla | Leila Issa | [unsplash.com/photos/4C_k18o_tnk](https://unsplash.com/photos/4C_k18o_tnk) | `photo-1587603366933-aa6947174c65` |
+| Sabor de Casa | Salón del restaurante | Glenov Brankovic | [unsplash.com/photos/e4B5AvA7Jqo](https://unsplash.com/photos/e4B5AvA7Jqo) | `photo-1667388969250-1c7220bf3f37` |
+| La Principal | Portada: estantería de ferretería | Artem Korolev | [unsplash.com/photos/UHXBNCK7Hu4](https://unsplash.com/photos/UHXBNCK7Hu4) | `photo-1765744893064-dce3184289ef` |
+| La Principal | Pared de herramientas | Darien Attridge | [unsplash.com/photos/ciY4tc7539I](https://unsplash.com/photos/ciY4tc7539I) | `photo-1759200165738-6366977a73c6` |
 | Linaza | Camisa manga corta, gris jaspe | tian dayong | [unsplash.com/photos/maHb1ki_X3o](https://unsplash.com/photos/maHb1ki_X3o) | `photo-1693443688057-85f57b872a3c` |
 | Linaza | Camisa manga corta, crudo | tian dayong | [unsplash.com/photos/lziP7ZPtghg](https://unsplash.com/photos/lziP7ZPtghg) | `photo-1713881676551-b16f22ce4719` |
 | Linaza | Camisa manga corta, azul noche | tian dayong | [unsplash.com/photos/8UsQoiJLNNQ](https://unsplash.com/photos/8UsQoiJLNNQ) | `photo-1713881649391-a1c8ddaf83cd` |
@@ -60,48 +60,48 @@ obligatoria. Aun así se acredita al autor en la demo.
 | Linaza | Blazer de lino | Robert Richman | [unsplash.com/photos/cYRsB4liZPs](https://unsplash.com/photos/cYRsB4liZPs) | `photo-1740710748146-a15d840d6f40` |
 | Linaza | Portada: camisa blanca frente al mar | Margo Evardson | [unsplash.com/photos/5ObmjcAoXOI](https://unsplash.com/photos/5ObmjcAoXOI) | `photo-1776633734216-26b0dbcf61d1` |
 | Linaza | El taller: telas de lino | Svitlana | [unsplash.com/photos/ASB-wPXJFGE](https://unsplash.com/photos/ASB-wPXJFGE) | `photo-1596433904747-e8b061219a71` |
-| Palanca | Portada: levantamiento con entrenador | Vitaly Gariev | [unsplash.com/photos/rD0poLlu57M](https://unsplash.com/photos/rD0poLlu57M) | `photo-1758875569256-f37c438cac65` |
-| Palanca | Coaches: técnica con kettlebell | maxhome fitness | [unsplash.com/photos/wSUlQl8HPYc](https://unsplash.com/photos/wSUlQl8HPYc) | `photo-1648542036561-e1d66a5ae2b1` |
-| Nomenclatura | Portada: edificio de ladrillo | Sergio Aguirre | [unsplash.com/photos/hSNIg-WZmfs](https://unsplash.com/photos/hSNIg-WZmfs) | `photo-1785970841472-ac4d3a690c13` |
-| Nomenclatura | Sala con balcón | Danilo Rios | [unsplash.com/photos/AgK_XAqSbfk](https://unsplash.com/photos/AgK_XAqSbfk) | `photo-1665249934445-1de680641f50` |
-| Nomenclatura | Cocina y fotos de interiores | Point3D Commercial Imaging Ltd. | [unsplash.com/photos/tUFogT8Mn8U](https://unsplash.com/photos/tUFogT8Mn8U) | `photo-1630699293875-e56c25151c4b` |
-| Nomenclatura | Sala con ventanal | Huy Nguyen | [unsplash.com/photos/QGxBeUDkeWk](https://unsplash.com/photos/QGxBeUDkeWk) | `photo-1612419299101-6c294dc2901d` |
-| Nomenclatura | Alcoba | Francesca Tosolini | [unsplash.com/photos/Sh22mtTd2GA](https://unsplash.com/photos/Sh22mtTd2GA) | `photo-1560448075-57d0285fc59b` |
-| Nomenclatura | Sala blanca | ian dooley | [unsplash.com/photos/_-JR5TxKNSo](https://unsplash.com/photos/_-JR5TxKNSo) | `photo-1501876725168-00c445821c9e` |
-| Nomenclatura | Cocina con isla | Raphael (Ajani Kamali Akio) | [unsplash.com/photos/ImHGMkJ_Mvg](https://unsplash.com/photos/ImHGMkJ_Mvg) | `photo-1759691337957-ebc9ed54dc44` |
-| Nomenclatura | Sala con sofá azul | Jarek Ceborski | [unsplash.com/photos/jn7uVeCdf6U](https://unsplash.com/photos/jn7uVeCdf6U) | `photo-1493809842364-78817add7ffb` |
-| Nomenclatura | Sala abierta amoblada | Melrose By The Lake | [unsplash.com/photos/43vHzsfrmxk](https://unsplash.com/photos/43vHzsfrmxk) | `photo-1741764014072-68953e93cd48` |
-| Nomenclatura | Loft | Nathan Van Egmond | [unsplash.com/photos/9LMRQdVv7hw](https://unsplash.com/photos/9LMRQdVv7hw) | `photo-1536376072261-38c75010e6c9` |
-| Nomenclatura | Sala de televisión | Grant | [unsplash.com/photos/N90LM3A5AZQ](https://unsplash.com/photos/N90LM3A5AZQ) | `photo-1529408632839-a54952c491e5` |
-| Nomenclatura | Apartaestudio e interior | Julia | [unsplash.com/photos/ABohRftG_Os](https://unsplash.com/photos/ABohRftG_Os) | `photo-1585128792103-0b591f96512e` |
-| Nomenclatura | Alcoba junto a la ventana | Andrew Kayani | [unsplash.com/photos/7wEy-0AHgeQ](https://unsplash.com/photos/7wEy-0AHgeQ) | `photo-1649068559107-e5d936141e44` |
-| Nomenclatura | Sala con sofá verde | Evan Wise | [unsplash.com/photos/jZkFVycn3FQ](https://unsplash.com/photos/jZkFVycn3FQ) | `photo-1661796428215-04fc2830aae6` |
-| Nomenclatura | Alcoba amplia | Aquilion Property | [unsplash.com/photos/qbhF5gOzhVU](https://unsplash.com/photos/qbhF5gOzhVU) | `photo-1702014861736-d62834317c5e` |
-| Nomenclatura | Fachada de edificio nuevo | Patrick Tomasso | [unsplash.com/photos/lSvdsYjnssg](https://unsplash.com/photos/lSvdsYjnssg) | `photo-1501688639626-9804fb1ad475` |
-| Nomenclatura | Cocina moderna | Irena Oze | [unsplash.com/photos/xLEQEF3cC1s](https://unsplash.com/photos/xLEQEF3cC1s) | `photo-1781249144275-c04daed37031` |
-| Nomenclatura | Casa campestre | Datingjungle | [unsplash.com/photos/chO9nH4iAKc](https://unsplash.com/photos/chO9nH4iAKc) | `photo-1613498248726-8922766cebdb` |
-| Nomenclatura | Comedor | Zac Gudakov | [unsplash.com/photos/pJClFZuRc3c](https://unsplash.com/photos/pJClFZuRc3c) | `photo-1629042306548-afec37a5e46b` |
-| Tanda | Pandebono | rodolfo allen_ | [unsplash.com/photos/mOedSrS6qS0](https://unsplash.com/photos/mOedSrS6qS0) | `photo-1559141680-d0bd7bc5af84` |
-| Tanda | Pan francés | Sergio Arze | [unsplash.com/photos/cWXibBbXx44](https://unsplash.com/photos/cWXibBbXx44) | `photo-1568471173242-461f0a730452` |
-| Tanda | Masa madre | Monika Grabkowska | [unsplash.com/photos/mha2dvydACg](https://unsplash.com/photos/mha2dvydACg) | `photo-1616841888027-89693dec0827` |
-| Tanda | Pan de leche | César Guel | [unsplash.com/photos/OLdmSwK94Sw](https://unsplash.com/photos/OLdmSwK94Sw) | `photo-1609889132680-4e2ea2befbef` |
-| Tanda | Croissant | personalgraphic.com | [unsplash.com/photos/VzUE5RtCuBA](https://unsplash.com/photos/VzUE5RtCuBA) | `photo-1691480162735-9b91238080f6` |
-| Tanda | Pastel de guayaba | Geri Chapple | [unsplash.com/photos/fXdoHjQ2Pyg](https://unsplash.com/photos/fXdoHjQ2Pyg) | `photo-1608582037152-adefa9decb70` |
-| Tanda | Mantecadas | Taylor Grote | [unsplash.com/photos/LqkFX2Km1a0](https://unsplash.com/photos/LqkFX2Km1a0) | `photo-1499889808931-317a0255c0e9` |
-| Tanda | Torta de naranja | Rasmus Gundorff Sæderup | [unsplash.com/photos/r_2o5F_1wEs](https://unsplash.com/photos/r_2o5F_1wEs) | `photo-1590055619179-a07394301525` |
-| Tanda | Milhoja | Cody Chan | [unsplash.com/photos/BhK9JdaBTvk](https://unsplash.com/photos/BhK9JdaBTvk) | `photo-1622941367239-8acd68fa946d` |
-| Tanda | Tinto | tabitha turner | [unsplash.com/photos/3n3mPoGko8g](https://unsplash.com/photos/3n3mPoGko8g) | `photo-1593443320739-77f74939d0da` |
-| Tanda | Capuchino | Phil Desforges | [unsplash.com/photos/Nw8wbiDE3gU](https://unsplash.com/photos/Nw8wbiDE3gU) | `photo-1559001724-fbad036dbc9e` |
-| Tanda | Torta de chocolate | Karly Jones | [unsplash.com/photos/z-Lvc04qYaQ](https://unsplash.com/photos/z-Lvc04qYaQ) | `photo-1555050338-0abc773f7978` |
-| Tanda | Torta con fresas | Tuva Mathilde Løland | [unsplash.com/photos/4rfVL3NNGrA](https://unsplash.com/photos/4rfVL3NNGrA) | `photo-1559553156-2e97137af16f` |
-| Tanda | Torta con naranja | Joe Dumas | [unsplash.com/photos/JNb_3Ork0Rc](https://unsplash.com/photos/JNb_3Ork0Rc) | `photo-1772064871914-00305a3053d2` |
-| Tanda | Portada: panadero en el horno | DDP | [unsplash.com/photos/CceG6jpl19M](https://unsplash.com/photos/CceG6jpl19M) | `photo-1560427183-4efd29c38997` |
+| Titán Gym | Portada: levantamiento con entrenador | Vitaly Gariev | [unsplash.com/photos/rD0poLlu57M](https://unsplash.com/photos/rD0poLlu57M) | `photo-1758875569256-f37c438cac65` |
+| Titán Gym | Coaches: técnica con kettlebell | maxhome fitness | [unsplash.com/photos/wSUlQl8HPYc](https://unsplash.com/photos/wSUlQl8HPYc) | `photo-1648542036561-e1d66a5ae2b1` |
+| Tu Casa Inmobiliaria | Portada: edificio de ladrillo | Sergio Aguirre | [unsplash.com/photos/hSNIg-WZmfs](https://unsplash.com/photos/hSNIg-WZmfs) | `photo-1785970841472-ac4d3a690c13` |
+| Tu Casa Inmobiliaria | Sala con balcón | Danilo Rios | [unsplash.com/photos/AgK_XAqSbfk](https://unsplash.com/photos/AgK_XAqSbfk) | `photo-1665249934445-1de680641f50` |
+| Tu Casa Inmobiliaria | Cocina y fotos de interiores | Point3D Commercial Imaging Ltd. | [unsplash.com/photos/tUFogT8Mn8U](https://unsplash.com/photos/tUFogT8Mn8U) | `photo-1630699293875-e56c25151c4b` |
+| Tu Casa Inmobiliaria | Sala con ventanal | Huy Nguyen | [unsplash.com/photos/QGxBeUDkeWk](https://unsplash.com/photos/QGxBeUDkeWk) | `photo-1612419299101-6c294dc2901d` |
+| Tu Casa Inmobiliaria | Alcoba | Francesca Tosolini | [unsplash.com/photos/Sh22mtTd2GA](https://unsplash.com/photos/Sh22mtTd2GA) | `photo-1560448075-57d0285fc59b` |
+| Tu Casa Inmobiliaria | Sala blanca | ian dooley | [unsplash.com/photos/_-JR5TxKNSo](https://unsplash.com/photos/_-JR5TxKNSo) | `photo-1501876725168-00c445821c9e` |
+| Tu Casa Inmobiliaria | Cocina con isla | Raphael (Ajani Kamali Akio) | [unsplash.com/photos/ImHGMkJ_Mvg](https://unsplash.com/photos/ImHGMkJ_Mvg) | `photo-1759691337957-ebc9ed54dc44` |
+| Tu Casa Inmobiliaria | Sala con sofá azul | Jarek Ceborski | [unsplash.com/photos/jn7uVeCdf6U](https://unsplash.com/photos/jn7uVeCdf6U) | `photo-1493809842364-78817add7ffb` |
+| Tu Casa Inmobiliaria | Sala abierta amoblada | Melrose By The Lake | [unsplash.com/photos/43vHzsfrmxk](https://unsplash.com/photos/43vHzsfrmxk) | `photo-1741764014072-68953e93cd48` |
+| Tu Casa Inmobiliaria | Loft | Nathan Van Egmond | [unsplash.com/photos/9LMRQdVv7hw](https://unsplash.com/photos/9LMRQdVv7hw) | `photo-1536376072261-38c75010e6c9` |
+| Tu Casa Inmobiliaria | Sala de televisión | Grant | [unsplash.com/photos/N90LM3A5AZQ](https://unsplash.com/photos/N90LM3A5AZQ) | `photo-1529408632839-a54952c491e5` |
+| Tu Casa Inmobiliaria | Apartaestudio e interior | Julia | [unsplash.com/photos/ABohRftG_Os](https://unsplash.com/photos/ABohRftG_Os) | `photo-1585128792103-0b591f96512e` |
+| Tu Casa Inmobiliaria | Alcoba junto a la ventana | Andrew Kayani | [unsplash.com/photos/7wEy-0AHgeQ](https://unsplash.com/photos/7wEy-0AHgeQ) | `photo-1649068559107-e5d936141e44` |
+| Tu Casa Inmobiliaria | Sala con sofá verde | Evan Wise | [unsplash.com/photos/jZkFVycn3FQ](https://unsplash.com/photos/jZkFVycn3FQ) | `photo-1661796428215-04fc2830aae6` |
+| Tu Casa Inmobiliaria | Alcoba amplia | Aquilion Property | [unsplash.com/photos/qbhF5gOzhVU](https://unsplash.com/photos/qbhF5gOzhVU) | `photo-1702014861736-d62834317c5e` |
+| Tu Casa Inmobiliaria | Fachada de edificio nuevo | Patrick Tomasso | [unsplash.com/photos/lSvdsYjnssg](https://unsplash.com/photos/lSvdsYjnssg) | `photo-1501688639626-9804fb1ad475` |
+| Tu Casa Inmobiliaria | Cocina moderna | Irena Oze | [unsplash.com/photos/xLEQEF3cC1s](https://unsplash.com/photos/xLEQEF3cC1s) | `photo-1781249144275-c04daed37031` |
+| Tu Casa Inmobiliaria | Casa campestre | Datingjungle | [unsplash.com/photos/chO9nH4iAKc](https://unsplash.com/photos/chO9nH4iAKc) | `photo-1613498248726-8922766cebdb` |
+| Tu Casa Inmobiliaria | Comedor | Zac Gudakov | [unsplash.com/photos/pJClFZuRc3c](https://unsplash.com/photos/pJClFZuRc3c) | `photo-1629042306548-afec37a5e46b` |
+| Pan de la Casa | Pandebono | rodolfo allen_ | [unsplash.com/photos/mOedSrS6qS0](https://unsplash.com/photos/mOedSrS6qS0) | `photo-1559141680-d0bd7bc5af84` |
+| Pan de la Casa | Pan francés | Sergio Arze | [unsplash.com/photos/cWXibBbXx44](https://unsplash.com/photos/cWXibBbXx44) | `photo-1568471173242-461f0a730452` |
+| Pan de la Casa | Masa madre | Monika Grabkowska | [unsplash.com/photos/mha2dvydACg](https://unsplash.com/photos/mha2dvydACg) | `photo-1616841888027-89693dec0827` |
+| Pan de la Casa | Pan de leche | César Guel | [unsplash.com/photos/OLdmSwK94Sw](https://unsplash.com/photos/OLdmSwK94Sw) | `photo-1609889132680-4e2ea2befbef` |
+| Pan de la Casa | Croissant | personalgraphic.com | [unsplash.com/photos/VzUE5RtCuBA](https://unsplash.com/photos/VzUE5RtCuBA) | `photo-1691480162735-9b91238080f6` |
+| Pan de la Casa | Pastel de guayaba | Geri Chapple | [unsplash.com/photos/fXdoHjQ2Pyg](https://unsplash.com/photos/fXdoHjQ2Pyg) | `photo-1608582037152-adefa9decb70` |
+| Pan de la Casa | Mantecadas | Taylor Grote | [unsplash.com/photos/LqkFX2Km1a0](https://unsplash.com/photos/LqkFX2Km1a0) | `photo-1499889808931-317a0255c0e9` |
+| Pan de la Casa | Torta de naranja | Rasmus Gundorff Sæderup | [unsplash.com/photos/r_2o5F_1wEs](https://unsplash.com/photos/r_2o5F_1wEs) | `photo-1590055619179-a07394301525` |
+| Pan de la Casa | Milhoja | Cody Chan | [unsplash.com/photos/BhK9JdaBTvk](https://unsplash.com/photos/BhK9JdaBTvk) | `photo-1622941367239-8acd68fa946d` |
+| Pan de la Casa | Tinto | tabitha turner | [unsplash.com/photos/3n3mPoGko8g](https://unsplash.com/photos/3n3mPoGko8g) | `photo-1593443320739-77f74939d0da` |
+| Pan de la Casa | Capuchino | Phil Desforges | [unsplash.com/photos/Nw8wbiDE3gU](https://unsplash.com/photos/Nw8wbiDE3gU) | `photo-1559001724-fbad036dbc9e` |
+| Pan de la Casa | Torta de chocolate | Karly Jones | [unsplash.com/photos/z-Lvc04qYaQ](https://unsplash.com/photos/z-Lvc04qYaQ) | `photo-1555050338-0abc773f7978` |
+| Pan de la Casa | Torta con fresas | Tuva Mathilde Løland | [unsplash.com/photos/4rfVL3NNGrA](https://unsplash.com/photos/4rfVL3NNGrA) | `photo-1559553156-2e97137af16f` |
+| Pan de la Casa | Torta con naranja | Joe Dumas | [unsplash.com/photos/JNb_3Ork0Rc](https://unsplash.com/photos/JNb_3Ork0Rc) | `photo-1772064871914-00305a3053d2` |
+| Pan de la Casa | Portada: panadero en el horno | DDP | [unsplash.com/photos/CceG6jpl19M](https://unsplash.com/photos/CceG6jpl19M) | `photo-1560427183-4efd29c38997` |
 
 ## Imágenes y video generados con IA
 
 | Demo | Uso | Herramienta | Dónde vive |
 |---|---|---|---|
-| Orilla | Fotogramas de las tres escenas, pósters y galería | Imágenes con Gemini (Nano Banana Pro), video con Veo 3.1 en Google Flow | R2, `demos/orilla/` |
+| Brisas del Mar | Fotogramas de las tres escenas, pósters y galería | Imágenes con Gemini (Nano Banana Pro), video con Veo 3.1 en Google Flow | R2, `demos/orilla/` |
 
 No son de terceros: los generó Duvan con esas herramientas, cuyas condiciones permiten el uso
 comercial de lo generado. La demo lo dice al pie ("Imágenes y video generados con IA") para que nadie

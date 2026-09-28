@@ -1,6 +1,6 @@
 /**
  * Motor de gestión: productos, existencias, ventas de mostrador y reportes.
- * Lo usa la ferretería Doble Rosca y sirve igual para una miscelánea, una
+ * Lo usa la ferretería La Principal y sirve igual para una miscelánea, una
  * distribuidora o una tienda de repuestos.
  *
  * Las existencias no se guardan: se calculan. Salen de los movimientos

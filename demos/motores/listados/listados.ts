@@ -1,7 +1,7 @@
 /**
  * Motor de listados: fichas con filtros que viven en la dirección de la página
  * (para compartir una búsqueda por WhatsApp), orden y un simulador de crédito.
- * Lo usa la inmobiliaria Nomenclatura y sirve igual para un concesionario de
+ * Lo usa la inmobiliaria Tu Casa Inmobiliaria y sirve igual para un concesionario de
  * carros usados o un directorio de fincas para alquilar.
  */
 

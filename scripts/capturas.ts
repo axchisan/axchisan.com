@@ -37,7 +37,7 @@ const PANEL = async (p: Page) => {
 
 const SALON = async (p: Page) => {
   await p.evaluate(() =>
-    localStorage.setItem("axchi-demo:peine-fino:preferencias", JSON.stringify({ nivel: "sistema", recorrido: false })),
+    localStorage.setItem("axchi-demo:look-y-estilo:preferencias", JSON.stringify({ nivel: "sistema", recorrido: false })),
   )
   await p.reload({ waitUntil: "networkidle" })
 }
@@ -46,7 +46,7 @@ const SALON = async (p: Page) => {
  * La demo cinematográfica: se baja hasta una fracción de una escena (o de la
  * página, sin selector) y se espera a que lleguen los fotogramas finos.
  */
-const ORILLA = (fraccion: number, selector?: string, margen = 48) => async (p: Page) => {
+const BRISAS_DEL_MAR = (fraccion: number, selector?: string, margen = 48) => async (p: Page) => {
   await p.evaluate(
     ([f, sel, m]) => {
       const el = sel ? document.querySelector<HTMLElement>(sel as string) : null
@@ -78,11 +78,11 @@ const TOMAS: Toma[] = [
   { archivo: "canela-panel-escritorio", url: `${BASE}/demo/canela/panel`, preparar: PANEL },
   { archivo: "canela-ficha-escritorio", url: `${BASE}/demo/canela/panel/pacientes/m16`, preparar: PANEL },
   { archivo: "canela-recordatorios-escritorio", url: `${BASE}/demo/canela/panel/recordatorios`, preparar: PANEL },
-  { archivo: "peine-fino-portada-escritorio", url: `${BASE}/demo/peine-fino` },
-  { archivo: "peine-fino-portada-movil", url: `${BASE}/demo/peine-fino`, movil: true },
+  { archivo: "look-y-estilo-portada-escritorio", url: `${BASE}/demo/look-y-estilo` },
+  { archivo: "look-y-estilo-portada-movil", url: `${BASE}/demo/look-y-estilo`, movil: true },
   {
-    archivo: "peine-fino-reservar-movil",
-    url: `${BASE}/demo/peine-fino/reservar?servicios=corte-hombre,barba`,
+    archivo: "look-y-estilo-reservar-movil",
+    url: `${BASE}/demo/look-y-estilo/reservar?servicios=corte-hombre,barba`,
     movil: true,
     preparar: async (p) => {
       await p.getByRole("button", { name: "Continuar" }).click()
@@ -91,14 +91,14 @@ const TOMAS: Toma[] = [
       await p.evaluate(() => window.scrollTo(0, 260))
     },
   },
-  { archivo: "peine-fino-hoy-escritorio", url: `${BASE}/demo/peine-fino/panel`, preparar: SALON },
-  { archivo: "peine-fino-caja-escritorio", url: `${BASE}/demo/peine-fino/panel/caja`, preparar: SALON },
-  { archivo: "peine-fino-volver-escritorio", url: `${BASE}/demo/peine-fino/panel/volver`, preparar: SALON },
-  { archivo: "fogon-45-portada-escritorio", url: `${BASE}/demo/fogon-45` },
-  { archivo: "fogon-45-portada-movil", url: `${BASE}/demo/fogon-45`, movil: true },
+  { archivo: "look-y-estilo-hoy-escritorio", url: `${BASE}/demo/look-y-estilo/panel`, preparar: SALON },
+  { archivo: "look-y-estilo-caja-escritorio", url: `${BASE}/demo/look-y-estilo/panel/caja`, preparar: SALON },
+  { archivo: "look-y-estilo-volver-escritorio", url: `${BASE}/demo/look-y-estilo/panel/volver`, preparar: SALON },
+  { archivo: "sabor-de-casa-portada-escritorio", url: `${BASE}/demo/sabor-de-casa` },
+  { archivo: "sabor-de-casa-portada-movil", url: `${BASE}/demo/sabor-de-casa`, movil: true },
   {
-    archivo: "fogon-45-mesa-movil",
-    url: `${BASE}/demo/fogon-45?mesa=7`,
+    archivo: "sabor-de-casa-mesa-movil",
+    url: `${BASE}/demo/sabor-de-casa?mesa=7`,
     movil: true,
     preparar: async (p) => {
       await p.getByRole("button", { name: "Agregar Bandeja 45" }).click()
@@ -107,22 +107,22 @@ const TOMAS: Toma[] = [
       await p.waitForTimeout(3800)
     },
   },
-  { archivo: "fogon-45-cocina-escritorio", url: `${BASE}/demo/fogon-45/panel/cocina` },
+  { archivo: "sabor-de-casa-cocina-escritorio", url: `${BASE}/demo/sabor-de-casa/panel/cocina` },
   {
-    archivo: "fogon-45-seguimiento-movil",
-    url: `${BASE}/demo/fogon-45/panel`,
+    archivo: "sabor-de-casa-seguimiento-movil",
+    url: `${BASE}/demo/sabor-de-casa/panel`,
     movil: true,
     preparar: async (p) => {
       // Un domicilio que va en camino: el seguimiento se ve con casi todo hecho.
       const fila = p.locator("li").filter({ hasText: "En camino" }).filter({ hasText: "Domicilio" }).first()
       const numero = (await fila.locator("p").first().textContent())?.replace(/\D/g, "")
-      await p.goto(`${BASE}/demo/fogon-45/pedido/p${numero}`, { waitUntil: "networkidle" })
+      await p.goto(`${BASE}/demo/sabor-de-casa/pedido/p${numero}`, { waitUntil: "networkidle" })
     },
   },
-  { archivo: "fogon-45-carta-escritorio", url: `${BASE}/demo/fogon-45/panel/carta` },
+  { archivo: "sabor-de-casa-carta-escritorio", url: `${BASE}/demo/sabor-de-casa/panel/carta` },
   {
-    archivo: "doble-rosca-portada-movil",
-    url: `${BASE}/demo/doble-rosca`,
+    archivo: "la-principal-portada-movil",
+    url: `${BASE}/demo/la-principal`,
     movil: true,
     preparar: async (p) => {
       await p.getByRole("searchbox").fill("tornillo")
@@ -130,8 +130,8 @@ const TOMAS: Toma[] = [
     },
   },
   {
-    archivo: "doble-rosca-caja-escritorio",
-    url: `${BASE}/demo/doble-rosca/panel`,
+    archivo: "la-principal-caja-escritorio",
+    url: `${BASE}/demo/la-principal/panel`,
     preparar: async (p) => {
       for (const t of ["cemento", "arena", "varilla"]) {
         await p.getByPlaceholder(/Nombre o código/).fill(t)
@@ -140,8 +140,8 @@ const TOMAS: Toma[] = [
       await p.getByRole("button", { name: /^\$ 200\.000$/ }).click().catch(() => {})
     },
   },
-  { archivo: "doble-rosca-inventario-escritorio", url: `${BASE}/demo/doble-rosca/panel/inventario` },
-  { archivo: "doble-rosca-reportes-escritorio", url: `${BASE}/demo/doble-rosca/panel/reportes` },
+  { archivo: "la-principal-inventario-escritorio", url: `${BASE}/demo/la-principal/panel/inventario` },
+  { archivo: "la-principal-reportes-escritorio", url: `${BASE}/demo/la-principal/panel/reportes` },
   { archivo: "linaza-portada-escritorio", url: `${BASE}/demo/linaza` },
   {
     archivo: "linaza-producto-movil",
@@ -166,10 +166,10 @@ const TOMAS: Toma[] = [
   },
   { archivo: "linaza-pedidos-escritorio", url: `${BASE}/demo/linaza/panel` },
   { archivo: "linaza-inventario-escritorio", url: `${BASE}/demo/linaza/panel/inventario` },
-  { archivo: "molar-116-portada-movil", url: `${BASE}/demo/molar-116`, movil: true },
+  { archivo: "sonrisa-clara-portada-movil", url: `${BASE}/demo/sonrisa-clara`, movil: true },
   {
-    archivo: "molar-116-agendar-movil",
-    url: `${BASE}/demo/molar-116/agendar?motivo=valoracion`,
+    archivo: "sonrisa-clara-agendar-movil",
+    url: `${BASE}/demo/sonrisa-clara/agendar?motivo=valoracion`,
     movil: true,
     preparar: async (p) => {
       await p.getByRole("button", { name: "Continuar" }).click()
@@ -177,44 +177,44 @@ const TOMAS: Toma[] = [
       await p.evaluate(() => window.scrollTo(0, 250))
     },
   },
-  { archivo: "molar-116-agenda-escritorio", url: `${BASE}/demo/molar-116/panel` },
+  { archivo: "sonrisa-clara-agenda-escritorio", url: `${BASE}/demo/sonrisa-clara/panel` },
   {
-    archivo: "molar-116-odontograma-escritorio",
-    url: `${BASE}/demo/molar-116/panel/pacientes`,
+    archivo: "sonrisa-clara-odontograma-escritorio",
+    url: `${BASE}/demo/sonrisa-clara/panel/pacientes`,
     preparar: async (p) => {
       await p.locator("a", { hasText: "Por hacer" }).first().click()
       await p.waitForURL(/pacientes\/p/)
       await p.waitForLoadState("networkidle")
     },
   },
-  { archivo: "molar-116-cartera-escritorio", url: `${BASE}/demo/molar-116/panel/cartera` },
-  { archivo: "palanca-portada-movil", url: `${BASE}/demo/palanca`, movil: true },
+  { archivo: "sonrisa-clara-cartera-escritorio", url: `${BASE}/demo/sonrisa-clara/panel/cartera` },
+  { archivo: "titan-gym-portada-movil", url: `${BASE}/demo/titan-gym`, movil: true },
   {
-    archivo: "palanca-horario-escritorio",
-    url: `${BASE}/demo/palanca`,
+    archivo: "titan-gym-horario-escritorio",
+    url: `${BASE}/demo/titan-gym`,
     preparar: async (p) => {
       // Un día hábil completo, con la clase de la noche llena.
       await p.getByRole("radiogroup", { name: "Día" }).getByRole("radio").nth(await p.evaluate(() => (new Date().getDay() === 5 ? 3 : new Date().getDay() === 6 ? 2 : 1))).click()
       await p.evaluate(() => document.querySelector("#horario")?.scrollIntoView())
     },
   },
-  { archivo: "palanca-clases-escritorio", url: `${BASE}/demo/palanca/panel` },
-  { archivo: "palanca-socios-escritorio", url: `${BASE}/demo/palanca/panel/socios` },
-  { archivo: "palanca-resumen-escritorio", url: `${BASE}/demo/palanca/panel/resumen` },
-  { archivo: "nomenclatura-portada-movil", url: `${BASE}/demo/nomenclatura`, movil: true },
-  { archivo: "nomenclatura-listado-escritorio", url: `${BASE}/demo/nomenclatura/inmuebles?operacion=venta` },
-  { archivo: "nomenclatura-ficha-escritorio", url: `${BASE}/demo/nomenclatura/inmuebles/envigado-cocina` },
-  { archivo: "nomenclatura-interesados-escritorio", url: `${BASE}/demo/nomenclatura/panel/interesados` },
-  { archivo: "nomenclatura-panel-escritorio", url: `${BASE}/demo/nomenclatura/panel` },
-  { archivo: "tanda-portada-movil", url: `${BASE}/demo/tanda`, movil: true, reloj: "10:20" },
-  { archivo: "tanda-horneadas-escritorio", url: `${BASE}/demo/tanda#horneadas`, reloj: "10:20", preparar: async (p) => { await p.evaluate(() => document.querySelector("#horneadas")?.scrollIntoView()) } },
-  { archivo: "tanda-vitrina-escritorio", url: `${BASE}/demo/tanda#vitrina`, reloj: "10:20", preparar: async (p) => { await p.evaluate(() => document.querySelector("#vitrina")?.scrollIntoView()) } },
-  { archivo: "tanda-torta-escritorio", url: `${BASE}/demo/tanda/encargos`, reloj: "10:20" },
-  { archivo: "tanda-produccion-escritorio", url: `${BASE}/demo/tanda/panel/produccion`, reloj: "10:20" },
-  { archivo: "orilla-portada-escritorio", url: `${BASE}/demo/orilla`, preparar: ORILLA(0.15, "#llegada") },
-  { archivo: "orilla-portada-movil", url: `${BASE}/demo/orilla`, movil: true, preparar: ORILLA(0.15, "#llegada") },
-  { archivo: "orilla-piscina-escritorio", url: `${BASE}/demo/orilla`, preparar: ORILLA(0.5, "#piscina") },
-  { archivo: "orilla-habitaciones-escritorio", url: `${BASE}/demo/orilla`, preparar: ORILLA(0, "#habitaciones", 130) },
+  { archivo: "titan-gym-clases-escritorio", url: `${BASE}/demo/titan-gym/panel` },
+  { archivo: "titan-gym-socios-escritorio", url: `${BASE}/demo/titan-gym/panel/socios` },
+  { archivo: "titan-gym-resumen-escritorio", url: `${BASE}/demo/titan-gym/panel/resumen` },
+  { archivo: "tu-casa-portada-movil", url: `${BASE}/demo/tu-casa`, movil: true },
+  { archivo: "tu-casa-listado-escritorio", url: `${BASE}/demo/tu-casa/inmuebles?operacion=venta` },
+  { archivo: "tu-casa-ficha-escritorio", url: `${BASE}/demo/tu-casa/inmuebles/envigado-cocina` },
+  { archivo: "tu-casa-interesados-escritorio", url: `${BASE}/demo/tu-casa/panel/interesados` },
+  { archivo: "tu-casa-panel-escritorio", url: `${BASE}/demo/tu-casa/panel` },
+  { archivo: "pan-de-la-casa-portada-movil", url: `${BASE}/demo/pan-de-la-casa`, movil: true, reloj: "10:20" },
+  { archivo: "pan-de-la-casa-horneadas-escritorio", url: `${BASE}/demo/pan-de-la-casa#horneadas`, reloj: "10:20", preparar: async (p) => { await p.evaluate(() => document.querySelector("#horneadas")?.scrollIntoView()) } },
+  { archivo: "pan-de-la-casa-vitrina-escritorio", url: `${BASE}/demo/pan-de-la-casa#vitrina`, reloj: "10:20", preparar: async (p) => { await p.evaluate(() => document.querySelector("#vitrina")?.scrollIntoView()) } },
+  { archivo: "pan-de-la-casa-torta-escritorio", url: `${BASE}/demo/pan-de-la-casa/encargos`, reloj: "10:20" },
+  { archivo: "pan-de-la-casa-produccion-escritorio", url: `${BASE}/demo/pan-de-la-casa/panel/produccion`, reloj: "10:20" },
+  { archivo: "brisas-del-mar-portada-escritorio", url: `${BASE}/demo/brisas-del-mar`, preparar: BRISAS_DEL_MAR(0.15, "#llegada") },
+  { archivo: "brisas-del-mar-portada-movil", url: `${BASE}/demo/brisas-del-mar`, movil: true, preparar: BRISAS_DEL_MAR(0.15, "#llegada") },
+  { archivo: "brisas-del-mar-piscina-escritorio", url: `${BASE}/demo/brisas-del-mar`, preparar: BRISAS_DEL_MAR(0.5, "#piscina") },
+  { archivo: "brisas-del-mar-habitaciones-escritorio", url: `${BASE}/demo/brisas-del-mar`, preparar: BRISAS_DEL_MAR(0, "#habitaciones", 130) },
   { archivo: "jabones-mari-portada-escritorio", url: "https://jabonesmari.shop" },
   { archivo: "jabones-mari-portada-movil", url: "https://jabonesmari.shop", movil: true },
 ]
@@ -237,7 +237,7 @@ async function main() {
     }
     try {
       // La demo cinematográfica carga fotogramas sin parar: nunca queda en reposo.
-      await p.goto(t.url, { waitUntil: t.url.includes("/orilla") ? "load" : "networkidle" })
+      await p.goto(t.url, { waitUntil: t.url.includes("/brisas-del-mar") ? "load" : "networkidle" })
       await t.preparar?.(p)
       // Contra un servidor de desarrollo, su indicador no debe salir en la foto.
       // Va después de preparar: una recarga borraría el estilo.

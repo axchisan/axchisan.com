@@ -1,5 +1,5 @@
 /**
- * Motor de pedidos: carta con opciones, carrito y pedido. Lo usa Fogón 45 y
+ * Motor de pedidos: carta con opciones, carrito y pedido. Lo usa Sabor de Casa y
  * sirve igual para una cafetería, una panadería o unas comidas rápidas: cambia
  * la carta, no la lógica.
  */
