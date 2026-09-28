@@ -536,3 +536,24 @@
   --font-ta-titulo: var(--font-gluten), ui-rounded, system-ui, sans-serif;
   --font-ta-texto:  var(--font-nunito-sans), ui-sans-serif, system-ui, sans-serif;
 }
+
+/* Rojas & Duarte, abogados y contadores — docs/demos/rojas-duarte.md
+   Papel casi blanco, tinta y un vino sobrio como único acento. La serif hace
+   el trabajo de dar autoridad; el color, no. */
+@theme inline {
+  --color-rd-papel:  #f6f5f1;
+  --color-rd-niebla: #ebe8e1;
+  --color-rd-tinta:  #1c1f26;  /* 15,1:1 sobre papel */
+  --color-rd-vino:   #7b2335;  /* 9,0:1 sobre papel; blanco encima 9,8:1 */
+  --color-rd-vino-2: #93303f;  /* hover; blanco encima 7,7:1 */
+  --color-rd-vino-suave: #f5e6e8;
+  --color-rd-rosa:   #e9c9cf;  /* acento sobre tinta: 10,8:1 */
+  --color-rd-gris:   #5b5e66;  /* 6,0:1 sobre papel, 5,3:1 sobre niebla */
+  --color-rd-linea:  #dedbd3;
+  --color-rd-exito:  #2a6b4b;
+  --color-rd-exito-suave: #e3f1ea;
+  --color-rd-alerta: #8f5808;
+  --color-rd-alerta-suave: #fbf0dc;
+  --font-rd-titulo: var(--font-newsreader), ui-serif, Georgia, serif;
+  --font-rd-texto:  var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
+}

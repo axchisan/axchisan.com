@@ -96,6 +96,15 @@ obligatoria. Aun así se acredita al autor en la demo.
 | Pan de la Casa | Torta con fresas | Tuva Mathilde Løland | [unsplash.com/photos/4rfVL3NNGrA](https://unsplash.com/photos/4rfVL3NNGrA) | `photo-1559553156-2e97137af16f` |
 | Pan de la Casa | Torta con naranja | Joe Dumas | [unsplash.com/photos/JNb_3Ork0Rc](https://unsplash.com/photos/JNb_3Ork0Rc) | `photo-1772064871914-00305a3053d2` |
 | Pan de la Casa | Portada: panadero en el horno | DDP | [unsplash.com/photos/CceG6jpl19M](https://unsplash.com/photos/CceG6jpl19M) | `photo-1560427183-4efd29c38997` |
+| Rojas & Duarte | Portada: abogada con un cliente | Amy Hirschi | [unsplash.com/photos/izxMVv2Z9dw](https://unsplash.com/photos/izxMVv2Z9dw) | `photo-1551836022-b06985bceb24` |
+| Rojas & Duarte | Derecho laboral | Amy Hirschi | [unsplash.com/photos/JaoVGh5aJ3E](https://unsplash.com/photos/JaoVGh5aJ3E) | `photo-1551836022-d5d88e9218df` |
+| Rojas & Duarte | Familia y sucesiones | Amy Hirschi | [unsplash.com/photos/K0c8ko3e6AA](https://unsplash.com/photos/K0c8ko3e6AA) | `photo-1551836022-4c4c79ecde51` |
+| Rojas & Duarte | Empresas y contratos: firma de un documento | Jakub Żerdzicki | [unsplash.com/photos/QI6NLgN5XnM](https://unsplash.com/photos/QI6NLgN5XnM) | `photo-1763729805496-b5dbf7f00c79` |
+| Rojas & Duarte | Contabilidad y nómina: calculadora | Towfiqu barbhuiya | [unsplash.com/photos/JhevWHCbVyw](https://unsplash.com/photos/JhevWHCbVyw) | `photo-1626266061368-46a8f578ddd6` |
+| Rojas & Duarte | Impuestos y renta: documentos | Gabrielle Henderson | [unsplash.com/photos/HJckKnwCXxQ](https://unsplash.com/photos/HJckKnwCXxQ) | `photo-1562564055-71e051d33c19` |
+| Rojas & Duarte | Equipo: Laura Rojas | Vitaly Gariev | [unsplash.com/photos/jI4HREHtae4](https://unsplash.com/photos/jI4HREHtae4) | `photo-1758518729459-235dcaadc611` |
+| Rojas & Duarte | Equipo: Andrés Duarte | Vitaly Gariev | [unsplash.com/photos/HVDQwIqv0sQ](https://unsplash.com/photos/HVDQwIqv0sQ) | `photo-1787724779241-cb5c250ed70b` |
+| Rojas & Duarte | Equipo: Camilo Bernal | Vitaly Gariev | [unsplash.com/photos/o3PdpOz_iaA](https://unsplash.com/photos/o3PdpOz_iaA) | `photo-1758518729286-e8d94cc231f5` |
 
 ## Imágenes y video generados con IA
 

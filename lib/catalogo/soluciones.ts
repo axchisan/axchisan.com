@@ -369,6 +369,108 @@ export const SOLUCIONES: Solucion[] = [
     ],
   },
   {
+    slug: "abogados-y-contadores",
+    sector: "Abogados y contadores",
+    icono: "profesionales",
+    titulo: "Página profesional con áreas de práctica, calculadoras y formulario de consulta para abogados y contadores",
+    resumen:
+      "Una página que da confianza antes de la primera llamada: cada área con lo que cuesta y lo que hay que traer, calculadoras que la gente comparte y un formulario que le llega ordenado, con número de radicado.",
+    seo: {
+      title: "Página web para abogados y contadores en Colombia",
+      description:
+        "Página profesional para firmas de abogados y contadores: áreas de práctica, honorarios de referencia, calculadora de liquidación laboral, verificador de declaración de renta y formulario de consulta. Pruébala en una demo.",
+    },
+    muestra: {
+      tipo: "demo",
+      href: "/demo/rojas-duarte",
+      nombre: "Rojas & Duarte",
+      nota: "Firma ficticia de abogados y contadores en Bogotá, con cinco áreas de práctica, calculadora de liquidación, verificador de renta y formulario de consulta.",
+    },
+    capturas: {
+      escritorio: cap("/capturas/rojas-duarte-portada-escritorio.webp", "Portada de la demo de Rojas & Duarte, abogados y contadores"),
+      movil: cap("/capturas/rojas-duarte-portada-movil.webp", "Portada de la demo de Rojas & Duarte en un celular", true),
+    },
+    sintomas: [
+      "Los clientes llegan solo por recomendación, y quien lo busca en Google encuentra un directorio o a la competencia.",
+      "Media primera consulta se va en explicar qué documentos había que traer.",
+      "Lo primero que preguntan por WhatsApp es cuánto cuesta, y muchos no vuelven a escribir.",
+    ],
+    resultados: [
+      {
+        titulo: "Una página por área",
+        texto: "Quien busca un abogado laboral en su ciudad llega a la página de derecho laboral, con casos, pasos y honorarios de referencia.",
+      },
+      {
+        titulo: "Clientes que llegan preparados",
+        texto: "Con la lista de documentos marcada y, si usaron la calculadora, sabiendo cuánto les deben.",
+      },
+      {
+        titulo: "Consultas ordenadas",
+        texto: "El formulario pide el área, el caso y el contacto. Llega al correo con número de radicado y asignado a quien lo atiende.",
+      },
+    ],
+    diaADia: [
+      {
+        titulo: "El cliente lo encuentra",
+        texto: "La firma, sus años, el valor de la primera consulta y las áreas, dicho arriba y sin rodeos.",
+        captura: cap("/capturas/rojas-duarte-portada-escritorio.webp", "Portada con áreas de práctica"),
+      },
+      {
+        titulo: "Mira su área",
+        texto: "Casos en los que ayudan, cómo lo llevan, qué traer y cuánto cuesta, con la persona que lo atiende.",
+        captura: cap("/capturas/rojas-duarte-area-escritorio.webp", "Página del área de derecho laboral"),
+      },
+      {
+        titulo: "Hace la cuenta",
+        texto: "La liquidación laboral o el «¿tengo que declarar renta?», con las cifras oficiales del año.",
+        captura: cap("/capturas/rojas-duarte-liquidacion-escritorio.webp", "Calculadora de liquidación con cada rubro"),
+      },
+      {
+        titulo: "Agenda la consulta",
+        texto: "Cuenta su caso en el formulario y recibe su número de radicado. A la firma le llega el correo ordenado.",
+        captura: cap("/capturas/rojas-duarte-consulta-escritorio.webp", "Consulta enviada y correo que recibe la firma"),
+      },
+    ],
+    incluye: [
+      "Portada con la firma, el equipo, preguntas frecuentes, horario y ubicación",
+      "Una página por área de práctica con casos, pasos, documentos y honorarios de referencia",
+      "Calculadoras del sector (liquidación laboral, declaración de renta u otra que uses en consulta)",
+      "Formulario de consulta con validación que llega a tu correo",
+      "Ficha de Google Business y analítica de visitas",
+      "Textos redactados contigo y dos rondas de ajustes",
+    ],
+    noIncluye: [
+      "Agenda de citas en línea (se agrega con el módulo de citas)",
+      "Gestión de procesos, expedientes y términos (sistema aparte)",
+      "Fotografía del equipo y la oficina",
+    ],
+    planes: ["presencia", "pagina-profesional", "sitio-con-panel"],
+    preguntas: [
+      {
+        p: "¿Puedo publicar precios si soy abogado?",
+        r: "Se muestran como honorarios de referencia, con la aclaración de que el valor final se acuerda por escrito según el caso. Así se evitan las llamadas de quien solo pregunta el precio, sin comprometerte.",
+      },
+      {
+        p: "¿Las calculadoras se mantienen al día?",
+        r: "Sí. El salario mínimo, el auxilio de transporte y la UVT cambian cada año; en enero se actualizan dentro de la suscripción mensual, o por un valor fijo si pagaste la página de una vez.",
+      },
+      {
+        p: "¿Qué pasa con los datos que envían los clientes?",
+        r: "El formulario pide la autorización de la Ley 1581 de 2012 y la consulta llega solo a tu correo. No se guarda en ninguna base de datos pública.",
+      },
+      {
+        p: "¿Sirve para una constructora, una notaría o un consultorio?",
+        r: "Sí. Es la misma estructura de servicios con autoridad y contacto: cambian las áreas, los documentos y la calculadora.",
+      },
+    ],
+    tecnico: [
+      "Motor de presencia propio: formularios con validación de celular y correo colombianos, radicado y horario con «abierto ahora»",
+      "Calculadoras con las cifras oficiales en un solo archivo, fáciles de actualizar cada año",
+      "Next.js con renderizado en servidor: cada área es una página que Google lee completa",
+      "Accesible: formularios con resumen de errores y contraste AA verificado",
+    ],
+  },
+  {
     slug: "inmobiliarias",
     sector: "Inmobiliarias",
     icono: "inmobiliarias",

@@ -14,6 +14,7 @@ const RUTAS = [
   "/soluciones/gimnasios-y-estudios",
   "/soluciones/inmobiliarias",
   "/soluciones/panaderias-y-cafeterias",
+  "/soluciones/abogados-y-contadores",
   "/soluciones/tiendas-de-cosmeticos",
   "/planes",
   "/proceso",
