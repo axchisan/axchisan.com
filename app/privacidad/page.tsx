@@ -56,6 +56,11 @@ export default function PrivacidadPage() {
             únicamente para no contar diez veces a la misma persona. No hay perfiles, ni seguimiento
             entre sitios, ni cookies de terceros.
           </p>
+          <p>
+            Además, <strong>Vercel</strong>, que aloja el sitio, mide de forma anónima de dónde llegan
+            las visitas (el sitio que enlazó, el país y el tipo de dispositivo) y qué tan rápido carga
+            cada página. No usa cookies ni identifica a nadie: agrupa las visitas por día.
+          </p>
 
           <h2>Almacenamiento en tu navegador</h2>
           <p>Este sitio guarda en tu navegador, y solo ahí:</p>

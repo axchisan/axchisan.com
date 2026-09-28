@@ -8,13 +8,16 @@ export const dynamic = "force-dynamic"
 /**
  * Solo páginas que venden o informan. Las demos no entran: son negocios
  * ficticios y llevan noindex.
+ *
+ * Las páginas fijas y las fichas van sin `lastmod`: poner la fecha de cada
+ * petición le enseña a Google que el dato miente, y lo deja de usar también
+ * para las guías, que sí tienen su fecha real de edición.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const prioridad: Record<string, number> = { "": 1, "/soluciones": 0.9, "/planes": 0.9, "/privacidad": 0.2 }
   const fijas = ["", "/soluciones", "/planes", "/proceso", "/a-medida", "/empresa", "/cotizar", "/guias", "/privacidad"].map(
     (path) => ({
       url: `${SITE_URL}${path}`,
-      lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: prioridad[path] ?? 0.7,
     }),
@@ -22,7 +25,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const fichas = SOLUCIONES.map((s) => ({
     url: `${SITE_URL}/soluciones/${s.slug}`,
-    lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.9,
   }))
