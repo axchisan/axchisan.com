@@ -15,7 +15,7 @@ Ten a mano:
 | Qué | Dónde está |
 |---|---|
 | Logo cuadrado | `public/icon-512.png` |
-| Imagen de portada | Genérala con el prompt "Portada del Perfil de Google" de `prompts-gemini.md` |
+| Imagen de portada | La G01 de `prompts-gemini.md` (o la O07 de las fotos de la oficina, con tu logo encima) |
 | Fotos de trabajos | `public/capturas/*-escritorio.webp` (conviértelas a JPG si Google no acepta WebP) |
 | Imágenes de producto | `public/og/<sector>.png`, una por solución |
 | Teléfono | +57 318 303 8190 (el mismo WhatsApp del sitio) |
@@ -174,8 +174,8 @@ piezas publicitarias van en publicaciones, no en fotos del negocio.
 
 ## Paso 9. Publicaciones (Novedades)
 
-**Agregar actualización.** Una a la semana es suficiente. Cada una lleva imagen (las historias o
-publicaciones de `prompts-gemini.md` sirven) y el botón **Más información** con el enlace a la
+**Agregar actualización.** Una a la semana es suficiente. Cada una lleva imagen (las publicaciones P01 a P08
+de `prompts-gemini.md` sirven) y el botón **Más información** con el enlace a la
 ficha.
 
 Seis para empezar, sin precios:
