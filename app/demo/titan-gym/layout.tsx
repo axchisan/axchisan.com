@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { tarjetaDeDemo } from "@/lib/metadatos"
 import { Anybody, Public_Sans } from "next/font/google"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
@@ -10,6 +11,7 @@ const anybody = Anybody({ variable: "--font-anybody", subsets: ["latin"], axes: 
 const publicSans = Public_Sans({ variable: "--font-public-sans", subsets: ["latin"], display: "swap" })
 
 export const metadata: Metadata = {
+  ...tarjetaDeDemo("/demo/titan-gym"),
   title: { default: "Titán Gym, entrenamiento funcional (demo)", template: "%s · Titán Gym (demo)" },
   description:
     "Demostración de Axchi: horario de clases con cupos, reservas con lista de espera, membresías con vencimiento, asistencia y ocupación para un centro de entrenamiento ficticio en Cali.",

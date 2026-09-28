@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { metadatos } from "@/lib/metadatos"
 import { Header } from "@/components/site/header"
 import { Footer } from "@/components/site/footer"
 import { Band, Body, PageBand } from "@/components/site/band"
@@ -7,12 +8,12 @@ import { Button } from "@/components/ui/button"
 import { SERVICIOS } from "@/lib/servicios"
 import { PROFILE, SITE_NAME, SITE_URL } from "@/lib/site"
 
-export const metadata: Metadata = {
-  title: "Desarrollo de software a medida",
-  description:
+export const metadata: Metadata = metadatos({
+  titulo: "Desarrollo de software a medida",
+  descripcion:
     "Aplicaciones web y multiplataforma, automatización de procesos con IA e infraestructura en la nube para empresas en Colombia. Precio por jornada y alcance cerrado antes de empezar.",
-  alternates: { canonical: "/a-medida" },
-}
+  ruta: "/a-medida",
+})
 
 export default function AMedidaPage() {
   return (

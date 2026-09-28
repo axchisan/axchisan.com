@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { metadatos } from "@/lib/metadatos"
 import Link from "next/link"
 import { ExternalLink, MonitorPlay } from "lucide-react"
 import { Header } from "@/components/site/header"
@@ -10,12 +11,12 @@ import { PLANES, pesos } from "@/lib/catalogo/planes"
 import { SECTORES } from "@/lib/catalogo/sectores"
 import { SOLUCIONES } from "@/lib/catalogo/soluciones"
 
-export const metadata: Metadata = {
-  title: "Soluciones por tipo de negocio",
-  description:
+export const metadata: Metadata = metadatos({
+  titulo: "Soluciones por tipo de negocio",
+  descripcion:
     "Páginas web, tiendas y sistemas para veterinarias, tiendas de cosméticos, restaurantes, salones y más. Cada solución con una demo funcionando y su precio.",
-  alternates: { canonical: "/soluciones" },
-}
+  ruta: "/soluciones",
+})
 
 export default function SolucionesPage() {
   const pendientes = SECTORES.filter((s) => !s.solucion)

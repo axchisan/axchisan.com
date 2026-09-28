@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { metadatos } from "@/lib/metadatos"
 import Link from "next/link"
 import { Header } from "@/components/site/header"
 import { Body, PageBand } from "@/components/site/band"
@@ -6,12 +7,12 @@ import { Footer } from "@/components/site/footer"
 import { getBlogPosts } from "@/lib/data"
 import { cn, formatDate, toDate } from "@/lib/utils"
 
-export const metadata: Metadata = {
-  title: "Guías",
-  description:
+export const metadata: Metadata = metadatos({
+  titulo: "Guías",
+  descripcion:
     "Artículos sobre cómo se construyen y cuánto cuestan las páginas web y los sistemas para negocios.",
-  alternates: { canonical: "/guias" },
-}
+  ruta: "/guias",
+})
 
 export const dynamic = "force-dynamic"
 

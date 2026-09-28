@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { tarjetaDeDemo } from "@/lib/metadatos"
 import { Atkinson_Hyperlegible_Next, Bricolage_Grotesque } from "next/font/google"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
@@ -20,6 +21,7 @@ const atkinson = Atkinson_Hyperlegible_Next({
 })
 
 export const metadata: Metadata = {
+  ...tarjetaDeDemo("/demo/canela"),
   title: { default: "Canela, clínica veterinaria (demo)", template: "%s · Canela (demo)" },
   description:
     "Demostración de Axchi: página, citas en línea y sistema clínico para una veterinaria ficticia en Bogotá.",

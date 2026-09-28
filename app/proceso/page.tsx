@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { metadatos } from "@/lib/metadatos"
 import { Header } from "@/components/site/header"
 import { Footer } from "@/components/site/footer"
 import { Band, Body, PageBand } from "@/components/site/band"
@@ -6,12 +7,12 @@ import { Button } from "@/components/ui/button"
 import { PROCESO } from "@/lib/servicios"
 import { MENSAJE_WHATSAPP, whatsappUrl } from "@/lib/site"
 
-export const metadata: Metadata = {
-  title: "Proceso",
-  description:
+export const metadata: Metadata = metadatos({
+  titulo: "Proceso",
+  descripcion:
     "Cómo se contrata con Axchi: propuesta por escrito con precio cerrado, avances que pruebas desde el celular y todo a tu nombre al final.",
-  alternates: { canonical: "/proceso" },
-}
+  ruta: "/proceso",
+})
 
 const COMPROMISOS = [
   {

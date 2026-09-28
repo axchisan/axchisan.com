@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { metadatos } from "@/lib/metadatos"
 import { Check, Minus, MessageCircle } from "lucide-react"
 import { Header } from "@/components/site/header"
 import { Footer } from "@/components/site/footer"
@@ -22,11 +23,13 @@ import {
 import { PREGUNTAS_GENERALES } from "@/lib/catalogo/preguntas"
 import { LEGAL_NAME, MENSAJE_WHATSAPP, SITE_URL, whatsappUrl } from "@/lib/site"
 
-export const metadata: Metadata = {
-  title: "Planes y precios",
-  description: `Precios de páginas web, tiendas en línea y sistemas en Colombia: desde ${pesos(PRECIO_ENTRADA)} en un solo pago o ${pesos(MENSUAL_ENTRADA)} al mes, y ningún plan pasa de ${pesos(TECHO)}.`,
-  alternates: { canonical: "/planes" },
-}
+export const metadata: Metadata = metadatos({
+  titulo: "Planes y precios",
+  descripcion:
+    `Precios de páginas web, tiendas en línea y sistemas en Colombia: desde ${pesos(PRECIO_ENTRADA)} en un solo pago o ${pesos(MENSUAL_ENTRADA)} al mes, y ningún plan pasa de ${pesos(TECHO)}.`,
+  ruta: "/planes",
+  imagen: "/og/planes.png",
+})
 
 const GRUPOS: { titulo: string; entradilla: string; planes: PlanId[] }[] = [
   {
