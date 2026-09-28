@@ -1,10 +1,16 @@
 /**
- * Sube a R2 los fotogramas de una página cinematográfica.
+ * Sube a R2 los videos (o, en páginas viejas, los fotogramas) de una página
+ * cinematográfica.
  *
  *   npx tsx scripts/subir-cinematico.ts <carpeta-origen> <slug>
  *   npx tsx scripts/subir-cinematico.ts ~/Documents/Dev/PaginasScroll/hotel-orilla orilla
  *
  * La carpeta de origen sigue la estructura de las pruebas de PaginasScroll:
+ *   video/actoN-d.mp4, -m.mp4  escritorio y celular (scripts/codificar-cinematico.sh)
+ *   video/actoN-d.png, -m.png  pósters: primer fotograma de cada video
+ *   img/*.webp                 fotos fijas de la galería
+ *
+ * Si no hay carpeta `video/`, se suben los fotogramas del motor anterior:
  *   frames/actoN/0001.webp …   escritorio
  *   frames-m/actoN/0001.webp … celular
  *   frames/actoN/poster.jpg    póster de cada acto (sin movimiento)
@@ -17,7 +23,7 @@
  * cambia; si cambia el video, cambia el slug.
  */
 import { config } from "dotenv"
-import { readdirSync, readFileSync, statSync } from "node:fs"
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs"
 import { join } from "node:path"
 import { AwsClient } from "aws4fetch"
 import sharp from "sharp"
@@ -36,7 +42,7 @@ if (!R2_ACCOUNT_ID || !R2_ACCESS_KEY_ID || !R2_SECRET_ACCESS_KEY) throw new Erro
 const r2 = new AwsClient({ accessKeyId: R2_ACCESS_KEY_ID, secretAccessKey: R2_SECRET_ACCESS_KEY, service: "s3", region: "auto" })
 const PREFIJO = `demos/${slug}`
 
-type Tarea = { origen: string; destino: string; calidad?: number }
+type Tarea = { origen: string; destino: string; calidad?: number; tipo?: string }
 
 async function subir(t: Tarea) {
   const entrada = readFileSync(t.origen)
@@ -46,7 +52,7 @@ async function subir(t: Tarea) {
     const res = await r2.fetch(url, {
       method: "PUT",
       body: new Uint8Array(cuerpo),
-      headers: { "Content-Type": "image/webp", "Cache-Control": "public, max-age=31536000, immutable" },
+      headers: { "Content-Type": t.tipo ?? "image/webp", "Cache-Control": "public, max-age=31536000, immutable" },
     })
     if (res.ok) return cuerpo.length
     if (intento === 3) throw new Error(`${t.destino}: HTTP ${res.status}`)
@@ -55,7 +61,14 @@ async function subir(t: Tarea) {
 }
 
 const tareas: Tarea[] = []
-for (const carpeta of ["frames", "frames-m"]) {
+const video = join(origen, "video")
+if (existsSync(video)) {
+  for (const archivo of readdirSync(video)) {
+    if (archivo.endsWith(".mp4")) tareas.push({ origen: join(video, archivo), destino: `video/${archivo}`, tipo: "video/mp4" })
+    else if (archivo.endsWith(".png")) tareas.push({ origen: join(video, archivo), destino: `video/${archivo.replace(".png", ".webp")}`, calidad: 80 })
+  }
+}
+for (const carpeta of existsSync(video) ? [] : ["frames", "frames-m"]) {
   const base = join(origen, carpeta)
   for (const acto of readdirSync(base).filter((d) => statSync(join(base, d)).isDirectory())) {
     for (const archivo of readdirSync(join(base, acto))) {

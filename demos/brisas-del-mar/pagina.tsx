@@ -14,8 +14,6 @@ type Acto = {
   nombre: string
   titulo: string
   texto: string
-  fotogramas: number
-  fotogramasMovil: number
   segundos: number
   largo?: boolean
 }
@@ -26,8 +24,6 @@ const ACTOS: Acto[] = [
     nombre: "La llegada",
     titulo: "Donde termina el mar.",
     texto: "Desde la bahía, entre veleros, hasta nuestra escalera. Aquí se llega despacio.",
-    fotogramas: 192,
-    fotogramasMovil: 120,
     segundos: 8,
   },
   {
@@ -35,8 +31,6 @@ const ACTOS: Acto[] = [
     nombre: "La piscina",
     titulo: "Un jardín que abraza el agua.",
     texto: "Palmeras, un bar dentro de la piscina y un salón abierto a la brisa, entre columnas blancas.",
-    fotogramas: 240,
-    fotogramasMovil: 150,
     segundos: 10,
     largo: true,
   },
@@ -45,8 +39,6 @@ const ACTOS: Acto[] = [
     nombre: "La suite",
     titulo: "Despierta frente al horizonte.",
     texto: "Lino, teca y un balcón curvo que mira a la bahía. El mar entra contigo.",
-    fotogramas: 192,
-    fotogramasMovil: 120,
     segundos: 8,
   },
 ]
@@ -71,7 +63,7 @@ export function PaginaBrisasDelMar() {
   const nav = useRef<HTMLElement>(null)
   const [listo, setListo] = useState(false)
 
-  // El motor vive fuera de React: pinta en canvas y escucha el scroll.
+  // El motor vive fuera de React: mueve los videos y escucha el scroll.
   useEffect(() => {
     if (!raiz.current) return
     return iniciarScrub(raiz.current, { alEstarListo: () => setListo(true) })
@@ -127,15 +119,19 @@ export function PaginaBrisasDelMar() {
               id={a.id}
               className={`acto ${a.largo ? "acto--largo" : ""}`}
               data-scrub
-              data-frames={a.fotogramas}
-              data-frames-m={a.fotogramasMovil}
-              data-path={`${MEDIA}/frames/acto${i + 1}/`}
-              data-path-m={`${MEDIA}/frames-m/acto${i + 1}/`}
+              data-video={`${MEDIA}/video/acto${i + 1}-d.mp4`}
+              data-video-m={`${MEDIA}/video/acto${i + 1}-m.mp4`}
               data-duration={a.segundos}
               aria-label={a.nombre}
             >
-              <div className="acto__escena" style={{ ["--poster" as string]: `url(${MEDIA}/frames/acto${i + 1}/poster.webp)` }}>
-                <canvas aria-hidden />
+              <div
+                className="acto__escena"
+                style={{
+                  ["--poster" as string]: `url(${MEDIA}/video/acto${i + 1}-d.webp)`,
+                  ["--poster-m" as string]: `url(${MEDIA}/video/acto${i + 1}-m.webp)`,
+                }}
+              >
+                <video muted playsInline preload="none" disablePictureInPicture aria-hidden tabIndex={-1} />
                 <div className="acto__sombra" />
                 <div className="acto__texto">
                   <p className="acto__nombre">{a.nombre}</p>

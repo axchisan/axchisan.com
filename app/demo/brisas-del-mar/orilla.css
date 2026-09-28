@@ -59,7 +59,11 @@
 /* El póster queda siempre detrás del canvas: mientras llegan los fotogramas se
    ve la escena quieta, nunca un cuadro negro. */
 .orilla .acto__escena { position: sticky; top: var(--o-barra); height: calc(100vh - var(--o-barra)); height: calc(100svh - var(--o-barra)); overflow: hidden; background: var(--poster) center / cover no-repeat, var(--o-tinta); }
-.orilla .acto__escena canvas { width: 100%; height: 100%; display: block; }
+.orilla .acto__escena video { width: 100%; height: 100%; display: block; object-fit: cover; opacity: 0; transition: opacity .6s ease; }
+.orilla .acto.video-listo .acto__escena video { opacity: 1; }
+/* En el celular, el video y el póster son verticales: se ve la escena
+   completa en vez del centro ampliado de una toma horizontal. */
+@media (max-width: 768px) { .orilla .acto__escena { background-image: var(--poster-m); } }
 .orilla .acto__sombra {
   position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(to top, rgba(14,18,16,.8) 0%, rgba(14,18,16,.1) 45%, transparent 70%), linear-gradient(to right, rgba(14,18,16,.4), transparent 50%);
@@ -80,7 +84,7 @@
 /* Sin movimiento o con ahorro de datos: póster fijo, sin descargar fotogramas */
 .orilla.no-scrub .acto { height: calc(100vh - var(--o-barra)); }
 .orilla.no-scrub .acto__escena { background: var(--poster) center / cover no-repeat; }
-.orilla.no-scrub .acto__escena canvas { display: none; }
+.orilla.no-scrub .acto__escena video { display: none; }
 .orilla.no-scrub .acto__texto > * { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .orilla .acto__texto > * { transition: none; }

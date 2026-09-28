@@ -2,22 +2,21 @@ import { test, expect } from "@playwright/test"
 import AxeBuilder from "@axe-core/playwright"
 
 /**
- * Demo de Brisas del Mar, página cinematográfica. Los fotogramas vienen de R2: la
- * página nunca queda en reposo de red, así que se espera a `load`, no a
- * `networkidle`.
+ * Demo de Brisas del Mar, página cinematográfica. Los videos llegan de R2 después
+ * del evento `load`: se espera a `load`, no a `networkidle`.
  */
 const RAIZ = "/demo/brisas-del-mar"
 
 test.describe("demo Brisas del Mar", () => {
-  test("carga, queda fuera del índice y recibe los fotogramas", async ({ page }) => {
+  test("carga, queda fuera del índice y recibe el video de la primera escena", async ({ page }) => {
     const errores: string[] = []
     page.on("pageerror", (e) => errores.push(e.message))
-    // Los fotogramas llegan de R2: el canvas queda "contaminado" y no se pueden
-    // leer sus píxeles, así que se comprueba que el primero se sirvió bien.
-    const fotograma = page.waitForResponse((r) => /\/frames(-m)?\/acto1\/0001\.webp/.test(r.url()))
+    const video = page.waitForResponse((r) => /\/video\/acto1-[dm]\.mp4$/.test(r.url()))
     const res = await page.goto(RAIZ, { waitUntil: "load" })
     expect(res?.status()).toBe(200)
-    expect((await fotograma).status()).toBe(200)
+    expect((await video).status()).toBe(200)
+    // Se descargó con fetch (CORS de R2) y quedó listo para moverse.
+    await expect(page.locator("#llegada.video-listo")).toHaveCount(1, { timeout: 30_000 })
     await expect(page.locator("h1")).toHaveCount(1)
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/)
     // El cargador se va cuando la primera escena tiene lo mínimo para moverse.
@@ -35,18 +34,31 @@ test.describe("demo Brisas del Mar", () => {
       window.scrollTo(0, s.offsetTop + (s.offsetHeight - innerHeight) * 0.6)
     })
     await expect(tiempo).not.toHaveText(/^00:00/)
+    // Y el video salta al instante que corresponde.
+    await expect(page.locator("#llegada.video-listo")).toHaveCount(1, { timeout: 30_000 })
+    await expect.poll(() => page.locator("#llegada video").evaluate((v: HTMLVideoElement) => v.currentTime)).toBeGreaterThan(3)
   })
 
-  test("sin animaciones no descarga fotogramas", async ({ browser }) => {
+  test("en el celular carga el video vertical", async ({ browser }) => {
+    const contexto = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true })
+    const page = await contexto.newPage()
+    const video = page.waitForResponse((r) => /\/video\/acto1-m\.mp4$/.test(r.url()))
+    await page.goto(RAIZ, { waitUntil: "load" })
+    expect((await video).status()).toBe(200)
+    await contexto.close()
+  })
+
+  test("sin animaciones no descarga videos", async ({ browser }) => {
     const contexto = await browser.newContext({ reducedMotion: "reduce" })
     const page = await contexto.newPage()
-    const fotogramas: string[] = []
+    const videos: string[] = []
     page.on("request", (r) => {
-      if (/\/frames(-m)?\/acto\d\/\d{4}\.webp/.test(r.url())) fotogramas.push(r.url())
+      if (/\.mp4$/.test(r.url())) videos.push(r.url())
     })
     await page.goto(RAIZ, { waitUntil: "load" })
     await expect(page.locator(".orilla.no-scrub")).toHaveCount(1)
-    expect(fotogramas).toEqual([])
+    await page.waitForTimeout(1500)
+    expect(videos).toEqual([])
     await contexto.close()
   })
 
