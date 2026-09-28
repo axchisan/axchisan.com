@@ -2,7 +2,7 @@ import type { ConfigDemo } from "@/demos/comun/contexto"
 
 export const RAIZ = "/demo/sabor-de-casa"
 
-export const CONFIG_FOGON: ConfigDemo = {
+export const CONFIG_SABOR_DE_CASA: ConfigDemo = {
   slug: "sabor-de-casa",
   nombre: "Sabor de Casa, cocina colombiana",
   paraQuien: "un restaurante",

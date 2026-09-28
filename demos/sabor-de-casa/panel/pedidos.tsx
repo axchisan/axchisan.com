@@ -27,7 +27,7 @@ export function dondeVa(p: Pedido) {
 
 type Filtro = "curso" | "entregados" | "todos"
 
-export function PedidosFogon() {
+export function PedidosSaborDeCasa() {
   const e = useRestaurante()
   const [filtro, setFiltro] = useState<Filtro>("curso")
 

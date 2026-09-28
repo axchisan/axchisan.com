@@ -19,7 +19,7 @@ export function Peine({ className }: { className?: string }) {
   )
 }
 
-export function MarcaPeineFino({ claro }: { claro?: boolean }) {
+export function MarcaLookYEstilo({ claro }: { claro?: boolean }) {
   return (
     <span className={`inline-flex items-center gap-2 ${claro ? "text-white" : "text-pf-cordoban"}`}>
       <Peine className="h-5 w-8" />
@@ -75,7 +75,7 @@ export function CabeceraSalon() {
     <header className="border-b border-pf-linea bg-pf-porcelana">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-6 px-4 sm:px-6">
         <Link href={RAIZ} aria-label="Look & Estilo, inicio" className="rounded-[4px]">
-          <MarcaPeineFino />
+          <MarcaLookYEstilo />
         </Link>
         <nav aria-label="Secciones" className="ml-auto hidden items-center gap-6 text-[0.9375rem] md:flex">
           <a href="#servicios" className="hover:underline">Servicios</a>

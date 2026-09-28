@@ -2,7 +2,7 @@ import type { ConfigDemo } from "@/demos/comun/contexto"
 
 export const RAIZ = "/demo/tu-casa"
 
-export const CONFIG_NOMENCLATURA: ConfigDemo = {
+export const CONFIG_TU_CASA: ConfigDemo = {
   slug: "tu-casa",
   nombre: "Tu Casa Inmobiliaria",
   paraQuien: "una inmobiliaria",

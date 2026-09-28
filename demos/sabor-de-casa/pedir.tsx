@@ -44,7 +44,7 @@ function horasParaRecoger(ahora: Date) {
   return out
 }
 
-export function PedirFogon() {
+export function PedirSaborDeCasa() {
   const router = useRouter()
   const ahora = useAhora()
   const e = useRestaurante()

@@ -2,16 +2,16 @@ import Image from "next/image"
 import { Punto } from "@/demos/comun/recorrido"
 import { textoHoraDecimal } from "@/demos/motores/agenda/tiempo"
 import { pesos } from "@/lib/catalogo/planes"
-import { CartaFogon, PlatoPeltre } from "@/demos/sabor-de-casa/carta"
+import { CartaSaborDeCasa, PlatoPeltre } from "@/demos/sabor-de-casa/carta"
 import { FOTOS, HORARIO, platoPorId, RESTAURANTE, ZONAS } from "@/demos/sabor-de-casa/modelo"
 import { AccionesPortada, AccionReserva, EntradaPanel } from "@/demos/sabor-de-casa/portada"
-import { CabeceraFogon, EstadoHoy, MarcaFogon } from "@/demos/sabor-de-casa/publico"
+import { CabeceraSaborDeCasa, EstadoHoy, MarcaSaborDeCasa } from "@/demos/sabor-de-casa/publico"
 
 const DIAS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"]
 
 const CREDITOS = [...new Set(Object.values(FOTOS).map((f) => f.autor))]
 
-export default async function FogonInicio({ searchParams }: { searchParams: Promise<{ mesa?: string }> }) {
+export default async function SaborDeCasaInicio({ searchParams }: { searchParams: Promise<{ mesa?: string }> }) {
   const { mesa } = await searchParams
   const numeroMesa = Number(mesa)
   const mesaValida = Number.isInteger(numeroMesa) && numeroMesa >= 1 && numeroMesa <= RESTAURANTE.mesas ? numeroMesa : undefined
@@ -21,7 +21,7 @@ export default async function FogonInicio({ searchParams }: { searchParams: Prom
 
   return (
     <>
-      <CabeceraFogon />
+      <CabeceraSaborDeCasa />
 
       <main id="contenido">
         {/* ── Portada: la mesa vista desde arriba ─────────────────── */}
@@ -53,7 +53,7 @@ export default async function FogonInicio({ searchParams }: { searchParams: Prom
           </section>
         </Punto>
 
-        <CartaFogon mesa={mesaValida} />
+        <CartaSaborDeCasa mesa={mesaValida} />
 
         {/* ── Fin de semana ───────────────────────────────────────── */}
         <section className="bg-fg-peltre">
@@ -143,7 +143,7 @@ export default async function FogonInicio({ searchParams }: { searchParams: Prom
       <footer className="bg-fg-tizne text-fg-linea">
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-3">
           <div>
-            <MarcaFogon claro />
+            <MarcaSaborDeCasa claro />
             <p className="mt-3 text-[0.9375rem]">{RESTAURANTE.zona}</p>
             <div className="mt-5">
               <EntradaPanel />

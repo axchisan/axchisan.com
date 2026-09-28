@@ -7,7 +7,7 @@ import { pesos } from "@/lib/catalogo/planes"
 import { useRestaurante, ventasDelDia } from "../estado"
 import { Cargando, Encabezado } from "./marco"
 
-export function VentasFogon() {
+export function VentasSaborDeCasa() {
   const e = useRestaurante()
   return (
     <SoloEnNivel nivel="sistema">

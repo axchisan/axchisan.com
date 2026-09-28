@@ -14,7 +14,7 @@ import { botonBorde, botonVioleta, campo } from "./publico"
 const PASOS = ["Motivo", "Odontólogo", "Día y hora", "Tus datos"] as const
 const CORTO = new Intl.DateTimeFormat("es-CO", { weekday: "short" })
 
-export function AgendarMolar({ motivoInicial }: { motivoInicial?: string }) {
+export function AgendarSonrisaClara({ motivoInicial }: { motivoInicial?: string }) {
   const e = useConsultorio()
   const inicial = MOTIVOS.some((m) => m.id === motivoInicial) ? motivoInicial! : ""
   const [paso, setPaso] = useState(inicial ? 1 : 0)

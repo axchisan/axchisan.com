@@ -12,7 +12,7 @@ import { alternarAgotado, cambiarPrecio, estaAgotado, precioDe, useRestaurante }
 import { CATEGORIAS, PLATOS, type Plato } from "../modelo"
 import { Cargando, Encabezado } from "./marco"
 
-export function CartaPanelFogon() {
+export function CartaPanelSaborDeCasa() {
   const e = useRestaurante()
   return (
     <SoloEnNivel nivel="carta">

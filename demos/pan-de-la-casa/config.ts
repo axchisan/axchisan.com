@@ -2,7 +2,7 @@ import type { ConfigDemo } from "@/demos/comun/contexto"
 
 export const RAIZ = "/demo/pan-de-la-casa"
 
-export const CONFIG_TANDA: ConfigDemo = {
+export const CONFIG_PAN_DE_LA_CASA: ConfigDemo = {
   slug: "pan-de-la-casa",
   nombre: "Pan de la Casa, panadería y café",
   paraQuien: "una panadería o una cafetería",

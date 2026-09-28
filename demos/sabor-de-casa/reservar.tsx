@@ -16,7 +16,7 @@ const CORTO = new Intl.DateTimeFormat("es-CO", { weekday: "short", day: "numeric
 const campo =
   "mt-1.5 block h-12 w-full rounded-[12px] border border-fg-linea bg-white px-3 text-[1rem] placeholder:text-fg-ceniza focus:border-fg-cobalto focus:outline-2 focus:outline-fg-cobalto aria-[invalid=true]:border-fg-aji"
 
-export function ReservarFogon() {
+export function ReservarSaborDeCasa() {
   const ahora = useAhora()
   const e = useRestaurante()
   const [dia, setDia] = useState<string | null>(null)

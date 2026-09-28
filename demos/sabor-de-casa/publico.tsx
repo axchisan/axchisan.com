@@ -29,7 +29,7 @@ export function Olla({ className }: { className?: string }) {
   )
 }
 
-export function MarcaFogon({ claro }: { claro?: boolean }) {
+export function MarcaSaborDeCasa({ claro }: { claro?: boolean }) {
   return (
     <span className={`inline-flex items-center gap-2 ${claro ? "text-white" : "text-fg-cobalto"}`}>
       <Olla className="h-7 w-8" />
@@ -40,7 +40,7 @@ export function MarcaFogon({ claro }: { claro?: boolean }) {
 
 const MENSAJE = "Hola, Sabor de Casa. Quiero hacer un pedido."
 
-export function BotonWhatsappFogon(props: { children: ReactNode; className?: string; mensaje?: string }) {
+export function BotonWhatsappSaborDeCasa(props: { children: ReactNode; className?: string; mensaje?: string }) {
   return (
     <WhatsappSimulado negocio="el restaurante" mensaje={props.mensaje ?? MENSAJE} className={props.className}>
       {props.children}
@@ -82,7 +82,7 @@ export function EstadoHoy({ claro }: { claro?: boolean }) {
   )
 }
 
-export function CabeceraFogon() {
+export function CabeceraSaborDeCasa() {
   const { incluye } = useDemo()
   const carrito = useCarrito()
   const n = unidades(carrito?.lineas ?? [])
@@ -90,7 +90,7 @@ export function CabeceraFogon() {
     <header className="border-b border-fg-linea bg-white">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-6 px-4 sm:px-6">
         <Link href={RAIZ} aria-label="Sabor de Casa, inicio" className="rounded-[4px]">
-          <MarcaFogon />
+          <MarcaSaborDeCasa />
         </Link>
         <nav aria-label="Secciones" className="ml-auto hidden items-center gap-6 text-[0.9375rem] font-semibold md:flex">
           <a href={`${RAIZ}#carta`} className="hover:underline">Carta</a>
@@ -106,10 +106,10 @@ export function CabeceraFogon() {
             {n ? `Tu pedido (${n})` : "Pedir"}
           </Link>
         ) : (
-          <BotonWhatsappFogon className="ml-auto inline-flex h-10 items-center gap-2 rounded-full bg-fg-cobalto px-4 text-[0.9375rem] font-bold text-white hover:bg-fg-cobalto-2 md:ml-0">
+          <BotonWhatsappSaborDeCasa className="ml-auto inline-flex h-10 items-center gap-2 rounded-full bg-fg-cobalto px-4 text-[0.9375rem] font-bold text-white hover:bg-fg-cobalto-2 md:ml-0">
             <MessageCircle className="h-4 w-4" aria-hidden />
             Pedir por WhatsApp
-          </BotonWhatsappFogon>
+          </BotonWhatsappSaborDeCasa>
         )}
       </div>
     </header>

@@ -14,7 +14,7 @@ import { Encabezado } from "./marco"
  * Un QR por mesa, listo para imprimir. Cada uno abre la carta con el número de
  * la mesa: con el plan de pedidos, lo que se pide desde ahí llega a esa mesa.
  */
-export function MesasFogon() {
+export function MesasSaborDeCasa() {
   const [codigos, setCodigos] = useState<string[] | null>(null)
 
   useEffect(() => {

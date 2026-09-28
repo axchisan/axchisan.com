@@ -19,7 +19,7 @@ export function Muela({ className }: { className?: string }) {
   )
 }
 
-export function MarcaMolar({ claro }: { claro?: boolean }) {
+export function MarcaSonrisaClara({ claro }: { claro?: boolean }) {
   return (
     <span className={`inline-flex items-center gap-2 ${claro ? "text-white" : "text-mo-violeta"}`}>
       <Muela className="h-7 w-7" />
@@ -37,7 +37,7 @@ export const botonBorde =
 export const campo =
   "mt-1.5 block h-12 w-full rounded-[12px] border border-mo-linea bg-white px-3.5 text-[1rem] placeholder:text-mo-gris focus:border-mo-violeta focus:outline-2 focus:outline-mo-violeta aria-[invalid=true]:border-mo-rojo"
 
-export function BotonWhatsappMolar(props: { children: ReactNode; className?: string; mensaje?: string }) {
+export function BotonWhatsappSonrisaClara(props: { children: ReactNode; className?: string; mensaje?: string }) {
   return (
     <WhatsappSimulado negocio="el consultorio" mensaje={props.mensaje ?? "Hola, Sonrisa Clara. Quiero pedir una cita."} className={props.className}>
       {props.children}
@@ -50,10 +50,10 @@ export function AccionesCita({ motivo, compacto }: { motivo?: string; compacto?:
   const { incluye } = useDemo()
   if (!incluye("citas")) {
     return (
-      <BotonWhatsappMolar className={botonVioleta} mensaje={`Hola, Sonrisa Clara. Quiero pedir una cita${motivo ? ` de ${motivo}` : ""}.`}>
+      <BotonWhatsappSonrisaClara className={botonVioleta} mensaje={`Hola, Sonrisa Clara. Quiero pedir una cita${motivo ? ` de ${motivo}` : ""}.`}>
         <MessageCircle className="h-5 w-5" aria-hidden />
         Pedir cita por WhatsApp
-      </BotonWhatsappMolar>
+      </BotonWhatsappSonrisaClara>
     )
   }
   return (
@@ -72,13 +72,13 @@ export function AccionesCita({ motivo, compacto }: { motivo?: string; compacto?:
   )
 }
 
-export function CabeceraMolar() {
+export function CabeceraSonrisaClara() {
   const { incluye } = useDemo()
   return (
     <header className="border-b border-mo-linea bg-white">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-6 px-4 sm:px-6">
         <Link href={RAIZ} aria-label="Sonrisa Clara, inicio">
-          <MarcaMolar />
+          <MarcaSonrisaClara />
         </Link>
         <nav aria-label="Secciones" className="ml-auto hidden items-center gap-6 text-[0.9375rem] md:flex">
           <a href={`${RAIZ}#tratamientos`} className="hover:underline">Tratamientos</a>
@@ -90,10 +90,10 @@ export function CabeceraMolar() {
             Agendar
           </Link>
         ) : (
-          <BotonWhatsappMolar className="ml-auto inline-flex h-10 items-center gap-1.5 rounded-full bg-mo-violeta px-4 text-[0.9375rem] font-semibold text-white hover:bg-mo-violeta-2 md:ml-0">
+          <BotonWhatsappSonrisaClara className="ml-auto inline-flex h-10 items-center gap-1.5 rounded-full bg-mo-violeta px-4 text-[0.9375rem] font-semibold text-white hover:bg-mo-violeta-2 md:ml-0">
             <MessageCircle className="h-4 w-4" aria-hidden />
             WhatsApp
-          </BotonWhatsappMolar>
+          </BotonWhatsappSonrisaClara>
         )}
       </div>
     </header>

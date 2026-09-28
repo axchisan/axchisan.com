@@ -2,7 +2,7 @@ import type { ConfigDemo } from "@/demos/comun/contexto"
 
 export const RAIZ = "/demo/sonrisa-clara"
 
-export const CONFIG_MOLAR: ConfigDemo = {
+export const CONFIG_SONRISA_CLARA: ConfigDemo = {
   slug: "sonrisa-clara",
   nombre: "Sonrisa Clara, odontología",
   paraQuien: "un consultorio",

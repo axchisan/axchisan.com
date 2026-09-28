@@ -23,7 +23,7 @@ const SECCIONES: Seccion[] = [
 
 const activa = (ruta: string, href: string) => (href === `${RAIZ}/panel` ? ruta === href : ruta.startsWith(href))
 
-export function MarcoFogon({ children }: { children: ReactNode }) {
+export function MarcoSaborDeCasa({ children }: { children: ReactNode }) {
   const ruta = usePathname()
   const { incluye, config } = useDemo()
   const etiquetaNivel = (id: string) => config.niveles.find((n) => n.id === id)?.etiqueta

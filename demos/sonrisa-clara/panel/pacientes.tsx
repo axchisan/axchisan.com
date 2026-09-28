@@ -14,7 +14,7 @@ import { Cargando, Encabezado } from "./marco"
 
 const normalizar = (t: string) => t.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase()
 
-export function PacientesMolar() {
+export function PacientesSonrisaClara() {
   const e = useConsultorio()
   const [texto, setTexto] = useState("")
   return (
@@ -67,7 +67,7 @@ export function PacientesMolar() {
   )
 }
 
-export function CarteraMolar() {
+export function CarteraSonrisaClara() {
   const e = useConsultorio()
   return (
     <SoloEnNivel nivel="sistema">

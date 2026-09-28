@@ -10,7 +10,7 @@ import { CANAL, ESTADO, pasos, PAGO, subtotal, total } from "@/demos/motores/ped
 import { pesos } from "@/lib/catalogo/planes"
 import { RAIZ } from "./config"
 import { pedidoPorId, useRestaurante } from "./estado"
-import { BotonWhatsappFogon, botonPrincipal, botonSecundario } from "./publico"
+import { BotonWhatsappSaborDeCasa, botonPrincipal, botonSecundario } from "./publico"
 
 const TITULO = {
   recibido: "Recibimos tu pedido",
@@ -21,7 +21,7 @@ const TITULO = {
   cancelado: "Pedido cancelado",
 } as const
 
-export function SeguimientoFogon({ id }: { id: string }) {
+export function SeguimientoSaborDeCasa({ id }: { id: string }) {
   const e = useRestaurante()
   const { incluye } = useDemo()
   if (!e) return <div className="min-h-[70vh]" aria-busy="true" />
@@ -137,10 +137,10 @@ export function SeguimientoFogon({ id }: { id: string }) {
             </div>
           </dl>
           <Punto id="whatsapp" className="mt-5">
-            <BotonWhatsappFogon mensaje={mensajePedido("Sabor de Casa", p)} className={`${botonSecundario} w-full`}>
+            <BotonWhatsappSaborDeCasa mensaje={mensajePedido("Sabor de Casa", p)} className={`${botonSecundario} w-full`}>
               <MessageCircle className="h-5 w-5" aria-hidden />
               Cómo le llega al restaurante
-            </BotonWhatsappFogon>
+            </BotonWhatsappSaborDeCasa>
           </Punto>
           <Link href={`${RAIZ}#carta`} className="mt-4 block text-center text-[0.9375rem] font-semibold text-fg-cobalto underline underline-offset-4 hover:no-underline">
             Pedir algo más

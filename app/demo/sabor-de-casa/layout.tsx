@@ -3,7 +3,7 @@ import { Alfa_Slab_One, Figtree } from "next/font/google"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
 import { PanelRecorrido } from "@/demos/comun/recorrido"
-import { CONFIG_FOGON } from "@/demos/sabor-de-casa/config"
+import { CONFIG_SABOR_DE_CASA } from "@/demos/sabor-de-casa/config"
 
 // Tipografías de Sabor de Casa, no del sitio. Razones en docs/demos/sabor-de-casa.md.
 const alfaSlab = Alfa_Slab_One({
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
     "Demostración de Axchi: carta digital con QR, pedidos a la mesa, para recoger y a domicilio, reservas y panel de cocina para un restaurante ficticio en Bogotá.",
 }
 
-export default function FogonLayout({ children }: { children: React.ReactNode }) {
+export default function SaborDeCasaLayout({ children }: { children: React.ReactNode }) {
   return (
-    <DemoProvider config={CONFIG_FOGON}>
+    <DemoProvider config={CONFIG_SABOR_DE_CASA}>
       <BarraDemo />
       <div className={`${alfaSlab.variable} ${figtree.variable} min-h-screen bg-fg-peltre font-fg-texto text-fg-tizne`}>
         {children}
