@@ -180,13 +180,13 @@ export const SOLUCIONES: Solucion[] = [
     },
     muestra: {
       tipo: "demo",
-      href: "/demo/peine-fino",
-      nombre: "Peine Fino, salón y barbería",
+      href: "/demo/look-y-estilo",
+      nombre: "Look & Estilo, salón y barbería",
       nota: "Salón ficticio con página, reservas de varios servicios y panel de caja y clientes funcionando.",
     },
     capturas: {
-      escritorio: cap("/capturas/peine-fino-portada-escritorio.webp", "Portada de la demo de Peine Fino en un computador"),
-      movil: cap("/capturas/peine-fino-portada-movil.webp", "Portada de la demo de Peine Fino en un celular", true),
+      escritorio: cap("/capturas/look-y-estilo-portada-escritorio.webp", "Portada de la demo de Look & Estilo en un computador"),
+      movil: cap("/capturas/look-y-estilo-portada-movil.webp", "Portada de la demo de Look & Estilo en un celular", true),
     },
     sintomas: [
       "La mitad del día se va contestando por WhatsApp «¿tienes hora hoy?».",
@@ -211,22 +211,22 @@ export const SOLUCIONES: Solucion[] = [
       {
         titulo: "El cliente reserva",
         texto: "Desde el enlace de Instagram elige corte y barba, a su barbero y una hora libre. Termina en un minuto.",
-        captura: cap("/capturas/peine-fino-reservar-movil.webp", "Reserva de varios servicios en el celular", true),
+        captura: cap("/capturas/look-y-estilo-reservar-movil.webp", "Reserva de varios servicios en el celular", true),
       },
       {
         titulo: "El día, silla por silla",
         texto: "Una columna por profesional: quién está ocupado, quién tiene hueco y a qué hora termina cada uno.",
-        captura: cap("/capturas/peine-fino-hoy-escritorio.webp", "Agenda del día por profesional"),
+        captura: cap("/capturas/look-y-estilo-hoy-escritorio.webp", "Agenda del día por profesional"),
       },
       {
         titulo: "Se cobra y se reparte",
         texto: "Al terminar, el servicio pasa a la caja. El cierre del día y las comisiones salen sin hacer cuentas.",
-        captura: cap("/capturas/peine-fino-caja-escritorio.webp", "Caja del día con comisiones"),
+        captura: cap("/capturas/look-y-estilo-caja-escritorio.webp", "Caja del día con comisiones"),
       },
       {
         titulo: "Nadie se pierde",
         texto: "Cada semana aparecen los clientes que dejaron de venir, con un mensaje personal listo para enviar.",
-        captura: cap("/capturas/peine-fino-volver-escritorio.webp", "Lista de clientes que no vuelven"),
+        captura: cap("/capturas/look-y-estilo-volver-escritorio.webp", "Lista de clientes que no vuelven"),
       },
     ],
     incluye: [
@@ -285,13 +285,13 @@ export const SOLUCIONES: Solucion[] = [
     },
     muestra: {
       tipo: "demo",
-      href: "/demo/tanda",
-      nombre: "Tanda, panadería y café",
+      href: "/demo/pan-de-la-casa",
+      nombre: "Pan de la Casa, panadería y café",
       nota: "Panadería ficticia en Bucaramanga con horneadas del día, vitrina con lo que queda, pedidos, tortas por encargo y panel de producción.",
     },
     capturas: {
-      escritorio: cap("/capturas/tanda-horneadas-escritorio.webp", "Horneadas del día de la demo de Tanda"),
-      movil: cap("/capturas/tanda-portada-movil.webp", "Portada de la demo de Tanda en un celular", true),
+      escritorio: cap("/capturas/pan-de-la-casa-horneadas-escritorio.webp", "Horneadas del día de la demo de Pan de la Casa"),
+      movil: cap("/capturas/pan-de-la-casa-portada-movil.webp", "Portada de la demo de Pan de la Casa en un celular", true),
     },
     sintomas: [
       "Todo el día preguntan por WhatsApp «¿ya salió el pandebono?» y «¿todavía hay?».",
@@ -316,17 +316,17 @@ export const SOLUCIONES: Solucion[] = [
       {
         titulo: "El cliente mira la vitrina",
         texto: "Ve qué acaba de salir, cuánto queda y a qué hora sale lo que se acabó. Pide para recoger o a domicilio.",
-        captura: cap("/capturas/tanda-vitrina-escritorio.webp", "Vitrina con lo que queda de cada producto"),
+        captura: cap("/capturas/pan-de-la-casa-vitrina-escritorio.webp", "Vitrina con lo que queda de cada producto"),
       },
       {
         titulo: "Encarga la torta",
         texto: "La arma eligiendo cada parte y ve el precio mientras tanto. Queda con fecha y el anticipo pendiente.",
-        captura: cap("/capturas/tanda-torta-escritorio.webp", "Armado de una torta por encargo con su precio"),
+        captura: cap("/capturas/pan-de-la-casa-torta-escritorio.webp", "Armado de una torta por encargo con su precio"),
       },
       {
         titulo: "La cocina hornea",
         texto: "El plan del día por tandas, que el panadero va marcando, y los bizcochos que hay que dejar listos para mañana.",
-        captura: cap("/capturas/tanda-produccion-escritorio.webp", "Plan de producción del día por tandas"),
+        captura: cap("/capturas/pan-de-la-casa-produccion-escritorio.webp", "Plan de producción del día por tandas"),
       },
     ],
     incluye: [
@@ -338,7 +338,7 @@ export const SOLUCIONES: Solucion[] = [
       "Capacitación y 30 días de garantía sobre fallas",
     ],
     noIncluye: [
-      "Punto de venta del mostrador con inventario de insumos (se cotiza como el sistema de Doble Rosca)",
+      "Punto de venta del mostrador con inventario de insumos (se cotiza como el sistema de La Principal)",
       "Conexión con Rappi o iFood",
       "Fotografía de los productos",
     ],
@@ -382,13 +382,13 @@ export const SOLUCIONES: Solucion[] = [
     },
     muestra: {
       tipo: "demo",
-      href: "/demo/nomenclatura",
-      nombre: "Nomenclatura, finca raíz",
+      href: "/demo/tu-casa",
+      nombre: "Tu Casa Inmobiliaria",
       nota: "Inmobiliaria ficticia en Medellín con 12 inmuebles, filtros, mapa, ficha con simulador, visitas en línea y panel de inmuebles, interesados y visitas.",
     },
     capturas: {
-      escritorio: cap("/capturas/nomenclatura-listado-escritorio.webp", "Listado de inmuebles con filtros y mapa de la demo de Nomenclatura"),
-      movil: cap("/capturas/nomenclatura-portada-movil.webp", "Portada de la demo de Nomenclatura en un celular", true),
+      escritorio: cap("/capturas/tu-casa-listado-escritorio.webp", "Listado de inmuebles con filtros y mapa de la demo de Tu Casa Inmobiliaria"),
+      movil: cap("/capturas/tu-casa-portada-movil.webp", "Portada de la demo de Tu Casa Inmobiliaria en un celular", true),
     },
     sintomas: [
       "Los inmuebles están solo en los portales, pagando por cada publicación, y el cliente no sabe que la inmobiliaria existe.",
@@ -413,22 +413,22 @@ export const SOLUCIONES: Solucion[] = [
       {
         titulo: "El cliente busca",
         texto: "Comprar o arrendar, zona, alcobas y tope. La búsqueda queda en el enlace, para mandarla por WhatsApp.",
-        captura: cap("/capturas/nomenclatura-listado-escritorio.webp", "Listado con filtros y mapa"),
+        captura: cap("/capturas/tu-casa-listado-escritorio.webp", "Listado con filtros y mapa"),
       },
       {
         titulo: "Mira la ficha y agenda",
         texto: "Todos los datos, el simulador de crédito y las horas libres del asesor para la visita.",
-        captura: cap("/capturas/nomenclatura-ficha-escritorio.webp", "Ficha de inmueble con visita en línea"),
+        captura: cap("/capturas/tu-casa-ficha-escritorio.webp", "Ficha de inmueble con visita en línea"),
       },
       {
         titulo: "El asesor hace seguimiento",
         texto: "Cada interesado con su etapa, su mensaje y un botón para escribirle por WhatsApp.",
-        captura: cap("/capturas/nomenclatura-interesados-escritorio.webp", "Interesados por etapa"),
+        captura: cap("/capturas/tu-casa-interesados-escritorio.webp", "Interesados por etapa"),
       },
       {
         titulo: "La oficina actualiza",
         texto: "Bajó el precio, se reservó, se arrendó: se cambia en el panel y la página lo muestra al instante.",
-        captura: cap("/capturas/nomenclatura-panel-escritorio.webp", "Panel de inmuebles con precio y estado"),
+        captura: cap("/capturas/tu-casa-panel-escritorio.webp", "Panel de inmuebles con precio y estado"),
       },
     ],
     incluye: [
@@ -484,13 +484,13 @@ export const SOLUCIONES: Solucion[] = [
     },
     muestra: {
       tipo: "demo",
-      href: "/demo/palanca",
-      nombre: "Palanca, entrenamiento funcional",
+      href: "/demo/titan-gym",
+      nombre: "Titán Gym, entrenamiento funcional",
       nota: "Gimnasio ficticio en Cali con horario semanal, reservas con cupo y lista de espera, socios con membresías y resumen de ocupación.",
     },
     capturas: {
-      escritorio: cap("/capturas/palanca-horario-escritorio.webp", "Horario de clases con cupos de la demo de Palanca"),
-      movil: cap("/capturas/palanca-portada-movil.webp", "Portada de la demo de Palanca en un celular", true),
+      escritorio: cap("/capturas/titan-gym-horario-escritorio.webp", "Horario de clases con cupos de la demo de Titán Gym"),
+      movil: cap("/capturas/titan-gym-portada-movil.webp", "Portada de la demo de Titán Gym en un celular", true),
     },
     sintomas: [
       "Las clases de la noche se llenan de más y las del mediodía quedan vacías, y nadie sabe cuántos van a llegar.",
@@ -515,22 +515,22 @@ export const SOLUCIONES: Solucion[] = [
       {
         titulo: "El socio reserva",
         texto: "Elige el día, ve los cupos y reserva con su documento. La primera clase de un nuevo cliente se reserva igual, gratis.",
-        captura: cap("/capturas/palanca-horario-escritorio.webp", "Horario con cupos y lista de espera"),
+        captura: cap("/capturas/titan-gym-horario-escritorio.webp", "Horario con cupos y lista de espera"),
       },
       {
         titulo: "El coach toma asistencia",
         texto: "Desde el celular, al empezar la clase: quién vino y quién no. En la tiquetera se descuenta la clase.",
-        captura: cap("/capturas/palanca-clases-escritorio.webp", "Clases de hoy con la lista de cada una"),
+        captura: cap("/capturas/titan-gym-clases-escritorio.webp", "Clases de hoy con la lista de cada una"),
       },
       {
         titulo: "Recepción renueva",
         texto: "La lista de por vencer, con un mensaje listo para cada uno. Renovar antes de tiempo suma los días desde el vencimiento.",
-        captura: cap("/capturas/palanca-socios-escritorio.webp", "Socios por renovar"),
+        captura: cap("/capturas/titan-gym-socios-escritorio.webp", "Socios por renovar"),
       },
       {
         titulo: "Decides con datos",
         texto: "Ingresos del mes, asistencias, cuántos reservan y no vienen y qué horarios se llenan.",
-        captura: cap("/capturas/palanca-resumen-escritorio.webp", "Ocupación por horario"),
+        captura: cap("/capturas/titan-gym-resumen-escritorio.webp", "Ocupación por horario"),
       },
     ],
     incluye: [
@@ -586,13 +586,13 @@ export const SOLUCIONES: Solucion[] = [
     },
     muestra: {
       tipo: "demo",
-      href: "/demo/molar-116",
-      nombre: "Molar 116, odontología",
+      href: "/demo/sonrisa-clara",
+      nombre: "Sonrisa Clara, odontología",
       nota: "Consultorio ficticio con página, citas en línea, agenda por odontólogo, odontograma interactivo, presupuesto con abonos y cartera.",
     },
     capturas: {
-      escritorio: cap("/capturas/molar-116-odontograma-escritorio.webp", "Odontograma y plan de tratamiento de la demo de Molar 116"),
-      movil: cap("/capturas/molar-116-portada-movil.webp", "Portada de la demo de Molar 116 en un celular", true),
+      escritorio: cap("/capturas/sonrisa-clara-odontograma-escritorio.webp", "Odontograma y plan de tratamiento de la demo de Sonrisa Clara"),
+      movil: cap("/capturas/sonrisa-clara-portada-movil.webp", "Portada de la demo de Sonrisa Clara en un celular", true),
     },
     sintomas: [
       "La recepción se va en contestar «¿cuánto vale una limpieza?» y en cuadrar citas por teléfono.",
@@ -617,22 +617,22 @@ export const SOLUCIONES: Solucion[] = [
       {
         titulo: "El paciente agenda",
         texto: "Elige el motivo, ve el precio y la duración, y toma una hora libre del odontólogo que lo atiende. Con dolor, las primeras horas del día.",
-        captura: cap("/capturas/molar-116-agendar-movil.webp", "Agendar cita en el celular", true),
+        captura: cap("/capturas/sonrisa-clara-agendar-movil.webp", "Agendar cita en el celular", true),
       },
       {
         titulo: "La recepción ve el día",
         texto: "Una columna por odontólogo, con el motivo de cada cita. Se marca quién llegó y quién no vino.",
-        captura: cap("/capturas/molar-116-agenda-escritorio.webp", "Agenda del día por odontólogo"),
+        captura: cap("/capturas/sonrisa-clara-agenda-escritorio.webp", "Agenda del día por odontólogo"),
       },
       {
         titulo: "En la consulta",
         texto: "Se marca en el odontograma lo que se encuentra. El plan de tratamiento y el presupuesto se arman solos.",
-        captura: cap("/capturas/molar-116-odontograma-escritorio.webp", "Odontograma con plan de tratamiento y presupuesto"),
+        captura: cap("/capturas/sonrisa-clara-odontograma-escritorio.webp", "Odontograma con plan de tratamiento y presupuesto"),
       },
       {
         titulo: "Los abonos",
         texto: "El paciente aprueba el presupuesto y abona en cada cita. La cartera muestra quién debe y cuánto.",
-        captura: cap("/capturas/molar-116-cartera-escritorio.webp", "Saldos por cobrar con recordatorio"),
+        captura: cap("/capturas/sonrisa-clara-cartera-escritorio.webp", "Saldos por cobrar con recordatorio"),
       },
     ],
     incluye: [
@@ -793,13 +793,13 @@ export const SOLUCIONES: Solucion[] = [
     },
     muestra: {
       tipo: "demo",
-      href: "/demo/doble-rosca",
-      nombre: "Ferretería Doble Rosca",
+      href: "/demo/la-principal",
+      nombre: "Ferretería La Principal",
       nota: "Ferretería ficticia con catálogo público, caja, inventario, entradas, reportes y pedido sugerido a proveedores, con tres semanas de ventas.",
     },
     capturas: {
-      escritorio: cap("/capturas/doble-rosca-caja-escritorio.webp", "Caja de la demo de Doble Rosca en un computador"),
-      movil: cap("/capturas/doble-rosca-portada-movil.webp", "Catálogo de la demo de Doble Rosca en un celular", true),
+      escritorio: cap("/capturas/la-principal-caja-escritorio.webp", "Caja de la demo de La Principal en un computador"),
+      movil: cap("/capturas/la-principal-portada-movil.webp", "Catálogo de la demo de La Principal en un celular", true),
     },
     sintomas: [
       "El inventario está en un cuaderno o en un Excel que nadie actualiza, y te enteras de que algo se acabó cuando un cliente lo pide.",
@@ -824,22 +824,22 @@ export const SOLUCIONES: Solucion[] = [
       {
         titulo: "El cliente pregunta sin escribir",
         texto: "En la página busca el producto, ve el precio y si hay. Arma su lista y la manda por WhatsApp.",
-        captura: cap("/capturas/doble-rosca-portada-movil.webp", "Catálogo con existencias en el celular", true),
+        captura: cap("/capturas/la-principal-portada-movil.webp", "Catálogo con existencias en el celular", true),
       },
       {
         titulo: "Se vende en la caja",
         texto: "Se busca por nombre o código, se cobra en efectivo con el cambio calculado o por Nequi, y el inventario baja en ese momento.",
-        captura: cap("/capturas/doble-rosca-caja-escritorio.webp", "Caja con la venta actual y el cambio"),
+        captura: cap("/capturas/la-principal-caja-escritorio.webp", "Caja con la venta actual y el cambio"),
       },
       {
         titulo: "Se ve lo que se acaba",
         texto: "La cinta de cada producto muestra lo que queda frente al mínimo. Lo que está por reponer aparece primero.",
-        captura: cap("/capturas/doble-rosca-inventario-escritorio.webp", "Inventario con existencias frente al mínimo"),
+        captura: cap("/capturas/la-principal-inventario-escritorio.webp", "Inventario con existencias frente al mínimo"),
       },
       {
         titulo: "Se cierra el mes",
         texto: "Ventas por día, por categoría y por medio de pago, con la utilidad. Un botón lo descarga para Excel.",
-        captura: cap("/capturas/doble-rosca-reportes-escritorio.webp", "Reportes de ventas y utilidad"),
+        captura: cap("/capturas/la-principal-reportes-escritorio.webp", "Reportes de ventas y utilidad"),
       },
     ],
     incluye: [
@@ -896,13 +896,13 @@ export const SOLUCIONES: Solucion[] = [
     },
     muestra: {
       tipo: "demo",
-      href: "/demo/fogon-45",
-      nombre: "Fogón 45, cocina colombiana",
+      href: "/demo/sabor-de-casa",
+      nombre: "Sabor de Casa, cocina colombiana",
       nota: "Restaurante ficticio con carta, pedidos con seguimiento, reservas y panel con cocina, carta editable y ventas del día.",
     },
     capturas: {
-      escritorio: cap("/capturas/fogon-45-portada-escritorio.webp", "Portada de la demo de Fogón 45 en un computador"),
-      movil: cap("/capturas/fogon-45-portada-movil.webp", "Portada de la demo de Fogón 45 en un celular", true),
+      escritorio: cap("/capturas/sabor-de-casa-portada-escritorio.webp", "Portada de la demo de Sabor de Casa en un computador"),
+      movil: cap("/capturas/sabor-de-casa-portada-movil.webp", "Portada de la demo de Sabor de Casa en un celular", true),
     },
     sintomas: [
       "Los pedidos llegan por WhatsApp mezclados con todo lo demás, y a veces uno se pierde.",
@@ -927,22 +927,22 @@ export const SOLUCIONES: Solucion[] = [
       {
         titulo: "El cliente escanea y pide",
         texto: "Desde la mesa, o desde su casa con el enlace de Instagram. Elige, ajusta y envía; no necesita instalar nada.",
-        captura: cap("/capturas/fogon-45-mesa-movil.webp", "Carta abierta desde el QR de la mesa 7 en un celular", true),
+        captura: cap("/capturas/sabor-de-casa-mesa-movil.webp", "Carta abierta desde el QR de la mesa 7 en un celular", true),
       },
       {
         titulo: "La cocina lo recibe",
         texto: "El pedido aparece en la pantalla de la cocina con las notas resaltadas. Un toque lo pasa a preparación y otro a listo.",
-        captura: cap("/capturas/fogon-45-cocina-escritorio.webp", "Pantalla de la cocina con pedidos nuevos, en preparación y listos"),
+        captura: cap("/capturas/sabor-de-casa-cocina-escritorio.webp", "Pantalla de la cocina con pedidos nuevos, en preparación y listos"),
       },
       {
         titulo: "El cliente sabe cómo va",
         texto: "Ve su pedido avanzar sin escribir para preguntar. El restaurante también lo recibe completo por WhatsApp.",
-        captura: cap("/capturas/fogon-45-seguimiento-movil.webp", "Seguimiento del pedido en el celular del cliente", true),
+        captura: cap("/capturas/sabor-de-casa-seguimiento-movil.webp", "Seguimiento del pedido en el celular del cliente", true),
       },
       {
         titulo: "La carta, siempre al día",
         texto: "Se acabó la mojarra: se marca como agotada y deja de ofrecerse al instante. Los precios se cambian igual de fácil.",
-        captura: cap("/capturas/fogon-45-carta-escritorio.webp", "Panel para cambiar precios y marcar platos agotados"),
+        captura: cap("/capturas/sabor-de-casa-carta-escritorio.webp", "Panel para cambiar precios y marcar platos agotados"),
       },
     ],
     incluye: [
@@ -1000,13 +1000,13 @@ export const SOLUCIONES: Solucion[] = [
     },
     muestra: {
       tipo: "demo",
-      href: "/demo/orilla",
-      nombre: "Orilla, hotel frente al mar",
+      href: "/demo/brisas-del-mar",
+      nombre: "Brisas del Mar, hotel frente al mar",
       nota: "Hotel ficticio con tres escenas que avanzan con el scroll, habitaciones con precio y reserva por WhatsApp.",
     },
     capturas: {
-      escritorio: cap("/capturas/orilla-portada-escritorio.webp", "Portada de la demo de Orilla en un computador"),
-      movil: cap("/capturas/orilla-portada-movil.webp", "Portada de la demo de Orilla en un celular", true),
+      escritorio: cap("/capturas/brisas-del-mar-portada-escritorio.webp", "Portada de la demo de Brisas del Mar en un computador"),
+      movil: cap("/capturas/brisas-del-mar-portada-movil.webp", "Portada de la demo de Brisas del Mar en un celular", true),
     },
     sintomas: [
       "Las fotos del hotel son buenas, pero en la página se ven iguales a las de cualquier otro.",
@@ -1031,17 +1031,17 @@ export const SOLUCIONES: Solucion[] = [
       {
         titulo: "La llegada",
         texto: "La portada no es una foto: es el camino hasta la puerta. El título y el contador del video acompañan cada paso.",
-        captura: cap("/capturas/orilla-portada-escritorio.webp", "Primera escena: la llegada al hotel por la bahía"),
+        captura: cap("/capturas/brisas-del-mar-portada-escritorio.webp", "Primera escena: la llegada al hotel por la bahía"),
       },
       {
         titulo: "El lugar, escena por escena",
         texto: "Cada espacio que vendes tiene su propia escena: la piscina, el restaurante, la suite. Se hacen con video de dron, con un recorrido grabado o generadas a partir de tus fotos.",
-        captura: cap("/capturas/orilla-piscina-escritorio.webp", "Segunda escena: el jardín y la piscina"),
+        captura: cap("/capturas/brisas-del-mar-piscina-escritorio.webp", "Segunda escena: el jardín y la piscina"),
       },
       {
         titulo: "Del recorrido a la reserva",
         texto: "Al terminar las escenas vienen las habitaciones con precio por noche, las experiencias y cómo llegar. El último botón abre WhatsApp.",
-        captura: cap("/capturas/orilla-habitaciones-escritorio.webp", "Lista de habitaciones con precio por noche"),
+        captura: cap("/capturas/brisas-del-mar-habitaciones-escritorio.webp", "Lista de habitaciones con precio por noche"),
       },
     ],
     incluye: [

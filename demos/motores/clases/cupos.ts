@@ -1,7 +1,7 @@
 /**
  * Motor de clases con cupo: un horario semanal que se repite, sesiones con un
  * número fijo de puestos, reservas, lista de espera y membresías. Lo usa el
- * centro de entrenamiento Palanca y sirve igual para un estudio de yoga, una
+ * centro de entrenamiento Titán Gym y sirve igual para un estudio de yoga, una
  * academia de baile o una escuela de natación.
  *
  * A diferencia del motor de agenda (una cita, un profesional, un hueco), aquí

@@ -86,6 +86,9 @@ test.describe("compatibilidad con rutas anteriores", () => {
     ["/terms", "/privacidad"],
     ["/saved", "/soluciones"],
     ["/messages", "/cotizar"],
+    // Demos renombradas en septiembre de 2026.
+    ["/demo/fogon-45", "/demo/sabor-de-casa"],
+    ["/demo/tanda/encargos", "/demo/pan-de-la-casa/encargos"],
   ]
 
   for (const [vieja, nueva] of HEREDADAS) {

@@ -21,7 +21,7 @@ decisión). Trampas ya pisadas en este repositorio:
 - **Nada escribe en disco.** El hosting es serverless: los archivos van a R2 por URL prefirmada
   (`lib/storage.ts`), nunca a `public/`.
 - **La caché de compilación de Vercel dejaba sin estilos las demos nuevas.** El CSS de producción
-  salía sin las clases de la carpeta recién creada en `demos/` (pasó con Peine Fino y con Linaza).
+  salía sin las clases de la carpeta recién creada en `demos/` (pasó con Look & Estilo y con Linaza).
   Por eso producción tiene `VERCEL_FORCE_NO_BUILD_CACHE=1`. Al publicar una demo, comprobar que el
   CSS servido trae sus clases (`curl` del `.css` y buscar el prefijo de sus tokens).
 - **La suite E2E corre contra una rama de Neon**, no contra producción. Ver `playwright.config.ts`.

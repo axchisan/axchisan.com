@@ -2,7 +2,7 @@
 
 /* Las demos viven fuera de app/. Se declaran como fuente explícita: con la
    caché de compilación, una carpeta de demo nueva podía quedar sin escanear y
-   la demo salía en producción sin sus colores (pasó con Peine Fino). */
+   la demo salía en producción sin sus colores (pasó con Look & Estilo). */
 @source "../demos";
 
 /* ==========================================================================
@@ -341,7 +341,7 @@
   .cn-placa-colgada { animation: none; }
 }
 
-/* Peine Fino, salón y barbería — docs/demos/peine-fino.md */
+/* Look & Estilo, salón y barbería — docs/demos/look-y-estilo.md */
 @theme inline {
   --color-pf-cordoban:   #5b1e26;
   --color-pf-cordoban-2: #6e2630;   /* hover sobre cordobán */
@@ -368,7 +368,7 @@
   background-image: repeating-linear-gradient(to bottom, transparent 0 7px, rgb(255 255 255 / 0.045) 7px 8px);
 }
 
-/* Fogón 45, cocina colombiana — docs/demos/fogon-45.md
+/* Sabor de Casa, cocina colombiana — docs/demos/sabor-de-casa.md
    Peltre: el blanco frío de las ollas y platos esmaltados, con su borde azul. */
 @theme inline {
   --color-fg-peltre:    #f3f5f6;
@@ -400,7 +400,7 @@
   .fg-sin-imprimir { display: none !important; }
 }
 
-/* Ferretería Doble Rosca — docs/demos/doble-rosca.md
+/* Ferretería La Principal — docs/demos/la-principal.md
    Verde de fachada de ferretería de barrio, zinc galvanizado y el amarillo de
    la cinta métrica. */
 @theme inline {
@@ -447,7 +447,7 @@
   --font-li: var(--font-familjen), ui-sans-serif, system-ui, sans-serif;
 }
 
-/* Molar 116, odontología — docs/demos/molar-116.md
+/* Sonrisa Clara, odontología — docs/demos/sonrisa-clara.md
    Violeta de marca; rojo y azul reservados para el odontograma: rojo es lo que
    hay que hacer, azul lo que ya se hizo, como en la historia clínica en papel. */
 @theme inline {
@@ -470,7 +470,7 @@
   --font-mo: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
 }
 
-/* Palanca, entrenamiento funcional — docs/demos/palanca.md
+/* Titán Gym, entrenamiento funcional — docs/demos/titan-gym.md
    Tiza y hierro; los tipos de clase llevan los colores de los discos
    olímpicos (rojo 25 kg, azul 20, amarillo 15, verde 10). */
 @theme inline {
@@ -496,7 +496,7 @@
 /* Títulos de Anybody ensanchada: la letra de las camisetas de competencia. */
 .pa-ancha { font-stretch: 130%; }
 
-/* Nomenclatura, finca raíz — docs/demos/nomenclatura.md
+/* Tu Casa Inmobiliaria — docs/demos/tu-casa.md
    Azul petróleo de marca; el ladrillo de los edificios de Medellín solo en
    los pines del mapa y en lo nuevo. */
 @theme inline {
@@ -516,7 +516,7 @@
   --font-nm: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
 }
 
-/* Tanda, panadería y café — docs/demos/tanda.md
+/* Pan de la Casa, panadería y café — docs/demos/pan-de-la-casa.md
    Blanco, amarillo mantequilla en bloques, cacao para el texto y fresa como
    acento. Nada de crema con terracota. */
 @theme inline {
