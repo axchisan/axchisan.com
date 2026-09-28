@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next"
-import { Instrument_Sans, JetBrains_Mono } from "next/font/google"
+import localFont from "next/font/local"
 import { Toaster } from "sonner"
 import { Medicion } from "@/components/medicion"
 import "./globals.css"
@@ -7,17 +7,17 @@ import { PRECIO_ENTRADA, pesos } from "@/lib/catalogo/planes"
 import { LEGAL_NAME, PROFILE, SITE_NAME, SITE_URL, WHATSAPP } from "@/lib/site"
 
 // Una sola familia para todo el sitio. Ver DESIGN.md.
-const instrumentSans = Instrument_Sans({
+const instrumentSans = localFont({
+  src: [{ path: "fuentes/instrument-sans.woff2", weight: "400 700", style: "normal" }],
   variable: "--font-instrument-sans",
-  subsets: ["latin"],
   display: "swap",
+  declarations: [{ prop: "font-stretch", value: "100%" }],
 })
 
 // Solo donde hay código o un dato numérico real. Nunca como etiqueta decorativa.
-const jetbrainsMono = JetBrains_Mono({
+const jetbrainsMono = localFont({
+  src: [{ path: "fuentes/jetbrains-mono.woff2", weight: "400 500", style: "normal" }],
   variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  weight: ["400", "500"],
   display: "swap",
 })
 

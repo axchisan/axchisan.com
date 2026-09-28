@@ -1,14 +1,22 @@
 import type { Metadata } from "next"
 import { tarjetaDeDemo } from "@/lib/metadatos"
-import { Inter_Tight, Manrope } from "next/font/google"
+import localFont from "next/font/local"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
 import { PanelRecorrido } from "@/demos/comun/recorrido"
 import { CONFIG_BRISAS_DEL_MAR } from "@/demos/brisas-del-mar/config"
 import "./orilla.css"
 
-const interTight = Inter_Tight({ variable: "--font-inter-tight", subsets: ["latin"], weight: ["300", "400"], display: "swap" })
-const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin"], display: "swap" })
+const interTight = localFont({
+  src: [{ path: "../../fuentes/inter-tight.woff2", weight: "300 400", style: "normal" }],
+  variable: "--font-inter-tight",
+  display: "swap",
+})
+const manrope = localFont({
+  src: [{ path: "../../fuentes/manrope.woff2", weight: "200 800", style: "normal" }],
+  variable: "--font-manrope",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   ...tarjetaDeDemo("/demo/brisas-del-mar"),

@@ -1,22 +1,22 @@
 import type { Metadata } from "next"
 import { tarjetaDeDemo } from "@/lib/metadatos"
-import { Atkinson_Hyperlegible_Next, Bricolage_Grotesque } from "next/font/google"
+import localFont from "next/font/local"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
 import { PanelRecorrido } from "@/demos/comun/recorrido"
 import { CONFIG_CANELA } from "@/demos/canela/config"
 
 // Tipografías de Canela, no del sitio. Razones en docs/demos/canela.md.
-const bricolage = Bricolage_Grotesque({
+const bricolage = localFont({
+  src: [{ path: "../../fuentes/bricolage-grotesque.woff2", weight: "200 800", style: "normal" }],
   variable: "--font-bricolage",
-  subsets: ["latin"],
-  axes: ["opsz", "wdth"],
   display: "swap",
+  declarations: [{ prop: "font-stretch", value: "75% 100%" }],
 })
 
-const atkinson = Atkinson_Hyperlegible_Next({
+const atkinson = localFont({
+  src: [{ path: "../../fuentes/atkinson-hyperlegible-next.woff2", weight: "200 800", style: "normal" }],
   variable: "--font-atkinson",
-  subsets: ["latin"],
   display: "swap",
 })
 

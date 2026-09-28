@@ -1,14 +1,23 @@
 import type { Metadata } from "next"
 import { tarjetaDeDemo } from "@/lib/metadatos"
-import { Anybody, Public_Sans } from "next/font/google"
+import localFont from "next/font/local"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
 import { PanelRecorrido } from "@/demos/comun/recorrido"
 import { CONFIG_TITAN_GYM } from "@/demos/titan-gym/config"
 
 // Tipografías de Titán Gym, no del sitio. Razones en docs/demos/titan-gym.md.
-const anybody = Anybody({ variable: "--font-anybody", subsets: ["latin"], axes: ["wdth"], display: "swap" })
-const publicSans = Public_Sans({ variable: "--font-public-sans", subsets: ["latin"], display: "swap" })
+const anybody = localFont({
+  src: [{ path: "../../fuentes/anybody.woff2", weight: "100 900", style: "normal" }],
+  variable: "--font-anybody",
+  display: "swap",
+  declarations: [{ prop: "font-stretch", value: "50% 150%" }],
+})
+const publicSans = localFont({
+  src: [{ path: "../../fuentes/public-sans.woff2", weight: "100 900", style: "normal" }],
+  variable: "--font-public-sans",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   ...tarjetaDeDemo("/demo/titan-gym"),

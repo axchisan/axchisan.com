@@ -24,6 +24,10 @@ decisión). Trampas ya pisadas en este repositorio:
   salía sin las clases de la carpeta recién creada en `demos/` (pasó con Look & Estilo y con Linaza).
   Por eso producción tiene `VERCEL_FORCE_NO_BUILD_CACHE=1`. Al publicar una demo, comprobar que el
   CSS servido trae sus clases (`curl` del `.css` y buscar el prefijo de sus tokens).
+- **Las fuentes son locales** (`app/fuentes/`, `next/font/local`). `next/font/google` las bajaba en cada
+  compilación y Google devuelve de vez en cuando una URL que Turbopack no lee (vercel/next.js#99114):
+  la compilación de producción fallaba al azar. Para una fuente nueva, declararla con
+  `next/font/google` y correr `python3 scripts/fuentes-locales.py`.
 - **La suite E2E corre contra una rama de Neon**, no contra producción. Ver `playwright.config.ts`.
 - **El contraste está calculado, no elegido a ojo.** Cambiar un color de `globals.css` obliga a
   reejecutar `npx playwright test e2e/accesibilidad.spec.ts`.

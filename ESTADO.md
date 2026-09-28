@@ -27,6 +27,7 @@ En orden. Cada punto se cierra con pruebas, despliegue y verificación en produc
 
 | # | Tarea | Por qué va en este orden | Estado |
 |---|---|---|---|
+| 0 | **Fuentes locales**: `next/font/google` hacía caer compilaciones de producción al azar (vercel/next.js#99114) | Un despliegue fallido bloquea todo lo demás | **Hecho**: 20 archivos en `app/fuentes/`, `scripts/fuentes-locales.py` |
 | 1 | **Footer**: la columna de soluciones crece con cada demo y desborda | Rompe todas las páginas del sitio; arreglo corto | **Hecho**: los sectores van en una franja propia, en columnas |
 | 2 | **Open Graph**: tarjeta y texto al compartir el enlace, y una tarjeta por ficha | El enlace se comparte por WhatsApp todos los días; hoy describe el portafolio viejo | **Hecho**: texto nuevo, tarjeta general, una por ficha y por demo (`npm run og`, `lib/metadatos.ts`) |
 | 3 | **Brisas del Mar**: el scroll se siente trabado y la imagen pierde calidad. Medir, encontrar la causa e investigar una técnica mejor para las páginas cinematográficas | Es un plan que se vende ($ 1.800.000): la demo tiene que ser la mejor del catálogo | Pendiente |

@@ -1,22 +1,21 @@
 import type { Metadata } from "next"
 import { tarjetaDeDemo } from "@/lib/metadatos"
-import { Big_Shoulders, Hanken_Grotesk } from "next/font/google"
+import localFont from "next/font/local"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
 import { PanelRecorrido } from "@/demos/comun/recorrido"
 import { CONFIG_LOOK_Y_ESTILO } from "@/demos/look-y-estilo/config"
 
 // Tipografías de Look & Estilo, no del sitio. Razones en docs/demos/look-y-estilo.md.
-const bigShoulders = Big_Shoulders({
+const bigShoulders = localFont({
+  src: [{ path: "../../fuentes/big-shoulders.woff2", weight: "100 900", style: "normal" }],
   variable: "--font-big-shoulders",
-  subsets: ["latin"],
-  axes: ["opsz"],
   display: "swap",
 })
 
-const hanken = Hanken_Grotesk({
+const hanken = localFont({
+  src: [{ path: "../../fuentes/hanken-grotesk.woff2", weight: "100 900", style: "normal" }],
   variable: "--font-hanken",
-  subsets: ["latin"],
   display: "swap",
 })
 

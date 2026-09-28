@@ -1,13 +1,17 @@
 import type { Metadata } from "next"
 import { tarjetaDeDemo } from "@/lib/metadatos"
-import { Schibsted_Grotesk } from "next/font/google"
+import localFont from "next/font/local"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
 import { PanelRecorrido } from "@/demos/comun/recorrido"
 import { CONFIG_TU_CASA } from "@/demos/tu-casa/config"
 
 // Una sola familia. Razones en docs/demos/tu-casa.md.
-const schibsted = Schibsted_Grotesk({ variable: "--font-schibsted", subsets: ["latin"], display: "swap" })
+const schibsted = localFont({
+  src: [{ path: "../../fuentes/schibsted-grotesk.woff2", weight: "400 900", style: "normal" }],
+  variable: "--font-schibsted",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   ...tarjetaDeDemo("/demo/tu-casa"),

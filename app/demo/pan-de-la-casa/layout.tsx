@@ -1,14 +1,23 @@
 import type { Metadata } from "next"
 import { tarjetaDeDemo } from "@/lib/metadatos"
-import { Gluten, Nunito_Sans } from "next/font/google"
+import localFont from "next/font/local"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
 import { PanelRecorrido } from "@/demos/comun/recorrido"
 import { CONFIG_PAN_DE_LA_CASA } from "@/demos/pan-de-la-casa/config"
 
 // Tipografías de Pan de la Casa, no del sitio. Razones en docs/demos/pan-de-la-casa.md.
-const gluten = Gluten({ variable: "--font-gluten", subsets: ["latin"], display: "swap" })
-const nunito = Nunito_Sans({ variable: "--font-nunito-sans", subsets: ["latin"], display: "swap" })
+const gluten = localFont({
+  src: [{ path: "../../fuentes/gluten.woff2", weight: "100 900", style: "normal" }],
+  variable: "--font-gluten",
+  display: "swap",
+})
+const nunito = localFont({
+  src: [{ path: "../../fuentes/nunito-sans.woff2", weight: "200 1000", style: "normal" }],
+  variable: "--font-nunito-sans",
+  display: "swap",
+  declarations: [{ prop: "font-stretch", value: "100%" }],
+})
 
 export const metadata: Metadata = {
   ...tarjetaDeDemo("/demo/pan-de-la-casa"),

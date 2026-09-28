@@ -1,13 +1,17 @@
 import type { Metadata } from "next"
 import { tarjetaDeDemo } from "@/lib/metadatos"
-import { Onest } from "next/font/google"
+import localFont from "next/font/local"
 import { BarraDemo } from "@/demos/comun/barra-demo"
 import { DemoProvider } from "@/demos/comun/contexto"
 import { PanelRecorrido } from "@/demos/comun/recorrido"
 import { CONFIG_SONRISA_CLARA } from "@/demos/sonrisa-clara/config"
 
 // Una sola familia. Razones en docs/demos/sonrisa-clara.md.
-const onest = Onest({ variable: "--font-onest", subsets: ["latin"], display: "swap" })
+const onest = localFont({
+  src: [{ path: "../../fuentes/onest.woff2", weight: "100 900", style: "normal" }],
+  variable: "--font-onest",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   ...tarjetaDeDemo("/demo/sonrisa-clara"),
