@@ -4,7 +4,7 @@ import { textoHoraDecimal } from "@/demos/motores/agenda/tiempo"
 import { pesos } from "@/lib/catalogo/planes"
 import { RAIZ } from "@/demos/sonrisa-clara/config"
 import { CONSULTORIO, HORARIO, MOTIVOS, ODONTOLOGOS, textoDuracion } from "@/demos/sonrisa-clara/modelo"
-import { AccionesCita, Arcada, BotonWhatsappMolar, CabeceraMolar, MarcaMolar } from "@/demos/sonrisa-clara/publico"
+import { AccionesCita, Arcada, BotonWhatsappSonrisaClara, CabeceraSonrisaClara, MarcaSonrisaClara } from "@/demos/sonrisa-clara/publico"
 
 const DIAS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"]
 
@@ -15,10 +15,10 @@ const PREGUNTAS = [
   { p: "¿Qué hago si me duele un sábado?", r: "Los sábados atendemos hasta la 1:00 p. m. Agenda con «Tengo dolor» y te damos la primera hora libre." },
 ]
 
-export default function MolarInicio() {
+export default function SonrisaClaraInicio() {
   return (
     <>
-      <CabeceraMolar />
+      <CabeceraSonrisaClara />
       <main id="contenido">
         <section className="mx-auto grid max-w-6xl items-center gap-10 px-4 pt-12 pb-16 sm:px-6 lg:grid-cols-2 lg:pt-20 lg:pb-24">
           <div>
@@ -122,7 +122,7 @@ export default function MolarInicio() {
       <footer className="border-t border-mo-linea bg-white">
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-3">
           <div>
-            <MarcaMolar />
+            <MarcaSonrisaClara />
             <p className="mt-3 text-[0.9375rem] text-mo-gris">{CONSULTORIO.direccion}</p>
             <Link href={`${RAIZ}/panel`} className="mt-4 inline-block text-[0.9375rem] font-semibold text-mo-violeta underline underline-offset-4">
               Ver el sistema del consultorio
@@ -132,7 +132,7 @@ export default function MolarInicio() {
             <p>Teléfono {CONSULTORIO.telefono}</p>
             <div>
               WhatsApp{" "}
-              <BotonWhatsappMolar className="underline underline-offset-4 hover:text-mo-tinta">{CONSULTORIO.whatsappVisible}</BotonWhatsappMolar>
+              <BotonWhatsappSonrisaClara className="underline underline-offset-4 hover:text-mo-tinta">{CONSULTORIO.whatsappVisible}</BotonWhatsappSonrisaClara>
             </div>
             <p>{CONSULTORIO.correo}</p>
           </div>

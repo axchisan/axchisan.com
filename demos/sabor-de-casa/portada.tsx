@@ -4,7 +4,7 @@ import Link from "next/link"
 import { CalendarPlus, LayoutDashboard, MessageCircle } from "lucide-react"
 import { useDemo } from "@/demos/comun/contexto"
 import { RAIZ } from "./config"
-import { BotonWhatsappFogon, botonPrincipal, botonSecundario } from "./publico"
+import { BotonWhatsappSaborDeCasa, botonPrincipal, botonSecundario } from "./publico"
 
 const botonClaro =
   "inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-[1rem] font-bold text-fg-cobalto transition-colors hover:bg-fg-peltre focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-white"
@@ -22,10 +22,10 @@ export function AccionesPortada() {
           Reservar mesa
         </Link>
       ) : (
-        <BotonWhatsappFogon className={botonSecundario} mensaje="Hola, Sabor de Casa. Quiero reservar una mesa.">
+        <BotonWhatsappSaborDeCasa className={botonSecundario} mensaje="Hola, Sabor de Casa. Quiero reservar una mesa.">
           <MessageCircle className="h-5 w-5" aria-hidden />
           Reservar por WhatsApp
-        </BotonWhatsappFogon>
+        </BotonWhatsappSaborDeCasa>
       )}
     </div>
   )
@@ -39,10 +39,10 @@ export function AccionReserva() {
       Reservar mesa
     </Link>
   ) : (
-    <BotonWhatsappFogon className={botonClaro} mensaje="Hola, Sabor de Casa. Quiero reservar una mesa.">
+    <BotonWhatsappSaborDeCasa className={botonClaro} mensaje="Hola, Sabor de Casa. Quiero reservar una mesa.">
       <MessageCircle className="h-5 w-5" aria-hidden />
       Reservar por WhatsApp
-    </BotonWhatsappFogon>
+    </BotonWhatsappSaborDeCasa>
   )
 }
 

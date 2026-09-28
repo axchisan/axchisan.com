@@ -16,7 +16,7 @@ const ESTADO: Record<Reserva["estado"], { texto: string; clase: string }> = {
   cancelada: { texto: "No vino", clase: "bg-fg-aji-suave text-fg-aji" },
 }
 
-export function ReservasFogon({ diaInicial }: { diaInicial?: string }) {
+export function ReservasSaborDeCasa({ diaInicial }: { diaInicial?: string }) {
   const e = useRestaurante()
   const [dia, setDia] = useState<string | null>(diaInicial ?? null)
 

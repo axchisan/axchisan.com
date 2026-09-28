@@ -21,7 +21,7 @@ import {
   useRestaurante,
 } from "./estado"
 import { CATEGORIAS, ETIQUETA, PLATOS, platoPorId, type Etiqueta, type Plato } from "./modelo"
-import { BotonWhatsappFogon, botonPrincipal, Olla } from "./publico"
+import { BotonWhatsappSaborDeCasa, botonPrincipal, Olla } from "./publico"
 
 const ICONO_ETIQUETA: Record<Etiqueta, { icono: typeof Flame; clase: string }> = {
   picante: { icono: Flame, clase: "text-fg-aji" },
@@ -44,7 +44,7 @@ export function PlatoPeltre({ plato, tamano, gris }: { plato: Plato; tamano: num
   )
 }
 
-export function CartaFogon({ mesa }: { mesa?: number }) {
+export function CartaSaborDeCasa({ mesa }: { mesa?: number }) {
   const { incluye } = useDemo()
   const e = useRestaurante()
   const carrito = useCarrito()
@@ -152,10 +152,10 @@ export function CartaFogon({ mesa }: { mesa?: number }) {
                 <p className="mt-2 text-[0.9375rem] text-fg-ceniza">
                   Escríbenos con lo que quieres y te confirmamos el total y el tiempo. Domicilios en Chapinero y Teusaquillo.
                 </p>
-                <BotonWhatsappFogon className={`${botonPrincipal} mt-4 w-full`}>
+                <BotonWhatsappSaborDeCasa className={`${botonPrincipal} mt-4 w-full`}>
                   <MessageCircle className="h-5 w-5" aria-hidden />
                   Pedir por WhatsApp
-                </BotonWhatsappFogon>
+                </BotonWhatsappSaborDeCasa>
               </div>
             )}
           </Punto>

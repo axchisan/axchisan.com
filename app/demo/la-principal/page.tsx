@@ -3,11 +3,11 @@ import { MessageCircle } from "lucide-react"
 import { CatalogoFerreteria } from "@/demos/la-principal/catalogo"
 import { EntradaPanelFerreteria } from "@/demos/la-principal/panel/entrada"
 import { FERRETERIA, FOTOS, HORARIO_TEXTO, PRODUCTOS } from "@/demos/la-principal/modelo"
-import { BotonWhatsappFerreteria, botonBorde, CabeceraFerreteria, MarcaDobleRosca } from "@/demos/la-principal/publico"
+import { BotonWhatsappFerreteria, botonBorde, CabeceraFerreteria, MarcaLaPrincipal } from "@/demos/la-principal/publico"
 
 const CREDITOS = Object.values(FOTOS).map((f) => f.autor)
 
-export default function DobleRoscaInicio() {
+export default function LaPrincipalInicio() {
   return (
     <>
       <CabeceraFerreteria />
@@ -69,7 +69,7 @@ export default function DobleRoscaInicio() {
       <footer className="bg-dr-verde text-white">
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-3">
           <div>
-            <MarcaDobleRosca claro />
+            <MarcaLaPrincipal claro />
             <p className="mt-3 text-[0.9375rem] text-dr-verde-claro">{FERRETERIA.direccion}</p>
             <div className="mt-5">
               <EntradaPanelFerreteria />

@@ -19,7 +19,7 @@ export function Tuerca({ className }: { className?: string }) {
   )
 }
 
-export function MarcaDobleRosca({ claro }: { claro?: boolean }) {
+export function MarcaLaPrincipal({ claro }: { claro?: boolean }) {
   return (
     <span className={`inline-flex items-center gap-2 ${claro ? "text-white" : "text-dr-verde"}`}>
       <Tuerca className="h-8 w-8" />
@@ -83,7 +83,7 @@ export function CabeceraFerreteria() {
     <header className="border-b-4 border-dr-verde bg-white">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-6 px-4 sm:px-6">
         <Link href={RAIZ} aria-label="Ferretería La Principal, inicio" className="rounded-[4px]">
-          <MarcaDobleRosca />
+          <MarcaLaPrincipal />
         </Link>
         <nav aria-label="Secciones" className="ml-auto hidden items-center gap-6 text-[0.9375rem] font-semibold md:flex">
           <a href={`${RAIZ}#productos`} className="hover:underline">Productos</a>

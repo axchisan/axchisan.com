@@ -2,7 +2,7 @@ import type { ConfigDemo } from "@/demos/comun/contexto"
 
 export const RAIZ = "/demo/la-principal"
 
-export const CONFIG_DOBLE_ROSCA: ConfigDemo = {
+export const CONFIG_LA_PRINCIPAL: ConfigDemo = {
   slug: "la-principal",
   nombre: "Ferretería La Principal",
   paraQuien: "un negocio con inventario",

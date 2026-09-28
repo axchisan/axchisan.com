@@ -18,7 +18,7 @@ const ESTADO: Record<EstadoCita, { texto: string; clase: string }> = {
   "no-asistio": { texto: "No vino", clase: "bg-mo-rojo-suave text-mo-rojo" },
 }
 
-export function AgendaMolar({ diaInicial }: { diaInicial?: string }) {
+export function AgendaSonrisaClara({ diaInicial }: { diaInicial?: string }) {
   const e = useConsultorio()
   const { incluye } = useDemo()
   const [dia, setDia] = useState(diaInicial ?? "")

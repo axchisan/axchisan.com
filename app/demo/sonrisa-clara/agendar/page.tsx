@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { SoloEnNivel } from "@/demos/comun/solo-en-nivel"
-import { AgendarMolar } from "@/demos/sonrisa-clara/agendar"
-import { CabeceraMolar } from "@/demos/sonrisa-clara/publico"
+import { AgendarSonrisaClara } from "@/demos/sonrisa-clara/agendar"
+import { CabeceraSonrisaClara } from "@/demos/sonrisa-clara/publico"
 
 export const metadata: Metadata = { title: "Agendar cita" }
 
@@ -9,10 +9,10 @@ export default async function AgendarPage({ searchParams }: { searchParams: Prom
   const { motivo } = await searchParams
   return (
     <>
-      <CabeceraMolar />
+      <CabeceraSonrisaClara />
       <main id="contenido">
         <SoloEnNivel nivel="citas">
-          <AgendarMolar motivoInicial={motivo} />
+          <AgendarSonrisaClara motivoInicial={motivo} />
         </SoloEnNivel>
       </main>
     </>

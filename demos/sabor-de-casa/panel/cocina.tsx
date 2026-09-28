@@ -18,7 +18,7 @@ const COLUMNAS: { estado: EstadoPedido; titulo: string; vacio: string }[] = [
 /** A partir de estos minutos, el pedido se marca como demorado. */
 const DEMORA = 20
 
-export function CocinaFogon() {
+export function CocinaSaborDeCasa() {
   const e = useRestaurante()
   const ahora = useAhora()
 

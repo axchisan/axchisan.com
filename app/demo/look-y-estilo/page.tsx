@@ -12,7 +12,7 @@ import {
   SERVICIOS,
   textoDuracion,
 } from "@/demos/look-y-estilo/modelo"
-import { AccionesReserva, CabeceraSalon, MarcaPeineFino } from "@/demos/look-y-estilo/publico"
+import { AccionesReserva, CabeceraSalon, MarcaLookYEstilo } from "@/demos/look-y-estilo/publico"
 import { RAIZ } from "@/demos/look-y-estilo/config"
 
 const DIAS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"]
@@ -31,7 +31,7 @@ const PREGUNTAS = [
   { p: "¿Cómo cancelo?", r: "Escríbenos por WhatsApp hasta dos horas antes y liberamos la hora para otra persona." },
 ]
 
-export default function PeineFinoInicio() {
+export default function LookYEstiloInicio() {
   return (
     <>
       <CabeceraSalon />
@@ -227,7 +227,7 @@ export default function PeineFinoInicio() {
       <footer className="bg-pf-cordoban text-pf-niebla">
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-3">
           <div>
-            <MarcaPeineFino claro />
+            <MarcaLookYEstilo claro />
             <p className="mt-3 text-[0.9375rem]">{SALON.zona}</p>
           </div>
           <div className="text-[0.9375rem] leading-relaxed">

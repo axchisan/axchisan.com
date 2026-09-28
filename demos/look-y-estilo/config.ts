@@ -2,7 +2,7 @@ import type { ConfigDemo } from "@/demos/comun/contexto"
 
 export const RAIZ = "/demo/look-y-estilo"
 
-export const CONFIG_PEINE_FINO: ConfigDemo = {
+export const CONFIG_LOOK_Y_ESTILO: ConfigDemo = {
   slug: "look-y-estilo",
   nombre: "Look & Estilo, salón y barbería",
   paraQuien: "un salón o una barbería",

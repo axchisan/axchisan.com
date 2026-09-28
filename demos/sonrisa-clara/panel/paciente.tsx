@@ -26,7 +26,7 @@ const HERRAMIENTAS: { id: Herramienta; nombre: string; muestra: string; cara: bo
 
 const edad = (nacimiento: string) => (nacimiento ? Math.floor((Date.now() - new Date(`${nacimiento}T12:00`).getTime()) / 31_557_600_000) : null)
 
-export function PacienteMolar({ id }: { id: string }) {
+export function PacienteSonrisaClara({ id }: { id: string }) {
   const e = useConsultorio()
   const [herramienta, setHerramienta] = useState<Herramienta>("caries")
   const [valor, setValor] = useState("")
