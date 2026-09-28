@@ -16,9 +16,9 @@ por Resend.
 |---|---|
 | Sitio comercial (portada, soluciones, planes, proceso, a medida, empresa, cotizar, guías) | En producción |
 | Ola 1 de demos: Canela, Look & Estilo, Brisas del Mar, Sabor de Casa, La Principal, Linaza, Jabones Mari (real) | Completa |
-| Ola 2: Sonrisa Clara, Titán Gym, Tu Casa Inmobiliaria, Pan de la Casa, Rojas & Duarte | 5 de 6. Falta la app de fidelización |
+| Ola 2: Sonrisa Clara, Titán Gym, Tu Casa Inmobiliaria, Pan de la Casa, Rojas & Duarte, Café del Barrio | Completa |
 | Ola 3: bot de WhatsApp, asistente con IA, catálogo B2B, reservas de hotel, facturación DIAN | Sin empezar |
-| Pruebas E2E | 313 en escritorio y celular, incluida WCAG AA |
+| Pruebas E2E | 337 en escritorio y celular, incluida WCAG AA |
 | Medición del embudo | Propia: visitas, aperturas de demo y clics a WhatsApp en la base (`lib/eventos`) |
 
 ## Hoja de ruta
@@ -32,7 +32,7 @@ En orden. Cada punto se cierra con pruebas, despliegue y verificación en produc
 | 2 | **Open Graph**: tarjeta y texto al compartir el enlace, y una tarjeta por ficha | El enlace se comparte por WhatsApp todos los días; hoy describe el portafolio viejo | **Hecho**: texto nuevo, tarjeta general, una por ficha y por demo (`npm run og`, `lib/metadatos.ts`) |
 | 3 | **Brisas del Mar**: el scroll se siente trabado y la imagen pierde calidad. Medir, encontrar la causa e investigar una técnica mejor para las páginas cinematográficas | Es un plan que se vende ($ 1.800.000): la demo tiene que ser la mejor del catálogo | **Hecho**: video con fotogramas clave cada 6 en vez de 627 imágenes; 22 MB en vez de 53, resolución nativa, vertical en celular. Ver `docs/demos/brisas-del-mar.md` |
 | 4 | **SEO**: revisar metadatos, sitemap, datos estructurados y rendimiento; dejar pasos de Search Console, Bing y analítica | Depende de 2 (la tarjeta nueva) y conviene hacerlo con el sitio ya corregido | **Hecho** en el código: Lighthouse 96–100, `lastmod` corregido, Vercel Analytics y Speed Insights. Pasos de cuentas en `SEO.md` |
-| 5 | App de fidelización (última de la ola 2) | Después de dejar sano lo que ya existe | Pendiente |
+| 5 | App de fidelización (última de la ola 2) | Después de dejar sano lo que ya existe | **Hecho**: Café del Barrio, `/soluciones/programa-de-puntos` |
 | 6 | Ola 3 | Según los datos del embudo | Pendiente |
 
 ## Pendientes del dueño del sitio

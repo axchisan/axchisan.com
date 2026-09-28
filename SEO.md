@@ -11,7 +11,7 @@ marcados **Tú** solo se pueden hacer desde tus cuentas.
 |---|---|
 | Lighthouse en celular, portada | Rendimiento 96, accesibilidad 100, buenas prácticas 100, SEO 100. LCP 2,8 s, CLS 0 |
 | Lighthouse en celular, ficha de veterinarias | Rendimiento 98, accesibilidad 100, buenas prácticas 100, SEO 100. LCP 2,4 s, CLS 0 |
-| Páginas en el sitemap | 9 fijas, 12 fichas y las guías publicadas |
+| Páginas en el sitemap | 9 fijas, 13 fichas y las guías publicadas |
 | Datos estructurados | `ProfessionalService` en todo el sitio, `Service` con `AggregateOffer` y `FAQPage` en cada ficha, `OfferCatalog` con precios en planes, `BlogPosting` en guías |
 | `www` y `http` | Redirigen con 308 a `https://axchisan.com` |
 | Demos | `noindex, follow` y fuera del sitemap: son negocios ficticios |
@@ -86,6 +86,7 @@ https://axchisan.com/soluciones/panaderias-y-cafeterias
 https://axchisan.com/soluciones/abogados-y-contadores
 https://axchisan.com/soluciones/hoteles-y-turismo
 https://axchisan.com/soluciones/tiendas-de-cosmeticos
+https://axchisan.com/soluciones/programa-de-puntos
 https://axchisan.com/cotizar
 https://axchisan.com/a-medida
 https://axchisan.com/proceso
@@ -158,6 +159,7 @@ intención, una página: no se crean dos fichas que compitan por la misma búsqu
 | página web para abogados, página web para contador | `/soluciones/abogados-y-contadores` |
 | página web para hotel, página de hotel con video | `/soluciones/hoteles-y-turismo` |
 | tienda en línea cosméticos, jabones artesanales tienda virtual | `/soluciones/tiendas-de-cosmeticos` |
+| programa de puntos para clientes, tarjeta de sellos digital, app de fidelización | `/soluciones/programa-de-puntos` |
 | cuánto cuesta una página web en Colombia, página web por mensualidad | `/planes` |
 | desarrollo de software a medida Bogotá | `/a-medida` |
 

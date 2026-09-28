@@ -45,6 +45,7 @@ volantes imprimibles y tarjetas de presentación. Cada prompt se pega tal cual; 
 | Comercio y distribución | `public/capturas/la-principal-portada-movil.webp` | `public/capturas/la-principal-caja-escritorio.webp` | `inventario-y-ventas` |
 | Restaurantes y cafeterías | `public/capturas/sabor-de-casa-portada-movil.webp` | `public/capturas/sabor-de-casa-portada-escritorio.webp` | `restaurantes` |
 | Hoteles y turismo | `public/capturas/brisas-del-mar-portada-movil.webp` | `public/capturas/brisas-del-mar-portada-escritorio.webp` | `hoteles-y-turismo` |
+| Programa de puntos | `public/capturas/cafe-del-barrio-app-movil.webp` | `public/capturas/cafe-del-barrio-caja-escritorio.webp` | `programa-de-puntos` |
 | Cosméticos y cuidado personal | `public/capturas/jabones-mari-portada-movil.webp` | `public/capturas/jabones-mari-portada-escritorio.webp` | `tiendas-de-cosmeticos` |
 
 **Ojo con las capturas de computador:** arriba llevan la barra de la demo de Axchi, que muestra el
@@ -128,6 +129,7 @@ Frases por sector (sin precios):
 | Panaderías | panadería | Que sepan a qué hora sale el pan caliente |
 | Abogados y contadores | oficina | Clientes que llegan con los documentos listos |
 | Hoteles | hotel | Que recorran tu hotel antes de reservar |
+| Cafés y comercios de barrio | negocio | Que tus clientes vuelvan por el café gratis |
 
 ### 1.3 Pregunta que invita a averiguar
 

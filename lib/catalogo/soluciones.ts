@@ -471,6 +471,108 @@ export const SOLUCIONES: Solucion[] = [
     ],
   },
   {
+    slug: "programa-de-puntos",
+    sector: "Programa de puntos",
+    icono: "fidelizacion",
+    titulo: "App de puntos, sellos y cupones para que tus clientes vuelvan",
+    resumen:
+      "Tus clientes llevan la tarjeta de sellos y sus puntos en el celular, cambian premios desde la app y reciben cupones cuando dejan de venir. En caja se suman los puntos con un código.",
+    seo: {
+      title: "Programa de puntos y fidelización para cafés y negocios de barrio",
+      description:
+        "App de puntos, tarjeta de sellos digital, cupones de un solo uso y campañas por WhatsApp para cafés, heladerías, droguerías y comercios en Colombia. Pruébala en una demo con caja y panel.",
+    },
+    muestra: {
+      tipo: "demo",
+      href: "/demo/cafe-del-barrio",
+      nombre: "Café del Barrio",
+      nota: "Café ficticio en Pereira con la app del cliente, la caja para sumar puntos y cobrar cupones, y el panel con clientes y campañas.",
+    },
+    capturas: {
+      escritorio: cap("/capturas/cafe-del-barrio-app-escritorio.webp", "App de puntos de la demo de Café del Barrio, con la tarjeta de sellos"),
+      movil: cap("/capturas/cafe-del-barrio-app-movil.webp", "App de puntos de Café del Barrio en un celular", true),
+    },
+    sintomas: [
+      "La tarjeta de sellos de cartón se pierde en la billetera y nadie la completa.",
+      "No sabes quién es cliente fijo ni quién dejó de venir hace un mes.",
+      "Las promociones se anuncian en un cartel y le llegan a quien ya estaba en el local.",
+    ],
+    resultados: [
+      {
+        titulo: "Clientes que vuelven",
+        texto: "Los sellos, los niveles y los puntos por vencer le dan a cada cliente una razón para regresar esta semana.",
+      },
+      {
+        titulo: "Sabes quién es quién",
+        texto: "Cada cliente con sus visitas, su nivel y su última compra. Los que dejaron de venir, marcados.",
+      },
+      {
+        titulo: "Promociones que llegan",
+        texto: "Un cupón con código para cada cliente del grupo y el mensaje de WhatsApp listo: cumpleaños, te extrañamos, puntos por vencer.",
+      },
+    ],
+    diaADia: [
+      {
+        titulo: "El cliente abre su app",
+        texto: "Ve sus puntos, sus sellos y su código para la caja. Se instala en el celular sin pasar por la tienda de aplicaciones.",
+        captura: cap("/capturas/cafe-del-barrio-app-escritorio.webp", "App del cliente con puntos y sellos"),
+      },
+      {
+        titulo: "En caja se suman los puntos",
+        texto: "Con el código o el celular del cliente. Los puntos salen según su nivel y la compra le pone un sello.",
+        captura: cap("/capturas/cafe-del-barrio-caja-escritorio.webp", "Caja con el cliente y el pedido"),
+      },
+      {
+        titulo: "El dueño ve si funciona",
+        texto: "Cuántos clientes volvieron, cuántas visitas trae cada uno y cuántos premios se canjearon.",
+        captura: cap("/capturas/cafe-del-barrio-panel-escritorio.webp", "Panel con clientes y métricas"),
+      },
+      {
+        titulo: "Y los hace volver",
+        texto: "Campañas con un toque: cada cliente recibe su cupón y el mensaje por WhatsApp.",
+        captura: cap("/capturas/cafe-del-barrio-campanas-escritorio.webp", "Campañas con cupones por grupo de clientes"),
+      },
+    ],
+    incluye: [
+      "App para tus clientes con puntos, tarjeta de sellos, premios, cupones e historial",
+      "Instalable en el celular, sin tienda de aplicaciones",
+      "Caja para sumar puntos, inscribir clientes y cobrar cupones",
+      "Niveles con beneficios y puntos que vencen",
+      "Panel con clientes, visitas y premios canjeados",
+      "Campañas por grupo e invitaciones con bono para los dos (sistema completo)",
+    ],
+    noIncluye: [
+      "Conexión con tu programa de facturación o datáfono (se cotiza según el sistema)",
+      "Envío automático de WhatsApp por API (módulo aparte)",
+      "Tarjetas plásticas impresas",
+    ],
+    planes: ["sistema-de-gestion", "sistema-completo"],
+    preguntas: [
+      {
+        p: "¿Mis clientes tienen que descargar una app?",
+        r: "No de una tienda. Abren un enlace y la instalan en la pantalla de inicio en dos toques, o la usan desde el navegador. Así nadie se queda por fuera por falta de espacio en el celular.",
+      },
+      {
+        p: "¿Sirve para algo distinto de un café?",
+        r: "Sí: heladerías, droguerías, lavaderos de carros, peluquerías, panaderías. Se cambian los premios, los niveles y la cantidad de sellos; la lógica es la misma.",
+      },
+      {
+        p: "¿Qué pasa si un cliente usa el mismo cupón dos veces?",
+        r: "No puede. Cada cupón tiene un código único y la caja lo marca como usado; si alguien lo intenta de nuevo, la caja lo rechaza y dice cuándo se usó.",
+      },
+      {
+        p: "¿Puedo empezar con la tarjeta de sellos y agregar puntos después?",
+        r: "Sí. Se arranca con lo que ya conocen tus clientes y el resto se activa cuando quieras, sin perder el historial.",
+      },
+    ],
+    tecnico: [
+      "Motor de fidelización propio: puntos que vencen del más viejo al más nuevo, sellos, niveles y cupones de un solo uso",
+      "El saldo se calcula de los movimientos: el historial siempre cuadra con los puntos",
+      "App web instalable (PWA) con su propio ícono y pantalla de inicio",
+      "La app y la caja se sincronizan al instante",
+    ],
+  },
+  {
     slug: "inmobiliarias",
     sector: "Inmobiliarias",
     icono: "inmobiliarias",

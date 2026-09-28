@@ -557,3 +557,25 @@
   --font-rd-titulo: var(--font-newsreader), ui-serif, Georgia, serif;
   --font-rd-texto:  var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
 }
+
+/* Café del Barrio, programa de fidelización — docs/demos/cafe-del-barrio.md
+   Verde de cafeto como base y rojo cereza de café solo para los sellos y lo
+   que se gana. Nada de crema con marrón. */
+@theme inline {
+  --color-cb-fondo:  #eef2ef;
+  --color-cb-tinta:  #17211c;  /* 14,6:1 sobre fondo */
+  --color-cb-cafeto: #1d3b2f;  /* blanco encima 12,2:1 */
+  --color-cb-cafeto-2: #2a5241; /* hover; blanco encima 8,8:1 */
+  --color-cb-cereza: #b02a37;  /* 6,5:1 sobre blanco, 5,3:1 sobre cereza suave */
+  --color-cb-cereza-suave: #f8e3e5;
+  --color-cb-hoja:   #dfe9e2;
+  --color-cb-menta:  #a8d5bd;  /* acento sobre cafeto: 7,5:1 */
+  --color-cb-gris:   #56615b;  /* 5,7:1 sobre fondo, 5,2:1 sobre hoja */
+  --color-cb-linea:  #d5ddd7;
+  --color-cb-oro:    #8a5d0c;
+  --color-cb-oro-suave: #f7ecd6;
+  --color-cb-exito:  #236b47;
+  --color-cb-exito-suave: #e2f1e8;
+  --font-cb-marca: var(--font-young-serif), ui-serif, Georgia, serif;
+  --font-cb: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+}

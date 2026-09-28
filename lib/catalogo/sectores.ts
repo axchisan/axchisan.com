@@ -2,6 +2,7 @@ import {
   BedDouble,
   Croissant,
   Boxes,
+  Coffee,
   Building2,
   Dumbbell,
   PawPrint,
@@ -112,6 +113,13 @@ export const SECTORES: Sector[] = [
     icono: Scale,
     ejemplo: "Página de servicios que genera confianza y contactos",
     solucion: "abogados-y-contadores",
+  },
+  {
+    id: "fidelizacion",
+    nombre: "Cafés y comercios de barrio",
+    icono: Coffee,
+    ejemplo: "Programa de puntos y cupones que hace volver a los clientes",
+    solucion: "programa-de-puntos",
   },
 ]
 

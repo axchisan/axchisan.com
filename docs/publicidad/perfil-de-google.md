@@ -136,6 +136,7 @@ aparezcan de esta lista (hasta 9):
 | Citas y reservas en línea | Tus clientes reservan desde el celular y tú ves la agenda del día. Para veterinarias, salones, consultorios y gimnasios. Demo en axchisan.com. |
 | Carta digital y pedidos para restaurantes | Carta con QR por mesa, pedidos a domicilio y para recoger, y pantalla de cocina. Pruébala en axchisan.com. |
 | Sistema de inventario y punto de venta | Productos y existencias, caja con recibo, reportes y descarga para Excel. Para ferreterías, misceláneas y distribuidoras. Demo en axchisan.com. |
+| Programa de puntos para tus clientes | App con puntos, tarjeta de sellos digital y cupones para que tus clientes vuelvan, y una caja para sumar puntos. Pruébala en axchisan.com. |
 | Página web con video para hoteles | Un recorrido en video por tu lugar que avanza con el scroll, creado con IA a partir de tus fotos. Mírala en axchisan.com. |
 | Desarrollo de software a medida | Aplicaciones, automatizaciones e integraciones para lo que no resuelve una solución lista. Alcance cerrado antes de empezar. |
 
