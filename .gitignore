@@ -52,5 +52,3 @@ next-env.d.ts
 # Imágenes de publicidad generadas con Gemini: pesan mucho para el repositorio.
 docs/publicidad/generadas/*
 !docs/publicidad/generadas/.gitkeep
-docs/publicidad/listas/*
-!docs/publicidad/listas/.gitkeep

@@ -9,15 +9,14 @@ Generado por `npx tsx scripts/publicidad.ts`: no se edita a mano.
 3. Sube los archivos de **Adjunta**, que están en `docs/publicidad/adjuntos/`.
 4. Copia el prompt completo y envíalo. Si responde con código, contesta `No quiero código. Genera la imagen.` Si el texto sale con un error: `Corrige solo el texto: debe decir exactamente «…». No cambies nada más.`
 5. Descarga la imagen y guárdala en `docs/publicidad/generadas/` con el nombre de **Guardar como** (basta el código: `V03.png`).
-6. Las que dicen **Lleva QR** salen con un cuadro blanco vacío: avísame y les pego el QR de su sector (`npx tsx scripts/pegar-qr.ts`). Quedan en `docs/publicidad/listas/`.
 
 Ninguna pieza muestra precios: todas llevan a la web a averiguarlo.
+
+Las tarjetas y los volantes **no** se hacen con Gemini: llevan texto exacto y un QR que tiene que escanearse, y salen listos para la imprenta de `npx tsx scripts/impresos.ts` (ver `docs/publicidad/README.md`).
 
 - [Historias](#historias): 15 piezas
 - [Publicaciones](#publicaciones): 8 piezas
 - [Portada](#portada): 1 piezas
-- [Volantes](#volantes): 15 piezas
-- [Tarjetas](#tarjetas): 15 piezas
 - [Fotos de la oficina](#fotos-de-la-oficina): 10 piezas
 
 ## Historias
@@ -553,723 +552,6 @@ Fondo casi negro #0b0f14. A la derecha, un computador portátil con la captura a
 Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
 ```
 
-## Volantes
-
-Media carta para imprimir. V02 es el reverso de todos. Llevan QR.
-
-### V01 · Volante general, cara
-
-**Adjunta:** `logo.png`, `restaurantes-computador.png`, `veterinarias-celular.png`, `gimnasios-y-estudios-celular.png`  
-**Formato:** Vertical media carta, 14 × 21,6 cm  
-**Guardar como:** `V01.png`  
-**Lleva QR:** `volante-general`
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-El fondo casi negro #0b0f14 llega hasta los bordes. Márgenes internos amplios: ningún texto cerca del borde.
-Arriba, el logo. Titular grande en blanco: "Tu negocio merece una página que venda". Subtítulo en gris claro: "Páginas web, tiendas en línea y sistemas de citas, pedidos e inventario".
-En el centro, un computador portátil y dos celulares con las capturas adjuntas en las pantallas.
-Tres líneas cortas, cada una con un pequeño punto verde azulado #0ea5a5 al inicio: "Pruébala funcionando antes de contratar", "Todo queda a tu nombre", "Te atendemos por WhatsApp".
-Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
-Abajo a la izquierda, junto al cuadrado: "Escanea y mira la demo de tu negocio" y debajo "axchisan.com".
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### V02 · Volante, reverso (sirve para todos)
-
-**Adjunta:** `logo-claro.png`  
-**Formato:** Vertical media carta, 14 × 21,6 cm  
-**Guardar como:** `V02.png`
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea el reverso de un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-Pieza clara: fondo #f3f6f9 hasta los bordes, texto #0f1720, márgenes internos amplios. Arriba, el logo adjunto "logo-claro" pequeño.
-Titular: "¿Qué tipo de negocio tienes?".
-Una cuadrícula de 12 recuadros iguales, cada uno con un ícono lineal simple en verde azulado #0ea5a5 y su nombre debajo: Restaurante, Veterinaria, Peluquería, Consultorio, Ferretería, Tienda de ropa, Inmobiliaria, Gimnasio, Panadería, Abogados, Hotel, Café.
-Abajo: "Para cada uno hay una demo funcionando en axchisan.com. Averigua cuánto cuesta la tuya en la web." Y en una línea aparte: "WhatsApp +57 318 303 8190".
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### V03 · Volante: Veterinarias
-
-**Adjunta:** `logo.png`, `veterinarias-celular.png`, `veterinarias-computador.png`  
-**Formato:** Vertical media carta, 14 × 21,6 cm  
-**Guardar como:** `V03.png`  
-**Lleva QR:** `volante-veterinarias`
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-El fondo casi negro #0b0f14 llega hasta los bordes. Márgenes internos amplios.
-Arriba, el logo. Titular grande en blanco: "Citas, vacunas y recordatorios, sin cuaderno". Subtítulo en gris claro: "Tus clientes agendan desde el celular y tú ves la agenda del día.".
-En el centro, un celular y un computador portátil con las capturas adjuntas "veterinarias-celular" y "veterinarias-computador" en las pantallas.
-Debajo: "Mira cómo se vería la página de tu veterinaria. Es una demo real: tócala desde tu celular."
-Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
-Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### V04 · Volante: Peluquerías y barberías
-
-**Adjunta:** `logo.png`, `salones-y-barberias-celular.png`, `salones-y-barberias-computador.png`  
-**Formato:** Vertical media carta, 14 × 21,6 cm  
-**Guardar como:** `V04.png`  
-**Lleva QR:** `volante-salones-y-barberias`
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-El fondo casi negro #0b0f14 llega hasta los bordes. Márgenes internos amplios.
-Arriba, el logo. Titular grande en blanco: "Que te reserven a las 11 de la noche, sin contestar". Subtítulo en gris claro: "Reservas en línea con el profesional y la hora que quieren.".
-En el centro, un celular y un computador portátil con las capturas adjuntas "salones-y-barberias-celular" y "salones-y-barberias-computador" en las pantallas.
-Debajo: "Mira cómo se vería la página de tu peluquería. Es una demo real: tócala desde tu celular."
-Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
-Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### V05 · Volante: Panaderías
-
-**Adjunta:** `logo.png`, `panaderias-y-cafeterias-celular.png`, `panaderias-y-cafeterias-computador.png`  
-**Formato:** Vertical media carta, 14 × 21,6 cm  
-**Guardar como:** `V05.png`  
-**Lleva QR:** `volante-panaderias-y-cafeterias`
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-El fondo casi negro #0b0f14 llega hasta los bordes. Márgenes internos amplios.
-Arriba, el logo. Titular grande en blanco: "Que sepan a qué hora sale el pan caliente". Subtítulo en gris claro: "Pedidos para recoger y tortas por encargo.".
-En el centro, un celular y un computador portátil con las capturas adjuntas "panaderias-y-cafeterias-celular" y "panaderias-y-cafeterias-computador" en las pantallas.
-Debajo: "Mira cómo se vería la página de tu panadería. Es una demo real: tócala desde tu celular."
-Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
-Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### V06 · Volante: Abogados y contadores
-
-**Adjunta:** `logo.png`, `abogados-y-contadores-celular.png`, `abogados-y-contadores-computador.png`  
-**Formato:** Vertical media carta, 14 × 21,6 cm  
-**Guardar como:** `V06.png`  
-**Lleva QR:** `volante-abogados-y-contadores`
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-El fondo casi negro #0b0f14 llega hasta los bordes. Márgenes internos amplios.
-Arriba, el logo. Titular grande en blanco: "Clientes que llegan con los documentos listos". Subtítulo en gris claro: "Una página que da confianza antes de la primera llamada.".
-En el centro, un celular y un computador portátil con las capturas adjuntas "abogados-y-contadores-celular" y "abogados-y-contadores-computador" en las pantallas.
-Debajo: "Mira cómo se vería la página de tu oficina. Es una demo real: tócala desde tu celular."
-Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
-Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### V07 · Volante: Programa de puntos
-
-**Adjunta:** `logo.png`, `programa-de-puntos-celular.png`, `programa-de-puntos-computador.png`  
-**Formato:** Vertical media carta, 14 × 21,6 cm  
-**Guardar como:** `V07.png`  
-**Lleva QR:** `volante-programa-de-puntos`
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-El fondo casi negro #0b0f14 llega hasta los bordes. Márgenes internos amplios.
-Arriba, el logo. Titular grande en blanco: "Que tus clientes vuelvan por el café gratis". Subtítulo en gris claro: "Puntos, sellos y cupones en el celular de tus clientes.".
-En el centro, un celular y un computador portátil con las capturas adjuntas "programa-de-puntos-celular" y "programa-de-puntos-computador" en las pantallas.
-Debajo: "Mira cómo se vería la página de tu negocio. Es una demo real: tócala desde tu celular."
-Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
-Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### V08 · Volante: Inmobiliarias
-
-**Adjunta:** `logo.png`, `inmobiliarias-celular.png`, `inmobiliarias-computador.png`  
-**Formato:** Vertical media carta, 14 × 21,6 cm  
-**Guardar como:** `V08.png`  
-**Lleva QR:** `volante-inmobiliarias`
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-El fondo casi negro #0b0f14 llega hasta los bordes. Márgenes internos amplios.
-Arriba, el logo. Titular grande en blanco: "Tus inmuebles con mapa, filtros y visitas agendadas". Subtítulo en gris claro: "Una página propia, sin depender solo de los portales.".
-En el centro, un celular y un computador portátil con las capturas adjuntas "inmobiliarias-celular" y "inmobiliarias-computador" en las pantallas.
-Debajo: "Mira cómo se vería la página de tu inmobiliaria. Es una demo real: tócala desde tu celular."
-Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
-Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### V09 · Volante: Gimnasios
-
-**Adjunta:** `logo.png`, `gimnasios-y-estudios-celular.png`, `gimnasios-y-estudios-computador.png`  
-**Formato:** Vertical media carta, 14 × 21,6 cm  
-**Guardar como:** `V09.png`  
-**Lleva QR:** `volante-gimnasios-y-estudios`
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-El fondo casi negro #0b0f14 llega hasta los bordes. Márgenes internos amplios.
-Arriba, el logo. Titular grande en blanco: "Clases con cupo y membresías que avisan antes de vencer". Subtítulo en gris claro: "Tus socios reservan su puesto desde el celular.".
-En el centro, un celular y un computador portátil con las capturas adjuntas "gimnasios-y-estudios-celular" y "gimnasios-y-estudios-computador" en las pantallas.
-Debajo: "Mira cómo se vería la página de tu gimnasio. Es una demo real: tócala desde tu celular."
-Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
-Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### V10 · Volante: Consultorios
-
-**Adjunta:** `logo.png`, `consultorios-odontologicos-celular.png`, `consultorios-odontologicos-computador.png`  
-**Formato:** Vertical media carta, 14 × 21,6 cm  
-**Guardar como:** `V10.png`  
-**Lleva QR:** `volante-consultorios-odontologicos`
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-El fondo casi negro #0b0f14 llega hasta los bordes. Márgenes internos amplios.
-Arriba, el logo. Titular grande en blanco: "Tus pacientes agendan solos desde el celular". Subtítulo en gris claro: "Agenda, odontograma y presupuestos en un solo lugar.".
-En el centro, un celular y un computador portátil con las capturas adjuntas "consultorios-odontologicos-celular" y "consultorios-odontologicos-computador" en las pantallas.
-Debajo: "Mira cómo se vería la página de tu consultorio. Es una demo real: tócala desde tu celular."
-Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
-Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### V11 · Volante: Tiendas de ropa
-
-**Adjunta:** `logo.png`, `tiendas-de-ropa-celular.png`, `tiendas-de-ropa-computador.png`  
-**Formato:** Vertical media carta, 14 × 21,6 cm  
-**Guardar como:** `V11.png`  
-**Lleva QR:** `volante-tiendas-de-ropa`
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-El fondo casi negro #0b0f14 llega hasta los bordes. Márgenes internos amplios.
-Arriba, el logo. Titular grande en blanco: "Vende tallas y colores con PSE y Nequi". Subtítulo en gris claro: "Tu colección en línea, con inventario por talla.".
-En el centro, un celular y un computador portátil con las capturas adjuntas "tiendas-de-ropa-celular" y "tiendas-de-ropa-computador" en las pantallas.
-Debajo: "Mira cómo se vería la página de tu tienda de ropa. Es una demo real: tócala desde tu celular."
-Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
-Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### V12 · Volante: Ferreterías y comercios
-
-**Adjunta:** `logo.png`, `inventario-y-ventas-celular.png`, `inventario-y-ventas-computador.png`  
-**Formato:** Vertical media carta, 14 × 21,6 cm  
-**Guardar como:** `V12.png`  
-**Lleva QR:** `volante-inventario-y-ventas`
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-El fondo casi negro #0b0f14 llega hasta los bordes. Márgenes internos amplios.
-Arriba, el logo. Titular grande en blanco: "¿Cuánto te queda en bodega? Míralo en un segundo". Subtítulo en gris claro: "Inventario, caja y reportes para Excel.".
-En el centro, un celular y un computador portátil con las capturas adjuntas "inventario-y-ventas-celular" y "inventario-y-ventas-computador" en las pantallas.
-Debajo: "Mira cómo se vería la página de tu negocio. Es una demo real: tócala desde tu celular."
-Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
-Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### V13 · Volante: Restaurantes
-
-**Adjunta:** `logo.png`, `restaurantes-celular.png`, `restaurantes-computador.png`  
-**Formato:** Vertical media carta, 14 × 21,6 cm  
-**Guardar como:** `V13.png`  
-**Lleva QR:** `volante-restaurantes`
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-El fondo casi negro #0b0f14 llega hasta los bordes. Márgenes internos amplios.
-Arriba, el logo. Titular grande en blanco: "¿Tus pedidos llegan por WhatsApp y se pierden?". Subtítulo en gris claro: "Carta con QR, pedidos a domicilio y pantalla de cocina.".
-En el centro, un celular y un computador portátil con las capturas adjuntas "restaurantes-celular" y "restaurantes-computador" en las pantallas.
-Debajo: "Mira cómo se vería la página de tu restaurante. Es una demo real: tócala desde tu celular."
-Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
-Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### V14 · Volante: Hoteles
-
-**Adjunta:** `logo.png`, `hoteles-y-turismo-celular.png`, `hoteles-y-turismo-computador.png`  
-**Formato:** Vertical media carta, 14 × 21,6 cm  
-**Guardar como:** `V14.png`  
-**Lleva QR:** `volante-hoteles-y-turismo`
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-El fondo casi negro #0b0f14 llega hasta los bordes. Márgenes internos amplios.
-Arriba, el logo. Titular grande en blanco: "Que recorran tu hotel antes de reservar". Subtítulo en gris claro: "Una página con video que avanza con el scroll.".
-En el centro, un celular y un computador portátil con las capturas adjuntas "hoteles-y-turismo-celular" y "hoteles-y-turismo-computador" en las pantallas.
-Debajo: "Mira cómo se vería la página de tu hotel. Es una demo real: tócala desde tu celular."
-Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
-Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### V15 · Volante: Cosméticos
-
-**Adjunta:** `logo.png`, `tiendas-de-cosmeticos-celular.png`, `tiendas-de-cosmeticos-computador.png`  
-**Formato:** Vertical media carta, 14 × 21,6 cm  
-**Guardar como:** `V15.png`  
-**Lleva QR:** `volante-tiendas-de-cosmeticos`
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-El fondo casi negro #0b0f14 llega hasta los bordes. Márgenes internos amplios.
-Arriba, el logo. Titular grande en blanco: "Tu tienda de cosméticos, vendiendo por internet". Subtítulo en gris claro: "Catálogo, carrito y pagos en línea.".
-En el centro, un celular y un computador portátil con las capturas adjuntas "tiendas-de-cosmeticos-celular" y "tiendas-de-cosmeticos-computador" en las pantallas.
-Debajo: "Mira cómo se vería la página de tu tienda. Es una demo real: tócala desde tu celular."
-Abajo a la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que mida un cuarto del ancho del volante.
-Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-## Tarjetas
-
-9 × 5 cm, el tamaño usual en Colombia. T02 es el reverso de todas. Llevan QR.
-
-### T01 · Tarjeta de presentación, cara
-
-**Adjunta:** `logo.png`  
-**Formato:** Horizontal 9 × 5 cm  
-**Guardar como:** `T01.png`
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea la cara de una tarjeta de presentación horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios. Centrado: el logo grande. Debajo, en gris claro y letra pequeña: "Páginas web, tiendas y sistemas para tu negocio". Nada más.
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### T02 · Tarjeta de presentación, reverso con tus datos
-
-**Adjunta:** `logo-claro.png`  
-**Formato:** Horizontal 9 × 5 cm  
-**Guardar como:** `T02.png`  
-**Lleva QR:** `tarjeta-general`
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea el reverso de una tarjeta de presentación horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-Pieza clara: fondo #f3f6f9 hasta los bordes, texto #0f1720, márgenes internos amplios.
-A la izquierda, en cuatro líneas: "Duvan Yair Arciniegas", "Axchi" en verde azulado #0b7c7c, "WhatsApp +57 318 303 8190", "contacto@axchisan.com".
-A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Del alto de las cuatro líneas de texto.
-Debajo del cuadrado, en letra pequeña: "Mira las demos".
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### T03 · Tarjeta para dejar en: Veterinarias
-
-**Adjunta:** `logo.png`  
-**Formato:** Horizontal 9 × 5 cm  
-**Guardar como:** `T03.png`  
-**Lleva QR:** `tarjeta-veterinarias`
-
-Reverso: la T02.
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
-A la izquierda, en blanco y semibold, en dos o tres líneas: "Citas, vacunas y recordatorios, sin cuaderno". Debajo, en gris claro y pequeño: "Mira la demo de tu veterinaria en axchisan.com".
-A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
-Abajo a la izquierda, el logo pequeño.
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### T04 · Tarjeta para dejar en: Peluquerías y barberías
-
-**Adjunta:** `logo.png`  
-**Formato:** Horizontal 9 × 5 cm  
-**Guardar como:** `T04.png`  
-**Lleva QR:** `tarjeta-salones-y-barberias`
-
-Reverso: la T02.
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
-A la izquierda, en blanco y semibold, en dos o tres líneas: "Que te reserven a las 11 de la noche, sin contestar". Debajo, en gris claro y pequeño: "Mira la demo de tu peluquería en axchisan.com".
-A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
-Abajo a la izquierda, el logo pequeño.
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### T05 · Tarjeta para dejar en: Panaderías
-
-**Adjunta:** `logo.png`  
-**Formato:** Horizontal 9 × 5 cm  
-**Guardar como:** `T05.png`  
-**Lleva QR:** `tarjeta-panaderias-y-cafeterias`
-
-Reverso: la T02.
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
-A la izquierda, en blanco y semibold, en dos o tres líneas: "Que sepan a qué hora sale el pan caliente". Debajo, en gris claro y pequeño: "Mira la demo de tu panadería en axchisan.com".
-A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
-Abajo a la izquierda, el logo pequeño.
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### T06 · Tarjeta para dejar en: Abogados y contadores
-
-**Adjunta:** `logo.png`  
-**Formato:** Horizontal 9 × 5 cm  
-**Guardar como:** `T06.png`  
-**Lleva QR:** `tarjeta-abogados-y-contadores`
-
-Reverso: la T02.
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
-A la izquierda, en blanco y semibold, en dos o tres líneas: "Clientes que llegan con los documentos listos". Debajo, en gris claro y pequeño: "Mira la demo de tu oficina en axchisan.com".
-A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
-Abajo a la izquierda, el logo pequeño.
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### T07 · Tarjeta para dejar en: Programa de puntos
-
-**Adjunta:** `logo.png`  
-**Formato:** Horizontal 9 × 5 cm  
-**Guardar como:** `T07.png`  
-**Lleva QR:** `tarjeta-programa-de-puntos`
-
-Reverso: la T02.
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
-A la izquierda, en blanco y semibold, en dos o tres líneas: "Que tus clientes vuelvan por el café gratis". Debajo, en gris claro y pequeño: "Mira la demo de tu negocio en axchisan.com".
-A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
-Abajo a la izquierda, el logo pequeño.
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### T08 · Tarjeta para dejar en: Inmobiliarias
-
-**Adjunta:** `logo.png`  
-**Formato:** Horizontal 9 × 5 cm  
-**Guardar como:** `T08.png`  
-**Lleva QR:** `tarjeta-inmobiliarias`
-
-Reverso: la T02.
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
-A la izquierda, en blanco y semibold, en dos o tres líneas: "Tus inmuebles con mapa, filtros y visitas agendadas". Debajo, en gris claro y pequeño: "Mira la demo de tu inmobiliaria en axchisan.com".
-A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
-Abajo a la izquierda, el logo pequeño.
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### T09 · Tarjeta para dejar en: Gimnasios
-
-**Adjunta:** `logo.png`  
-**Formato:** Horizontal 9 × 5 cm  
-**Guardar como:** `T09.png`  
-**Lleva QR:** `tarjeta-gimnasios-y-estudios`
-
-Reverso: la T02.
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
-A la izquierda, en blanco y semibold, en dos o tres líneas: "Clases con cupo y membresías que avisan antes de vencer". Debajo, en gris claro y pequeño: "Mira la demo de tu gimnasio en axchisan.com".
-A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
-Abajo a la izquierda, el logo pequeño.
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### T10 · Tarjeta para dejar en: Consultorios
-
-**Adjunta:** `logo.png`  
-**Formato:** Horizontal 9 × 5 cm  
-**Guardar como:** `T10.png`  
-**Lleva QR:** `tarjeta-consultorios-odontologicos`
-
-Reverso: la T02.
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
-A la izquierda, en blanco y semibold, en dos o tres líneas: "Tus pacientes agendan solos desde el celular". Debajo, en gris claro y pequeño: "Mira la demo de tu consultorio en axchisan.com".
-A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
-Abajo a la izquierda, el logo pequeño.
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### T11 · Tarjeta para dejar en: Tiendas de ropa
-
-**Adjunta:** `logo.png`  
-**Formato:** Horizontal 9 × 5 cm  
-**Guardar como:** `T11.png`  
-**Lleva QR:** `tarjeta-tiendas-de-ropa`
-
-Reverso: la T02.
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
-A la izquierda, en blanco y semibold, en dos o tres líneas: "Vende tallas y colores con PSE y Nequi". Debajo, en gris claro y pequeño: "Mira la demo de tu tienda de ropa en axchisan.com".
-A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
-Abajo a la izquierda, el logo pequeño.
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### T12 · Tarjeta para dejar en: Ferreterías y comercios
-
-**Adjunta:** `logo.png`  
-**Formato:** Horizontal 9 × 5 cm  
-**Guardar como:** `T12.png`  
-**Lleva QR:** `tarjeta-inventario-y-ventas`
-
-Reverso: la T02.
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
-A la izquierda, en blanco y semibold, en dos o tres líneas: "¿Cuánto te queda en bodega? Míralo en un segundo". Debajo, en gris claro y pequeño: "Mira la demo de tu negocio en axchisan.com".
-A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
-Abajo a la izquierda, el logo pequeño.
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### T13 · Tarjeta para dejar en: Restaurantes
-
-**Adjunta:** `logo.png`  
-**Formato:** Horizontal 9 × 5 cm  
-**Guardar como:** `T13.png`  
-**Lleva QR:** `tarjeta-restaurantes`
-
-Reverso: la T02.
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
-A la izquierda, en blanco y semibold, en dos o tres líneas: "¿Tus pedidos llegan por WhatsApp y se pierden?". Debajo, en gris claro y pequeño: "Mira la demo de tu restaurante en axchisan.com".
-A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
-Abajo a la izquierda, el logo pequeño.
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### T14 · Tarjeta para dejar en: Hoteles
-
-**Adjunta:** `logo.png`  
-**Formato:** Horizontal 9 × 5 cm  
-**Guardar como:** `T14.png`  
-**Lleva QR:** `tarjeta-hoteles-y-turismo`
-
-Reverso: la T02.
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
-A la izquierda, en blanco y semibold, en dos o tres líneas: "Que recorran tu hotel antes de reservar". Debajo, en gris claro y pequeño: "Mira la demo de tu hotel en axchisan.com".
-A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
-Abajo a la izquierda, el logo pequeño.
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
-### T15 · Tarjeta para dejar en: Cosméticos
-
-**Adjunta:** `logo.png`  
-**Formato:** Horizontal 9 × 5 cm  
-**Guardar como:** `T15.png`  
-**Lleva QR:** `tarjeta-tiendas-de-cosmeticos`
-
-Reverso: la T02.
-
-```text
-Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
-Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
-Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
-Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
-Tipografía: sans serif geométrica moderna, estilo Instrument Sans, títulos semibold. Sin letras decorativas, cursivas ni sombras.
-Estilo: sobrio, limpio y actual, con mucho espacio libre. Sin brillos, sin degradados de colores, sin íconos 3D, sin cohetes, bombillos ni robots.
-Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No agregues ningún otro texto, número ni precio.
-Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
-A la izquierda, en blanco y semibold, en dos o tres líneas: "Tu tienda de cosméticos, vendiendo por internet". Debajo, en gris claro y pequeño: "Mira la demo de tu tienda en axchisan.com".
-A la derecha, un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después. Que ocupe casi todo el alto de la tarjeta.
-Abajo a la izquierda, el logo pequeño.
-Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código.
-```
-
 ## Fotos de la oficina
 
 Una serie de fotos consistente: siempre el mismo escritorio blanco, el MacBook Air medianoche, el pothos y la taza. **Haz primero la O01**; todas las demás la usan de referencia para que parezcan de la misma sesión.
@@ -1282,7 +564,7 @@ Son imágenes generadas: úsalas en redes, en la web y en publicaciones. Para la
 **Formato:** Horizontal 3:2  
 **Guardar como:** `O01.png`
 
-Genera varias y quédate con la mejor. **Guárdala también como `docs/publicidad/adjuntos/oficina-base.png`**: es la referencia de todas las demás fotos de la oficina.
+Genera varias y quédate con la mejor. **Guárdala también como `docs/publicidad/adjuntos/oficina-base.jpg`**: es la referencia de todas las demás fotos de la oficina.
 
 ```text
 Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones.
@@ -1297,7 +579,7 @@ Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de códig
 
 ### O02 · Oficina desde arriba
 
-**Adjunta:** `oficina-base.png`, `restaurantes-computador.png`  
+**Adjunta:** `oficina-base.jpg`, `restaurantes-computador.png`  
 **Formato:** Cuadrada 1:1  
 **Guardar como:** `O02.png`
 
@@ -1314,7 +596,7 @@ Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de códig
 
 ### O03 · Primer plano de la pantalla
 
-**Adjunta:** `oficina-base.png`, `programa-de-puntos-computador.png`  
+**Adjunta:** `oficina-base.jpg`, `programa-de-puntos-computador.png`  
 **Formato:** Vertical 4:5  
 **Guardar como:** `O03.png`
 
@@ -1331,7 +613,7 @@ Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de códig
 
 ### O04 · Oficina para historias, con espacio para texto
 
-**Adjunta:** `oficina-base.png`, `pantalla-axchisan.png`  
+**Adjunta:** `oficina-base.jpg`, `pantalla-axchisan.png`  
 **Formato:** Vertical 9:16  
 **Guardar como:** `O04.png`
 
@@ -1348,7 +630,7 @@ Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de códig
 
 ### O05 · Programando
 
-**Adjunta:** `oficina-base.png`  
+**Adjunta:** `oficina-base.jpg`  
 **Formato:** Horizontal 3:2  
 **Guardar como:** `O05.png`
 
@@ -1365,7 +647,7 @@ Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de códig
 
 ### O06 · El Mac y un celular con una demo
 
-**Adjunta:** `oficina-base.png`, `salones-y-barberias-computador.png`, `salones-y-barberias-celular.png`  
+**Adjunta:** `oficina-base.jpg`, `salones-y-barberias-computador.png`, `salones-y-barberias-celular.png`  
 **Formato:** Vertical 4:5  
 **Guardar como:** `O06.png`
 
@@ -1382,7 +664,7 @@ Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de códig
 
 ### O07 · Panorámica para portadas, con espacio a la izquierda
 
-**Adjunta:** `oficina-base.png`, `pantalla-axchisan.png`  
+**Adjunta:** `oficina-base.jpg`, `pantalla-axchisan.png`  
 **Formato:** Horizontal 16:9  
 **Guardar como:** `O07.png`
 
@@ -1399,7 +681,7 @@ Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de códig
 
 ### O08 · La misma oficina al atardecer
 
-**Adjunta:** `oficina-base.png`, `hoteles-y-turismo-computador.png`  
+**Adjunta:** `oficina-base.jpg`, `hoteles-y-turismo-computador.png`  
 **Formato:** Horizontal 3:2  
 **Guardar como:** `O08.png`
 
@@ -1416,7 +698,7 @@ Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de códig
 
 ### O09 · Manos en el teclado
 
-**Adjunta:** `oficina-base.png`, `inventario-y-ventas-computador.png`  
+**Adjunta:** `oficina-base.jpg`, `inventario-y-ventas-computador.png`  
 **Formato:** Vertical 4:5  
 **Guardar como:** `O09.png`
 
@@ -1433,7 +715,7 @@ Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de códig
 
 ### O10 · Detalle de la planta y la taza
 
-**Adjunta:** `oficina-base.png`  
+**Adjunta:** `oficina-base.jpg`  
 **Formato:** Cuadrada 1:1  
 **Guardar como:** `O10.png`
 

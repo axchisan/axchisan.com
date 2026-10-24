@@ -3,7 +3,6 @@
  *
  *   docs/publicidad/adjuntos/        las imágenes que se suben a Gemini, listas y con nombres simples
  *   docs/publicidad/prompts-gemini.md  un prompt completo por pieza: copiar, pegar, descargar
- *   docs/publicidad/piezas.json      qué QR lleva cada pieza (lo usa scripts/pegar-qr.ts)
  *
  *   npx tsx scripts/publicidad.ts
  *
@@ -16,26 +15,11 @@ import sharp from "sharp"
 import { CARAS, FONDO_MARCA, VIEWBOX } from "../components/site/logo-geometria"
 import { SOLUCIONES } from "../lib/catalogo/soluciones"
 import { PROFILE, WHATSAPP } from "../lib/site"
+import { SECTORES } from "./publicidad-sectores"
 
 const DOCS = "docs/publicidad"
 const ADJ = `${DOCS}/adjuntos`
 
-/** Cómo se le habla a cada sector. Sin precios: la pieza lleva a la web. */
-const SECTORES: Record<string, { corto: string; tu: string; frase: string; apoyo: string }> = {
-  restaurantes: { corto: "Restaurantes", tu: "tu restaurante", frase: "¿Tus pedidos llegan por WhatsApp y se pierden?", apoyo: "Carta con QR, pedidos a domicilio y pantalla de cocina." },
-  veterinarias: { corto: "Veterinarias", tu: "tu veterinaria", frase: "Citas, vacunas y recordatorios, sin cuaderno", apoyo: "Tus clientes agendan desde el celular y tú ves la agenda del día." },
-  "salones-y-barberias": { corto: "Peluquerías y barberías", tu: "tu peluquería", frase: "Que te reserven a las 11 de la noche, sin contestar", apoyo: "Reservas en línea con el profesional y la hora que quieren." },
-  "consultorios-odontologicos": { corto: "Consultorios", tu: "tu consultorio", frase: "Tus pacientes agendan solos desde el celular", apoyo: "Agenda, odontograma y presupuestos en un solo lugar." },
-  "inventario-y-ventas": { corto: "Ferreterías y comercios", tu: "tu negocio", frase: "¿Cuánto te queda en bodega? Míralo en un segundo", apoyo: "Inventario, caja y reportes para Excel." },
-  "tiendas-de-ropa": { corto: "Tiendas de ropa", tu: "tu tienda de ropa", frase: "Vende tallas y colores con PSE y Nequi", apoyo: "Tu colección en línea, con inventario por talla." },
-  inmobiliarias: { corto: "Inmobiliarias", tu: "tu inmobiliaria", frase: "Tus inmuebles con mapa, filtros y visitas agendadas", apoyo: "Una página propia, sin depender solo de los portales." },
-  "gimnasios-y-estudios": { corto: "Gimnasios", tu: "tu gimnasio", frase: "Clases con cupo y membresías que avisan antes de vencer", apoyo: "Tus socios reservan su puesto desde el celular." },
-  "panaderias-y-cafeterias": { corto: "Panaderías", tu: "tu panadería", frase: "Que sepan a qué hora sale el pan caliente", apoyo: "Pedidos para recoger y tortas por encargo." },
-  "abogados-y-contadores": { corto: "Abogados y contadores", tu: "tu oficina", frase: "Clientes que llegan con los documentos listos", apoyo: "Una página que da confianza antes de la primera llamada." },
-  "hoteles-y-turismo": { corto: "Hoteles", tu: "tu hotel", frase: "Que recorran tu hotel antes de reservar", apoyo: "Una página con video que avanza con el scroll." },
-  "programa-de-puntos": { corto: "Programa de puntos", tu: "tu negocio", frase: "Que tus clientes vuelvan por el café gratis", apoyo: "Puntos, sellos y cupones en el celular de tus clientes." },
-  "tiendas-de-cosmeticos": { corto: "Cosméticos", tu: "tu tienda", frase: "Tu tienda de cosméticos, vendiendo por internet", apoyo: "Catálogo, carrito y pagos en línea." },
-}
 
 const MARCA = `Marca: Axchi, estudio que hace páginas web, tiendas en línea y sistemas para negocios pequeños en Colombia. El logo está en la imagen adjunta "logo": úsalo tal cual, sin redibujarlo ni cambiarle los colores.
 Colores: fondo casi negro #0b0f14, texto blanco, acento verde azulado #0ea5a5, gris claro #9aa7b5 para textos secundarios. En piezas claras: fondo #f3f6f9 y texto #0f1720.
@@ -51,9 +35,8 @@ Texto: español de Colombia, escrito exactamente como lo indico, con tildes. No 
 const INICIO = "Genera una imagen. Tu respuesta debe ser únicamente la imagen generada: no escribas código, HTML, CSS ni explicaciones."
 const CIERRE = "Recuerda: entrega solo la imagen terminada, lista para descargar. Nada de código."
 
-const QR = `un cuadrado blanco puro (#FFFFFF), liso y completamente vacío, con un borde fino gris oscuro. No dibujes nada dentro: ahí se pegará un código QR después`
 
-type Pieza = { id: string; titulo: string; adjuntos: string[]; formato: string; prompt: string; qr?: string; guia?: string }
+type Pieza = { id: string; titulo: string; adjuntos: string[]; formato: string; prompt: string; guia?: string }
 
 const piezas: { seccion: string; intro: string; items: Pieza[] }[] = []
 
@@ -223,102 +206,6 @@ Fondo casi negro #0b0f14. A la derecha, un computador portátil con la captura a
   ]
 }
 
-function volantes(): Pieza[] {
-  const lista: Pieza[] = [
-    {
-      id: "V01",
-      titulo: "Volante general, cara",
-      adjuntos: ["logo.png", "restaurantes-computador.png", "veterinarias-celular.png", "gimnasios-y-estudios-celular.png"],
-      formato: "Vertical media carta, 14 × 21,6 cm",
-      qr: "volante-general",
-      prompt: `Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
-${MARCA}
-El fondo casi negro #0b0f14 llega hasta los bordes. Márgenes internos amplios: ningún texto cerca del borde.
-Arriba, el logo. Titular grande en blanco: "Tu negocio merece una página que venda". Subtítulo en gris claro: "Páginas web, tiendas en línea y sistemas de citas, pedidos e inventario".
-En el centro, un computador portátil y dos celulares con las capturas adjuntas en las pantallas.
-Tres líneas cortas, cada una con un pequeño punto verde azulado #0ea5a5 al inicio: "Pruébala funcionando antes de contratar", "Todo queda a tu nombre", "Te atendemos por WhatsApp".
-Abajo a la derecha, ${QR}. Que mida un cuarto del ancho del volante.
-Abajo a la izquierda, junto al cuadrado: "Escanea y mira la demo de tu negocio" y debajo "axchisan.com".`,
-    },
-    {
-      id: "V02",
-      titulo: "Volante, reverso (sirve para todos)",
-      adjuntos: ["logo-claro.png"],
-      formato: "Vertical media carta, 14 × 21,6 cm",
-      prompt: `Crea el reverso de un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
-${MARCA}
-Pieza clara: fondo #f3f6f9 hasta los bordes, texto #0f1720, márgenes internos amplios. Arriba, el logo adjunto "logo-claro" pequeño.
-Titular: "¿Qué tipo de negocio tienes?".
-Una cuadrícula de 12 recuadros iguales, cada uno con un ícono lineal simple en verde azulado #0ea5a5 y su nombre debajo: Restaurante, Veterinaria, Peluquería, Consultorio, Ferretería, Tienda de ropa, Inmobiliaria, Gimnasio, Panadería, Abogados, Hotel, Café.
-Abajo: "Para cada uno hay una demo funcionando en axchisan.com. Averigua cuánto cuesta la tuya en la web." Y en una línea aparte: "WhatsApp ${WHATSAPP.visible}".`,
-    },
-  ]
-  orden.forEach((slug, i) => {
-    const x = SECTORES[slug]
-    lista.push({
-      id: `V${n(i + 3)}`,
-      titulo: `Volante: ${x.corto}`,
-      adjuntos: ["logo.png", `${slug}-celular.png`, `${slug}-computador.png`],
-      formato: "Vertical media carta, 14 × 21,6 cm",
-      qr: `volante-${slug}`,
-      prompt: `Crea un volante vertical para imprimir en media carta (14 x 21,6 cm), proporción 1:1,54, a la máxima resolución.
-${MARCA}
-El fondo casi negro #0b0f14 llega hasta los bordes. Márgenes internos amplios.
-Arriba, el logo. Titular grande en blanco: "${x.frase}". Subtítulo en gris claro: "${x.apoyo}".
-En el centro, un celular y un computador portátil con las capturas adjuntas "${slug}-celular" y "${slug}-computador" en las pantallas.
-Debajo: "Mira cómo se vería la página de ${x.tu}. Es una demo real: tócala desde tu celular."
-Abajo a la derecha, ${QR}. Que mida un cuarto del ancho del volante.
-Junto al cuadrado: "Escanea y pruébala" y "axchisan.com".`,
-    })
-  })
-  return lista
-}
-
-function tarjetas(): Pieza[] {
-  const lista: Pieza[] = [
-    {
-      id: "T01",
-      titulo: "Tarjeta de presentación, cara",
-      adjuntos: ["logo.png"],
-      formato: "Horizontal 9 × 5 cm",
-      prompt: `Crea la cara de una tarjeta de presentación horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución.
-${MARCA}
-Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios. Centrado: el logo grande. Debajo, en gris claro y letra pequeña: "Páginas web, tiendas y sistemas para tu negocio". Nada más.`,
-    },
-    {
-      id: "T02",
-      titulo: "Tarjeta de presentación, reverso con tus datos",
-      adjuntos: ["logo-claro.png"],
-      formato: "Horizontal 9 × 5 cm",
-      qr: "tarjeta-general",
-      prompt: `Crea el reverso de una tarjeta de presentación horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución.
-${MARCA}
-Pieza clara: fondo #f3f6f9 hasta los bordes, texto #0f1720, márgenes internos amplios.
-A la izquierda, en cuatro líneas: "${PROFILE.name}", "Axchi" en verde azulado #0b7c7c, "WhatsApp ${WHATSAPP.visible}", "${PROFILE.email}".
-A la derecha, ${QR}. Del alto de las cuatro líneas de texto.
-Debajo del cuadrado, en letra pequeña: "Mira las demos".`,
-    },
-  ]
-  orden.forEach((slug, i) => {
-    const x = SECTORES[slug]
-    lista.push({
-      id: `T${n(i + 3)}`,
-      titulo: `Tarjeta para dejar en: ${x.corto}`,
-      adjuntos: ["logo.png"],
-      formato: "Horizontal 9 × 5 cm",
-      qr: `tarjeta-${slug}`,
-      prompt: `Crea una tarjeta horizontal de 9 x 5 cm, proporción 9:5, a la máxima resolución, para dejar en el mostrador de un negocio.
-${MARCA}
-Fondo casi negro #0b0f14 hasta los bordes, márgenes internos amplios.
-A la izquierda, en blanco y semibold, en dos o tres líneas: "${x.frase}". Debajo, en gris claro y pequeño: "Mira la demo de ${x.tu} en axchisan.com".
-A la derecha, ${QR}. Que ocupe casi todo el alto de la tarjeta.
-Abajo a la izquierda, el logo pequeño.`,
-      guia: "Reverso: la T02.",
-    })
-  })
-  return lista
-}
-
 // ─── Fotos de la oficina ─────────────────────────────────────────────────
 
 const ESCENA = `Fotografía realista de estilo editorial minimalista, como tomada con cámara profesional; no parece render 3D ni ilustración.
@@ -338,12 +225,12 @@ function oficina(): Pieza[] {
       prompt: `${ESCENA}
 En la pantalla del MacBook se ve la captura adjunta "pantalla-axchisan", nítida y sin reflejos fuertes.
 Cámara a la altura del escritorio, ligeramente de frente, el computador un poco a la derecha del centro. Profundidad de campo suave. Formato horizontal 3:2, máxima resolución.`,
-      guia: "Genera varias y quédate con la mejor. **Guárdala también como `docs/publicidad/adjuntos/oficina-base.png`**: es la referencia de todas las demás fotos de la oficina.",
+      guia: "Genera varias y quédate con la mejor. **Guárdala también como `docs/publicidad/adjuntos/oficina-base.jpg`**: es la referencia de todas las demás fotos de la oficina.",
     },
     {
       id: "O02",
       titulo: "Oficina desde arriba",
-      adjuntos: ["oficina-base.png", "restaurantes-computador.png"],
+      adjuntos: ["oficina-base.jpg", "restaurantes-computador.png"],
       formato: "Cuadrada 1:1",
       prompt: `${MISMA}
 ${ESCENA}
@@ -352,7 +239,7 @@ Cambia solo el ángulo: vista cenital, desde arriba, con el MacBook abierto en e
     {
       id: "O03",
       titulo: "Primer plano de la pantalla",
-      adjuntos: ["oficina-base.png", "programa-de-puntos-computador.png"],
+      adjuntos: ["oficina-base.jpg", "programa-de-puntos-computador.png"],
       formato: "Vertical 4:5",
       prompt: `${MISMA}
 ${ESCENA}
@@ -361,7 +248,7 @@ Cambia solo el encuadre: primer plano del MacBook, con la pantalla ocupando buen
     {
       id: "O04",
       titulo: "Oficina para historias, con espacio para texto",
-      adjuntos: ["oficina-base.png", "pantalla-axchisan.png"],
+      adjuntos: ["oficina-base.jpg", "pantalla-axchisan.png"],
       formato: "Vertical 9:16",
       prompt: `${MISMA}
 ${ESCENA}
@@ -370,7 +257,7 @@ Cambia solo el formato: vertical 9:16. El escritorio ocupa el tercio inferior; l
     {
       id: "O05",
       titulo: "Programando",
-      adjuntos: ["oficina-base.png"],
+      adjuntos: ["oficina-base.jpg"],
       formato: "Horizontal 3:2",
       prompt: `${MISMA}
 ${ESCENA}
@@ -379,7 +266,7 @@ Cambia solo la pantalla: un editor de código de tema oscuro con líneas de cód
     {
       id: "O06",
       titulo: "El Mac y un celular con una demo",
-      adjuntos: ["oficina-base.png", "salones-y-barberias-computador.png", "salones-y-barberias-celular.png"],
+      adjuntos: ["oficina-base.jpg", "salones-y-barberias-computador.png", "salones-y-barberias-celular.png"],
       formato: "Vertical 4:5",
       prompt: `${MISMA}
 ${ESCENA}
@@ -388,7 +275,7 @@ Agrega solo un objeto: un celular negro sin marca, acostado sobre el escritorio 
     {
       id: "O07",
       titulo: "Panorámica para portadas, con espacio a la izquierda",
-      adjuntos: ["oficina-base.png", "pantalla-axchisan.png"],
+      adjuntos: ["oficina-base.jpg", "pantalla-axchisan.png"],
       formato: "Horizontal 16:9",
       prompt: `${MISMA}
 ${ESCENA}
@@ -397,7 +284,7 @@ Cambia solo el formato: panorámica 16:9. El escritorio con el MacBook, la plant
     {
       id: "O08",
       titulo: "La misma oficina al atardecer",
-      adjuntos: ["oficina-base.png", "hoteles-y-turismo-computador.png"],
+      adjuntos: ["oficina-base.jpg", "hoteles-y-turismo-computador.png"],
       formato: "Horizontal 3:2",
       prompt: `${MISMA}
 ${ESCENA}
@@ -406,7 +293,7 @@ Cambia solo la luz: atardecer, luz cálida y dorada entrando por la ventana, som
     {
       id: "O09",
       titulo: "Manos en el teclado",
-      adjuntos: ["oficina-base.png", "inventario-y-ventas-computador.png"],
+      adjuntos: ["oficina-base.jpg", "inventario-y-ventas-computador.png"],
       formato: "Vertical 4:5",
       prompt: `${MISMA}
 ${ESCENA}
@@ -415,7 +302,7 @@ Agrega solo unas manos escribiendo en el teclado del MacBook, vistas de cerca de
     {
       id: "O10",
       titulo: "Detalle de la planta y la taza",
-      adjuntos: ["oficina-base.png"],
+      adjuntos: ["oficina-base.jpg"],
       formato: "Cuadrada 1:1",
       prompt: `${MISMA}
 ${ESCENA}
@@ -431,8 +318,6 @@ function documento() {
     { seccion: "Historias", intro: "Para Instagram, Facebook y estados de WhatsApp. No llevan QR: en Instagram se les pone el sticker de enlace.", items: historias() },
     { seccion: "Publicaciones", intro: "Para el feed de Instagram y Facebook. P02 a P07 son un carrusel: se publican juntas, en orden.", items: publicaciones() },
     { seccion: "Portada", intro: "Para el Perfil de Google, Facebook y LinkedIn.", items: portada() },
-    { seccion: "Volantes", intro: "Media carta para imprimir. V02 es el reverso de todos. Llevan QR.", items: volantes() },
-    { seccion: "Tarjetas", intro: "9 × 5 cm, el tamaño usual en Colombia. T02 es el reverso de todas. Llevan QR.", items: tarjetas() },
     {
       seccion: "Fotos de la oficina",
       intro:
@@ -453,9 +338,10 @@ Generado por \`npx tsx scripts/publicidad.ts\`: no se edita a mano.
 3. Sube los archivos de **Adjunta**, que están en \`docs/publicidad/adjuntos/\`.
 4. Copia el prompt completo y envíalo. Si responde con código, contesta \`No quiero código. Genera la imagen.\` Si el texto sale con un error: \`Corrige solo el texto: debe decir exactamente «…». No cambies nada más.\`
 5. Descarga la imagen y guárdala en \`docs/publicidad/generadas/\` con el nombre de **Guardar como** (basta el código: \`V03.png\`).
-6. Las que dicen **Lleva QR** salen con un cuadro blanco vacío: avísame y les pego el QR de su sector (\`npx tsx scripts/pegar-qr.ts\`). Quedan en \`docs/publicidad/listas/\`.
 
 Ninguna pieza muestra precios: todas llevan a la web a averiguarlo.
+
+Las tarjetas y los volantes **no** se hacen con Gemini: llevan texto exacto y un QR que tiene que escanearse, y salen listos para la imprenta de \`npx tsx scripts/impresos.ts\` (ver \`docs/publicidad/README.md\`).
 
 ${indice}
 `
@@ -465,7 +351,7 @@ ${indice}
       md += `\n### ${p.id} · ${p.titulo}\n\n`
       md += `**Adjunta:** ${p.adjuntos.map((a) => `\`${a}\``).join(", ")}  \n`
       md += `**Formato:** ${p.formato}  \n`
-      md += `**Guardar como:** \`${p.id}.png\`${p.qr ? `  \n**Lleva QR:** \`${p.qr}\`` : ""}\n`
+      md += `**Guardar como:** \`${p.id}.png\`\n`
       if (p.guia) md += `\n${p.guia}\n`
       md += `\n\`\`\`text\n${INICIO}\n${p.prompt}\n${CIERRE}\n\`\`\`\n`
     }
@@ -483,8 +369,6 @@ ${indice}
 Cada QR lleva su origen. En \`/admin\`, **Visitas por publicidad** muestra cuántas visitas trajo cada pieza (\`volante/restaurantes\`, \`tarjeta/general\`…). Si una no trae visitas en dos semanas, cambia la frase antes de imprimir más.
 `
   writeFileSync(`${DOCS}/prompts-gemini.md`, md)
-  const mapa = Object.fromEntries(piezas.flatMap((s) => s.items).filter((p) => p.qr).map((p) => [p.id, p.qr]))
-  writeFileSync(`${DOCS}/piezas.json`, JSON.stringify(mapa, null, 2) + "\n")
   return piezas.reduce((t, s) => t + s.items.length, 0)
 }
 
