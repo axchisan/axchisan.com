@@ -364,3 +364,63 @@ model Favorite {
   @@unique([userId, blogPostId])
   @@map("favorites")
 }
+
+/// Negocio que puede ser cliente de Axchi. Se llena desde la API de Google
+/// Places (scripts/prospectos-places.ts) y se trabaja en /admin/prospectos.
+/// Solo datos de contacto comerciales publicados por el propio negocio.
+model Prospecto {
+  id            String    @id @default(cuid())
+  /// Id del lugar en Google: evita duplicados al volver a buscar.
+  placeId       String?   @unique
+  nombre        String
+  categoria     String?
+  /// Ficha de Axchi que le corresponde, p. ej. "restaurantes".
+  ficha         String?
+  ciudad        String
+  /// Localidad o barrio en Bogotá; municipio fuera de ella.
+  zona          String?
+  direccion     String?
+  telefono      String?
+  web           String?
+  /// sin-pagina, solo-redes o con-pagina.
+  estadoWeb     String    @default("sin-pagina")
+  calificacion  Float?
+  resenas       Int       @default(0)
+  lat           Float?
+  lng           Float?
+  mapsUrl       String?
+  /// Distancia en km desde la base (el sur de Bogotá), para ordenar visitas.
+  distanciaKm   Float?
+  prioridad     String    @default("C")
+  puntaje       Int       @default(0)
+  fortalezas    String?
+  falta         String?
+  plan          String?
+  /// por-contactar, escrito, respondio, reunion, propuesta, cliente, descartado.
+  estado        String    @default("por-contactar")
+  proximo       DateTime?
+  notas         String?
+  /// De dónde salió: "places:restaurantes en Chapinero, Bogotá" o "maps-navegador".
+  fuente        String?
+  eventos       ProspectoEvento[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([estado, prioridad])
+  @@index([ciudad, zona])
+  @@map("prospectos")
+}
+
+/// Historial de cada prospecto: cambios de estado y notas de cada contacto.
+model ProspectoEvento {
+  id          String    @id @default(cuid())
+  prospecto   Prospecto @relation(fields: [prospectoId], references: [id], onDelete: Cascade)
+  prospectoId String
+  /// estado, nota, whatsapp, llamada o visita.
+  tipo        String
+  texto       String
+  createdAt   DateTime  @default(now())
+
+  @@index([prospectoId, createdAt])
+  @@map("prospecto_eventos")
+}

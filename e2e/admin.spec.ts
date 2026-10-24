@@ -200,6 +200,28 @@ test.describe("panel de administración", () => {
     }
   })
 
+  test("el CRM de prospectos filtra, cambia el estado y guarda el historial", async ({ page }) => {
+    await entrar(page)
+    await page.goto("/admin/prospectos")
+    await expect(page.getByRole("heading", { name: "Prospectos", level: 1 })).toBeVisible()
+    // La rama de pruebas tiene prospectos cargados con scripts/importar-prospectos.ts.
+    const primero = page.getByRole("list", { name: "Negocios" }).getByRole("button").first()
+    test.skip(!(await primero.isVisible().catch(() => false)), "La rama de pruebas no tiene prospectos")
+    await page.getByLabel("Prioridad").first().selectOption("A")
+    await expect(page.getByText(/ de \d+ negocios/)).toBeVisible()
+    await primero.click()
+    const ficha = page.getByRole("complementary")
+    const estadoAntes = await ficha.getByLabel("Estado").inputValue()
+    await ficha.getByLabel("Estado").selectOption("respondio")
+    await expect(ficha.getByText(/→ Respondió/)).toBeVisible()
+    await ficha.getByLabel("Qué pasó").fill(`${MARCA} prueba de historial`)
+    await ficha.getByRole("button", { name: "Anotar" }).click()
+    await expect(ficha.getByText(`${MARCA} prueba de historial`)).toBeVisible()
+    // Se deja como estaba.
+    await ficha.getByLabel("Estado").selectOption(estadoAntes)
+    await expect(ficha.getByText(new RegExp(`Respondió → `))).toBeVisible()
+  })
+
   test("cerrar sesión deja el panel inaccesible", async ({ page }) => {
     await entrar(page)
     await page.getByRole("button", { name: /Cerrar sesión/ }).click()
