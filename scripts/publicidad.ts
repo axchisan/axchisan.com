@@ -58,6 +58,17 @@ async function prepararAdjuntos() {
   // La pantalla de la oficina: la portada de axchisan.com, sin la cabecera del navegador.
   const web = await navegador.newPage({ viewport: { width: 1440, height: 900 } })
   await web.goto("https://axchisan.com", { waitUntil: "networkidle" })
+  // La publicidad no muestra precios: se oculta el recuadro "Desde $ …" de la portada.
+  await web.evaluate(() => {
+    for (const el of document.querySelectorAll("main *")) {
+      if (el.children.length === 0 && /\$\s?\d/.test(el.textContent ?? "")) {
+        // Se sube hasta el recuadro con borde que contiene el precio.
+        let caja: Element | null = el
+        while (caja && caja !== document.body && parseFloat(getComputedStyle(caja).borderTopWidth) === 0) caja = caja.parentElement
+        if (caja instanceof HTMLElement && caja !== document.body) caja.style.visibility = "hidden"
+      }
+    }
+  })
   await web.screenshot({ path: `${ADJ}/pantalla-axchisan.png` })
   await navegador.close()
 
@@ -80,117 +91,6 @@ const faltan = SOLUCIONES.filter((s) => !SECTORES[s.slug]).map((s) => s.slug)
 if (faltan.length) throw new Error(`Faltan en SECTORES: ${faltan.join(", ")}`)
 
 const n = (i: number) => String(i).padStart(2, "0")
-
-function historias(): Pieza[] {
-  const lista: Pieza[] = [
-    {
-      id: "H01",
-      titulo: "Historia general: prueba antes de contratar",
-      adjuntos: ["logo.png", "restaurantes-celular.png", "veterinarias-celular.png", "gimnasios-y-estudios-celular.png"],
-      formato: "Vertical 9:16, 1080 × 1920",
-      prompt: `Crea una historia vertical 9:16 (1080 x 1920 px) para Instagram y estados de WhatsApp.
-${MARCA}
-Composición: fondo casi negro #0b0f14. Arriba, el logo pequeño y centrado. En el centro, tres celulares ligeramente inclinados en abanico, cada uno con una de las capturas adjuntas en la pantalla (restaurante, veterinaria y gimnasio).
-Titular grande en blanco, arriba de los celulares: "Prueba la página de tu negocio antes de pagarla".
-Debajo de los celulares, en gris claro: "Hay una demo funcionando para cada tipo de negocio".
-Abajo, un botón redondeado verde azulado #0ea5a5 con texto oscuro: "Mírala en axchisan.com".
-Deja vacía la franja inferior de 250 px.`,
-      guia: "En Instagram, agrega el sticker de enlace con `https://axchisan.com/?utm_source=instagram&utm_campaign=historia`.",
-    },
-    {
-      id: "H02",
-      titulo: "Historia: ¿cuánto cuesta una página?",
-      adjuntos: ["logo-claro.png"],
-      formato: "Vertical 9:16, 1080 × 1920",
-      prompt: `Crea una historia vertical 9:16 (1080 x 1920 px) para Instagram y estados de WhatsApp.
-${MARCA}
-Composición: pieza clara, fondo #f3f6f9 y texto #0f1720. Arriba, el logo adjunto "logo-claro". En el centro, en letra grande y semibold: "¿Cuánto cuesta una página web para tu negocio?". Debajo, en gris: "Menos de lo que crees, y la pruebas antes de pagar." Más abajo, una flecha simple hacia abajo en verde azulado #0ea5a5, separada del texto. Abajo: "Averígualo en axchisan.com". Sin personas ni celulares. Mucho espacio en blanco.`,
-      guia: "Sticker de enlace: `https://axchisan.com/planes?utm_source=instagram&utm_campaign=cuanto-cuesta`.",
-    },
-  ]
-  orden.forEach((slug, i) => {
-    const x = SECTORES[slug]
-    lista.push({
-      id: `H${n(i + 3)}`,
-      titulo: `Historia: ${x.corto}`,
-      adjuntos: ["logo.png", `${slug}-celular.png`],
-      formato: "Vertical 9:16, 1080 × 1920",
-      prompt: `Crea una historia vertical 9:16 (1080 x 1920 px) para Instagram y estados de WhatsApp.
-${MARCA}
-Composición: fondo casi negro #0b0f14. Arriba a la izquierda, el logo pequeño. Un solo celular grande, centrado y un poco inclinado, con la captura adjunta "${slug}-celular" en la pantalla.
-Titular en blanco, arriba del celular: "${x.frase}".
-Línea en gris claro: "Así se vería la página de ${x.tu}. Es una demo real: tócala."
-Abajo, un botón redondeado verde azulado #0ea5a5 con texto oscuro: "Pruébala en axchisan.com".
-Deja vacía la franja inferior de 250 px.`,
-      guia: `Sticker de enlace: \`https://axchisan.com/soluciones/${slug}?utm_source=instagram&utm_campaign=${slug}\`.`,
-    })
-  })
-  return lista
-}
-
-function publicaciones(): Pieza[] {
-  const casos = [
-    ["Si te buscan en Google", "Una página con tus servicios, horario y WhatsApp.", "abogados-y-contadores"],
-    ["Si vendes productos", "Una tienda con carrito y pagos con PSE y Nequi.", "tiendas-de-ropa"],
-    ["Si das citas", "Reservas en línea y la agenda del día en tu celular.", "veterinarias"],
-    ["Si llevas inventario", "Existencias, caja y reportes para Excel.", "inventario-y-ventas"],
-  ] as const
-  const lista: Pieza[] = [
-    {
-      id: "P01",
-      titulo: "Publicación: antes y después",
-      adjuntos: ["logo.png", "veterinarias-computador.png"],
-      formato: "Vertical 4:5, 1080 × 1350",
-      prompt: `Crea una publicación vertical 4:5 (1080 x 1350 px) para Instagram y Facebook, dividida en dos mitades.
-${MARCA}
-Mitad superior, en tonos grises apagados: un cuaderno de citas lleno de tachones y un celular con muchos mensajes sin leer. Texto pequeño arriba a la izquierda: "Antes".
-Mitad inferior, fondo casi negro #0b0f14: un computador portátil con la captura adjunta "veterinarias-computador" en la pantalla. Texto pequeño: "Con tu página".
-Sobre la línea que divide las mitades, una franja oscura con el titular en blanco: "Tu negocio, ordenado desde el celular".
-Abajo a la derecha, el logo. Abajo a la izquierda, en gris claro: "Mira cómo funciona en axchisan.com".`,
-    },
-    {
-      id: "P02",
-      titulo: "Carrusel 1 de 6: portada",
-      adjuntos: ["logo.png"],
-      formato: "Vertical 4:5, 1080 × 1350",
-      prompt: `Crea una imagen vertical 4:5 (1080 x 1350 px), portada de un carrusel de Instagram.
-${MARCA}
-Fondo casi negro #0b0f14. Titular grande en blanco, alineado a la izquierda y a media altura: "¿Página, tienda o sistema? Qué necesita tu negocio". Abajo a la izquierda, en gris claro: "Desliza". Abajo a la derecha, el logo pequeño. Mucho espacio vacío.`,
-    },
-  ]
-  casos.forEach(([titulo, texto, slug], i) => {
-    lista.push({
-      id: `P${n(i + 3)}`,
-      titulo: `Carrusel ${i + 2} de 6: ${titulo.toLowerCase()}`,
-      adjuntos: ["logo.png", `${slug}-computador.png`],
-      formato: "Vertical 4:5, 1080 × 1350",
-      prompt: `Crea una imagen vertical 4:5 (1080 x 1350 px), diapositiva de un carrusel de Instagram.
-${MARCA}
-Fondo casi negro #0b0f14. Arriba a la izquierda, en verde azulado #0ea5a5 y grande, el número "${i + 1}". Debajo, titular en blanco: "${titulo}". Debajo, en gris claro: "${texto}". En la mitad inferior, un computador portátil con la captura adjunta "${slug}-computador" en la pantalla. Abajo a la derecha, el logo pequeño.`,
-    })
-  })
-  lista.push(
-    {
-      id: "P07",
-      titulo: "Carrusel 6 de 6: cierre",
-      adjuntos: ["logo.png"],
-      formato: "Vertical 4:5, 1080 × 1350",
-      prompt: `Crea una imagen vertical 4:5 (1080 x 1350 px), última diapositiva de un carrusel de Instagram.
-${MARCA}
-Fondo casi negro #0b0f14. Centrado: el logo, debajo el titular en blanco "Prueba la demo de tu negocio" y en verde azulado #0ea5a5 "axchisan.com". Mucho espacio vacío.`,
-    },
-    {
-      id: "P08",
-      titulo: "Imagen cuadrada para compartir por WhatsApp",
-      adjuntos: ["logo.png", "restaurantes-celular.png", "programa-de-puntos-celular.png"],
-      formato: "Cuadrada 1:1, 1080 × 1080",
-      prompt: `Crea una imagen cuadrada 1:1 (1080 x 1080 px) para compartir por WhatsApp.
-${MARCA}
-Fondo casi negro #0b0f14. Centrado: el logo, debajo el titular en blanco "Páginas web, tiendas y sistemas para tu negocio" y una línea en gris claro "Pruébalos funcionando antes de contratar". Abajo, en verde azulado #0ea5a5: "axchisan.com". A los lados, dos celulares recortados por el borde de la imagen, con las capturas adjuntas en la pantalla.`,
-    },
-  )
-  return lista
-}
 
 function portada(): Pieza[] {
   return [
@@ -315,9 +215,7 @@ Cambia solo el encuadre: detalle de la planta y la taza en primer plano, nítida
 
 function documento() {
   piezas.push(
-    { seccion: "Historias", intro: "Para Instagram, Facebook y estados de WhatsApp. No llevan QR: en Instagram se les pone el sticker de enlace.", items: historias() },
-    { seccion: "Publicaciones", intro: "Para el feed de Instagram y Facebook. P02 a P07 son un carrusel: se publican juntas, en orden.", items: publicaciones() },
-    { seccion: "Portada", intro: "Para el Perfil de Google, Facebook y LinkedIn.", items: portada() },
+    { seccion: "Portada", intro: "Para el Perfil de Google, Facebook y LinkedIn. Ya está hecha: `generadas/G01.jpg`.", items: portada() },
     {
       seccion: "Fotos de la oficina",
       intro:
@@ -340,6 +238,8 @@ Generado por \`npx tsx scripts/publicidad.ts\`: no se edita a mano.
 5. Descarga la imagen y guárdala en \`docs/publicidad/generadas/\` con el nombre de **Guardar como** (basta el código: \`V03.png\`).
 
 Ninguna pieza muestra precios: todas llevan a la web a averiguarlo.
+
+Las publicaciones del feed salen de \`npx tsx scripts/redes.ts\` y su calendario está en \`docs/publicidad/redes.md\`: aquí quedan solo las fotos que Gemini hace bien.
 
 Las tarjetas y los volantes **no** se hacen con Gemini: llevan texto exacto y un QR que tiene que escanearse, y salen listos para la imprenta de \`npx tsx scripts/impresos.ts\` (ver \`docs/publicidad/README.md\`).
 

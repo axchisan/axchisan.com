@@ -20,7 +20,7 @@ export const nombreEstado = (id: string) => ESTADOS.find((e) => e.id === id)?.no
 export const ESTADOS_WEB = { "sin-pagina": "Sin página", "solo-redes": "Solo redes", "con-pagina": "Con página" } as const
 export type EstadoWeb = keyof typeof ESTADOS_WEB
 
-const REDES = ["facebook.com", "instagram.com", "linktr.ee", "wa.me", "whatsapp.com", "tiktok.com", "linkin.bio", "beacons.ai", "taplink.cc", "aiyellow.com", "my.canva.site", "bit.ly"]
+const REDES = ["facebook.com", "instagram.com", "linktr.ee", "wa.me", "whatsapp.com", "tiktok.com", "linkin.bio", "beacons.ai", "taplink.cc", "aiyellow.com", "my.canva.site", "bit.ly", "campsite.bio", "wa.link", "wixsite.com", "fresha.com", "vercel.app", "wordpress.com"]
 
 export function estadoWeb(web?: string | null): EstadoWeb {
   if (!web) return "sin-pagina"

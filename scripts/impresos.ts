@@ -1,18 +1,19 @@
 /**
- * Genera la publicidad impresa lista para la imprenta:
+ * Genera la publicidad impresa de Axchi, lista para la imprenta:
  *
- *   docs/publicidad/impresos/<pieza>.pdf   medida final más 3 mm de sangrado, vectorial
- *   docs/publicidad/impresos/<pieza>.png   la misma pieza a 300 dpi, para revisarla
+ *   docs/publicidad/impresos/tarjeta-cara.pdf, tarjeta-reverso.pdf   9 × 5 cm, dos caras
+ *   docs/publicidad/impresos/volante.pdf                             media carta, una cara
  *
- *   npx tsx scripts/impresos.ts            todas
- *   npx tsx scripts/impresos.ts tarjeta    solo las que contengan "tarjeta"
+ * Cada una sale también en PNG a 300 dpi para revisarla.
  *
- * Las piezas con texto exacto y QR se arman aquí y no con Gemini: Gemini se
- * equivoca en las letras y no dibuja QR que se puedan escanear. Cada QR lleva
- * utm_source (la pieza) y utm_campaign (el sector), que el panel /admin cuenta
- * en "Visitas por publicidad".
+ *   npx tsx scripts/impresos.ts
+ *
+ * Son solo dos piezas generales, a propósito: imprimir una versión por sector
+ * multiplica el costo sin necesidad. La variedad por sector va en redes. El
+ * QR lleva utm_source (la pieza), que el panel /admin cuenta en "Visitas por
+ * publicidad".
  */
-import { mkdirSync, readFileSync } from "node:fs"
+import { mkdirSync, readFileSync, rmSync } from "node:fs"
 import { chromium } from "@playwright/test"
 import QRCode from "qrcode"
 import { CARAS, VIEWBOX } from "../components/site/logo-geometria"
@@ -30,11 +31,8 @@ const marca = (alto: string) =>
   `<svg viewBox="${VIEWBOX.x} ${VIEWBOX.y} ${VIEWBOX.w} ${VIEWBOX.h}" style="height:${alto};width:auto;display:block">${CARAS.map((c) => `<polygon points="${c.puntos}" fill="${c.color}"/>`).join("")}</svg>`
 const logo = (alto: string, color: string) =>
   `<div style="display:flex;align-items:center;gap:calc(${alto} * .35);font-weight:600;font-size:calc(${alto} * .9);letter-spacing:-.02em;color:${color}">${marca(alto)}Axchi</div>`
-
-async function qr(url: string, oscuro = "#0b0f14") {
-  return QRCode.toString(url, { type: "svg", margin: 1, errorCorrectionLevel: "M", color: { dark: oscuro, light: "#ffffff" } })
-}
-const enlace = (pieza: string, campana: string, ruta = "/") => `https://axchisan.com${ruta}?utm_source=${pieza}&utm_campaign=${campana}`
+const qr = (url: string) => QRCode.toString(url, { type: "svg", margin: 1, errorCorrectionLevel: "M", color: { dark: "#0b0f14", light: "#ffffff" } })
+const enlace = (pieza: string) => `https://axchisan.com/?utm_source=${pieza}&utm_campaign=general`
 
 function hoja(anchoMm: number, altoMm: number, fondo: string, cuerpo: string) {
   const W = anchoMm + SANGRADO * 2
@@ -55,157 +53,83 @@ html, body { width: ${W}mm; height: ${H}mm; background: ${fondo}; font-family: "
 
 type Pieza = { archivo: string; anchoMm: number; altoMm: number; fondo: string; cuerpo: string }
 
-// ─── Tarjetas (9 × 5 cm) ─────────────────────────────────────────────────
-
-async function tarjetas(): Promise<Pieza[]> {
-  const lista: Pieza[] = [
-    {
-      archivo: "tarjeta-cara",
-      anchoMm: 90,
-      altoMm: 50,
-      fondo: "#0b0f14",
-      cuerpo: `<div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3.2mm">
-        ${logo("9mm", "#ffffff")}
-        <p style="font-size:2.6mm;color:#9aa7b5">Páginas web, tiendas y sistemas para tu negocio</p></div>`,
-    },
-    {
-      archivo: "tarjeta-reverso",
-      anchoMm: 90,
-      altoMm: 50,
-      fondo: "#f3f6f9",
-      cuerpo: `<div style="height:100%;display:flex;align-items:center;justify-content:space-between;gap:4mm;color:#0f1720">
-        <div style="font-size:2.7mm;line-height:1.55">
-          <p style="font-size:3.6mm;font-weight:600;letter-spacing:-.01em">${PROFILE.name}</p>
-          <p style="color:#0b7c7c;font-weight:600;margin-bottom:2mm">Axchi</p>
-          <p>WhatsApp ${WHATSAPP.visible}</p>
-          <p>${PROFILE.email}</p>
-          <p>axchisan.com</p>
-        </div>
-        <div style="text-align:center;font-size:2.2mm;color:#4b5866">
-          <div class="qr" style="width:24mm;height:24mm">${await qr(enlace("tarjeta", "general"))}</div>
-          <p style="margin-top:1mm">Mira las demos</p>
-        </div></div>`,
-    },
-  ]
-  for (const s of SOLUCIONES) {
-    const x = SECTORES[s.slug]
-    lista.push({
-      archivo: `tarjeta-${s.slug}`,
-      anchoMm: 90,
-      altoMm: 50,
-      fondo: "#0b0f14",
-      cuerpo: `<div style="height:100%;display:flex;align-items:center;justify-content:space-between;gap:4mm">
-        <div style="height:100%;display:flex;flex-direction:column;justify-content:space-between">
-          <div>
-            <p style="font-size:4.1mm;line-height:1.15;font-weight:600;letter-spacing:-.015em;color:#fff;max-width:44mm">${x.frase}</p>
-            <p style="margin-top:2.2mm;font-size:2.4mm;line-height:1.35;color:#9aa7b5;max-width:44mm">Mira la demo de ${x.tu}. Escanea el código.</p>
-          </div>
-          ${logo("4mm", "#ffffff")}
-        </div>
-        <div style="background:#fff;border-radius:1.5mm;padding:1.2mm;width:30mm;height:30mm;flex:none">
-          <div class="qr" style="width:100%;height:100%">${await qr(enlace("tarjeta", s.slug, `/soluciones/${s.slug}`))}</div>
-        </div></div>`,
-    })
+async function piezas(): Promise<Pieza[]> {
+  const tarjetaCara: Pieza = {
+    archivo: "tarjeta-cara",
+    anchoMm: 90,
+    altoMm: 50,
+    fondo: "#0b0f14",
+    cuerpo: `<div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3.2mm">
+      ${logo("9mm", "#ffffff")}
+      <p style="font-size:2.6mm;color:#9aa7b5">Páginas web, tiendas y sistemas para tu negocio</p></div>`,
   }
-  return lista
-}
+  const tarjetaReverso: Pieza = {
+    archivo: "tarjeta-reverso",
+    anchoMm: 90,
+    altoMm: 50,
+    fondo: "#f3f6f9",
+    cuerpo: `<div style="height:100%;display:flex;align-items:center;justify-content:space-between;gap:4mm;color:#0f1720">
+      <div style="font-size:2.7mm;line-height:1.55">
+        <p style="font-size:3.6mm;font-weight:600;letter-spacing:-.01em">${PROFILE.name}</p>
+        <p style="color:#0b7c7c;font-weight:600;margin-bottom:2mm">Axchi</p>
+        <p>WhatsApp ${WHATSAPP.visible}</p>
+        <p>${PROFILE.email}</p>
+        <p>axchisan.com</p>
+      </div>
+      <div style="text-align:center;font-size:2.2mm;color:#4b5866">
+        <div class="qr" style="width:24mm;height:24mm">${await qr(enlace("tarjeta"))}</div>
+        <p style="margin-top:1mm">Mira las demos</p>
+      </div></div>`,
+  }
 
-// ─── Volantes (media carta, 14 × 21,6 cm) ────────────────────────────────
-
-/** Un computador y un celular con las capturas de una demo. */
-function pantallas(computador: string, celular: string) {
-  return `<div style="position:relative;height:66mm;margin:6mm 0 2mm">
-    <div style="position:absolute;left:0;top:0;width:96mm;border-radius:2.4mm 2.4mm 0 0;border:2mm solid #1e2630;border-bottom-width:3mm;overflow:hidden;background:#1e2630">
-      <img src="${img(computador)}" style="display:block;width:100%;height:54mm;object-fit:cover;object-position:top">
-    </div>
-    <div style="position:absolute;left:-4mm;top:59mm;width:104mm;height:3mm;border-radius:0 0 3mm 3mm;background:#2a3542"></div>
-    <div style="position:absolute;right:0;top:6mm;width:30mm;height:60mm;border-radius:4mm;border:1.6mm solid #1e2630;overflow:hidden;background:#1e2630;box-shadow:0 0 0 .3mm #2a3542">
-      <img src="${img(celular)}" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top">
-    </div></div>`
-}
-
-async function volanteCara(archivo: string, titular: string, apoyo: string, linea: string, puntos: string[], computador: string, celular: string, url: string): Promise<Pieza> {
-  return {
-    archivo,
+  // El volante dice en una sola cara qué se hace, lo muestra funcionando y
+  // nombra los tipos de negocio: quien lo recibe se reconoce en la lista.
+  const sectores = SOLUCIONES.map((s) => SECTORES[s.slug].corto)
+  const volante: Pieza = {
+    archivo: "volante",
     anchoMm: 140,
     altoMm: 216,
     fondo: "#0b0f14",
     cuerpo: `<div style="height:100%;display:flex;flex-direction:column;color:#fff">
       ${logo("7mm", "#ffffff")}
-      <h1 style="margin-top:9mm;font-size:10.5mm;line-height:1.04;font-weight:600;letter-spacing:-.035em">${titular}</h1>
-      <p style="margin-top:4mm;font-size:4.2mm;line-height:1.4;color:#9aa7b5">${apoyo}</p>
-      ${pantallas(computador, celular)}
-      <p style="font-size:3.9mm;line-height:1.45;color:#dfe6ee">${linea}</p>
-      <ul style="list-style:none;padding:0;margin-top:3mm;font-size:3.7mm;line-height:1.7;color:#dfe6ee">
-        ${puntos.map((p) => `<li style="display:flex;align-items:center;gap:2.4mm"><span style="width:2mm;height:2mm;border-radius:50%;background:#0ea5a5;flex:none"></span>${p}</li>`).join("")}
+      <h1 style="margin-top:7mm;font-size:10mm;line-height:1.04;font-weight:600;letter-spacing:-.035em">Tu negocio merece una página que venda</h1>
+      <p style="margin-top:3.5mm;font-size:4.2mm;line-height:1.4;color:#9aa7b5">Páginas web, tiendas en línea y sistemas de citas, pedidos e inventario.</p>
+      <div style="position:relative;height:50mm;flex:none;margin:5mm 0 3mm">
+        <div style="position:absolute;left:0;top:0;width:90mm;border-radius:2.4mm 2.4mm 0 0;border:2mm solid #1e2630;border-bottom-width:3mm;overflow:hidden;background:#1e2630">
+          <img src="${img("restaurantes-computador.png")}" style="display:block;width:100%;height:41mm;object-fit:cover;object-position:top">
+        </div>
+        <div style="position:absolute;left:-4mm;top:46mm;width:98mm;height:3mm;border-radius:0 0 3mm 3mm;background:#2a3542"></div>
+        <div style="position:absolute;right:0;top:2mm;width:25mm;height:48mm;border-radius:4mm;border:1.6mm solid #1e2630;overflow:hidden;background:#1e2630">
+          <img src="${img("veterinarias-celular.png")}" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top">
+        </div>
+      </div>
+      <p style="font-size:4.2mm;font-weight:600">Hay una demo funcionando para cada tipo de negocio:</p>
+      <div style="margin-top:2.6mm;display:flex;flex-wrap:wrap;gap:1.6mm">
+        ${sectores.map((s) => `<span style="font-size:3.1mm;padding:1mm 2.4mm;border-radius:99mm;border:.3mm solid #2a3542;color:#dfe6ee">${s}</span>`).join("")}
+      </div>
+      <ul style="list-style:none;padding:0;margin-top:5mm;flex:none;font-size:3.9mm;line-height:1.75;color:#dfe6ee">
+        ${["La pruebas funcionando antes de contratar", "Precio cerrado por escrito y todo queda a tu nombre", "Te atendemos por WhatsApp"].map((t) => `<li style="display:flex;align-items:center;gap:2.4mm"><span style="width:2mm;height:2mm;border-radius:50%;background:#0ea5a5;flex:none"></span>${t}</li>`).join("")}
       </ul>
       <div style="margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;gap:6mm;border-top:.3mm solid #1e2630;padding-top:5mm">
         <div>
-          <p style="font-size:5mm;font-weight:600">Escanea y pruébala</p>
+          <p style="font-size:5mm;font-weight:600">Escanea y prueba la de tu negocio</p>
           <p style="margin-top:1.2mm;font-size:3.8mm;color:#9aa7b5">o entra a <span style="color:#0ea5a5;font-weight:600">axchisan.com</span></p>
           <p style="margin-top:1.2mm;font-size:3.4mm;color:#9aa7b5">WhatsApp ${WHATSAPP.visible}</p>
         </div>
-        <div style="background:#fff;border-radius:2mm;padding:1.6mm;width:36mm;height:36mm;flex:none">
-          <div class="qr" style="width:100%;height:100%">${await qr(url)}</div>
+        <div style="background:#fff;border-radius:2mm;padding:1.6mm;width:34mm;height:34mm;flex:none">
+          <div class="qr" style="width:100%;height:100%">${await qr(enlace("volante"))}</div>
         </div>
       </div></div>`,
   }
-}
-
-async function volantes(): Promise<Pieza[]> {
-  const lista: Pieza[] = [
-    await volanteCara(
-      "volante-general",
-      "Tu negocio merece una página que venda",
-      "Páginas web, tiendas en línea y sistemas de citas, pedidos e inventario.",
-      "Hay una demo funcionando para cada tipo de negocio: tócala desde tu celular antes de decidir.",
-      ["Pruébala antes de contratar", "Todo queda a tu nombre", "Te atendemos por WhatsApp"],
-      "restaurantes-computador.png",
-      "veterinarias-celular.png",
-      enlace("volante", "general"),
-    ),
-    {
-      archivo: "volante-reverso",
-      anchoMm: 140,
-      altoMm: 216,
-      fondo: "#f3f6f9",
-      cuerpo: `<div style="height:100%;display:flex;flex-direction:column;color:#0f1720">
-        ${logo("6mm", "#0f1720")}
-        <h2 style="margin-top:8mm;font-size:8.4mm;line-height:1.08;font-weight:600;letter-spacing:-.03em">¿Qué tipo de negocio tienes?</h2>
-        <p style="margin-top:3mm;font-size:3.9mm;color:#4b5866">Para cada uno hay una demo funcionando en axchisan.com.</p>
-        <div style="margin-top:6mm;display:grid;grid-template-columns:1fr 1fr;gap:3.4mm 6mm">
-          ${SOLUCIONES.map((s) => `<div style="border-top:.3mm solid #d5dde5;padding-top:2.2mm"><p style="font-size:3.7mm;font-weight:600">${SECTORES[s.slug].corto}</p><p style="margin-top:.6mm;font-size:2.9mm;line-height:1.35;color:#4b5866">${SECTORES[s.slug].apoyo}</p></div>`).join("")}
-        </div>
-        <div style="margin-top:auto;border-top:.3mm solid #d5dde5;padding-top:5mm">
-          <p style="font-size:5mm;font-weight:600;letter-spacing:-.01em">Averigua cuánto cuesta la tuya en <span style="color:#0b7c7c">axchisan.com</span></p>
-          <p style="margin-top:1.5mm;font-size:3.8mm;color:#4b5866">WhatsApp ${WHATSAPP.visible}</p>
-        </div></div>`,
-    },
-  ]
-  for (const s of SOLUCIONES) {
-    const x = SECTORES[s.slug]
-    lista.push(
-      await volanteCara(
-        `volante-${s.slug}`,
-        x.frase,
-        x.apoyo,
-        `Así se vería la página de ${x.tu}. Es una demo real: tócala desde tu celular.`,
-        ["Pruébala antes de contratar", "Todo queda a tu nombre", "Te atendemos por WhatsApp"],
-        `${s.slug}-computador.png`,
-        `${s.slug}-celular.png`,
-        enlace("volante", s.slug, `/soluciones/${s.slug}`),
-      ),
-    )
-  }
-  return lista
+  return [tarjetaCara, tarjetaReverso, volante]
 }
 
 async function main() {
+  // Se borran las versiones viejas (una por sector) para que no queden sueltas.
+  rmSync(DESTINO, { recursive: true, force: true })
   mkdirSync(DESTINO, { recursive: true })
-  const filtro = process.argv[2] ?? ""
-  const piezas = [...(await tarjetas()), ...(await volantes())].filter((p) => p.archivo.includes(filtro))
   const navegador = await chromium.launch()
-  for (const p of piezas) {
+  for (const p of await piezas()) {
     const h = hoja(p.anchoMm, p.altoMm, p.fondo, p.cuerpo)
     const mm = 96 / 25.4
     const pagina = await navegador.newPage({ viewport: { width: Math.round(h.W * mm), height: Math.round(h.H * mm) }, deviceScaleFactor: 300 / 96 })
